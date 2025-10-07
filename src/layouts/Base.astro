@@ -1,0 +1,51 @@
+---
+import "~/styles/globals.css";
+import Navbar from "~/components/Navbar.astro";
+import Footer from "~/components/Footer.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  structuredData?: Record<string, unknown>;
+}
+
+const {
+  title = "Noah Isme · Senior Frontend & UX Engineer",
+  description = "Menciptakan pengalaman digital presisi tinggi dengan aksesibilitas, performa, dan detail visual yang sempurna.",
+  ogImage = "/og-default.svg",
+  structuredData,
+} = Astro.props;
+const canonical = `${Astro.site?.origin ?? "https://noahisme.vercel.app"}${Astro.url.pathname}`;
+---
+
+<html lang="id" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    {
+      structuredData && (
+        <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+      )
+    }
+  </head>
+  <body class="bg-bg text-text">
+    <Navbar />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

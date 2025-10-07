@@ -1,0 +1,12 @@
+node_modules
+.DS_Store
+pnpm-lock.yaml
+pnpm-workspace.yaml
+.env
+.env.*
+/.astro
+/dist
+/.playwright
+/playwright-report
+/test-results
+.husky/_

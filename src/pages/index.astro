@@ -1,0 +1,128 @@
+---
+import Base from "~/layouts/Base.astro";
+import Section from "~/components/Section.astro";
+import ProjectCard from "~/components/ProjectCard.astro";
+import CTAButton from "~/components/CTAButton";
+import MotionReveal from "~/components/MotionReveal";
+import { getCollection } from "astro:content";
+import { trackEvent } from "~/lib/analytics";
+
+const projects = await getCollection("projects", ({ data }) => data.featured);
+const featured = projects.sort((a, b) => (a.data.date > b.data.date ? -1 : 1)).slice(0, 4);
+const services = await getCollection("services");
+const testimonials = await getCollection("testimonials");
+
+const heroSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Noah Isme",
+  jobTitle: "Senior Frontend & UX Engineer",
+  url: "https://noahisme.vercel.app",
+  sameAs: ["https://github.com", "https://dribbble.com", "https://www.linkedin.com"],
+};
+---
+
+<Base structuredData={heroSchema}>
+  <section class="relative overflow-hidden bg-bg">
+    <div
+      class="mx-auto flex max-w-6xl flex-col gap-10 px-6 pb-24 pt-32 md:flex-row md:items-center md:justify-between"
+    >
+      <div class="max-w-xl space-y-6">
+        <p class="text-xs uppercase tracking-[0.3em] text-accent">Noah Isme</p>
+        <h1 class="font-heading text-4xl tracking-tight text-text md:text-5xl">
+          Senior Frontend Engineer & UX Engineer yang terobsesi pada detail dan emosi.
+        </h1>
+        <p class="text-base text-text2 md:text-lg">
+          Saya mendesain dan membangun pengalaman produk animatif yang mengutamakan aksesibilitas,
+          kinerja, dan storytelling yang elegan.
+        </p>
+        <div class="flex flex-wrap items-center gap-4">
+          <CTAButton client:load href="/contact" onClick={() => trackEvent("cta_primary_contact")}>
+            Jadwalkan diskusi
+          </CTAButton>
+          <CTAButton client:load href="/projects" variant="ghost"> Lihat studi kasus </CTAButton>
+        </div>
+      </div>
+      <MotionReveal client:only="react">
+        <div
+          class="relative mx-auto w-64 overflow-hidden rounded-3xl border border-divider/40 bg-surface/80 p-6 text-text2 shadow-soft md:mx-0"
+        >
+          <div
+            class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,#8aa4ff33,transparent_70%)]"
+          >
+          </div>
+          <p class="text-sm">Spesialisasi</p>
+          <ul class="mt-4 space-y-2 text-sm leading-relaxed">
+            <li>• Arsitektur Astro Islands, React, dan animasi Framer Motion.</li>
+            <li>• Sistem desain aksesibel dengan audit warna & typografi presisi.</li>
+            <li>• Integrasi audio halus mematuhi prefers-reduced-motion & autoplay.</li>
+          </ul>
+        </div>
+      </MotionReveal>
+    </div>
+  </section>
+
+  <Section
+    id="projects"
+    eyebrow="Featured"
+    title="Studi kasus terpilih"
+    description="3 proyek yang menonjolkan strategi pengalaman end-to-end: dari riset, desain, hingga implementasi front-end performa tinggi."
+  >
+    <div class="grid gap-8 md:grid-cols-2">
+      {featured.map(({ data, slug }) => <ProjectCard project={data} slug={slug} />)}
+    </div>
+  </Section>
+
+  {
+    services.length > 0 && (
+      <Section
+        eyebrow="Layanan"
+        title="Cara saya membantu tim Anda"
+        description="Pendekatan kolaboratif untuk menyelesaikan tantangan produk dengan kecepatan dan presisi."
+      >
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {services.map(({ data }) => (
+            <div class="rounded-2xl border border-divider/40 bg-surface/80 p-6 shadow-soft">
+              <span class="text-2xl" aria-hidden="true">
+                {data.icon ?? "✨"}
+              </span>
+              <h3 class="mt-4 font-heading text-xl text-text">{data.title}</h3>
+              <p class="mt-2 text-sm text-text2">{data.description}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
+    )
+  }
+
+  {
+    testimonials.length > 0 && (
+      <Section
+        eyebrow="Testimoni"
+        title="Suara kolaborator"
+        description="Rekan kerja dan klien tentang dampak kolaborasi kami."
+      >
+        <div class="grid gap-6 md:grid-cols-2">
+          {testimonials.map(({ data }) => (
+            <figure class="rounded-2xl border border-divider/40 bg-surface/70 p-6 shadow-soft">
+              <div class="flex items-center gap-4">
+                <img
+                  src={data.avatar ?? "/images/testimonials/saskia.svg"}
+                  alt={data.name}
+                  width="64"
+                  height="64"
+                  class="h-16 w-16 rounded-full object-cover"
+                />
+                <figcaption>
+                  <p class="font-heading text-lg text-text">{data.name}</p>
+                  <p class="text-sm text-text2">{data.role}</p>
+                </figcaption>
+              </div>
+              <blockquote class="mt-4 text-sm text-text2">“{data.quote}”</blockquote>
+            </figure>
+          ))}
+        </div>
+      </Section>
+    )
+  }
+</Base>

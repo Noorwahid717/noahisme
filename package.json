@@ -1,0 +1,67 @@
+{
+  "name": "noahisme",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "lint": "eslint src --ext .ts,.tsx,.astro",
+    "format": "prettier --check .",
+    "format:write": "prettier --write .",
+    "typecheck": "astro check",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,astro,js,jsx,css,md,mdx,json}": [
+      "prettier --write"
+    ],
+    "src/**/*.{ts,tsx,astro}": [
+      "eslint --fix"
+    ]
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^3.1.0",
+    "@astrojs/react": "^3.3.0",
+    "@astrojs/sitemap": "^3.1.4",
+    "@astrojs/tailwind": "^5.1.2",
+    "astro": "^4.13.3",
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.11.17",
+    "howler": "^2.2.4",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.7.0",
+    "@eslint/js": "^9.14.0",
+    "@playwright/test": "^1.48.2",
+    "@types/howler": "^2.2.7",
+    "@types/react": "18.3.11",
+    "@types/react-dom": "18.3.1",
+    "@typescript-eslint/eslint-plugin": "^8.13.0",
+    "@typescript-eslint/parser": "^8.13.0",
+    "astro-eslint-parser": "^1.0.3",
+    "autoprefixer": "^10.4.20",
+    "axe-playwright": "^2.2.2",
+    "eslint": "^9.13.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-astro": "^0.34.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.2.10",
+    "postcss": "^8.4.48",
+    "prettier": "^3.3.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "tailwindcss": "^3.4.14",
+    "typescript": "^5.6.3"
+  },
+  "pnpm": {
+    "ignoredBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ]
+  }
+}

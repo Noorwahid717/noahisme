@@ -1,0 +1,16 @@
+---
+import Base from "~/layouts/Base.astro";
+import CTAButton from "~/components/CTAButton";
+---
+
+<Base title="Halaman tidak ditemukan" description="Ups, halaman yang Anda cari tidak tersedia.">
+  <section class="mx-auto flex max-w-3xl flex-col items-center gap-6 px-6 pb-32 pt-36 text-center">
+    <p class="text-xs uppercase tracking-[0.3em] text-accent">404</p>
+    <h1 class="font-heading text-5xl text-text">Sepertinya Anda tersesat.</h1>
+    <p class="max-w-xl text-base text-text2">
+      Halaman ini mungkin telah dipindahkan atau tautannya salah ketik. Mari kembali ke beranda dan
+      jelajahi karya terbaru.
+    </p>
+    <CTAButton client:load href="/">Kembali ke beranda</CTAButton>
+  </section>
+</Base>

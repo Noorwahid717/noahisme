@@ -1,0 +1,71 @@
+---
+import Base from "~/layouts/Base.astro";
+import CTAButton from "~/components/CTAButton";
+---
+
+<Base
+  title="Kontak Noah Isme"
+  description="Hubungi saya untuk kolaborasi produk digital, audit aksesibilitas, atau konsultasi animasi."
+>
+  <section class="mx-auto grid max-w-4xl gap-10 px-6 pb-24 pt-28">
+    <header class="space-y-4">
+      <p class="text-xs uppercase tracking-[0.3em] text-accent">Kontak</p>
+      <h1 class="font-heading text-4xl text-text">Mari bangun hal yang berdampak</h1>
+      <p class="max-w-2xl text-base text-text2">
+        Isi formulir berikut atau email langsung ke <a
+          class="underline"
+          href="mailto:hello@noahisme.com">hello@noahisme.com</a
+        >. Saya akan merespons dalam 1–2 hari kerja.
+      </p>
+    </header>
+    <form
+      class="grid gap-6 rounded-3xl border border-divider/40 bg-surface/80 p-8 shadow-soft"
+      method="post"
+      action="https://formsubmit.co/hello@noahisme.com"
+    >
+      <input type="hidden" name="_next" value="https://noahisme.vercel.app/contact?success=true" />
+      <input type="text" name="company" class="hidden" aria-hidden="true" tabindex="-1" />
+      <div class="grid gap-2">
+        <label class="text-sm font-medium text-text" for="name">Nama</label>
+        <input
+          class="focus-outline rounded-md border border-divider/60 bg-bg/80 px-4 py-3 text-sm text-text"
+          type="text"
+          id="name"
+          name="name"
+          required
+          autocomplete="name"
+        />
+      </div>
+      <div class="grid gap-2">
+        <label class="text-sm font-medium text-text" for="email">Email</label>
+        <input
+          class="focus-outline rounded-md border border-divider/60 bg-bg/80 px-4 py-3 text-sm text-text"
+          type="email"
+          id="email"
+          name="email"
+          required
+          autocomplete="email"
+        />
+      </div>
+      <div class="grid gap-2">
+        <label class="text-sm font-medium text-text" for="subject">Judul proyek</label>
+        <input
+          class="focus-outline rounded-md border border-divider/60 bg-bg/80 px-4 py-3 text-sm text-text"
+          type="text"
+          id="subject"
+          name="subject"
+          required
+        />
+      </div>
+      <div class="grid gap-2">
+        <label class="text-sm font-medium text-text" for="message">Cerita proyek</label>
+        <textarea
+          class="focus-outline min-h-[160px] rounded-md border border-divider/60 bg-bg/80 px-4 py-3 text-sm text-text"
+          id="message"
+          name="message"
+          required></textarea>
+      </div>
+      <CTAButton client:load onClick={() => {}}> Kirim pesan </CTAButton>
+    </form>
+  </section>
+</Base>
