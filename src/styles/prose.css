@@ -1,0 +1,20 @@
+.prose {
+  color: #e7e9ec;
+}
+
+.prose h2,
+.prose h3,
+.prose h4 {
+  font-family: "Spectral", serif;
+  color: #e7e9ec;
+}
+
+.prose p {
+  color: #a8afb7;
+  line-height: 1.6;
+}
+
+.prose a {
+  color: #8aa4ff;
+  text-decoration: underline;
+}

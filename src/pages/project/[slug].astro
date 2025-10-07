@@ -1,0 +1,67 @@
+---
+import CaseStudy from "~/layouts/CaseStudy.astro";
+import { getCollection } from "astro:content";
+
+const { slug } = Astro.params;
+const projects = await getCollection("projects");
+const entry = projects.find((project) => project.slug === slug);
+
+export async function getStaticPaths() {
+  const entries = await getCollection("projects");
+  return entries.map((project) => ({ params: { slug: project.slug } }));
+}
+
+if (!entry) {
+  throw new Error(`Project ${slug} not found`);
+}
+
+const { data } = entry;
+const { Content } = await entry.render();
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  name: data.title,
+  datePublished: data.date,
+  creator: {
+    "@type": "Person",
+    name: "Noah Isme",
+  },
+  headline: data.problem,
+  about: data.process,
+  image: data.cover,
+};
+---
+
+<CaseStudy title={`${data.title} · Studi Kasus`} description={data.problem} structuredData={schema}>
+  <header class="space-y-3">
+    <p class="text-xs uppercase tracking-[0.3em] text-accent">{data.role}</p>
+    <h1 class="font-heading text-4xl text-text">{data.title}</h1>
+    <p class="text-base text-text2">{data.problem}</p>
+    <div class="flex flex-wrap gap-3 text-xs uppercase tracking-[0.2em] text-text2">
+      {
+        data.stack.map((item: string) => (
+          <span class="rounded-full border border-divider/50 px-3 py-1">{item}</span>
+        ))
+      }
+    </div>
+  </header>
+  <figure class="mt-10 overflow-hidden rounded-3xl border border-divider/40">
+    <img src={data.cover} alt={`Cuplikan ${data.title}`} loading="lazy" />
+  </figure>
+  <div class="prose mt-12 space-y-6">
+    <Content />
+  </div>
+  {
+    data.kpi && (
+      <section class="mt-12 grid gap-4 rounded-2xl border border-divider/40 bg-surface/70 p-6">
+        <h2 class="font-heading text-2xl text-text">Dampak terukur</h2>
+        <ul class="grid gap-3 text-sm text-success/90">
+          {data.kpi.map((item: string) => (
+            <li>• {item}</li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+</CaseStudy>

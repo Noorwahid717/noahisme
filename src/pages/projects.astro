@@ -1,0 +1,146 @@
+---
+import Base from "~/layouts/Base.astro";
+import { getCollection } from "astro:content";
+import CTAButton from "~/components/CTAButton";
+
+const projects = (await getCollection("projects")).sort((a, b) =>
+  a.data.date > b.data.date ? -1 : 1
+);
+const stacks = Array.from(new Set(projects.flatMap((project) => project.data.stack))).sort();
+---
+
+<Base
+  title="Proyek Noah Isme"
+  description="Rangkuman studi kasus lengkap beserta proses, dampak, dan peran saya dalam tiap proyek."
+>
+  <section class="mx-auto max-w-6xl px-6 pb-24 pt-28">
+    <header class="space-y-4">
+      <p class="text-xs uppercase tracking-[0.3em] text-accent">Studi kasus</p>
+      <h1 class="font-heading text-4xl text-text">Proyek terkurasi</h1>
+      <p class="max-w-2xl text-base text-text2">
+        Filter berdasarkan stack untuk menemukan karya relevan. Navigasi kartu dapat menggunakan
+        tombol panah, Enter untuk membuka, dan Escape untuk kembali ke filter.
+      </p>
+    </header>
+    <div class="mt-10 flex flex-wrap items-center gap-3" id="filter-bar">
+      <button class="focus-outline filter-chip" data-filter="all" type="button">Semua</button>
+      {
+        stacks.map((stack) => (
+          <button class="focus-outline filter-chip" data-filter={stack} type="button">
+            {stack}
+          </button>
+        ))
+      }
+    </div>
+    <div class="projects-grid mt-12 grid gap-8 sm:grid-cols-2">
+      {
+        projects.map(({ data, slug }) => (
+          <article
+            class="project-card grid gap-4 rounded-2xl border border-divider/40 bg-surface/80 p-6 shadow-soft transition focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            tabindex="0"
+            data-stack={data.stack.join(",")}
+          >
+            <img
+              src={data.cover}
+              width="640"
+              height="360"
+              loading="lazy"
+              alt={`Cuplikan proyek ${data.title}`}
+              class="h-48 w-full rounded-xl object-cover"
+            />
+            <div class="space-y-2">
+              <h2 class="font-heading text-2xl text-text">{data.title}</h2>
+              <p class="text-sm text-text2">{data.problem}</p>
+              <p class="text-sm text-success/80">{data.result}</p>
+            </div>
+            <CTAButton client:load href={`/project/${slug}`} variant="ghost">
+              Lihat studi kasus
+            </CTAButton>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+  <script>
+    const chips = document.querySelectorAll<HTMLButtonElement>(".filter-chip");
+    const cards = Array.from(document.querySelectorAll<HTMLElement>(".project-card"));
+    let active = "all";
+
+    function updateFilter(target: string) {
+      active = target;
+      chips.forEach((chip) => {
+        chip.classList.toggle("bg-accent", chip.dataset.filter === active);
+        chip.classList.toggle("text-bg", chip.dataset.filter === active);
+        chip.classList.toggle("border", chip.dataset.filter !== active);
+        chip.classList.toggle("border-divider/60", chip.dataset.filter !== active);
+        chip.setAttribute("aria-pressed", chip.dataset.filter === active ? "true" : "false");
+      });
+      cards.forEach((card) => {
+        const stack = card.dataset.stack?.split(",") ?? [];
+        const visible = active === "all" || stack.includes(active);
+        card.style.display = visible ? "grid" : "none";
+      });
+    }
+
+    chips.forEach((chip) => {
+      chip.addEventListener("click", () => updateFilter(chip.dataset.filter ?? "all"));
+      chip.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          updateFilter(chip.dataset.filter ?? "all");
+        }
+        if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+          event.preventDefault();
+          const chipsArray = Array.from(chips);
+          const currentIndex = chipsArray.indexOf(chip);
+          const nextIndex = event.key === "ArrowRight" ? currentIndex + 1 : currentIndex - 1;
+          const targetChip = chipsArray[(nextIndex + chipsArray.length) % chipsArray.length];
+          targetChip.focus();
+        }
+      });
+    });
+
+    updateFilter("all");
+
+    const grid = document.querySelector<HTMLElement>(".projects-grid");
+    grid?.addEventListener("keydown", (event) => {
+      const focusable = cards.filter((card) => card.style.display !== "none");
+      const currentIndex = focusable.indexOf(document.activeElement as HTMLElement);
+      if (currentIndex === -1) return;
+      const columns = window.innerWidth >= 640 ? 2 : 1;
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        focusable[(currentIndex + 1) % focusable.length]?.focus();
+      } else if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        focusable[(currentIndex - 1 + focusable.length) % focusable.length]?.focus();
+      } else if (event.key === "ArrowDown") {
+        event.preventDefault();
+        focusable[Math.min(currentIndex + columns, focusable.length - 1)]?.focus();
+      } else if (event.key === "ArrowUp") {
+        event.preventDefault();
+        focusable[Math.max(currentIndex - columns, 0)]?.focus();
+      } else if (event.key === "Escape") {
+        event.preventDefault();
+        document.querySelector<HTMLButtonElement>("#filter-bar button")?.focus();
+      }
+    });
+  </script>
+  <style>
+    .filter-chip {
+      border-radius: 999px;
+      border: 1px solid rgba(42, 45, 49, 0.7);
+      background: rgba(21, 23, 25, 0.8);
+      color: #a8afb7;
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: all 0.2s ease;
+    }
+    .filter-chip:hover {
+      color: #e7e9ec;
+      border-color: rgba(138, 164, 255, 0.7);
+    }
+  </style>
+</Base>

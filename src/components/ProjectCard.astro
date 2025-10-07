@@ -1,0 +1,56 @@
+---
+import MotionReveal from "./MotionReveal";
+import CTAButton from "./CTAButton";
+
+interface ProjectFrontmatter {
+  title: string;
+  stack: string[];
+  problem: string;
+  result: string;
+  cover: string;
+  role: string;
+  impact?: string;
+}
+
+interface Props {
+  project: ProjectFrontmatter;
+  slug: string;
+}
+
+const { project, slug } = Astro.props;
+---
+
+<MotionReveal client:only="react">
+  <article
+    class="group grid gap-6 rounded-2xl border border-divider/40 bg-surface/80 p-6 shadow-soft transition hover:border-accent/40"
+  >
+    <img
+      src={project.cover}
+      alt={`Cuplikan proyek ${project.title}`}
+      loading="lazy"
+      class="h-48 w-full rounded-xl object-cover"
+      width="640"
+      height="360"
+    />
+    <div class="space-y-4">
+      <div class="flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.3em] text-accent">
+        <span>{project.role}</span>
+        {
+          project.stack.map((stack: string) => (
+            <span class="rounded-full bg-divider/40 px-2 py-1 normal-case tracking-normal text-text2">
+              {stack}
+            </span>
+          ))
+        }
+      </div>
+      <div class="space-y-2">
+        <h3 class="font-heading text-2xl text-text">{project.title}</h3>
+        <p class="text-sm text-text2">{project.problem}</p>
+        <p class="text-sm text-success/90">{project.impact ?? project.result}</p>
+      </div>
+      <CTAButton client:load href={`/project/${slug}`} variant="ghost">
+        Lihat studi kasus
+      </CTAButton>
+    </div>
+  </article>
+</MotionReveal>
