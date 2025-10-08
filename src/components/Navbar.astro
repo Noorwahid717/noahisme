@@ -12,7 +12,11 @@ const links = [
 ];
 ---
 
-<nav class="sticky top-0 z-50 bg-gradient-to-b from-bg via-bg/95 to-transparent backdrop-blur">
+<nav
+  class="sticky top-0 z-50 bg-gradient-to-b from-bg via-bg/95 to-transparent backdrop-blur motion-safe:transition-transform motion-safe:duration-200 motion-safe:ease-out data-[state=hidden]:-translate-y-full"
+  data-state="visible"
+  data-nav
+>
   <div class="mx-auto max-w-6xl px-6 pt-6">
     <div
       class="flex items-center justify-between gap-4 rounded-full border border-divider/60 bg-surface/70 px-6 py-4 text-sm shadow-subtle backdrop-blur"
@@ -55,3 +59,74 @@ const links = [
     </div>
   </div>
 </nav>
+
+<script is:inline>
+  const nav = document.querySelector("[data-nav]");
+  const root = document.documentElement;
+
+  if (nav) {
+    let lastY = window.scrollY;
+    const scrollThreshold = 12;
+    const showOffset = 96;
+    let ticking = false;
+
+    const setState = (state) => {
+      if (nav.dataset.state !== state) {
+        nav.dataset.state = state;
+      }
+    };
+
+    const prefersReducedMotion = () => root.dataset.motion === "reduced";
+
+    const evaluate = () => {
+      const currentY = window.scrollY;
+
+      if (prefersReducedMotion()) {
+        setState("visible");
+        lastY = currentY;
+        return;
+      }
+
+      if (currentY <= showOffset) {
+        setState("visible");
+      } else if (currentY - lastY > scrollThreshold) {
+        setState("hidden");
+      } else if (lastY - currentY > scrollThreshold) {
+        setState("visible");
+      }
+
+      lastY = currentY;
+    };
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          evaluate();
+          ticking = false;
+        });
+      },
+      { passive: true }
+    );
+
+    nav.addEventListener("mouseenter", () => setState("visible"));
+    nav.addEventListener("focusin", () => setState("visible"));
+
+    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const handlePreference = (event) => {
+      if (event.matches) {
+        setState("visible");
+      }
+    };
+
+    if (typeof query.addEventListener === "function") {
+      query.addEventListener("change", handlePreference);
+    } else if (typeof query.addListener === "function") {
+      query.addListener(handlePreference);
+    }
+
+    evaluate();
+  }
+</script>
