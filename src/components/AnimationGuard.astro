@@ -1,0 +1,29 @@
+---
+
+---
+
+<script is:inline>
+  const root = document.documentElement;
+  const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  const applyPreference = () => {
+    const value = query.matches ? "reduced" : "full";
+    if (root.dataset.motion !== value) {
+      root.dataset.motion = value;
+    }
+  };
+
+  applyPreference();
+  query.addEventListener("change", applyPreference);
+</script>
+
+<noscript>
+  <style>
+    * {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  </style>
+</noscript>

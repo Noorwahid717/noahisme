@@ -1,17 +1,28 @@
 ---
+import { Image } from "astro:assets";
 import Base from "~/layouts/Base.astro";
 import { getCollection } from "astro:content";
 import CTAButton from "~/components/CTAButton";
+import { SITE } from "~/lib/seo";
 
 const projects = (await getCollection("projects")).sort((a, b) =>
   a.data.date > b.data.date ? -1 : 1
 );
 const stacks = Array.from(new Set(projects.flatMap((project) => project.data.stack))).sort();
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "Portofolio proyek Noah Isme",
+  description: "Daftar studi kasus lengkap yang dikurasi berdasarkan stack dan hasil bisnis.",
+  url: `${SITE.url}/projects`,
+};
 ---
 
 <Base
   title="Proyek Noah Isme"
   description="Rangkuman studi kasus lengkap beserta proses, dampak, dan peran saya dalam tiap proyek."
+  structuredData={structuredData}
+  breadcrumbs={[{ name: "Proyek", url: "/projects" }]}
 >
   <section class="mx-auto max-w-6xl px-6 pb-24 pt-28">
     <header class="space-y-4">
@@ -40,13 +51,13 @@ const stacks = Array.from(new Set(projects.flatMap((project) => project.data.sta
             tabindex="0"
             data-stack={data.stack.join(",")}
           >
-            <img
+            <Image
               src={data.cover}
-              width="640"
-              height="360"
               loading="lazy"
+              decoding="async"
               alt={`Cuplikan proyek ${data.title}`}
               class="h-48 w-full rounded-xl object-cover"
+              sizes="(min-width: 1024px) 420px, (min-width: 640px) 50vw, 100vw"
             />
             <div class="space-y-2">
               <h2 class="font-heading text-2xl text-text">{data.title}</h2>

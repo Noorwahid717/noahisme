@@ -1,20 +1,28 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Spectral:wght@400;600;700&display=swap");
+@import "./fonts.css";
 
 :root {
   color-scheme: dark;
-  font-family: "Inter", system-ui, sans-serif;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  --bg: #0f1115;
+  --surface: #15181fdd;
+  --text: #f5f7fa;
+  --text-muted: #c7ccd9;
+  --accent: #8aa4ff;
+  --success: #7be0b8;
+  --divider: #2b3242;
 }
 
 html,
 body {
-  background: #0e0f10;
-  color: #e7e9ec;
+  background: var(--bg);
+  color: var(--text);
   min-height: 100%;
-}
-
-.theme-light body {
-  background: #f8f9fb;
-  color: #0e0f10;
 }
 
 body {
@@ -36,6 +44,18 @@ textarea {
   font: inherit;
 }
 
+.focus-outline:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+[data-motion="reduced"] * {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.001ms !important;
@@ -43,9 +63,4 @@ textarea {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
-}
-
-.focus-outline:focus-visible {
-  outline: 2px solid #8aa4ff;
-  outline-offset: 3px;
 }

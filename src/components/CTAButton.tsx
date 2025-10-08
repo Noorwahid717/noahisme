@@ -11,6 +11,7 @@ interface CTAButtonProps {
   onClick?: () => void;
   variant?: "primary" | "ghost";
   className?: string;
+  type?: "button" | "submit" | "reset";
 }
 
 const baseClasses =
@@ -22,6 +23,7 @@ export default function CTAButton({
   onClick,
   variant = "primary",
   className,
+  type = "button",
 }: CTAButtonProps) {
   const Component = href ? motion.a : motion.button;
   const styles = clsx(
@@ -37,7 +39,7 @@ export default function CTAButton({
     onClick?.();
   };
 
-  const componentProps = href ? { href } : { type: "button" as const };
+  const componentProps = href ? { href } : { type };
 
   return (
     <Component

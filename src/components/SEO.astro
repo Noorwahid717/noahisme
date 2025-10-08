@@ -1,0 +1,61 @@
+---
+import interFontUrl from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
+import spectralSemiBoldUrl from "@fontsource/spectral/files/spectral-latin-600-normal.woff2?url";
+import { SITE } from "~/lib/seo";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
+  noindex?: boolean;
+}
+
+const {
+  title = SITE.title,
+  description = SITE.description,
+  image = "/og-default.svg",
+  canonical = `${SITE.url}${Astro.url.pathname}`,
+  structuredData,
+  noindex = false,
+} = Astro.props;
+
+const data = Array.isArray(structuredData)
+  ? structuredData
+  : structuredData
+    ? [structuredData]
+    : [];
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={SITE.name} />
+<meta property="og:locale" content={SITE.locale} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={`${SITE.url}${image}`} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={`${SITE.url}${image}`} />
+<meta name="theme-color" content="#0f1115" />
+<link rel="preload" as="font" type="font/woff2" href={interFontUrl} crossorigin="anonymous" />
+<link
+  rel="preload"
+  as="font"
+  type="font/woff2"
+  href={spectralSemiBoldUrl}
+  crossorigin="anonymous"
+/>
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+{
+  data.map((entry) => (
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(entry)} />
+  ))
+}

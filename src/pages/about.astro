@@ -1,22 +1,24 @@
 ---
+import { Image } from "astro:assets";
 import Base from "~/layouts/Base.astro";
 import CTAButton from "~/components/CTAButton";
+import portrait from "~/assets/images/portrait.svg";
+import { SITE } from "~/lib/seo";
 
-const schema = {
+const structuredData = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Noah Isme",
-  jobTitle: "Senior Frontend & UX Engineer",
-  url: "https://noahisme.vercel.app",
-  image: "/images/portrait.svg",
-  sameAs: ["https://github.com", "https://dribbble.com", "https://www.linkedin.com"],
+  "@type": "AboutPage",
+  name: "Tentang Noah Isme",
+  url: `${SITE.url}/about`,
+  description: "Profil profesional Noah Isme sebagai Senior Frontend & UX Engineer.",
 };
 ---
 
 <Base
   title="Tentang Noah Isme"
   description="Bio singkat, filosofi desain, dan timeline karier sebagai Senior Frontend & UX Engineer."
-  structuredData={schema}
+  structuredData={structuredData}
+  breadcrumbs={[{ name: "Tentang", url: "/about" }]}
 >
   <section
     class="mx-auto grid max-w-6xl gap-12 px-6 pb-24 pt-28 md:grid-cols-[1fr,0.9fr] md:items-start"
@@ -35,9 +37,9 @@ const schema = {
       </p>
       <CTAButton client:load href="/contact">Diskusikan peluang</CTAButton>
     </div>
-    <aside class="space-y-8">
+    <aside class="space-y-8" aria-label="Detail profesional Noah Isme">
       <div class="overflow-hidden rounded-3xl border border-divider/40">
-        <img src="/images/portrait.svg" alt="Potret Noah Isme" />
+        <Image src={portrait} alt="Potret Noah Isme" loading="lazy" decoding="async" />
       </div>
       <section class="space-y-4">
         <h2 class="font-heading text-2xl text-text">Keahlian utama</h2>

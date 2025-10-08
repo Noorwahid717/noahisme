@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import MotionReveal from "./MotionReveal";
 import CTAButton from "./CTAButton";
 
@@ -7,7 +9,7 @@ interface ProjectFrontmatter {
   stack: string[];
   problem: string;
   result: string;
-  cover: string;
+  cover: ImageMetadata;
   role: string;
   impact?: string;
 }
@@ -24,13 +26,13 @@ const { project, slug } = Astro.props;
   <article
     class="group grid gap-6 rounded-2xl border border-divider/40 bg-surface/80 p-6 shadow-soft transition hover:border-accent/40"
   >
-    <img
+    <Image
       src={project.cover}
       alt={`Cuplikan proyek ${project.title}`}
-      loading="lazy"
       class="h-48 w-full rounded-xl object-cover"
-      width="640"
-      height="360"
+      loading="lazy"
+      decoding="async"
+      sizes="(min-width: 768px) 320px, 100vw"
     />
     <div class="space-y-4">
       <div class="flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.3em] text-accent">

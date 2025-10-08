@@ -10,7 +10,16 @@ export default defineConfig({
     tailwind({ applyBaseStyles: false }),
     react(),
     mdx(),
-    sitemap()
+    sitemap({
+      entryLimit: 1000,
+      changefreq: "monthly",
+      i18n: {
+        defaultLocale: "id",
+        locales: {
+          id: "id-ID",
+        },
+      },
+    })
   ],
   output: "static"
 });

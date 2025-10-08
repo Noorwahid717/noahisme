@@ -1,11 +1,22 @@
 ---
 import Base from "~/layouts/Base.astro";
 import CTAButton from "~/components/CTAButton";
+import { SITE } from "~/lib/seo";
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  name: "Kontak Noah Isme",
+  description: "Halaman kontak resmi Noah Isme untuk kolaborasi dan konsultasi produk.",
+  url: `${SITE.url}/contact`,
+};
 ---
 
 <Base
   title="Kontak Noah Isme"
   description="Hubungi saya untuk kolaborasi produk digital, audit aksesibilitas, atau konsultasi animasi."
+  structuredData={structuredData}
+  breadcrumbs={[{ name: "Kontak", url: "/contact" }]}
 >
   <section class="mx-auto grid max-w-4xl gap-10 px-6 pb-24 pt-28">
     <header class="space-y-4">
@@ -65,7 +76,7 @@ import CTAButton from "~/components/CTAButton";
           name="message"
           required></textarea>
       </div>
-      <CTAButton client:load onClick={() => {}}> Kirim pesan </CTAButton>
+      <CTAButton client:load type="submit"> Kirim pesan </CTAButton>
     </form>
   </section>
 </Base>
