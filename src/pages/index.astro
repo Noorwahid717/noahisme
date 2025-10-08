@@ -1,28 +1,30 @@
 ---
+import { Image } from "astro:assets";
 import Base from "~/layouts/Base.astro";
 import Section from "~/components/Section.astro";
 import ProjectCard from "~/components/ProjectCard.astro";
 import CTAButton from "~/components/CTAButton";
 import MotionReveal from "~/components/MotionReveal";
+import AudioButton from "~/components/AudioButton";
 import { getCollection } from "astro:content";
 import { trackEvent } from "~/lib/analytics";
+import { SITE } from "~/lib/seo";
 
 const projects = await getCollection("projects", ({ data }) => data.featured);
 const featured = projects.sort((a, b) => (a.data.date > b.data.date ? -1 : 1)).slice(0, 4);
 const services = await getCollection("services");
 const testimonials = await getCollection("testimonials");
 
-const heroSchema = {
+const homePageSchema = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Noah Isme",
-  jobTitle: "Senior Frontend & UX Engineer",
-  url: "https://noahisme.vercel.app",
-  sameAs: ["https://github.com", "https://dribbble.com", "https://www.linkedin.com"],
+  "@type": "WebPage",
+  name: SITE.title,
+  description: SITE.description,
+  url: SITE.url,
 };
 ---
 
-<Base structuredData={heroSchema}>
+<Base structuredData={homePageSchema}>
   <section class="relative overflow-hidden bg-bg">
     <div
       class="mx-auto flex max-w-6xl flex-col gap-10 px-6 pb-24 pt-32 md:flex-row md:items-center md:justify-between"
@@ -41,6 +43,9 @@ const heroSchema = {
             Jadwalkan diskusi
           </CTAButton>
           <CTAButton client:load href="/projects" variant="ghost"> Lihat studi kasus </CTAButton>
+          <div data-testid="hero-audio-toggle">
+            <AudioButton client:only="react" className="ml-1" />
+          </div>
         </div>
       </div>
       <MotionReveal client:only="react">
@@ -106,13 +111,17 @@ const heroSchema = {
           {testimonials.map(({ data }) => (
             <figure class="rounded-2xl border border-divider/40 bg-surface/70 p-6 shadow-soft">
               <div class="flex items-center gap-4">
-                <img
-                  src={data.avatar ?? "/images/testimonials/saskia.svg"}
-                  alt={data.name}
-                  width="64"
-                  height="64"
-                  class="h-16 w-16 rounded-full object-cover"
-                />
+                {data.avatar && (
+                  <Image
+                    src={data.avatar}
+                    alt={data.name}
+                    class="h-16 w-16 rounded-full object-cover"
+                    width={64}
+                    height={64}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                )}
                 <figcaption>
                   <p class="font-heading text-lg text-text">{data.name}</p>
                   <p class="text-sm text-text2">{data.role}</p>

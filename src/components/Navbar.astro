@@ -1,6 +1,6 @@
 ---
 import ThemeToggle from "./ThemeToggle";
-import VolumeControl from "./VolumeControl";
+import AudioButton from "./AudioButton";
 import CTAButton from "./CTAButton";
 import { trackEvent } from "~/lib/analytics";
 
@@ -43,7 +43,7 @@ const links = [
       </CTAButton>
     </div>
     <div class="flex items-center gap-3">
-      <VolumeControl client:only="react" />
+      <AudioButton client:only="react" />
       <ThemeToggle client:only="react" />
     </div>
   </div>

@@ -9,4 +9,5 @@ pnpm-workspace.yaml
 /.playwright
 /playwright-report
 /test-results
+/.lighthouse
 .husky/_

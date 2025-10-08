@@ -15,5 +15,39 @@ test.describe("basic routing", () => {
 test("navigasi keyboard navbar", async ({ page }) => {
   await page.goto("/");
   await page.keyboard.press("Tab");
+  await page.keyboard.press("Tab");
   await expect(page.locator("a", { hasText: "Proyek" }).first()).toBeFocused();
+});
+
+test("audio button toggles pressed state", async ({ page }) => {
+  await page.goto("/");
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.waitForSelector('[data-testid="hero-audio-toggle"] astro-island');
+  const firstToggle = await page.evaluate(async () => {
+    const island = document.querySelector('[data-testid="hero-audio-toggle"] astro-island');
+    const root = (island as HTMLElement & { shadowRoot?: ShadowRoot })?.shadowRoot ?? island;
+    const button = root?.querySelector("button");
+    button?.click();
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    return {
+      pressed: button?.getAttribute("aria-pressed"),
+      enabled: window.localStorage.getItem("audio-enabled"),
+    };
+  });
+  expect(firstToggle?.pressed).toBe("true");
+  expect(firstToggle?.enabled).toBe("true");
+
+  const secondToggle = await page.evaluate(async () => {
+    const island = document.querySelector('[data-testid="hero-audio-toggle"] astro-island');
+    const root = (island as HTMLElement & { shadowRoot?: ShadowRoot })?.shadowRoot ?? island;
+    const button = root?.querySelector("button");
+    button?.click();
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    return {
+      pressed: button?.getAttribute("aria-pressed"),
+      enabled: window.localStorage.getItem("audio-enabled"),
+    };
+  });
+  expect(secondToggle?.pressed).toBe("false");
+  expect(secondToggle?.enabled).toBe("false");
 });

@@ -1,6 +1,8 @@
 ---
+import { Image } from "astro:assets";
 import CaseStudy from "~/layouts/CaseStudy.astro";
 import { getCollection } from "astro:content";
+import { SITE } from "~/lib/seo";
 
 const { slug } = Astro.params;
 const projects = await getCollection("projects");
@@ -29,11 +31,20 @@ const schema = {
   },
   headline: data.problem,
   about: data.process,
-  image: data.cover,
+  image: `${SITE.url}${data.cover.src}`,
 };
 ---
 
-<CaseStudy title={`${data.title} · Studi Kasus`} description={data.problem} structuredData={schema}>
+<CaseStudy
+  title={`${data.title} · Studi Kasus`}
+  description={data.problem}
+  structuredData={schema}
+  breadcrumbs={[
+    { name: "Proyek", url: "/projects" },
+    { name: data.title, url: `/project/${slug}` },
+  ]}
+  image={data.cover.src}
+>
   <header class="space-y-3">
     <p class="text-xs uppercase tracking-[0.3em] text-accent">{data.role}</p>
     <h1 class="font-heading text-4xl text-text">{data.title}</h1>
@@ -47,7 +58,14 @@ const schema = {
     </div>
   </header>
   <figure class="mt-10 overflow-hidden rounded-3xl border border-divider/40">
-    <img src={data.cover} alt={`Cuplikan ${data.title}`} loading="lazy" />
+    <Image
+      src={data.cover}
+      alt={`Cuplikan ${data.title}`}
+      loading="lazy"
+      decoding="async"
+      class="w-full"
+      sizes="(min-width: 768px) 768px, 100vw"
+    />
   </figure>
   <div class="prose mt-12 space-y-6">
     <Content />

@@ -2,48 +2,60 @@
 import "~/styles/globals.css";
 import Navbar from "~/components/Navbar.astro";
 import Footer from "~/components/Footer.astro";
+import SEO from "~/components/SEO.astro";
+import AnimationGuard from "~/components/AnimationGuard.astro";
+import { SITE, personSchema, websiteSchema, buildBreadcrumbs, type Breadcrumb } from "~/lib/seo";
 
 interface Props {
   title?: string;
   description?: string;
-  ogImage?: string;
-  structuredData?: Record<string, unknown>;
+  image?: string;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
+  breadcrumbs?: Breadcrumb[];
+  noindex?: boolean;
 }
 
 const {
-  title = "Noah Isme · Senior Frontend & UX Engineer",
-  description = "Menciptakan pengalaman digital presisi tinggi dengan aksesibilitas, performa, dan detail visual yang sempurna.",
-  ogImage = "/og-default.svg",
+  title = SITE.title,
+  description = SITE.description,
+  image = "/og-default.svg",
   structuredData,
+  breadcrumbs = [],
+  noindex = false,
 } = Astro.props;
-const canonical = `${Astro.site?.origin ?? "https://noahisme.vercel.app"}${Astro.url.pathname}`;
+
+const additionalData = Array.isArray(structuredData)
+  ? structuredData
+  : structuredData
+    ? [structuredData]
+    : [];
+
+const breadcrumbTrail = breadcrumbs.length
+  ? buildBreadcrumbs([{ name: "Beranda", url: "/" }, ...breadcrumbs])
+  : null;
+
+const jsonLd = [
+  personSchema,
+  websiteSchema,
+  ...(breadcrumbTrail ? [breadcrumbTrail] : []),
+  ...additionalData,
+];
 ---
 
 <html lang="id" class="scroll-smooth">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={ogImage} />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
-    {
-      structuredData && (
-        <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
-      )
-    }
+    <SEO
+      title={title}
+      description={description}
+      image={image}
+      structuredData={jsonLd}
+      noindex={noindex}
+    />
   </head>
-  <body class="bg-bg text-text">
+  <body class="bg-bg text-text antialiased">
+    <AnimationGuard />
     <Navbar />
-    <main>
+    <main class="min-h-[60vh]">
       <slot />
     </main>
     <Footer />
