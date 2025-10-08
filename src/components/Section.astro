@@ -8,17 +8,25 @@ interface Props {
 const { id, title, eyebrow, description } = Astro.props;
 ---
 
-<section id={id} class="relative py-20">
-  <div class="mx-auto flex max-w-6xl flex-col gap-8 px-6">
-    <div class="max-w-2xl space-y-3">
-      {eyebrow && <p class="text-xs uppercase tracking-[0.3em] text-accent">{eyebrow}</p>}
-      <h2 class="font-heading text-3xl tracking-tight text-text md:text-4xl">{title}</h2>
-      {description && <p class="text-base text-text2">{description}</p>}
+<section id={id} class="relative py-24">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="flex flex-col gap-12 md:flex-row md:items-end md:justify-between">
+      <div class="max-w-2xl space-y-4">
+        {eyebrow && <p class="text-xs uppercase tracking-[0.35em] text-accent/80">{eyebrow}</p>}
+        <h2 class="font-heading text-3xl font-semibold tracking-tight text-text md:text-4xl">
+          {title}
+        </h2>
+        {description && <p class="text-base text-text2">{description}</p>}
+      </div>
+      <div class="hidden h-12 w-36 -translate-y-4 rounded-full bg-accent/10 blur-2xl md:block">
+      </div>
     </div>
-    <slot />
+    <div class="mt-12 space-y-12">
+      <slot />
+    </div>
   </div>
   <div
-    class="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-divider/40 to-transparent"
+    class="pointer-events-none absolute inset-x-6 bottom-0 h-px max-w-6xl mx-auto bg-gradient-to-r from-transparent via-divider/60 to-transparent"
   >
   </div>
 </section>

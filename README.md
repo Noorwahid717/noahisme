@@ -18,6 +18,25 @@ pnpm dev
 - `pnpm test` – Menjalankan unit test dan E2E berurutan.
 - `pnpm build` – Build produksi Astro.
 
+## Deploy ke Vercel
+
+Proyek ini sudah disiapkan untuk Vercel melalui `vercel.json`. Langkah deploy:
+
+1. Pastikan semua dependensi ter-install: `pnpm install`
+2. Buat build produksi lokal (opsional untuk verifikasi): `pnpm build`
+3. Push branch ke GitHub/GitLab/Bitbucket dan hubungkan repositori di dashboard Vercel.
+4. Saat konfigurasi, biarkan _Framework Preset_ terdeteksi sebagai **Astro**. Vercel akan menggunakan:
+   - Install command: `pnpm install`
+   - Build command: `pnpm build`
+   - Output directory: `dist`
+5. Untuk deploy manual via CLI:
+   ```bash
+   pnpm install -g vercel
+   vercel login
+   vercel --prod
+   ```
+   Vercel CLI akan membaca pengaturan dari `vercel.json`.
+
 ## Struktur
 
 ```

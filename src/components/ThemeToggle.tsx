@@ -32,7 +32,7 @@ export default function ThemeToggle() {
   return (
     <button
       type="button"
-      className="focus-outline inline-flex h-10 w-10 items-center justify-center rounded-md border border-divider/60 bg-surface/60 text-text transition hover:border-accent/60"
+      className="focus-outline inline-flex h-10 w-10 items-center justify-center rounded-full border border-divider/60 bg-surface/80 text-text2 transition-colors duration-200 hover:border-accent/60 hover:text-text"
       onClick={toggleTheme}
       aria-label={label}
       title={label}

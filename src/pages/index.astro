@@ -6,6 +6,7 @@ import ProjectCard from "~/components/ProjectCard.astro";
 import CTAButton from "~/components/CTAButton";
 import MotionReveal from "~/components/MotionReveal";
 import AudioButton from "~/components/AudioButton";
+import HeroVisual from "~/components/HeroVisual";
 import { getCollection } from "astro:content";
 import { trackEvent } from "~/lib/analytics";
 import { SITE } from "~/lib/seo";
@@ -25,45 +26,65 @@ const homePageSchema = {
 ---
 
 <Base structuredData={homePageSchema}>
-  <section class="relative overflow-hidden bg-bg">
+  <section class="relative overflow-hidden">
     <div
-      class="mx-auto flex max-w-6xl flex-col gap-10 px-6 pb-24 pt-32 md:flex-row md:items-center md:justify-between"
+      aria-hidden="true"
+      class="absolute inset-0 -z-10 bg-gradient-to-br from-accent/10 via-transparent to-transparent"
     >
-      <div class="max-w-xl space-y-6">
-        <p class="text-xs uppercase tracking-[0.3em] text-accent">Noah Isme</p>
-        <h1 class="font-heading text-4xl tracking-tight text-text md:text-5xl">
-          Senior Frontend Engineer & UX Engineer yang terobsesi pada detail dan emosi.
-        </h1>
-        <p class="text-base text-text2 md:text-lg">
-          Saya mendesain dan membangun pengalaman produk animatif yang mengutamakan aksesibilitas,
-          kinerja, dan storytelling yang elegan.
-        </p>
-        <div class="flex flex-wrap items-center gap-4">
-          <CTAButton client:load href="/contact" onClick={() => trackEvent("cta_primary_contact")}>
-            Jadwalkan diskusi
-          </CTAButton>
-          <CTAButton client:load href="/projects" variant="ghost"> Lihat studi kasus </CTAButton>
-          <div data-testid="hero-audio-toggle">
-            <AudioButton client:only="react" className="ml-1" />
+    </div>
+    <div
+      aria-hidden="true"
+      class="absolute left-1/2 top-12 -z-10 h-72 w-72 -translate-x-1/2 rounded-full bg-accent/15 blur-[120px]"
+    >
+    </div>
+    <div class="mx-auto max-w-6xl px-6 pb-32 pt-36">
+      <div class="grid gap-16 md:grid-cols-[minmax(0,1fr)_minmax(280px,0.9fr)] md:items-center">
+        <MotionReveal client:only="react">
+          <div class="space-y-8">
+            <p class="text-xs uppercase tracking-[0.35em] text-accent/80">Noah Isme</p>
+            <h1
+              class="font-heading text-4xl font-semibold tracking-tight text-text sm:text-5xl md:text-[3.25rem] md:leading-[1.1]"
+            >
+              Senior Frontend Engineer & UX Engineer yang terobsesi pada detail dan emosi.
+            </h1>
+            <p class="max-w-xl text-lg text-text2">
+              Saya merancang dan membangun pengalaman produk modern dengan animasi halus, performa
+              tinggi, dan detail aksesibilitas yang membuat setiap interaksi terasa premium.
+            </p>
+            <div class="flex flex-wrap items-center gap-4">
+              <CTAButton
+                client:load
+                href="/contact"
+                onClick={() => trackEvent("cta_primary_contact")}
+              >
+                Jadwalkan diskusi
+              </CTAButton>
+              <CTAButton client:load href="/projects" variant="ghost">
+                Lihat studi kasus
+              </CTAButton>
+              <div data-testid="hero-audio-toggle">
+                <AudioButton
+                  client:only="react"
+                  className="rounded-full border-divider/60 bg-surface/70 px-5 py-3"
+                />
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-3 text-xs uppercase tracking-[0.35em] text-text2/80">
+              <span
+                class="inline-flex items-center gap-2 rounded-full border border-divider/60 bg-surface/70 px-4 py-2 tracking-[0.2em] text-text2"
+              >
+                <span class="h-2 w-2 rounded-full bg-success/80"></span> 8+ tahun pengalaman
+              </span>
+              <span
+                class="inline-flex items-center gap-2 rounded-full border border-divider/60 bg-surface/70 px-4 py-2 tracking-[0.2em] text-text2"
+              >
+                <span class="h-2 w-2 rounded-full bg-accent/60"></span> Fokus aksesibilitas & animasi
+              </span>
+            </div>
           </div>
-        </div>
+        </MotionReveal>
+        <HeroVisual client:only="react" />
       </div>
-      <MotionReveal client:only="react">
-        <div
-          class="relative mx-auto w-64 overflow-hidden rounded-3xl border border-divider/40 bg-surface/80 p-6 text-text2 shadow-soft md:mx-0"
-        >
-          <div
-            class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,#8aa4ff33,transparent_70%)]"
-          >
-          </div>
-          <p class="text-sm">Spesialisasi</p>
-          <ul class="mt-4 space-y-2 text-sm leading-relaxed">
-            <li>• Arsitektur Astro Islands, React, dan animasi Framer Motion.</li>
-            <li>• Sistem desain aksesibel dengan audit warna & typografi presisi.</li>
-            <li>• Integrasi audio halus mematuhi prefers-reduced-motion & autoplay.</li>
-          </ul>
-        </div>
-      </MotionReveal>
     </div>
   </section>
 
@@ -86,14 +107,17 @@ const homePageSchema = {
         description="Pendekatan kolaboratif untuk menyelesaikan tantangan produk dengan kecepatan dan presisi."
       >
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map(({ data }) => (
-            <div class="rounded-2xl border border-divider/40 bg-surface/80 p-6 shadow-soft">
-              <span class="text-2xl" aria-hidden="true">
-                {data.icon ?? "✨"}
-              </span>
-              <h3 class="mt-4 font-heading text-xl text-text">{data.title}</h3>
-              <p class="mt-2 text-sm text-text2">{data.description}</p>
-            </div>
+          {services.map(({ data }, index) => (
+            <MotionReveal client:only="react" delay={index * 0.1} key={data.title}>
+              <div class="group h-full rounded-xl border border-divider/50 bg-surface/90 p-7 shadow-subtle transition-all duration-300 hover:-translate-y-1 hover:shadow-soft">
+                <span class="text-2xl" aria-hidden="true">
+                  {data.icon ?? "✨"}
+                </span>
+                <h3 class="mt-6 font-heading text-xl font-semibold text-text">{data.title}</h3>
+                <p class="mt-3 text-sm text-text2">{data.description}</p>
+                <div class="mt-6 h-px w-full bg-gradient-to-r from-transparent via-divider/40 to-transparent" />
+              </div>
+            </MotionReveal>
           ))}
         </div>
       </Section>
@@ -108,27 +132,31 @@ const homePageSchema = {
         description="Rekan kerja dan klien tentang dampak kolaborasi kami."
       >
         <div class="grid gap-6 md:grid-cols-2">
-          {testimonials.map(({ data }) => (
-            <figure class="rounded-2xl border border-divider/40 bg-surface/70 p-6 shadow-soft">
-              <div class="flex items-center gap-4">
-                {data.avatar && (
-                  <Image
-                    src={data.avatar}
-                    alt={data.name}
-                    class="h-16 w-16 rounded-full object-cover"
-                    width={64}
-                    height={64}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                )}
-                <figcaption>
-                  <p class="font-heading text-lg text-text">{data.name}</p>
-                  <p class="text-sm text-text2">{data.role}</p>
-                </figcaption>
-              </div>
-              <blockquote class="mt-4 text-sm text-text2">“{data.quote}”</blockquote>
-            </figure>
+          {testimonials.map(({ data }, index) => (
+            <MotionReveal client:only="react" delay={index * 0.1} key={data.name}>
+              <figure class="rounded-xl border border-divider/40 bg-surface/80 p-6 shadow-subtle transition-all duration-300 hover:-translate-y-1 hover:shadow-soft">
+                <div class="flex items-center gap-4">
+                  {data.avatar && (
+                    <Image
+                      src={data.avatar}
+                      alt={data.name}
+                      class="h-14 w-14 rounded-full object-cover"
+                      width={56}
+                      height={56}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  )}
+                  <figcaption>
+                    <p class="font-heading text-lg font-semibold text-text">{data.name}</p>
+                    <p class="text-sm text-text2">{data.role}</p>
+                  </figcaption>
+                </div>
+                <blockquote class="mt-4 text-sm text-text2 italic leading-relaxed">
+                  “{data.quote}”
+                </blockquote>
+              </figure>
+            </MotionReveal>
           ))}
         </div>
       </Section>
