@@ -6,12 +6,12 @@ export default defineConfig({
   fullyParallel: true,
   reporter: [["list"], ["html", { outputFolder: "playwright-report" }]],
   use: {
-    baseURL: "http://127.0.0.1:4321",
+    baseURL: "http://127.0.0.1:4173",
     trace: "retain-on-failure",
   },
   webServer: {
-    command: "pnpm dev --host 127.0.0.1 --port 4321",
-    url: "http://127.0.0.1:4321",
+    command: "pnpm build && pnpm preview --host 127.0.0.1 --port 4173",
+    url: "http://127.0.0.1:4173",
     timeout: 120 * 1000,
     reuseExistingServer: !process.env.CI,
   },
