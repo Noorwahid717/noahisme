@@ -1,22 +1,23 @@
 "use client";
 
-import type { ReactNode } from "react";
+import type { FC, PropsWithChildren } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
-interface MotionRevealProps {
-  children: ReactNode;
+type MotionRevealProps = PropsWithChildren<{
   delay?: number;
-}
+  className?: string;
+}>;
 
-export default function MotionReveal({ children, delay = 0 }: MotionRevealProps) {
+const MotionReveal: FC<MotionRevealProps> = ({ children, delay = 0, className }) => {
   const prefersReducedMotion = useReducedMotion();
 
   if (prefersReducedMotion) {
-    return <div>{children}</div>;
+    return <div className={className}>{children}</div>;
   }
 
   return (
     <motion.div
+      className={className}
       initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
@@ -25,4 +26,6 @@ export default function MotionReveal({ children, delay = 0 }: MotionRevealProps)
       {children}
     </motion.div>
   );
-}
+};
+
+export default MotionReveal;

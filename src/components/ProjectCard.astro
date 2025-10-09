@@ -40,10 +40,7 @@ const { project, slug, revealDelay = 0 } = Astro.props;
         <span>{project.role}</span>
         {
           project.stack.map((stack: string) => (
-            <span
-              class="rounded-full border border-divider/60 bg-bg/60 px-2 py-1 normal-case tracking-normal text-text2"
-              key={stack}
-            >
+            <span class="rounded-full border border-divider/60 bg-bg/60 px-2 py-1 normal-case tracking-normal text-text2">
               {stack}
             </span>
           ))

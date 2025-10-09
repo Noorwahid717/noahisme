@@ -4,6 +4,7 @@ import Navbar from "~/components/Navbar.astro";
 import Footer from "~/components/Footer.astro";
 import SEO from "~/components/SEO.astro";
 import AnimationGuard from "~/components/AnimationGuard.astro";
+import Preloader from "~/components/Preloader.astro";
 import { SITE, personSchema, websiteSchema, buildBreadcrumbs, type Breadcrumb } from "~/lib/seo";
 
 interface Props {
@@ -53,6 +54,7 @@ const jsonLd = [
     />
   </head>
   <body class="bg-bg text-text antialiased">
+    <Preloader />
     <AnimationGuard />
     <Navbar />
     <main class="min-h-[60vh]">

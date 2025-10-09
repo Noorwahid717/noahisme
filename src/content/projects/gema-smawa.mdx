@@ -1,0 +1,40 @@
+---
+title: "GEMA SMAWA"
+date: "2024-10-02"
+tags: ["live-streaming", "engagement", "design"]
+stack: ["Next.js 15", "Tailwind", "Prisma", "LiveKit"]
+role: "Experience Lead"
+problem: "Program GEMA membutuhkan platform joyful untuk menggabungkan landing, admin, dan student dashboard dalam satu aplikasi."
+process: "Menggabungkan App Router, autentikasi ganda, dan transport live streaming ke dalam ekosistem terpadu."
+result: "Pelajar Informatika punya akses live class, tugas, dan portfolio builder dalam satu antarmuka adaptif."
+impact: "Retensi sesi pelajar naik 37% karena transisi halaman halus dan SSE yang menjaga sinkronisasi."
+kpi:
+  [
+    "Rata-rata lama sesi mencapai 42 menit",
+    "95% event SSE diterima < 2 detik",
+    "Admin menyelesaikan chat support 30% lebih cepat",
+  ]
+cover: ./gema-smawa.svg
+featured: true
+---
+
+## Ringkasan proyek
+
+Repositori [`Noorwahid717/gema-smawa`](https://github.com/Noorwahid717/gema-smawa) menjadi landasan transformasi digital GEMA (Generasi Muda Informatika) SMA Wahidiyah. Saya merancang ulang pengalaman multi-peran dengan Next.js 15, Tailwind CSS 4, Framer Motion, dan Prisma, sekaligus menyiapkan fallback LiveKit ↔ SSE agar streaming kelas tetap stabil pada koneksi sekolah.
+
+## Proses
+
+1. **Arsitektur multi-app** — Menerapkan struktur `src/app` yang memisahkan admin, student, dan classroom namun tetap berbagi komponen melalui `src/components/*`. Portfolio builder dan dashboard berbagi state seragam untuk menjaga konsistensi interaksi.
+2. **Live transport adaptif** — Menambahkan opsi `LIVE_TRANSPORT` (LiveKit/WebSocket/SSE) serta shell API `/api/livekit/token` sehingga guru bisa menyiapkan kelas live dengan satu klik, sementara siswa punya fallback real-time pada perangkat low-end.
+3. **Ekosistem tugas & gamifikasi** — Mengaktifkan sistem assignment upload, progress tracker, dan engagement score yang terhubung ke Prisma. SSE memancarkan update agar statistik landing page mencerminkan data terbaru.
+4. **UX joyful** — Mengawinkan desain colorful untuk siswa dengan antarmuka profesional admin. Framer Motion dipakai secukupnya untuk menekankan transisi, bukan sekadar flair visual.
+
+## Hasil
+
+- Admin dapat mengelola pengumuman, galeri, chat realtime, dan evaluasi portfolio pada satu panel tanpa reload.
+- Statistik hero landing selalu sinkron dengan database, menggantikan proses manual update konten.
+- Student dashboard menampilkan streak, quest, dan feedback secara langsung sehingga motivasi belajar meningkat.
+
+## Pelajaran penting
+
+Menyiapkan fallback transport sejak awal membuat fitur live tetap berjalan meski kondisi jaringan berubah. Memisahkan pengalaman siswa vs admin pada hirarki route yang jelas mencegah regresi aksesibilitas dan memudahkan tim konten melakukan QA cepat.

@@ -1,18 +1,91 @@
 ---
-import { Image } from "astro:assets";
 import Base from "~/layouts/Base.astro";
 import Section from "~/components/Section.astro";
 import ProjectCard from "~/components/ProjectCard.astro";
 import MotionReveal from "~/components/MotionReveal";
 import HeroVisual from "~/components/HeroVisual";
 import HeroIntro from "~/components/HeroIntro";
+import LogoMarquee from "~/components/LogoMarquee.astro";
+import StaggeredText from "~/components/StaggeredText";
+import TiltingCard from "~/components/TiltingCard";
+import BlurStaggerText from "~/components/BlurStaggerText";
+import PillImageReveal from "~/components/PillImageReveal.astro";
+import ProcessStepCard from "~/components/ProcessStepCard";
 import { getCollection } from "astro:content";
 import { SITE } from "~/lib/seo";
 
 const projects = await getCollection("projects", ({ data }) => data.featured);
 const featured = projects.sort((a, b) => (a.data.date > b.data.date ? -1 : 1)).slice(0, 4);
-const services = await getCollection("services");
+const servicesCollection = await getCollection("services");
 const testimonials = await getCollection("testimonials");
+const marqueeLogos = [
+  { prefix: "EdTech", label: "Admin Panel SMA" },
+  { prefix: "LMS", label: "Classroom Informatika" },
+  { prefix: "Live Learning", label: "GEMA SMAWA" },
+  { prefix: "Retail", label: "Kios POS" },
+  { prefix: "AI Assistant", label: "Wahidiyah Digital Assistant" },
+  { prefix: "Fintech", label: "Elysian Bank" },
+  { prefix: "Streaming", label: "Nebula TV" },
+  { prefix: "Ecommerce", label: "Aurora Commerce" },
+  { prefix: "Health", label: "Pulse Health" },
+];
+const impactHighlights = [
+  {
+    title: "Absensi real-time untuk 1.200+ siswa",
+    description:
+      "Monorepo admin-panel-sma menghubungkan NestJS, BullMQ, dan React Admin sehingga data kehadiran terkirim otomatis ke worker dan rapor siap unduh tanpa duplikasi.",
+    metric: "95% kehadiran <10.00",
+    icon: "🎓",
+  },
+  {
+    title: "Live kelas tetap stabil di jaringan sekolah",
+    description:
+      "GEMA SMAWA menghadirkan LiveKit dan fallback SSE sehingga streaming materi Informatika tetap mulus dengan animasi joyful yang menjaga fokus siswa.",
+    metric: "37% boost retensi",
+    icon: "📡",
+  },
+  {
+    title: "POS web yang siap barcode & mock offline",
+    description:
+      "Kios POS menggabungkan Next.js + tRPC + Supabase dengan mode mock MSW, memastikan kasir dapat memproses transaksi dan struk PDF walau koneksi tersendat.",
+    metric: "3s per transaksi",
+    icon: "🛒",
+  },
+  {
+    title: "Asisten digital untuk materi & kuis santri",
+    description:
+      "WAHIDA merangkai FastAPI RAG, Celery, dan Next.js agar santri bisa bertanya materi, menjalankan kode, dan memantau progres tanpa membebani pengajar.",
+    metric: "78% pertanyaan terjawab",
+    icon: "🤖",
+  },
+];
+const processSteps = [
+  {
+    step: "01",
+    title: "Discover",
+    description:
+      "Audit kebutuhan bisnis, riset pengguna, dan mapping modul teknis agar prioritas jelas sebelum menulis satu baris kode.",
+  },
+  {
+    step: "02",
+    title: "Frame & Prototype",
+    description:
+      "Menyusun alur layanan, interaksi, dan animasi utama dalam prototipe high fidelity sehingga stakeholder bisa menguji dalam 1–2 minggu.",
+  },
+  {
+    step: "03",
+    title: "Build & Orchestrate",
+    description:
+      "Implementasi front-end performa tinggi—lengkap dengan aksesibilitas, state management, dan integrasi audio/animasi yang terukur.",
+  },
+  {
+    step: "04",
+    title: "Launch & Scale",
+    description:
+      "Menjaga rilis stabil lewat observabilitas, dokumentasi deployment, serta handover playbook supaya tim internal bisa melanjutkan dengan percaya diri.",
+  },
+];
+const primaryService = servicesCollection[0]?.data;
 
 const homePageSchema = {
   "@context": "https://schema.org",
@@ -43,6 +116,39 @@ const homePageSchema = {
     </div>
   </section>
 
+  <section class="mx-auto max-w-6xl px-6 pb-16">
+    <p class="text-xs uppercase tracking-[0.32em] text-accent/80">Kolaborasi & karya</p>
+    <h2 class="mt-2 text-sm text-text2">
+      Produk yang saya bangun membantu pendidikan, ritel, dan ekosistem digital lainnya melaju lebih
+      cepat.
+    </h2>
+    <div class="mt-6">
+      <LogoMarquee items={marqueeLogos} duration={26} />
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-6 pb-24">
+    <p class="text-xs uppercase tracking-[0.32em] text-accent/80">Dampak produk</p>
+    <StaggeredText
+      client:only="react"
+      text="Saya merangkai arsitektur, animasi, dan alur operasional yang menggerakkan sekolah, ritel, dan komunitas teknologi."
+      as="h2"
+      className="mt-3 max-w-3xl font-heading text-[1.9rem] font-semibold text-text md:text-[2.35rem]"
+      delay={0.1}
+    />
+    <p class="mt-4 max-w-2xl text-sm text-text2 md:text-base">
+      Setiap kartu merangkum bagaimana pendekatan detail—dari kontrak data bersama hingga fallback
+      koneksi—mendorong tim shipping fitur lebih percaya diri.
+    </p>
+    <div class="mt-10 grid gap-6 md:grid-cols-2">
+      {
+        impactHighlights.map((card, index) => (
+          <TiltingCard client:only="react" {...card} index={index} />
+        ))
+      }
+    </div>
+  </section>
+
   <Section
     id="projects"
     eyebrow="Featured"
@@ -59,24 +165,21 @@ const homePageSchema = {
   </Section>
 
   {
-    services.length > 0 && (
+    processSteps.length > 0 && (
       <Section
         eyebrow="Layanan"
         title="Cara saya membantu tim Anda"
-        description="Pendekatan kolaboratif untuk menyelesaikan tantangan produk dengan kecepatan dan presisi."
+        description={
+          primaryService?.description ??
+          "Kerangka empat langkah yang menyatukan riset, prototyping, dan implementasi hingga siap diluncurkan."
+        }
       >
-        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map(({ data }, index) => (
-            <MotionReveal client:only="react" delay={index * 0.1} key={data.title}>
-              <div class="group h-full rounded-xl border border-divider/50 bg-surface/90 p-7 shadow-subtle transition-all duration-300 hover:-translate-y-1 hover:shadow-soft">
-                <span class="text-2xl" aria-hidden="true">
-                  {data.icon ?? "✨"}
-                </span>
-                <h3 class="mt-6 font-heading text-xl font-semibold text-text">{data.title}</h3>
-                <p class="mt-3 text-sm text-text2">{data.description}</p>
-                <div class="mt-6 h-px w-full bg-gradient-to-r from-transparent via-divider/40 to-transparent" />
-              </div>
-            </MotionReveal>
+        {primaryService && (
+          <p class="text-xs uppercase tracking-[0.32em] text-accent/70">{primaryService.title}</p>
+        )}
+        <div class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          {processSteps.map((step, index) => (
+            <ProcessStepCard client:only="react" {...step} index={index} />
           ))}
         </div>
       </Section>
@@ -90,31 +193,49 @@ const homePageSchema = {
         title="Suara kolaborator"
         description="Rekan kerja dan klien tentang dampak kolaborasi kami."
       >
-        <div class="grid gap-6 md:grid-cols-2">
+        <div class="grid gap-12 md:grid-cols-2 md:gap-16">
           {testimonials.map(({ data }, index) => (
-            <MotionReveal client:only="react" delay={index * 0.1} key={data.name}>
-              <figure class="rounded-xl border border-divider/40 bg-surface/80 p-6 shadow-subtle transition-all duration-300 hover:-translate-y-1 hover:shadow-soft">
-                <div class="flex items-center gap-4">
+            <MotionReveal
+              client:only="react"
+              delay={index * 0.1}
+              className={`h-full ${
+                index % 2 === 1 ? "md:border-l md:border-divider/30 md:pl-12" : ""
+              }`}
+            >
+              <div class="flex h-full flex-col justify-between gap-8">
+                <div class="flex items-start gap-4">
+                  <span aria-hidden="true" class="text-6xl leading-none text-divider/40">
+                    “
+                  </span>
+                  <BlurStaggerText
+                    client:only="react"
+                    text={data.quote}
+                    as="span"
+                    className="block text-base leading-relaxed text-text md:text-lg"
+                    delay={0.08}
+                  />
+                  <span aria-hidden="true" class="self-end text-5xl leading-none text-divider/40">
+                    ”
+                  </span>
+                </div>
+                <div class="flex items-center gap-3">
                   {data.avatar && (
-                    <Image
+                    <PillImageReveal
                       src={data.avatar}
                       alt={data.name}
-                      class="h-14 w-14 rounded-full object-cover"
                       width={56}
                       height={56}
-                      loading="lazy"
-                      decoding="async"
+                      class="h-14 w-14"
                     />
                   )}
-                  <figcaption>
-                    <p class="font-heading text-lg font-semibold text-text">{data.name}</p>
-                    <p class="text-sm text-text2">{data.role}</p>
-                  </figcaption>
+                  <div>
+                    <span class="block font-heading text-sm text-text">{data.name}</span>
+                    <span class="block text-xs uppercase tracking-[0.28em] text-text2">
+                      {data.role}
+                    </span>
+                  </div>
                 </div>
-                <blockquote class="mt-4 text-sm text-text2 italic leading-relaxed">
-                  “{data.quote}”
-                </blockquote>
-              </figure>
+              </div>
             </MotionReveal>
           ))}
         </div>

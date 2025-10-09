@@ -1,0 +1,40 @@
+---
+title: "Wahidiyah Digital Assistant"
+date: "2024-10-08"
+tags: ["ai", "rag", "fastapi"]
+stack: ["Next.js", "FastAPI", "Celery", "Supabase"]
+role: "AI Platform Engineer"
+problem: "Program mentoring pesantren butuh asisten digital yang mampu menjawab materi dan memantau progres santri."
+process: "Merakit front-backend mono repo dengan FastAPI RAG, Next.js App Router, dan pipeline ingest konten."
+result: "Santri bisa belajar materi, mengikuti kuis, dan menjalankan kode langsung di web."
+impact: "Waktu pendampingan guru berkurang 40% karena pertanyaan dasar dijawab AI dan progres tercatat otomatis."
+kpi:
+  [
+    "Rasio pertanyaan terjawab otomatis mencapai 78%",
+    "Sesi chat rata-rata 6 langkah percakapan",
+    "Eksekusi kode sandbox selesai < 3 detik",
+  ]
+cover: ./wahida.svg
+featured: true
+---
+
+## Ringkasan proyek
+
+Mengadopsi repo [`Noorwahid717/wahida`](https://github.com/Noorwahid717/wahida), saya menyusun asisten digital terintegrasi yang memadukan Next.js frontend dengan FastAPI backend. Tujuan utamanya adalah menyediakan chat RAG, kuis adaptif, eksekusi kode via Celery worker, dan tracking progres santri yang mudah diobservasi.
+
+## Proses
+
+1. **Bootstrap mono repo** — Menjaga `apps/frontend` dan `apps/api` dalam struktur konsisten dengan turunan CI lint/test, plus direktori `infra` untuk kelak menampung Terraform/Docker.
+2. **Pipeline RAG** — Menyempurnakan skrip `scripts/ingest_markdown.py` yang menyiapkan FAISS index dari materi pesantren, termasuk parameter chunking dan kompresi embedding.
+3. **Eksekusi kode aman** — Mendesain endpoint `/run` yang menyalurkan permintaan ke Celery + Judge0/Docker runner, melaporkan hasil via SSE agar pengguna melihat status secara bertahap.
+4. **Roadmap bertahap** — Menyusun sprint plan dari fondasi sampai integrasi guru/parent, memetakan opsi scale-up (pgvector, OTel, re-ranker, feature flag).
+
+## Hasil
+
+- Frontend Next.js menyediakan halaman chat, materi, kuis, dan leaderboard dengan state TanStack Query + Zustand.
+- FastAPI menghadirkan endpoint `/chat`, `/quiz`, `/progress`, `/run` lengkap dengan test guard ruff+mypy.
+- Docker Compose memudahkan tim untuk menjalankan keseluruhan stack (FastAPI + Next.js) secara lokal hanya dengan satu perintah.
+
+## Pelajaran penting
+
+Merekam roadmap produksi sejak awal mempercepat buy-in stakeholder. Kombinasi RAG dan eksekusi kode menuntut observabilitas; menyusun rencana OTel dan moderasi dari sprint awal mencegah hutang teknis saat pengguna bertambah.

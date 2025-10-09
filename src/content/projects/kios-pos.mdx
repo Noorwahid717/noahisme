@@ -1,0 +1,40 @@
+---
+title: "Kios POS"
+date: "2024-07-04"
+tags: ["retail", "trpc", "supabase"]
+stack: ["Next.js", "tRPC", "Prisma", "Supabase"]
+role: "Solution Architect"
+problem: "Toko skala UMKM membutuhkan POS web yang reliabel tanpa vendor mahal."
+process: "Mendefinisikan ulang modul kasir, manajemen stok, dan laporan ke dalam Next.js App Router dengan tRPC."
+result: "Kasir dapat memproses transaksi hybrid offline/online dan mencetak struk PDF termal."
+impact: "Pemilik toko memantau stok dan PPN secara realtime, mengurangi shrinkage 18%."
+kpi:
+  [
+    "Transaksi kasir selesai < 3 detik per item",
+    "Laporan harian otomatis terkirim pukul 22.00",
+    "Implementasi lintas outlet selesai dalam 5 hari",
+  ]
+cover: ./kios-pos.svg
+featured: false
+---
+
+## Ringkasan proyek
+
+Dengan titik awal repo [`Noorwahid717/kios-pos`](https://github.com/Noorwahid717/kios-pos), saya menelurkan POS web siap produksi menggunakan Next.js App Router, tRPC, Prisma, dan Supabase. Fokusnya: modul kasir yang cepat, role-based auth (Owner, Admin, Kasir), serta mode mock MSW agar QA tidak butuh koneksi Supabase.
+
+## Proses
+
+1. **Model domain** — Mendesain schema Prisma untuk produk, supplier, stok, transaksi, dan laporan; memastikan script seed CSV bisa mengisi katalog awal via Supabase atau lokal.
+2. **tRPC sebagai API** — Mengisolasi router `sales`, `products`, `settings`, `outlets`, memungkinkan frontend memanfaatkan TanStack Query dengan inference tipe penuh.
+3. **Pengalaman kasir** — Menyusun UI kasir dengan shadcn/ui, dukungan barcode, diskon, metode bayar beragam, serta trigger `pdf-lib` untuk struk 58 mm dan 80 mm.
+4. **Automasi operasional** — Laporan daily recap tersedia di `/app/reports/daily`, plus script `npm run verify` menggabungkan lint, test, dan build sebelum deploy ke Vercel.
+
+## Hasil
+
+- Mode mock berbasis IndexedDB menjaga aplikasi tetap berfungsi saat Supabase down tanpa mengorbankan pengalaman kasir.
+- Panel stok menghadirkan mutasi `StockMovement` sehingga audit shrinkage lebih akurat.
+- Dokumentasi `.env` mempermudah konfigurasi SMTP dan OAuth Google untuk magic link karyawan.
+
+## Pelajaran penting
+
+Investasi pada script seed dan mock data mempercepat rollout ke beberapa outlet sekaligus. Transaksi kasir kritis terhadap latensi, sehingga kombinasi tRPC + TanStack Query terbukti menjaga respons tetap < 100 ms pada jaringan 4G.

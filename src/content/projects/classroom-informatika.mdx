@@ -1,0 +1,40 @@
+---
+title: "Classroom Informatika"
+date: "2024-08-12"
+tags: ["lms", "product", "rbac"]
+stack: ["Next.js", "Prisma", "NextAuth", "Playwright"]
+role: "Product Engineer"
+problem: "Guru kesulitan memonitor progres siswa karena LMS lama tidak mendukung peran multi-level."
+process: "Menghadirkan arsitektur App Router dengan paket bersama dan guard RBAC yang konsisten."
+result: "Pelaporan tugas dan portfolio siswa terpusat, siklus review turun jadi 1 hari."
+impact: "Guru dapat mengelola 2× lebih banyak kelas tanpa overload karena otomasi penilaian."
+kpi:
+  [
+    "85% submission dinilai < 24 jam",
+    "Waktu onboarding guru baru berkurang dari 3 jam menjadi 45 menit",
+    "Tingkat kepuasan siswa (NPS) naik ke +42",
+  ]
+cover: ./classroom-informatika.svg
+featured: false
+---
+
+## Ringkasan proyek
+
+Berlandaskan repo [`Noorwahid717/classroom-informatika`](https://github.com/Noorwahid717/classroom-informatika), saya mengeksekusi LMS ringan yang mengutamakan pembelajaran Informatika. Fokus utama: pemisahan boundary `apps/*` vs `packages/*`, NextAuth v5 dengan peran `SUPER_ADMIN`, `ADMIN`, `MENTOR`, `STUDENT`, serta Prisma sebagai sumber kebenaran relasi kelas, tugas, dan nilai.
+
+## Proses
+
+1. **Workspace modular** — Menyusun ulang monorepo pnpm agar paket `@classroom/ui` dan `@classroom/config` bisa dipakai lintas aplikasi tanpa melanggar boundary domain.
+2. **RBAC terpadu** — Mengkonsolidasikan helper `@/lib/rbac` sehingga API route, komponen server, bahkan guard client menggunakan logika izin identik.
+3. **Pipeline kualitas** — Menyalakan Playwright E2E, Vitest unit, dan `prisma migrate diff` di GitHub Actions matrix Node 18/20 untuk menghindari regresi saat rilis materi baru.
+4. **Pengalaman pengguna** — Mendesain ulang peta rute `dashboard/student` vs `dashboard/teacher` dengan komponen UI re-usable agar navigasi cepat meskipun data berbeda.
+
+## Hasil
+
+- Dashboard guru menampilkan status submission real-time tanpa query manual.
+- `pg-mem` test context memastikan perubahan schema Prisma terbukti aman sebelum menyentuh produksi.
+- Route App Router mampu streaming data kelas, membuat halaman lebih responsif saat daftar tugas mencapai ratusan.
+
+## Pelajaran penting
+
+Memberi batas tegas antara paket presentasi dan paket domain memudahkan tim lintas fungsi mengerjakan modul baru (contoh: bank soal) tanpa memecahkan kontrak RBAC atau schema Prisma. Dokumentasi guard menjadi bagian penting ketika LMS berkembang.

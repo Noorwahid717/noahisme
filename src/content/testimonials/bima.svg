@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+  <defs>
+    <radialGradient id="bimaGradient" cx="50%" cy="35%" r="80%">
+      <stop offset="0" stop-color="#1B2A45" />
+      <stop offset="1" stop-color="#0F172A" />
+    </radialGradient>
+  </defs>
+  <rect width="240" height="240" rx="48" fill="url(#bimaGradient)" />
+  <circle cx="120" cy="88" r="52" fill="#111C32" stroke="#1F2A40" stroke-width="6" />
+  <path d="M92 84c9-22 27-30 44-30s35 8 44 30" fill="none" stroke="#38BDF8" stroke-width="6" stroke-linecap="round" opacity="0.6" />
+  <path d="M80 196c20-38 42-52 42-52h36s22 14 42 52" fill="#101A2E" stroke="#1F2A40" stroke-width="5" stroke-linejoin="round" />
+  <text x="120" y="218" text-anchor="middle" font-family="'Inter', 'Arial', sans-serif" font-size="20" fill="#E2E8F0">Bima H.</text>
+</svg>

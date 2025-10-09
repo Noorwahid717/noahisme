@@ -1,0 +1,117 @@
+---
+interface LogoItem {
+  label: string;
+  prefix?: string;
+}
+
+interface Props {
+  items: LogoItem[];
+  duration?: number;
+}
+
+const { items, duration = 28 }: Props = Astro.props;
+const marqueeItems = items.length > 0 ? [...items, ...items] : [];
+const announcement = items.length
+  ? `Kolaborasi dan studi kasus: ${items.map((item) => item.label).join(", ")}.`
+  : "";
+---
+
+<div class="marquee" aria-label={announcement}>
+  {
+    items.length > 0 && (
+      <div class="marquee__inner" style={`--marquee-duration: ${duration}s`}>
+        {marqueeItems.map((item, index) => (
+          <span
+            class="marquee__item focus-outline"
+            aria-hidden={index >= items.length ? "true" : "false"}
+          >
+            {item.prefix && <span class="marquee__prefix">{item.prefix}</span>}
+            <span>{item.label}</span>
+          </span>
+        ))}
+      </div>
+    )
+  }
+</div>
+
+<style>
+  :global(:root) {
+    --marquee-gradient: linear-gradient(
+      to right,
+      rgba(var(--color-bg), 1) 0%,
+      rgba(var(--color-bg), 0) 12%,
+      rgba(var(--color-bg), 0) 88%,
+      rgba(var(--color-bg), 1) 100%
+    );
+  }
+
+  .marquee {
+    position: relative;
+    overflow: hidden;
+    border-radius: 999px;
+    border: 1px solid rgba(var(--color-divider), 0.4);
+    background: rgba(var(--color-surface), 0.85);
+  }
+
+  .marquee::before,
+  .marquee::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: var(--marquee-gradient);
+    z-index: 2;
+  }
+
+  .marquee__inner {
+    display: flex;
+    gap: 1.5rem;
+    width: max-content;
+    padding: 1rem 2rem;
+    animation: marquee var(--marquee-duration) linear infinite;
+    will-change: transform;
+  }
+
+  .marquee__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.4rem;
+    border-radius: 999px;
+    border: 1px solid rgba(var(--color-divider), 0.35);
+    background: rgba(var(--color-bg), 0.3);
+    color: rgb(var(--color-text));
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .marquee__item span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .marquee__prefix {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgb(var(--color-text-muted));
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee__inner {
+      animation: none;
+      transform: none;
+    }
+  }
+</style>
