@@ -23,7 +23,7 @@ export default function HeroVisual() {
   const card = (
     <div className="relative overflow-hidden rounded-xl border border-divider/50 bg-surface/90 p-8 shadow-soft">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-accent/15 via-transparent to-transparent" />
-      <p className="text-xs uppercase tracking-[0.35em] text-accent/80">Spesialisasi</p>
+      <p className="text-xs uppercase tracking-[0.35em] text-accent">Spesialisasi</p>
       <ul className="mt-6 space-y-4 text-sm leading-relaxed text-text2">
         {highlights.map((item) => (
           <li key={item} className="flex items-start gap-3">

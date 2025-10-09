@@ -81,7 +81,7 @@ export default function HeroIntro() {
 
   return (
     <div className="space-y-8">
-      <p className="text-xs uppercase tracking-[0.35em] text-accent/80">Noah Isme</p>
+      <p className="text-xs uppercase tracking-[0.35em] text-accent">Noah Isme</p>
       <motion.h1
         className="font-heading text-4xl font-semibold tracking-tight text-text sm:text-5xl md:text-[3.25rem] md:leading-[1.1]"
         variants={headingContainer}
@@ -126,7 +126,7 @@ export default function HeroIntro() {
           <AudioButton className="rounded-full border-divider/60 bg-surface/70 px-5 py-3" />
         </motion.div>
       </motion.div>
-      <div className="flex flex-wrap gap-3 text-xs uppercase tracking-[0.35em] text-text2/80">
+      <div className="flex flex-wrap gap-3 text-xs uppercase tracking-[0.35em] text-text2">
         <span className="inline-flex items-center gap-2 rounded-full border border-divider/60 bg-surface/70 px-4 py-2 tracking-[0.2em] text-text2">
           <span className="h-2 w-2 rounded-full bg-success/80"></span> 8+ tahun pengalaman
         </span>
