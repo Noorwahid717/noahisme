@@ -3,7 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "packageManager": "pnpm@10.5.2",
+  "engines": {
+    "node": "^20.11.1",
+    "pnpm": ">=10.5.2"
+  },
   "scripts": {
+    "preinstall": "npm i -g pnpm@10.5.2",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",

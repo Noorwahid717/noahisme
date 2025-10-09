@@ -22,11 +22,11 @@ test("navigasi keyboard navbar", async ({ page }) => {
 test("audio button toggles pressed state", async ({ page }) => {
   await page.goto("/");
   await page.emulateMedia({ reducedMotion: "no-preference" });
-  await page.waitForSelector('[data-testid="hero-audio-toggle"] astro-island');
+  await page.waitForSelector('[data-testid="hero-audio-toggle"] button');
   const firstToggle = await page.evaluate(async () => {
-    const island = document.querySelector('[data-testid="hero-audio-toggle"] astro-island');
-    const root = (island as HTMLElement & { shadowRoot?: ShadowRoot })?.shadowRoot ?? island;
-    const button = root?.querySelector("button");
+    const button = document.querySelector<HTMLButtonElement>(
+      '[data-testid="hero-audio-toggle"] button'
+    );
     button?.click();
     await new Promise((resolve) => setTimeout(resolve, 0));
     return {
@@ -38,9 +38,9 @@ test("audio button toggles pressed state", async ({ page }) => {
   expect(firstToggle?.enabled).toBe("true");
 
   const secondToggle = await page.evaluate(async () => {
-    const island = document.querySelector('[data-testid="hero-audio-toggle"] astro-island');
-    const root = (island as HTMLElement & { shadowRoot?: ShadowRoot })?.shadowRoot ?? island;
-    const button = root?.querySelector("button");
+    const button = document.querySelector<HTMLButtonElement>(
+      '[data-testid="hero-audio-toggle"] button'
+    );
     button?.click();
     await new Promise((resolve) => setTimeout(resolve, 0));
     return {

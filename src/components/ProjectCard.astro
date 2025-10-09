@@ -17,19 +17,20 @@ interface ProjectFrontmatter {
 interface Props {
   project: ProjectFrontmatter;
   slug: string;
+  revealDelay?: number;
 }
 
-const { project, slug } = Astro.props;
+const { project, slug, revealDelay = 0 } = Astro.props;
 ---
 
-<MotionReveal client:only="react">
+<MotionReveal client:only="react" delay={revealDelay}>
   <article
-    class="group grid gap-6 rounded-xl border border-divider/40 bg-surface/90 p-6 shadow-subtle transition-all duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-soft"
+    class="group grid gap-6 rounded-xl border border-divider/40 bg-surface/90 p-6 shadow-subtle transition-transform duration-300 motion-safe:hover:-translate-y-[6px] motion-safe:hover:border-accent/50 motion-safe:hover:shadow-soft"
   >
     <Image
       src={project.cover}
       alt={`Cuplikan proyek ${project.title}`}
-      class="h-48 w-full rounded-lg object-cover"
+      class="h-48 w-full rounded-lg object-cover transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform motion-safe:group-hover:scale-[1.02]"
       loading="lazy"
       decoding="async"
       sizes="(min-width: 768px) 320px, 100vw"
@@ -39,7 +40,10 @@ const { project, slug } = Astro.props;
         <span>{project.role}</span>
         {
           project.stack.map((stack: string) => (
-            <span class="rounded-full border border-divider/60 bg-bg/60 px-2 py-1 normal-case tracking-normal text-text2">
+            <span
+              class="rounded-full border border-divider/60 bg-bg/60 px-2 py-1 normal-case tracking-normal text-text2"
+              key={stack}
+            >
               {stack}
             </span>
           ))
@@ -48,7 +52,7 @@ const { project, slug } = Astro.props;
       <div class="space-y-2">
         <h3 class="font-heading text-2xl font-semibold text-text">{project.title}</h3>
         <p class="text-sm text-text2">{project.problem}</p>
-        <p class="text-sm text-success/95">{project.impact ?? project.result}</p>
+        <p class="text-sm text-success">{project.impact ?? project.result}</p>
       </div>
       <CTAButton client:load href={`/project/${slug}`} variant="ghost">
         Lihat studi kasus
