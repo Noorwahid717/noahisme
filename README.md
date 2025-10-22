@@ -1,6 +1,6 @@
-# Noah Isme Portfolio
+# Mohammad Noor Wahid Portfolio
 
-Portofolio animatif dan berorientasi aksesibilitas untuk Noah Isme. Fokus pada performa tinggi, meta SEO lengkap, dan pengalaman audio yang mematuhi preferensi pengguna.
+Portofolio animatif dan berorientasi aksesibilitas untuk Mohammad Noor Wahid. Fokus pada performa tinggi, meta SEO lengkap, dan pengalaman audio yang mematuhi preferensi pengguna.
 
 ## Jalankan secara lokal
 

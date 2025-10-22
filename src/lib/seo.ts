@@ -1,6 +1,6 @@
 export const SITE = {
-  name: "Noah Isme",
-  title: "Noah Isme · Senior Frontend & UX Engineer",
+  name: "Mohammad Noor Wahid",
+  title: "Mohammad Noor Wahid · Full-Stack Web Developer",
   description:
     "Menciptakan pengalaman digital presisi tinggi dengan aksesibilitas, performa, dan detail visual yang sempurna.",
   url: "https://noahisme.vercel.app",
@@ -16,14 +16,10 @@ export const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: SITE.name,
-  jobTitle: "Senior Frontend & UX Engineer",
+  jobTitle: "Full-Stack Web Developer",
   url: SITE.url,
   image: `${SITE.url}/og-default.svg`,
-  sameAs: [
-    "https://github.com/noahisme",
-    "https://www.linkedin.com/in/noahisme",
-    "https://dribbble.com/noahisme",
-  ],
+  sameAs: ["https://github.com/Noorwahid717"],
 };
 
 export const websiteSchema = {

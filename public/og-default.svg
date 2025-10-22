@@ -7,7 +7,7 @@
   </defs>
   <rect width="1200" height="630" fill="url(#bg)" />
   <rect x="80" y="80" width="1040" height="470" rx="32" fill="rgba(21,23,25,0.85)" stroke="#2A2D31" stroke-width="2" />
-  <text x="120" y="230" font-family="'Spectral', 'Times New Roman', serif" font-size="72" fill="#E7E9EC" letter-spacing="2">Noah Isme</text>
+  <text x="120" y="230" font-family="'Spectral', 'Times New Roman', serif" font-size="72" fill="#E7E9EC" letter-spacing="2">Mohammad Noor Wahid</text>
   <text x="120" y="320" font-family="'Inter', 'Arial', sans-serif" font-size="36" fill="#A8AFB7">Senior Frontend & UX Engineer</text>
   <text x="120" y="410" font-family="'Inter', 'Arial', sans-serif" font-size="28" fill="#8AA4FF">Crafting accessible, performant digital experiences.</text>
   <circle cx="1000" cy="220" r="70" fill="none" stroke="#8AA4FF" stroke-width="10" opacity="0.65" />

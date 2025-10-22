@@ -4,8 +4,10 @@ import { motion, useReducedMotion } from "framer-motion";
 import CTAButton from "~/components/CTAButton";
 import AudioButton from "~/components/AudioButton";
 import { trackEvent } from "~/lib/analytics";
+import { useEffect, useRef } from "react";
 
-const HEADING_TEXT = "Senior Frontend Engineer & UX Engineer yang terobsesi pada detail dan emosi.";
+const HEADING_TEXT =
+  "Full-Stack Web Developer — Backend & Frontend Specialist, fokus pada efisiensi dan arsitektur bersih.";
 
 const easing: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
@@ -79,9 +81,41 @@ export default function HeroIntro() {
   const shouldAnimate = isBrowser && !prefersReducedMotion;
   const initialState = shouldAnimate ? "hidden" : "visible";
 
+  const typedRef = useRef<HTMLSpanElement | null>(null);
+
+  useEffect(() => {
+    if (!typedRef.current || !shouldAnimate) return;
+
+    let typed: { destroy?: () => void } | undefined;
+
+    (async () => {
+      const module = await import("typed.js");
+      const Typed = module.default;
+      typed = new Typed(typedRef.current!, {
+        strings: [
+          "Full-Stack Web Developer.",
+          "Backend & Frontend Specialist.",
+          "Building scalable, maintainable apps.",
+        ],
+        typeSpeed: 50,
+        backSpeed: 30,
+        backDelay: 1800,
+        loop: true,
+        showCursor: true,
+        cursorChar: "|",
+      });
+    })();
+
+    return () => {
+      if (typed && typeof typed.destroy === "function") {
+        typed.destroy();
+      }
+    };
+  }, [shouldAnimate]);
+
   return (
     <div className="space-y-8">
-      <p className="text-xs uppercase tracking-[0.35em] text-accent">Noah Isme</p>
+      <p className="text-xs uppercase tracking-[0.35em] text-accent">Mohammad Noor Wahid</p>
       <motion.h1
         className="font-heading text-4xl font-semibold tracking-tight text-text sm:text-5xl md:text-[3.25rem] md:leading-[1.1]"
         variants={headingContainer}
@@ -103,9 +137,12 @@ export default function HeroIntro() {
         initial={initialState}
         animate="visible"
       >
-        Saya merancang dan membangun pengalaman produk modern dengan animasi halus, performa tinggi,
-        dan detail aksesibilitas yang membuat setiap interaksi terasa premium.
+        Saya membangun aplikasi web end-to-end — dari API hingga UI — dengan perhatian pada
+        performa, aksesibilitas, dan arsitektur yang dapat diskalakan.
       </motion.p>
+      <div className="text-lg text-accent/80">
+        <span ref={typedRef} aria-live="polite" />
+      </div>
       <motion.div
         className="flex flex-wrap items-center gap-4"
         variants={ctaContainer}
@@ -128,7 +165,7 @@ export default function HeroIntro() {
       </motion.div>
       <div className="flex flex-wrap gap-3 text-xs uppercase tracking-[0.35em] text-text2">
         <span className="inline-flex items-center gap-2 rounded-full border border-divider/60 bg-surface/70 px-4 py-2 tracking-[0.2em] text-text2">
-          <span className="h-2 w-2 rounded-full bg-success/80"></span> 8+ tahun pengalaman
+          <span className="h-2 w-2 rounded-full bg-success/80"></span> 3+ tahun pengalaman
         </span>
         <span className="inline-flex items-center gap-2 rounded-full border border-divider/60 bg-surface/70 px-4 py-2 tracking-[0.2em] text-text2">
           <span className="h-2 w-2 rounded-full bg-accent/60"></span> Fokus aksesibilitas & animasi

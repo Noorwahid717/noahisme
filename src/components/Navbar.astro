@@ -3,6 +3,7 @@ import ThemeToggle from "./ThemeToggle";
 import AudioButton from "./AudioButton";
 import CTAButton from "./CTAButton";
 import { trackEvent } from "~/lib/analytics";
+// using public logo via <img>
 
 const links = [
   { href: "/#projects", label: "Proyek" },
@@ -24,13 +25,25 @@ const links = [
       <a
         class="focus-outline flex items-center gap-3 font-heading text-base font-semibold tracking-tight"
         href="/"
-        aria-label="Beranda Noah Isme"
+        aria-label="Beranda Mohammad Noor Wahid"
       >
-        <span
-          class="flex h-10 w-10 items-center justify-center rounded-full border border-divider/70 bg-bg text-sm font-semibold text-text"
-          >NI</span
-        >
-        <span class="hidden sm:inline-block text-text">Noah Isme</span>
+        <!-- small screens: icon only -->
+        <img
+          src="/mylogo.svg"
+          alt="Logo Mohammad Noor Wahid"
+          class="block sm:hidden h-8 w-8 rounded-full border border-divider/70 bg-bg object-cover"
+        />
+
+        <!-- sm+ screens: icon + name -->
+        <div class="hidden sm:flex items-center gap-3">
+          <img
+            src="/mylogo.svg"
+            alt=""
+            aria-hidden="true"
+            class="h-10 w-10 rounded-full border border-divider/70 bg-bg object-cover"
+          />
+          <span class="text-text">Mohammad Noor Wahid</span>
+        </div>
       </a>
       <div class="hidden items-center gap-7 md:flex">
         {

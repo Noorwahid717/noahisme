@@ -9,7 +9,6 @@
     "pnpm": ">=10.5.2"
   },
   "scripts": {
-    "preinstall": "npm i -g pnpm@10.5.2",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
@@ -42,6 +41,7 @@
     "clsx": "^2.1.1",
     "framer-motion": "^11.11.17",
     "howler": "^2.2.4",
+    "typed.js": "^2.0.12",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "types": "link:@astrojs/react/types"

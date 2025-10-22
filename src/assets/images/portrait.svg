@@ -10,6 +10,6 @@
   <path d="M150 120c10-26 40-44 70-44s60 18 70 44" fill="none" stroke="#8AA4FF" stroke-width="6" stroke-linecap="round" opacity="0.55" />
   <path d="M140 180c20 26 40 40 60 40s40-14 60-40" fill="none" stroke="#86E3C3" stroke-width="6" stroke-linecap="round" opacity="0.45" />
   <rect x="110" y="280" width="180" height="140" rx="32" fill="#151719" stroke="#2A2D31" stroke-width="4" />
-  <text x="200" y="350" text-anchor="middle" font-family="'Inter', 'Arial', sans-serif" font-size="28" fill="#E7E9EC">Noah Isme</text>
+  <text x="200" y="350" text-anchor="middle" font-family="'Inter', 'Arial', sans-serif" font-size="28" fill="#E7E9EC">Mohammad Noor Wahid</text>
   <text x="200" y="386" text-anchor="middle" font-family="'Inter', 'Arial', sans-serif" font-size="18" fill="#A8AFB7">Design Technologist</text>
 </svg>
