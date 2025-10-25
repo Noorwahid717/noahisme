@@ -1,5 +1,6 @@
 ---
 import "~/styles/globals.css";
+import { ViewTransitions } from "astro:transitions";
 import Navbar from "~/components/Navbar.astro";
 import Footer from "~/components/Footer.astro";
 import SEO from "~/components/SEO.astro";
@@ -52,6 +53,7 @@ const jsonLd = [
       structuredData={jsonLd}
       noindex={noindex}
     />
+    <ViewTransitions />
   </head>
   <body class="bg-bg text-text antialiased">
     <Preloader />
