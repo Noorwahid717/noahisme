@@ -42,6 +42,9 @@
 html {
   height: 100%;
   scroll-behavior: smooth;
+  /* Hint browser to use GPU acceleration */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -52,6 +55,9 @@ body {
   font-family: inherit;
   line-height: 1.6;
   text-rendering: optimizeLegibility;
+  /* Force hardware acceleration */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 main {
@@ -152,12 +158,6 @@ button {
     backdrop-filter: blur(4px) !important;
   }
 
-  /* Optimize transform performance */
-  * {
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
-  }
-
   /* Reduce animation complexity on mobile */
   [data-motion="reduced"] {
     animation: none !important;
@@ -209,4 +209,10 @@ button {
   ::view-transition-new(root) {
     animation-duration: 0.1s !important;
   }
+}
+
+/* Content visibility optimization for below-the-fold content */
+section:not(:first-of-type) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
 }

@@ -110,7 +110,7 @@ const homePageSchema = {
     </div>
     <div class="mx-auto max-w-6xl px-6 pb-32 pt-36">
       <div class="grid gap-16 md:grid-cols-[minmax(0,1fr)_minmax(280px,0.9fr)] md:items-center">
-        <HeroIntro client:load />
+        <HeroIntro client:idle />
         <HeroVisual client:visible />
       </div>
     </div>
@@ -141,11 +141,7 @@ const homePageSchema = {
       koneksi—mendorong tim shipping fitur lebih percaya diri.
     </p>
     <div class="mt-10 grid gap-6 md:grid-cols-2">
-      {
-        impactHighlights.map((card, index) => (
-          <TiltingCard client:visible {...card} index={index} />
-        ))
-      }
+      {impactHighlights.map((card, index) => <TiltingCard client:idle {...card} index={index} />)}
     </div>
   </section>
 

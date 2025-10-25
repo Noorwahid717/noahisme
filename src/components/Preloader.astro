@@ -15,8 +15,9 @@
 </div>
 
 <script is:inline>
-  const MIN_DURATION = 1500;
-  const FAILSAFE_DURATION = 4000;
+  // Optimized for mobile performance - minimal delay
+  const MIN_DURATION = 400; // Reduced from 1500ms to 400ms
+  const FAILSAFE_DURATION = 1500; // Reduced from 4000ms to 1500ms
   const overlay = document.querySelector("[data-preloader]");
   const start = performance.now();
 
@@ -36,12 +37,15 @@
       }, remaining);
     };
 
-    if (document.readyState === "complete") {
+    // Start immediately if DOM is ready
+    if (document.readyState === "interactive" || document.readyState === "complete") {
       finish();
     } else {
-      window.addEventListener("load", finish, { once: true });
+      // Use DOMContentLoaded instead of load for faster initial render
+      document.addEventListener("DOMContentLoaded", finish, { once: true });
     }
 
+    // Shorter failsafe timeout
     window.setTimeout(() => {
       if (!overlay.classList.contains("is-leaving")) {
         finish();

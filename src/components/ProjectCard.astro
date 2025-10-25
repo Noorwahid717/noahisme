@@ -28,9 +28,10 @@ const { project, slug, revealDelay = 0 } = Astro.props;
     <img
       src={project.cover}
       alt={`Cuplikan proyek ${project.title}`}
-      class="h-48 w-full rounded-lg object-cover transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform motion-safe:group-hover:scale-[1.02]"
-      loading="lazy"
+      class="h-48 w-full rounded-lg object-cover transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] motion-safe:group-hover:scale-[1.02]"
+      loading={revealDelay === 0 ? "eager" : "lazy"}
       decoding="async"
+      fetchpriority={revealDelay === 0 ? "high" : "auto"}
     />
     <div class="space-y-4">
       <div class="flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.3em] text-accent">

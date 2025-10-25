@@ -88,8 +88,10 @@ export default function HeroIntro() {
     if (!typedRef.current || !shouldAnimate) return;
 
     let typed: { destroy?: () => void } | undefined;
+    let timer: number | undefined;
 
-    (async () => {
+    // Delay Typed.js initialization for better FCP/LCP
+    timer = window.setTimeout(async () => {
       const module = await import("typed.js");
       const Typed = module.default;
       typed = new Typed(typedRef.current!, {
@@ -105,14 +107,17 @@ export default function HeroIntro() {
         showCursor: true,
         cursorChar: "|",
       });
-    })();
+    }, 1000); // Delay 1 second for better initial render
 
     return () => {
+      if (timer !== undefined) {
+        window.clearTimeout(timer);
+      }
       if (typed && typeof typed.destroy === "function") {
         typed.destroy();
       }
     };
-  }, [shouldAnimate]);
+  }, [shouldAnimate, isMobile]);
 
   return (
     <div className="space-y-8">
@@ -125,7 +130,7 @@ export default function HeroIntro() {
       >
         {words.map((word, index) => (
           <span key={`${word}-${index}`} className="relative inline-block overflow-hidden">
-            <motion.span variants={wordVariant} className="inline-block will-change-transform">
+            <motion.span variants={wordVariant} className="inline-block">
               {word}
               {index < words.length - 1 ? "\u00A0" : ""}
             </motion.span>
