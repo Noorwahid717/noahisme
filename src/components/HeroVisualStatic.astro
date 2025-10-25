@@ -1,0 +1,49 @@
+---
+// Static Hero Visual - No client-side JavaScript
+const highlights = [
+  "Arsitektur Astro Islands & React dengan performa tinggi.",
+  "Sistem desain aksesibel dengan tipografi presisi.",
+  "Integrasi animasi & audio yang patuh prefers-reduced-motion.",
+];
+---
+
+<div class="relative">
+  <div
+    class="relative overflow-hidden rounded-xl border border-divider/50 bg-surface/90 p-8 shadow-soft"
+  >
+    <div
+      class="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-accent/15 via-transparent to-transparent"
+    >
+    </div>
+    <p class="text-xs uppercase tracking-[0.35em] text-accent">Spesialisasi</p>
+    <ul class="mt-6 space-y-4 text-sm leading-relaxed text-text2">
+      {
+        highlights.map((item) => (
+          <li class="flex items-start gap-3">
+            <span class="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-accent" />
+            <span>{item}</span>
+          </li>
+        ))
+      }
+    </ul>
+    <div
+      class="mt-8 flex items-center gap-4 rounded-full border border-divider/40 bg-bg/60 px-4 py-3 text-xs uppercase tracking-[0.3em] text-text2"
+    >
+      <span>Kolaborasi global</span>
+      <span class="h-1 w-1 rounded-full bg-divider/60"></span>
+      <span>Studi kasus premium</span>
+    </div>
+  </div>
+
+  <!-- Static decorative elements - no animation -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute -left-6 top-10 hidden h-24 w-24 rounded-full bg-accent/20 blur-2xl md:block"
+  >
+  </div>
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute -right-10 bottom-0 hidden h-36 w-36 rounded-3xl bg-gradient-to-br from-accent/10 via-accent/0 to-transparent blur-2xl md:block"
+  >
+  </div>
+</div>

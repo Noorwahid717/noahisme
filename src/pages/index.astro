@@ -3,12 +3,10 @@ import Base from "~/layouts/Base.astro";
 import Section from "~/components/Section.astro";
 import ProjectCard from "~/components/ProjectCard.astro";
 import MotionReveal from "~/components/MotionReveal";
-import HeroVisual from "~/components/HeroVisual";
-import HeroIntro from "~/components/HeroIntro";
+import HeroStatic from "~/components/HeroStatic.astro";
+import HeroVisualStatic from "~/components/HeroVisualStatic.astro";
 import LogoMarquee from "~/components/LogoMarquee.astro";
-import StaggeredText from "~/components/StaggeredText";
 import TiltingCard from "~/components/TiltingCard";
-import BlurStaggerText from "~/components/BlurStaggerText";
 import PillImageReveal from "~/components/PillImageReveal.astro";
 import ProcessStepCard from "~/components/ProcessStepCard";
 import { getCollection } from "astro:content";
@@ -110,8 +108,8 @@ const homePageSchema = {
     </div>
     <div class="mx-auto max-w-6xl px-6 pb-32 pt-36">
       <div class="grid gap-16 md:grid-cols-[minmax(0,1fr)_minmax(280px,0.9fr)] md:items-center">
-        <HeroIntro client:idle />
-        <HeroVisual client:visible />
+        <HeroStatic />
+        <HeroVisualStatic />
       </div>
     </div>
   </section>
@@ -129,13 +127,10 @@ const homePageSchema = {
 
   <section class="mx-auto max-w-6xl px-6 pb-24">
     <p class="text-xs uppercase tracking-[0.32em] text-accent/80">Dampak produk</p>
-    <StaggeredText
-      client:visible
-      text="Saya merangkai arsitektur, animasi, dan alur operasional yang menggerakkan sekolah, ritel, dan komunitas teknologi."
-      as="h2"
-      className="mt-3 max-w-3xl font-heading text-[1.9rem] font-semibold text-text md:text-[2.35rem]"
-      delay={0.1}
-    />
+    <h2 class="mt-3 max-w-3xl font-heading text-[1.9rem] font-semibold text-text md:text-[2.35rem]">
+      Saya merangkai arsitektur, animasi, dan alur operasional yang menggerakkan sekolah, ritel, dan
+      komunitas teknologi.
+    </h2>
     <p class="mt-4 max-w-2xl text-sm text-text2 md:text-base">
       Setiap kartu merangkum bagaimana pendekatan detail—dari kontrak data bersama hingga fallback
       koneksi—mendorong tim shipping fitur lebih percaya diri.
@@ -203,15 +198,11 @@ const homePageSchema = {
                   <span aria-hidden="true" class="text-6xl leading-none text-divider/40">
                     "
                   </span>
-                  <BlurStaggerText
-                    client:visible
-                    text={data.quote}
-                    as="span"
-                    className="block text-base leading-relaxed text-text md:text-lg"
-                    delay={0.08}
-                  />
+                  <span class="block text-base leading-relaxed text-text md:text-lg">
+                    {data.quote}
+                  </span>
                   <span aria-hidden="true" class="self-end text-5xl leading-none text-divider/40">
-                    ”
+                    "
                   </span>
                 </div>
                 <div class="flex items-center gap-3">

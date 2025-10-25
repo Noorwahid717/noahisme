@@ -8,7 +8,9 @@ export default defineConfig({
   site: "https://noahisme.vercel.app",
   integrations: [
     tailwind({ applyBaseStyles: false }),
-    react(),
+    react({
+      include: ['**/react/*'],  // Only hydrate specific React components
+    }),
     mdx(),
     sitemap({
       entryLimit: 1000,
@@ -23,16 +25,29 @@ export default defineConfig({
   ],
   output: "static",
   build: {
-    inlineStylesheets: "auto"
+    inlineStylesheets: "auto",
+    assets: '_astro'
   },
   vite: {
     build: {
       cssCodeSplit: true,
+      minify: 'esbuild',  // Use esbuild (faster and built-in)
       rollupOptions: {
         output: {
-          manualChunks: {
-            'react-vendor': ['react', 'react-dom'],
-            'framer': ['framer-motion'],
+          manualChunks: (id) => {
+            // Aggressive code splitting
+            if (id.includes('node_modules')) {
+              if (id.includes('react') || id.includes('react-dom')) {
+                return 'react-vendor';
+              }
+              if (id.includes('framer-motion')) {
+                return 'framer';
+              }
+              if (id.includes('typed.js')) {
+                return 'typed';
+              }
+              return 'vendor';
+            }
           }
         }
       }
@@ -47,8 +62,5 @@ export default defineConfig({
     }
   },
   compressHTML: true,
-  prefetch: {
-    prefetchAll: true,
-    defaultStrategy: 'hover'
-  }
+  prefetch: false  // Disable prefetch to reduce initial JS
 });

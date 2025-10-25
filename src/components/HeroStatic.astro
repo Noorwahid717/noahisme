@@ -1,0 +1,82 @@
+---
+// Static Hero - Zero JavaScript for LCP optimization
+// This is the hero content without any client-side hydration
+import CTAButton from "~/components/CTAButton";
+---
+
+<div class="space-y-8">
+  <p class="text-xs uppercase tracking-[0.35em] text-accent">Mohammad Noor Wahid</p>
+
+  <!-- Static heading - No animations, no hydration, pure HTML -->
+  <h1
+    class="font-heading text-4xl font-semibold tracking-tight text-text sm:text-5xl md:text-[3.25rem] md:leading-[1.1]"
+  >
+    Full-Stack Web Developer — Backend & Frontend Specialist, fokus pada efisiensi dan arsitektur
+    bersih.
+  </h1>
+
+  <p class="max-w-xl text-lg text-text2">
+    Saya membangun aplikasi web end-to-end — dari API hingga UI — dengan perhatian pada performa,
+    aksesibilitas, dan arsitektur yang dapat diskalakan.
+  </p>
+
+  <!-- Static tagline - will be replaced by Typed.js after page load -->
+  <div class="text-lg text-accent/80">
+    <span id="hero-tagline">Full-Stack Web Developer.</span>
+  </div>
+
+  <div class="flex flex-wrap items-center gap-4">
+    <CTAButton client:idle href="/contact"> Jadwalkan diskusi </CTAButton>
+    <CTAButton client:idle href="/projects" variant="ghost"> Lihat studi kasus </CTAButton>
+  </div>
+
+  <div class="flex flex-wrap gap-3 text-xs uppercase tracking-[0.35em] text-text2">
+    <span
+      class="inline-flex items-center gap-2 rounded-full border border-divider/60 bg-surface/70 px-4 py-2 tracking-[0.2em] text-text2"
+    >
+      <span class="h-2 w-2 rounded-full bg-success/80"></span> 3+ tahun pengalaman
+    </span>
+    <span
+      class="inline-flex items-center gap-2 rounded-full border border-divider/60 bg-surface/70 px-4 py-2 tracking-[0.2em] text-text2"
+    >
+      <span class="h-2 w-2 rounded-full bg-accent/60"></span> Fokus aksesibilitas & animasi
+    </span>
+  </div>
+</div>
+
+<!-- Inline script for Typed.js - loaded after LCP -->
+<script>
+  // Only load Typed.js after the page is fully interactive
+  if (typeof window !== "undefined") {
+    // Use requestIdleCallback for non-critical animation
+    const initTyped = () => {
+      const element = document.getElementById("hero-tagline");
+      if (!element) return;
+
+      // Delay import until idle
+      import("typed.js").then((module) => {
+        const Typed = module.default;
+        new Typed("#hero-tagline", {
+          strings: [
+            "Full-Stack Web Developer.",
+            "Backend & Frontend Specialist.",
+            "Building scalable, maintainable apps.",
+          ],
+          typeSpeed: window.innerWidth < 768 ? 40 : 50,
+          backSpeed: window.innerWidth < 768 ? 30 : 40,
+          backDelay: 1800,
+          loop: true,
+          showCursor: true,
+          cursorChar: "|",
+        });
+      });
+    };
+
+    // Use requestIdleCallback if available, otherwise setTimeout
+    if ("requestIdleCallback" in window) {
+      requestIdleCallback(initTyped);
+    } else {
+      setTimeout(initTyped, 2000);
+    }
+  }
+</script>
