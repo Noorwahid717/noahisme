@@ -29,58 +29,58 @@ const marqueeLogos = [
 ];
 const impactHighlights = [
   {
-    title: "Absensi real-time untuk 1.200+ siswa",
+    title: "Sistem manajemen sekolah terpusat untuk SMA",
     description:
-      "Monorepo admin-panel-sma menghubungkan NestJS, BullMQ, dan React Admin sehingga data kehadiran terkirim otomatis ke worker dan rapor siap unduh tanpa duplikasi.",
-    metric: "95% kehadiran <10.00",
+      "Admin Panel SMA menggabungkan TypeScript dan React untuk mencatat kehadiran dan nilai akademik secara real-time, mengurangi pekerjaan manual administrasi dengan interface responsif.",
+    metric: "Data aman & terpusat",
     icon: "🎓",
   },
   {
-    title: "Live kelas tetap stabil di jaringan sekolah",
+    title: "Platform pembelajaran digital komprehensif",
     description:
-      "GEMA SMAWA menghadirkan LiveKit dan fallback SSE sehingga streaming materi Informatika tetap mulus dengan animasi joyful yang menjaga fokus siswa.",
-    metric: "37% boost retensi",
+      "GEMA SMAWA mengintegrasikan manajemen siswa, konten tutorial, dan interaksi real-time dengan Next.js 15 dan LiveKit untuk meningkatkan engagement siswa dalam satu ekosistem terpadu.",
+    metric: "Engagement lebih tinggi",
     icon: "📡",
   },
   {
-    title: "POS web yang siap barcode & mock offline",
+    title: "Sistem kasir digital untuk retail modern",
     description:
-      "Kios POS menggabungkan Next.js + tRPC + Supabase dengan mode mock MSW, memastikan kasir dapat memproses transaksi dan struk PDF walau koneksi tersendat.",
-    metric: "3s per transaksi",
+      "Kios POS menyediakan platform Point of Sale berbasis web dengan TypeScript, memproses transaksi kurang dari 3 detik per item dengan cloud-ready deployment di Vercel.",
+    metric: "<3s per transaksi",
     icon: "🛒",
   },
   {
-    title: "Admin panel enterprise dengan monitoring real-time",
+    title: "Dashboard enterprise dengan integrasi lengkap",
     description:
-      "Buroq Admin Panel menyatukan React + TypeScript + Vite untuk dashboard komprehensif dengan Google Maps integration, WhatsApp Bot, dan analytics real-time.",
-    metric: "Type-safe & scalable",
+      "Buroq Admin Panel menggabungkan React 18+, TypeScript, dan Vite untuk centralized management system dengan Google Maps integration dan WhatsApp Business automation.",
+    metric: "Type-safe & modular",
     icon: "⚙️",
   },
 ];
 const processSteps = [
   {
     step: "01",
-    title: "Discover",
+    title: "Analisis & Perencanaan",
     description:
-      "Audit kebutuhan bisnis, riset pengguna, dan mapping modul teknis agar prioritas jelas sebelum menulis satu baris kode.",
+      "Mengidentifikasi kebutuhan bisnis, merancang arsitektur sistem, dan menentukan tech stack optimal (React/Next.js, Node.js/Golang, PostgreSQL) sebelum eksekusi.",
   },
   {
     step: "02",
-    title: "Frame & Prototype",
+    title: "Desain API & Database",
     description:
-      "Menyusun alur layanan, interaksi, dan animasi utama dalam prototipe high fidelity sehingga stakeholder bisa menguji dalam 1–2 minggu.",
+      "Merancang RESTful API, skema database relasional, dan struktur data yang scalable dengan fokus pada efisiensi query dan integritas data.",
   },
   {
     step: "03",
-    title: "Build & Orchestrate",
+    title: "Development Full-Stack",
     description:
-      "Implementasi front-end performa tinggi—lengkap dengan aksesibilitas, state management, dan integrasi audio/animasi yang terukur.",
+      "Implementasi backend (Node.js/Golang) dan frontend (React/Next.js) dengan TypeScript, state management modern, dan integrasi real-time menggunakan WebSocket/Redis.",
   },
   {
     step: "04",
-    title: "Launch & Scale",
+    title: "Deployment & Maintenance",
     description:
-      "Menjaga rilis stabil lewat observabilitas, dokumentasi deployment, serta handover playbook supaya tim internal bisa melanjutkan dengan percaya diri.",
+      "Deploy ke production (Vercel, Railway, Supabase), setup monitoring, optimisasi performa, dan dokumentasi teknis untuk kemudahan maintenance jangka panjang.",
   },
 ];
 const primaryService = servicesCollection[0]?.data;
@@ -144,7 +144,7 @@ const homePageSchema = {
     id="projects"
     eyebrow="Featured"
     title="Studi kasus terpilih"
-    description="3 proyek yang menonjolkan strategi pengalaman end-to-end: dari riset, desain, hingga implementasi front-end performa tinggi."
+    description="4 proyek yang menonjolkan strategi pengalaman end-to-end: dari riset, desain, hingga implementasi front-end performa tinggi."
   >
     <div class="grid gap-8 md:grid-cols-2">
       {
