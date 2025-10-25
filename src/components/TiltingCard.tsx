@@ -41,6 +41,17 @@ export default function TiltingCard({
     );
   }
 
+  // Disable hover effects on mobile for better performance
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+  const whileHoverEffect = isMobile
+    ? {}
+    : {
+        rotateX: -4,
+        rotateY: 6,
+        y: -6,
+        boxShadow: "0 28px 60px rgba(14, 25, 50, 0.35)",
+      };
+
   return (
     <motion.article
       className={baseClasses}
@@ -48,12 +59,7 @@ export default function TiltingCard({
       whileInView={{ opacity: 1, rotateX: 0, rotateY: 0, y: 0, scale: 1 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.7, ease: easing, delay }}
-      whileHover={{
-        rotateX: -4,
-        rotateY: 6,
-        y: -6,
-        boxShadow: "0 28px 60px rgba(14, 25, 50, 0.35)",
-      }}
+      whileHover={whileHoverEffect}
     >
       <header className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-accent/80">

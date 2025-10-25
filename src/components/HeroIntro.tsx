@@ -82,6 +82,7 @@ export default function HeroIntro() {
   const initialState = shouldAnimate ? "hidden" : "visible";
 
   const typedRef = useRef<HTMLSpanElement | null>(null);
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
 
   useEffect(() => {
     if (!typedRef.current || !shouldAnimate) return;
@@ -97,8 +98,8 @@ export default function HeroIntro() {
           "Backend & Frontend Specialist.",
           "Building scalable, maintainable apps.",
         ],
-        typeSpeed: 50,
-        backSpeed: 30,
+        typeSpeed: isMobile ? 40 : 50, // Faster typing on mobile
+        backSpeed: isMobile ? 30 : 40, // Faster backspace on mobile
         backDelay: 1800,
         loop: true,
         showCursor: true,

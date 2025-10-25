@@ -111,7 +111,7 @@ const homePageSchema = {
     <div class="mx-auto max-w-6xl px-6 pb-32 pt-36">
       <div class="grid gap-16 md:grid-cols-[minmax(0,1fr)_minmax(280px,0.9fr)] md:items-center">
         <HeroIntro client:load />
-        <HeroVisual client:only="react" />
+        <HeroVisual client:visible />
       </div>
     </div>
   </section>
@@ -130,7 +130,7 @@ const homePageSchema = {
   <section class="mx-auto max-w-6xl px-6 pb-24">
     <p class="text-xs uppercase tracking-[0.32em] text-accent/80">Dampak produk</p>
     <StaggeredText
-      client:only="react"
+      client:visible
       text="Saya merangkai arsitektur, animasi, dan alur operasional yang menggerakkan sekolah, ritel, dan komunitas teknologi."
       as="h2"
       className="mt-3 max-w-3xl font-heading text-[1.9rem] font-semibold text-text md:text-[2.35rem]"
@@ -143,7 +143,7 @@ const homePageSchema = {
     <div class="mt-10 grid gap-6 md:grid-cols-2">
       {
         impactHighlights.map((card, index) => (
-          <TiltingCard client:only="react" {...card} index={index} />
+          <TiltingCard client:visible {...card} index={index} />
         ))
       }
     </div>
@@ -179,7 +179,7 @@ const homePageSchema = {
         )}
         <div class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {processSteps.map((step, index) => (
-            <ProcessStepCard client:only="react" {...step} index={index} />
+            <ProcessStepCard client:visible {...step} index={index} />
           ))}
         </div>
       </Section>
@@ -196,7 +196,7 @@ const homePageSchema = {
         <div class="grid gap-12 md:grid-cols-2 md:gap-16">
           {testimonials.map(({ data }, index) => (
             <MotionReveal
-              client:only="react"
+              client:visible
               delay={index * 0.1}
               className={`h-full ${
                 index % 2 === 1 ? "md:border-l md:border-divider/30 md:pl-12" : ""
@@ -205,10 +205,10 @@ const homePageSchema = {
               <div class="flex h-full flex-col justify-between gap-8">
                 <div class="flex items-start gap-4">
                   <span aria-hidden="true" class="text-6xl leading-none text-divider/40">
-                    “
+                    "
                   </span>
                   <BlurStaggerText
-                    client:only="react"
+                    client:visible
                     text={data.quote}
                     as="span"
                     className="block text-base leading-relaxed text-text md:text-lg"

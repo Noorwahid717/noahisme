@@ -86,6 +86,15 @@ img,
 picture {
   display: block;
   max-width: 100%;
+  height: auto;
+}
+
+/* Optimize image rendering on mobile */
+@media (max-width: 768px) {
+  img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
 }
 
 button,
@@ -124,5 +133,34 @@ button {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Mobile-specific performance optimizations */
+@media (max-width: 768px) {
+  /* Reduce blur effects on mobile for better performance */
+  .blur-2xl {
+    filter: blur(40px) !important;
+  }
+
+  .blur-3xl {
+    filter: blur(48px) !important;
+  }
+
+  /* Simplify backdrop blur on mobile */
+  .backdrop-blur-sm {
+    backdrop-filter: blur(4px) !important;
+  }
+
+  /* Optimize transform performance */
+  * {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+
+  /* Reduce animation complexity on mobile */
+  [data-motion="reduced"] {
+    animation: none !important;
+    transition: none !important;
   }
 }

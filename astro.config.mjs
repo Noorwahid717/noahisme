@@ -21,5 +21,34 @@ export default defineConfig({
       },
     })
   ],
-  output: "static"
+  output: "static",
+  build: {
+    inlineStylesheets: "auto"
+  },
+  vite: {
+    build: {
+      cssCodeSplit: true,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'react-vendor': ['react', 'react-dom'],
+            'framer': ['framer-motion'],
+          }
+        }
+      }
+    },
+    ssr: {
+      noExternal: ['react-icons']
+    }
+  },
+  image: {
+    service: {
+      entrypoint: 'astro/assets/services/sharp'
+    }
+  },
+  compressHTML: true,
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'hover'
+  }
 });

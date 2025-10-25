@@ -165,4 +165,43 @@
       filter: none;
     }
   }
+
+  /* Mobile optimizations for better performance */
+  @media (max-width: 768px) {
+    .preloader {
+      background: radial-gradient(circle at top, rgba(30, 41, 59, 0.98), rgba(15, 23, 42, 1));
+    }
+
+    .preloader__inner {
+      backdrop-filter: blur(8px);
+      padding: 1.25rem 1.5rem;
+    }
+
+    .preloader__letters {
+      gap: 0.4rem;
+    }
+
+    .preloader__letter {
+      animation-duration: 1s;
+      animation-delay: calc(var(--index) * 70ms);
+    }
+
+    @keyframes letterReveal {
+      0% {
+        opacity: 0;
+        transform: translateY(16px) scale(0.94);
+        filter: blur(2px);
+      }
+      50% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
+    }
+  }
 </style>
