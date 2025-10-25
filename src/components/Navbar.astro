@@ -1,6 +1,6 @@
 ---
 import ThemeToggle from "./ThemeToggle";
-import AudioButton from "./AudioButton";
+// import AudioButton from "./AudioButton";
 import CTAButton from "./CTAButton";
 import { trackEvent } from "~/lib/analytics";
 // using public logo via <img>
@@ -8,7 +8,6 @@ import { trackEvent } from "~/lib/analytics";
 const links = [
   { href: "/#projects", label: "Proyek" },
   { href: "/about", label: "Tentang" },
-  { href: "/projects", label: "Studi kasus" },
   { href: "/contact", label: "Kontak" },
 ];
 ---
@@ -42,7 +41,7 @@ const links = [
             aria-hidden="true"
             class="h-10 w-10 rounded-full border border-divider/70 bg-bg object-cover"
           />
-          <span class="text-text">Mohammad Noor Wahid</span>
+          <span class="text-text">NOAH IS ME</span>
         </div>
       </a>
       <div class="hidden items-center gap-7 md:flex">
@@ -66,7 +65,7 @@ const links = [
         </CTAButton>
       </div>
       <div class="flex items-center gap-2">
-        <AudioButton client:only="react" />
+        <!-- <AudioButton client:only="react" /> -->
         <ThemeToggle client:only="react" />
       </div>
     </div>

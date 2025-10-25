@@ -1,11 +1,10 @@
 ---
-import { Image } from "astro:assets";
 import Base from "~/layouts/Base.astro";
 import { getCollection } from "astro:content";
 import CTAButton from "~/components/CTAButton";
 import { SITE } from "~/lib/seo";
 
-const projects = (await getCollection("projects")).sort((a, b) =>
+const projects = (await getCollection("projects", ({ data }) => data.featured)).sort((a, b) =>
   a.data.date > b.data.date ? -1 : 1
 );
 const stacks = Array.from(new Set(projects.flatMap((project) => project.data.stack))).sort();
@@ -51,13 +50,12 @@ const structuredData = {
             tabindex="0"
             data-stack={data.stack.join(",")}
           >
-            <Image
+            <img
               src={data.cover}
               loading="lazy"
               decoding="async"
               alt={`Cuplikan proyek ${data.title}`}
               class="h-48 w-full rounded-xl object-cover"
-              sizes="(min-width: 1024px) 420px, (min-width: 640px) 50vw, 100vw"
             />
             <div class="space-y-2">
               <h2 class="font-heading text-2xl text-text">{data.title}</h2>

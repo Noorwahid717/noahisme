@@ -2,39 +2,119 @@
 title: "Admin Panel SMA"
 date: "2024-09-25"
 tags: ["education", "monorepo", "ops"]
-stack: ["NestJS", "React Admin", "BullMQ", "Postgres"]
-role: "Lead Fullstack"
-problem: "Operasional sekolah terhambat karena absen & nilai tersebar di spreadsheet manual."
-process: "Membangun monorepo terpadu berisi API, worker, dan interface admin yang konsisten."
-result: "Tim akademik memproses absensi dan penilaian 2× lebih cepat."
-impact: "Sinkronisasi data lintas departemen menjadi realtime sehingga pelaporan rapor tepat waktu."
+stack: ["TypeScript", "React", "Web-based"]
+role: "Full-Stack Developer"
+problem: "Sekolah membutuhkan platform web modern untuk mengelola data siswa dengan lebih efisien, khususnya untuk pencatatan kehadiran dan nilai akademik secara terpusat."
+process: "Membangun sistem manajemen sekolah berbasis web dengan TypeScript dan React, menyediakan fitur lengkap untuk manajemen kehadiran siswa dan pencatatan nilai akademik."
+result: "Platform web dengan interface intuitif yang dapat diakses dari berbagai perangkat, memudahkan pengelolaan data siswa secara real-time."
+impact: "Efisiensi operasional meningkat dengan mengurangi pekerjaan manual administrasi, data tersimpan aman dan terpusat, serta laporan kehadiran dan nilai lebih terstruktur."
 kpi:
   [
-    "95% data kehadiran terisi sebelum pukul 10.00 setiap hari",
-    "0 incident penggandaan data sejak go-live",
-    "Waktu pembuatan rapor turun dari 5 hari ke 2 hari",
+    "Efisiensi operasional - mengurangi pekerjaan manual administrasi",
+    "Data aman dengan penyimpanan terenkripsi dan terpercaya",
+    "Interface responsif untuk akses data kapan saja",
+    "Laporan terstruktur untuk kehadiran dan nilai",
   ]
-cover: ./admin-panel-sma.svg
+cover: /preview/adp-sma/dasbor.png
 featured: true
 ---
 
-## Ringkasan proyek
+## Deskripsi Singkat
 
-Studi kasus ini mengkonversi repo publik [`Noorwahid717/admin-panel-sma`](https://github.com/Noorwahid717/admin-panel-sma) menjadi fondasi operasional sekolah berbasis SaaS. Saya mengarsitektur ulang kebutuhan absensi, penilaian, dan distribusi rapor ke dalam monorepo pnpm yang menyatukan API NestJS, aplikasi React Admin, worker BullMQ, dan paket shared untuk schema/kontrak data.
+**Admin Panel SMA** adalah platform web modern yang dirancang khusus untuk membantu sekolah mengelola data siswa dengan lebih efisien. Sistem ini menyediakan fitur lengkap untuk mengelola kehadiran siswa (absen) dan pencatatan nilai akademik secara terpusat dan terintegrasi. Platform dapat diakses langsung di [admin-panel-sma-admin.vercel.app](https://admin-panel-sma-admin.vercel.app).
 
-## Proses
+Repository proyek tersedia di [`noah-isme/admin-panel-sma`](https://github.com/noah-isme/admin-panel-sma).
 
-1. **Definisi kontrak data** — Memusatkan Zod schema, enum peran, dan definisi Drizzle di package `@apps/shared` agar API, worker, dan admin berbagi tipe identik tanpa duplikasi.
-2. **Orkestrasi job** — Menggunakan BullMQ worker untuk mengelola batch absensi dan pencetakan rapor PDF; setiap job diantri via queue khusus yang diawasi oleh dashboard internal.
-3. **Pengalaman admin** — Merakit ulang React Admin sehingga tabel siswa, kelas, dan nilai mengikuti permission role-based, plus state machine untuk approval rapor agar tidak ada slip nilai tanpa verifikasi.
-4. **Observabilitas** — Menambahkan dokumentasi deployment (Postgres + Redis + Vercel) sekaligus playbook error build worker yang sebelumnya sering gagal karena modul CommonJS.
+## Fitur Utama
 
-## Hasil
+### 1. Manajemen Kehadiran Siswa
 
-- Absensi kini tersinkronisasi otomatis ke worker, memicu notifikasi keterlambatan di bawah 5 menit.
-- Shared package mengurangi bug tipe lintas service; build worker turun dari 8 menit ke 2 menit karena bundling ESM konsisten.
-- Dokumentasi `.env` yang rinci memudahkan tim infra mengganti penyimpanan (Supabase ↔ R2) tanpa downtime.
+Pencatatan dan monitoring kehadiran siswa secara real-time, memudahkan administrasi dalam melacak absensi harian dengan sistem yang terintegrasi dan mudah digunakan.
 
-## Pelajaran penting
+### 2. Pencatatan Nilai
 
-Menegakkan modul shared yang dikompilasi ESM adalah kunci menjaga kompatibilitas Vite + Node 22 sekaligus meminimalkan regresi antar service. Tanpa kontrak data tunggal, iterasi fitur seperti lockout login atau konfigurasi rapor akan lebih mahal dan rawan inkonsistensi.
+Input dan pengelolaan nilai akademik siswa yang terstruktur, memungkinkan guru dan admin untuk mencatat nilai dengan cepat dan akurat dalam satu platform terpusat.
+
+### 3. Dashboard Intuitif
+
+Interface yang user-friendly dan mudah digunakan, dirancang dengan UX yang optimal sehingga pengguna dapat mengakses fitur-fitur dengan mudah tanpa kurva pembelajaran yang tinggi.
+
+### 4. Akses Berbasis Web
+
+Dapat diakses dari berbagai perangkat melalui browser, memberikan fleksibilitas kepada pengguna untuk mengelola data dari desktop, tablet, atau smartphone.
+
+### 5. Data Terpusat
+
+Semua informasi siswa tersimpan dalam satu sistem yang aman, menghilangkan fragmentasi data dan memastikan konsistensi informasi di seluruh sekolah.
+
+## Teknologi
+
+Platform ini dibangun dengan teknologi modern dan best practices development:
+
+- **Frontend**: TypeScript + React (Modern & Type-Safe)
+- **Deployment**: Vercel (Reliable & Fast)
+- **Status**: Active & Well-Maintained
+- **Architecture**: Web-based untuk aksesibilitas maksimal
+
+## Preview Platform
+
+Berikut adalah tampilan antarmuka Admin Panel SMA yang menunjukkan berbagai fitur untuk manajemen sekolah:
+
+![Dashboard](/preview/adp-sma/dasbor.png)
+_Dashboard utama dengan overview data siswa, kehadiran, dan statistik sekolah real-time_
+
+![Daftar Siswa](/preview/adp-sma/list%20siswa.png)
+_Manajemen daftar siswa dengan informasi lengkap dan fitur pencarian yang powerful_
+
+![Rekap Kehadiran](/preview/adp-sma/rekap%20hadir.png)
+_Sistem rekap kehadiran siswa dengan laporan detail dan tracking absensi harian_
+
+![Akun User](/preview/adp-sma/akun%20user.png)
+_Manajemen akun pengguna dengan role-based access control untuk admin, guru, dan staff_
+
+![Generator Jadwal](/preview/adp-sma/generator%20jadwal.png)
+_Tools generator jadwal otomatis untuk penyusunan jadwal pelajaran sekolah_
+
+![Kalender Pendidikan](/preview/adp-sma/kalender%20pendidikan.png)
+_Kalender pendidikan untuk tracking kegiatan akademik dan non-akademik sekolah_
+
+## Keuntungan untuk Sekolah
+
+### 📈 Efisiensi Operasional
+
+Mengurangi pekerjaan manual administrasi dengan automasi pencatatan kehadiran dan nilai, menghemat waktu staf dan mengurangi kemungkinan kesalahan input manual.
+
+### 🔒 Data Aman
+
+Penyimpanan data yang terenkripsi dan terpercaya, memastikan informasi sensitif siswa terlindungi dengan standar keamanan yang tinggi.
+
+### ⚡ Akses Cepat
+
+Interface responsif untuk akses data kapan saja dan dari mana saja, memudahkan pengelolaan data baik di dalam maupun di luar lingkungan sekolah.
+
+### 📊 Laporan Terstruktur
+
+Memudahkan pembuatan laporan kehadiran dan nilai dengan format yang terstruktur dan mudah dibaca, mempercepat proses evaluasi dan pelaporan.
+
+## Proses Pengembangan
+
+1. **Analisis Kebutuhan** — Memahami workflow administrasi sekolah untuk kehadiran dan nilai, mengidentifikasi pain points dalam sistem manual yang ada.
+
+2. **Desain Interface** — Merancang dashboard yang intuitif dan mudah digunakan untuk berbagai tingkat pengguna (admin, guru, staff).
+
+3. **Implementasi Fitur** — Membangun sistem dengan TypeScript dan React untuk memastikan type safety dan maintainability jangka panjang.
+
+4. **Testing & Deployment** — Melakukan testing menyeluruh sebelum deployment ke Vercel untuk memastikan reliabilitas dan performa optimal.
+
+## Hasil & Dampak
+
+Platform ini berhasil memberikan solusi modern untuk manajemen sekolah dengan hasil yang signifikan:
+
+- **Centralized Data Management**: Semua data siswa terpusat dalam satu sistem yang mudah diakses
+- **Real-time Updates**: Pencatatan kehadiran dan nilai dapat dilakukan dan dilihat secara real-time
+- **User-Friendly Interface**: Dashboard yang intuitif mengurangi waktu training untuk pengguna baru
+- **Cross-Device Compatibility**: Dapat diakses dari berbagai perangkat tanpa masalah kompatibilitas
+
+## Pelajaran Penting
+
+Membangun sistem manajemen sekolah yang efektif memerlukan balance antara fitur yang komprehensif dan simplicity dalam penggunaan. Dengan menggunakan TypeScript dan React, platform dapat memastikan type safety yang mengurangi bug dan meningkatkan developer experience. Deployment di Vercel memberikan reliabilitas dan performa yang stabil untuk kebutuhan operasional sekolah sehari-hari.

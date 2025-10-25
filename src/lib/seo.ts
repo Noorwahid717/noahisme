@@ -19,7 +19,7 @@ export const personSchema = {
   jobTitle: "Full-Stack Web Developer",
   url: SITE.url,
   image: `${SITE.url}/og-default.svg`,
-  sameAs: ["https://github.com/Noorwahid717"],
+  sameAs: ["https://github.com/noah-isme"],
 };
 
 export const websiteSchema = {

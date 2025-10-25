@@ -4,37 +4,85 @@ date: "2024-10-02"
 tags: ["live-streaming", "engagement", "design"]
 stack: ["Next.js 15", "Tailwind", "Prisma", "LiveKit"]
 role: "Experience Lead"
-problem: "Program GEMA membutuhkan platform joyful untuk menggabungkan landing, admin, dan student dashboard dalam satu aplikasi."
-process: "Menggabungkan App Router, autentikasi ganda, dan transport live streaming ke dalam ekosistem terpadu."
-result: "Pelajar Informatika punya akses live class, tugas, dan portfolio builder dalam satu antarmuka adaptif."
-impact: "Retensi sesi pelajar naik 37% karena transisi halaman halus dan SSE yang menjaga sinkronisasi."
+problem: "Institusi pendidikan membutuhkan platform manajemen pembelajaran digital yang komprehensif untuk mengoptimalkan pengalaman pendidikan dalam satu ekosistem terpadu."
+process: "Mengintegrasikan manajemen siswa, konten tutorial, interaksi real-time, dan sistem evaluasi dengan teknologi modern TypeScript dan infrastruktur cloud Vercel."
+result: "Platform web-based production-ready dengan fitur lengkap: manajemen siswa terstruktur, repository materi pembelajaran, komunikasi real-time, tools evaluasi, dan UI intuitif."
+impact: "Efisiensi operasional meningkat dengan sentralisasi proses pembelajaran, engagement siswa lebih tinggi melalui fitur interaksi real-time, dan tracking progress komprehensif untuk monitoring."
 kpi:
   [
-    "Rata-rata lama sesi mencapai 42 menit",
-    "95% event SSE diterima < 2 detik",
-    "Admin menyelesaikan chat support 30% lebih cepat",
+    "Sentralisasi semua proses pembelajaran dalam satu platform",
+    "Fitur interaksi real-time meningkatkan keterlibatan siswa",
+    "Sistem evaluasi komprehensif untuk monitoring progress",
+    "Aksesibilitas platform dari berbagai perangkat",
   ]
-cover: ./gema-smawa.svg
+cover: /preview/gema/image.png
 featured: true
 ---
 
-## Ringkasan proyek
+## Ringkasan Proyek
 
-Repositori [`Noorwahid717/gema-smawa`](https://github.com/Noorwahid717/gema-smawa) menjadi landasan transformasi digital GEMA (Generasi Muda Informatika) SMA Wahidiyah. Saya merancang ulang pengalaman multi-peran dengan Next.js 15, Tailwind CSS 4, Framer Motion, dan Prisma, sekaligus menyiapkan fallback LiveKit ↔ SSE agar streaming kelas tetap stabil pada koneksi sekolah.
+**Gema Smawa** adalah platform manajemen pembelajaran digital yang komprehensif, dirancang untuk mengoptimalkan pengalaman pendidikan dengan mengintegrasikan berbagai fungsi pembelajaran dalam satu ekosistem terpadu. Platform ini tersedia di [gema-smawa.vercel.app](https://gema-smawa.vercel.app) dan merupakan proyek open source yang dapat diakses di repositori [`noah-isme/gema-smawa`](https://github.com/noah-isme/gema-smawa).
 
-## Proses
+### Fitur Utama
 
-1. **Arsitektur multi-app** — Menerapkan struktur `src/app` yang memisahkan admin, student, dan classroom namun tetap berbagi komponen melalui `src/components/*`. Portfolio builder dan dashboard berbagi state seragam untuk menjaga konsistensi interaksi.
-2. **Live transport adaptif** — Menambahkan opsi `LIVE_TRANSPORT` (LiveKit/WebSocket/SSE) serta shell API `/api/livekit/token` sehingga guru bisa menyiapkan kelas live dengan satu klik, sementara siswa punya fallback real-time pada perangkat low-end.
-3. **Ekosistem tugas & gamifikasi** — Mengaktifkan sistem assignment upload, progress tracker, dan engagement score yang terhubung ke Prisma. SSE memancarkan update agar statistik landing page mencerminkan data terbaru.
-4. **UX joyful** — Mengawinkan desain colorful untuk siswa dengan antarmuka profesional admin. Framer Motion dipakai secukupnya untuk menekankan transisi, bukan sekadar flair visual.
+- **Manajemen Siswa** — Sistem pengelolaan data siswa yang terstruktur dan mudah diakses untuk administrasi yang efisien.
+- **Konten Tutorial** — Repository materi pembelajaran dengan organisasi yang baik, memudahkan akses dan distribusi konten edukatif.
+- **Interaksi Real-time** — Komunikasi langsung antara pengajar dan siswa untuk pembelajaran yang lebih responsif dan engaging.
+- **Sistem Evaluasi** — Tools penilaian dan tracking progress siswa yang komprehensif untuk monitoring pembelajaran.
+- **Antarmuka User-Friendly** — Desain intuitif yang memudahkan navigasi untuk semua pengguna, dari admin hingga siswa.
 
-## Hasil
+### Spesifikasi Teknis
 
-- Admin dapat mengelola pengumuman, galeri, chat realtime, dan evaluasi portfolio pada satu panel tanpa reload.
-- Statistik hero landing selalu sinkron dengan database, menggantikan proses manual update konten.
-- Student dashboard menampilkan streak, quest, dan feedback secara langsung sehingga motivasi belajar meningkat.
+Platform ini dibangun dengan teknologi modern dan best practices development:
 
-## Pelajaran penting
+- **Bahasa Pemrograman**: TypeScript
+- **Platform**: Web-based application
+- **Hosting**: Vercel (Production Ready)
+- **Status**: Live & Open Source
+- **Stack**: Teknologi terkini untuk memastikan performa optimal dan maintainability jangka panjang
 
-Menyiapkan fallback transport sejak awal membuat fitur live tetap berjalan meski kondisi jaringan berubah. Memisahkan pengalaman siswa vs admin pada hirarki route yang jelas mencegah regresi aksesibilitas dan memudahkan tim konten melakukan QA cepat.
+## Preview Platform
+
+Berikut adalah tampilan antarmuka platform Gema Smawa yang menunjukkan berbagai fitur dan kemudahan penggunaan:
+
+![Halaman Landing Page](/preview/gema/image.png)
+_Halaman landing page dengan desain modern dan informasi lengkap tentang platform_
+
+![Konten Tutorial](/preview/gema/image%20copy.png)
+_Repository materi pembelajaran dan tutorial yang terorganisir dengan baik_
+
+![Tugas Web Lab Siswa](/preview/gema/image%20copy%202.png)
+_Interface tugas web lab untuk siswa dengan instruksi yang jelas dan mudah diikuti_
+
+![Tugas Coding Lab Siswa](/preview/gema/image%20copy%203.png)
+_Platform coding lab untuk praktikum pemrograman siswa dengan environment interaktif_
+
+![Manajemen Siswa oleh Admin](/preview/gema/image%20copy%204.png)
+_Dashboard admin untuk mengelola data siswa, monitoring kehadiran, dan tracking progress_
+
+![Manajemen Kegiatan](/preview/gema/image%20copy%205.png)
+_Panel manajemen kegiatan untuk mengorganisir jadwal dan aktivitas pembelajaran_
+
+## Proses Pengembangan
+
+1. **Arsitektur Modular** — Merancang sistem dengan pemisahan concern yang jelas antara manajemen data, konten pembelajaran, dan interaksi real-time untuk memastikan skalabilitas dan kemudahan maintenance.
+
+2. **Sistem Real-time** — Implementasi komunikasi real-time menggunakan teknologi modern untuk memastikan responsivitas tinggi dalam interaksi pengajar-siswa.
+
+3. **Manajemen Konten** — Membangun repository pembelajaran yang terorganisir dengan baik, memungkinkan pengelolaan dan distribusi materi yang efisien.
+
+4. **Dashboard Analytics** — Mengintegrasikan sistem tracking dan evaluasi untuk memberikan insight mendalam tentang progress pembelajaran siswa.
+
+## Hasil & Dampak
+
+### Manfaat untuk Institusi Pendidikan
+
+- **Efisiensi Operasional** — Sentralisasi semua proses pembelajaran dalam satu platform mengurangi kompleksitas dan meningkatkan produktivitas.
+- **Engagement Lebih Tinggi** — Fitur interaksi real-time meningkatkan keterlibatan siswa dalam proses pembelajaran.
+- **Tracking & Analytics** — Sistem evaluasi yang komprehensif memungkinkan monitoring progress siswa secara detail dan akurat.
+- **Skalabilitas** — Infrastruktur modern yang dapat berkembang sesuai kebutuhan institusi.
+- **Aksesibilitas** — Platform web yang dapat diakses dari berbagai perangkat, memastikan fleksibilitas pembelajaran.
+
+## Pelajaran Penting
+
+Membangun platform pendidikan yang sukses memerlukan keseimbangan antara fitur yang komprehensif dan user experience yang sederhana. Dengan menggunakan TypeScript dan infrastruktur cloud modern, platform dapat memastikan reliability dan performa yang konsisten. Pendekatan open source juga memungkinkan transparansi dan kolaborasi komunitas untuk pengembangan berkelanjutan.

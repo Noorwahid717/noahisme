@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import CTAButton from "~/components/CTAButton";
-import AudioButton from "~/components/AudioButton";
+// import AudioButton from "~/components/AudioButton";
 import { trackEvent } from "~/lib/analytics";
 import { useEffect, useRef } from "react";
 
@@ -159,9 +159,9 @@ export default function HeroIntro() {
             Lihat studi kasus
           </CTAButton>
         </motion.div>
-        <motion.div data-testid="hero-audio-toggle" variants={ctaItem}>
+        {/* <motion.div data-testid="hero-audio-toggle" variants={ctaItem}>
           <AudioButton className="rounded-full border-divider/60 bg-surface/70 px-5 py-3" />
-        </motion.div>
+        </motion.div> */}
       </motion.div>
       <div className="flex flex-wrap gap-3 text-xs uppercase tracking-[0.35em] text-text2">
         <span className="inline-flex items-center gap-2 rounded-full border border-divider/60 bg-surface/70 px-4 py-2 tracking-[0.2em] text-text2">

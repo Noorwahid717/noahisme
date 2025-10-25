@@ -1,21 +1,20 @@
 import { defineCollection, z } from "astro:content";
 
 const projects = defineCollection({
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      date: z.string(),
-      tags: z.array(z.string()).default([]),
-      stack: z.array(z.string()).default([]),
-      role: z.string(),
-      problem: z.string(),
-      process: z.string(),
-      result: z.string(),
-      impact: z.string().optional(),
-      kpi: z.array(z.string()).optional(),
-      cover: image(),
-      featured: z.boolean().default(false),
-    }),
+  schema: z.object({
+    title: z.string(),
+    date: z.string(),
+    tags: z.array(z.string()).default([]),
+    stack: z.array(z.string()).default([]),
+    role: z.string(),
+    problem: z.string(),
+    process: z.string(),
+    result: z.string(),
+    impact: z.string().optional(),
+    kpi: z.array(z.string()).optional(),
+    cover: z.string(),
+    featured: z.boolean().default(false),
+  }),
 });
 
 const testimonials = defineCollection({

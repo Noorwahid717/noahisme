@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import CaseStudy from "~/layouts/CaseStudy.astro";
 import { getCollection } from "astro:content";
 import { SITE } from "~/lib/seo";
@@ -31,7 +30,7 @@ const schema = {
   },
   headline: data.problem,
   about: data.process,
-  image: `${SITE.url}${data.cover.src}`,
+  image: `${SITE.url}${data.cover}`,
 };
 ---
 
@@ -43,7 +42,7 @@ const schema = {
     { name: "Proyek", url: "/projects" },
     { name: data.title, url: `/project/${slug}` },
   ]}
-  image={data.cover.src}
+  image={data.cover}
 >
   <header class="space-y-3">
     <p class="text-xs uppercase tracking-[0.3em] text-accent">{data.role}</p>
@@ -58,13 +57,12 @@ const schema = {
     </div>
   </header>
   <figure class="mt-10 overflow-hidden rounded-3xl border border-divider/40">
-    <Image
+    <img
       src={data.cover}
       alt={`Cuplikan ${data.title}`}
       loading="lazy"
       decoding="async"
       class="w-full"
-      sizes="(min-width: 768px) 768px, 100vw"
     />
   </figure>
   <div class="prose mt-12 space-y-6">
