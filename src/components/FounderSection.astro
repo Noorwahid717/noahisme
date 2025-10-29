@@ -1,0 +1,267 @@
+---
+import FounderCard from "./FounderCard.astro";
+import FounderInfo from "./FounderInfo.astro";
+---
+
+<section class="founder-section" id="about">
+  <div class="founder-container">
+    <!-- Header with enhanced narrative -->
+    <div class="founder-header">
+      <!-- Editorial opener -->
+      <p class="founder-subtitle">
+        the author <span class="founder-sparkle">✦</span> the builder behind the ideas
+      </p>
+
+      <div class="founder-label-wrapper">
+        <div class="founder-label-line"></div>
+        <h4 class="founder-label"><em>About</em></h4>
+        <div class="founder-label-line"></div>
+      </div>
+
+      <h2 class="founder-title">
+        Pushing Ideas <span class="founder-year">since 2021</span>
+      </h2>
+
+      <!-- Accent underline -->
+      <div class="founder-accent-line"></div>
+
+      <!-- Emotional storytelling -->
+      <p class="founder-tagline">
+        Driven by curiosity and a deep love for clean architecture, I design systems that empower
+        people and communities.
+      </p>
+    </div>
+
+    <!-- Main content grid -->
+    <div class="founder-grid">
+      <FounderCard />
+      <FounderInfo />
+    </div>
+
+    <!-- Personal Signature -->
+    <div class="founder-signature">
+      <p class="signature-text">— Noah Noor Wahid</p>
+      <p class="signature-role">Full-Stack Developer & Educator</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .founder-section {
+    position: relative;
+    padding: 7rem 0;
+    background: #f9fafb;
+    overflow: hidden;
+  }
+
+  .founder-container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 clamp(2rem, 10vw, 8rem);
+  }
+
+  .founder-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 5rem;
+  }
+
+  /* Editorial subtitle */
+  .founder-subtitle {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: rgb(var(--color-text2));
+    letter-spacing: 0.08em;
+    text-transform: lowercase;
+    margin: 0;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.2s forwards;
+  }
+
+  .founder-sparkle {
+    color: rgb(var(--color-accent));
+    display: inline-block;
+    animation: sparkle 2s ease-in-out infinite;
+  }
+
+  @keyframes sparkle {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.6;
+      transform: scale(1.2);
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .founder-label-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    max-width: 400px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.3s forwards;
+  }
+
+  .founder-label-line {
+    flex: 1;
+    height: 1px;
+    background: rgb(var(--color-divider));
+  }
+
+  .founder-label {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: rgb(var(--color-text-muted));
+    text-transform: lowercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .founder-title {
+    font-family: var(--font-heading, "Satoshi", "Inter", sans-serif);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+    color: rgb(var(--color-text));
+    text-align: center;
+    margin: 0;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.4s forwards;
+  }
+
+  .founder-year {
+    color: #64748b;
+    font-weight: 500;
+  }
+
+  /* Accent underline */
+  .founder-accent-line {
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(to right, transparent, rgb(var(--color-accent)), transparent);
+    border-radius: 2px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.5s forwards;
+  }
+
+  /* Emotional tagline */
+  .founder-tagline {
+    max-width: 650px;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgb(var(--color-text2));
+    margin: 0;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.6s forwards;
+  }
+
+  .founder-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .founder-grid {
+      grid-template-columns: minmax(320px, 0.85fr) minmax(0, 1.15fr);
+      gap: clamp(3rem, 6vw, 5rem);
+      align-items: start;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .founder-section {
+      padding: 10rem 0;
+    }
+
+    .founder-container {
+      padding: 0 clamp(4rem, 12vw, 10rem);
+    }
+
+    .founder-header {
+      margin-bottom: 5rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .founder-section {
+      padding: 5rem 0;
+    }
+
+    .founder-grid {
+      gap: 3rem;
+    }
+
+    .founder-header {
+      margin-bottom: 3rem;
+    }
+  }
+
+  /* Personal Signature */
+  .founder-signature {
+    margin-top: 6rem;
+    text-align: center;
+    padding-top: 3rem;
+    border-top: 1px solid rgb(var(--color-divider) / 0.3);
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 1s forwards;
+  }
+
+  .signature-text {
+    font-family: "Sacramento", "Caveat", cursive;
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: rgb(var(--color-text));
+    margin: 0 0 0.5rem 0;
+    line-height: 1.2;
+  }
+
+  .signature-role {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: rgb(var(--color-text2));
+    letter-spacing: 0.05em;
+    margin: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .founder-subtitle,
+    .founder-label-wrapper,
+    .founder-title,
+    .founder-accent-line,
+    .founder-tagline,
+    .founder-signature {
+      opacity: 1;
+      animation: none;
+    }
+
+    .founder-sparkle {
+      animation: none;
+    }
+  }
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet" />
