@@ -20,6 +20,13 @@
   --color-accent: 40 95 178;
   --color-success: 24 128 86;
   --color-divider: 221 226 236;
+  /* IntroSection badge layout variables (moved from component) */
+  /* Side columns fixed to avoid overlap with center content; center is flexible */
+  --intro-badge-col-left: 190px;
+  --intro-badge-col-center: 1fr;
+  --intro-badge-col-right: 190px;
+  --intro-badge-gap: 3rem;
+  --intro-badge-vertical-gap: 1.75rem;
 }
 
 [data-theme="dark"] {
@@ -56,8 +63,9 @@ body {
   line-height: 1.6;
   text-rendering: optimizeLegibility;
   /* Force hardware acceleration */
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
+  /* use will-change instead of transform to hint for GPU without creating a stacking context */
+  will-change: transform;
+  -webkit-will-change: transform;
 }
 
 main {
@@ -100,6 +108,27 @@ picture {
   img {
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
+  }
+}
+
+/* Responsive overrides for IntroSection badge variables */
+@media (max-width: 968px) {
+  :root {
+    --intro-badge-col-left: 150px;
+    --intro-badge-col-center: 1fr;
+    --intro-badge-col-right: 150px;
+    --intro-badge-gap: 2rem;
+    --intro-badge-vertical-gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --intro-badge-col-left: 1fr;
+    --intro-badge-col-center: 1fr;
+    --intro-badge-col-right: 1fr;
+    --intro-badge-gap: 0.75rem;
+    --intro-badge-vertical-gap: 0.75rem;
   }
 }
 
