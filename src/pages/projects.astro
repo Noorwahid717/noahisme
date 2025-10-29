@@ -2,6 +2,7 @@
 import Base from "~/layouts/Base.astro";
 import { getCollection } from "astro:content";
 import CTAButton from "~/components/CTAButton";
+import WaveDivider from "~/components/WaveDivider.astro";
 import { SITE } from "~/lib/seo";
 
 const projects = (await getCollection("projects", ({ data }) => data.featured)).sort((a, b) =>
@@ -23,6 +24,7 @@ const structuredData = {
   structuredData={structuredData}
   breadcrumbs={[{ name: "Proyek", url: "/projects" }]}
 >
+  <WaveDivider variant="top" color="accent" opacity={0.06} />
   <section class="mx-auto max-w-6xl px-6 pb-24 pt-28">
     <header class="space-y-4">
       <p class="text-xs uppercase tracking-[0.3em] text-accent">Studi kasus</p>
@@ -44,29 +46,61 @@ const structuredData = {
     </div>
     <div class="projects-grid mt-12 grid gap-8 sm:grid-cols-2">
       {
-        projects.map(({ data, slug }) => (
-          <article
-            class="project-card grid gap-4 rounded-2xl border border-divider/40 bg-surface/80 p-6 shadow-soft transition focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-            tabindex="0"
-            data-stack={data.stack.join(",")}
-          >
-            <img
-              src={data.cover}
-              loading="lazy"
-              decoding="async"
-              alt={`Cuplikan proyek ${data.title}`}
-              class="h-48 w-full rounded-xl object-cover"
-            />
-            <div class="space-y-2">
-              <h2 class="font-heading text-2xl text-text">{data.title}</h2>
-              <p class="text-sm text-text2">{data.problem}</p>
-              <p class="text-sm text-success">{data.result}</p>
-            </div>
-            <CTAButton client:load href={`/project/${slug}`} variant="ghost">
-              Lihat studi kasus
-            </CTAButton>
-          </article>
-        ))
+        projects.map(({ data, slug }) => {
+          // Assign category based on stack
+          let category = "web";
+          let categoryIcon = "🌐";
+          let categoryColor = "accent";
+
+          if (data.stack.includes("AI") || data.stack.includes("Python")) {
+            category = "ai";
+            categoryIcon = "🤖";
+            categoryColor = "success";
+          } else if (data.stack.includes("EdTech") || data.stack.includes("Education")) {
+            category = "education";
+            categoryIcon = "📚";
+            categoryColor = "warning";
+          } else if (data.stack.includes("E-commerce") || data.stack.includes("POS")) {
+            category = "commerce";
+            categoryIcon = "🛒";
+            categoryColor = "info";
+          }
+
+          return (
+            <article
+              class="project-card group grid gap-4 rounded-2xl border border-divider/40 bg-surface/80 p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:shadow-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              tabindex="0"
+              data-stack={data.stack.join(",")}
+              data-category={category}
+            >
+              <div class="relative overflow-hidden rounded-xl">
+                <div
+                  class={`category-badge absolute left-3 top-3 z-10 flex items-center gap-1.5 rounded-full bg-${categoryColor}/90 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-sm`}
+                >
+                  <span>{categoryIcon}</span>
+                  <span class="capitalize">{category}</span>
+                </div>
+                <img
+                  src={data.cover}
+                  loading="lazy"
+                  decoding="async"
+                  alt={`Cuplikan proyek ${data.title}`}
+                  class="h-48 w-full rounded-xl object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+              <div class="space-y-2">
+                <h2 class="project-title font-heading text-2xl text-text transition-colors duration-200 group-hover:text-accent">
+                  {data.title}
+                </h2>
+                <p class="text-sm text-text2">{data.problem}</p>
+                <p class="text-sm text-success">{data.result}</p>
+              </div>
+              <CTAButton client:load href={`/project/${slug}`} variant="ghost">
+                Lihat studi kasus
+              </CTAButton>
+            </article>
+          );
+        })
       }
     </div>
   </section>
@@ -150,6 +184,56 @@ const structuredData = {
     .filter-chip:hover {
       color: rgb(var(--color-text));
       border-color: rgba(var(--color-accent), 0.35);
+    }
+
+    /* Category badges with custom colors */
+    .category-badge {
+      font-weight: 600;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    [data-category="ai"] .category-badge {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+    }
+
+    [data-category="education"] .category-badge {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+    }
+
+    [data-category="commerce"] .category-badge {
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+    }
+
+    [data-category="web"] .category-badge {
+      background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%) !important;
+    }
+
+    /* Project title hover underline effect */
+    .project-title {
+      position: relative;
+      display: inline-block;
+    }
+
+    .project-title::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: rgb(var(--color-accent));
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .project-card:hover .project-title::after {
+      width: 100%;
+    }
+
+    /* Fade animation on card hover */
+    @media (prefers-reduced-motion: no-preference) {
+      .project-card {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
     }
   </style>
 </Base>
