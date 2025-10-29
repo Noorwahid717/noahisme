@@ -1,8 +1,7 @@
 ---
-import { Image } from "astro:assets";
 import Base from "~/layouts/Base.astro";
 import CTAButton from "~/components/CTAButton";
-import portrait from "~/assets/images/portrait.svg";
+import WaveDivider from "~/components/WaveDivider.astro";
 import { SITE } from "~/lib/seo";
 
 const structuredData = {
@@ -10,113 +9,256 @@ const structuredData = {
   "@type": "AboutPage",
   name: "Tentang Mohammad Noor Wahid",
   url: `${SITE.url}/about`,
-  description: "Profil profesional Noah Isme sebagai Senior Frontend & UX Engineer.",
+  description: "Profil profesional Noah Is Me sebagai Full-Stack Web Developer.",
 };
+
+const skills = [
+  {
+    icon: "⚙️",
+    title: "Backend Development",
+    items: ["Node.js, FastAPI, Golang", "REST API & GraphQL", "Worker orchestration"],
+  },
+  {
+    icon: "🎨",
+    title: "Frontend Development",
+    items: ["React, Next.js, Astro", "Performance optimization", "Accessibility (WCAG)"],
+  },
+  {
+    icon: "🗄️",
+    title: "Database & Infrastructure",
+    items: ["PostgreSQL, Redis, Supabase", "Vercel, Railway deployment", "Docker containerization"],
+  },
+  {
+    icon: "🔧",
+    title: "Development Practices",
+    items: ["Testing & QA", "CI/CD pipelines", "Observability & monitoring"],
+  },
+];
+
+const timeline = [
+  {
+    year: "2023–2024",
+    role: "Web Developer",
+    company: "PT Buroq Sakti Terbang",
+    description:
+      "Membangun dan memelihara aplikasi full-stack dengan REST API, integrasi Google Maps, dan WhatsApp Business automation.",
+  },
+  {
+    year: "2024–Now",
+    role: "Project Lead",
+    company: "GEMA SMAWA (LMS Platform)",
+    description:
+      "Platform pembelajaran digital dengan live streaming, manajemen siswa, dan sistem evaluasi komprehensif.",
+  },
+  {
+    year: "2022–2023",
+    role: "Freelance Developer",
+    company: "POS & Admin Panel Projects",
+    description: "Implementasi modul transaksi, RBAC, dan sistem manajemen untuk sekolah & retail.",
+  },
+  {
+    year: "2020–2022",
+    role: "Open Source Contributor",
+    company: "Various Projects",
+    description: "Fokus pada tooling, integrasi layanan, dan kontribusi ke komunitas developer.",
+  },
+];
 ---
 
 <Base
   title="Tentang Mohammad Noor Wahid"
-  description="Profil singkat sebagai Full-Stack Web Developer — backend & frontend specialist."
+  description="Profil profesional sebagai Full-Stack Web Developer — backend & frontend specialist dengan pengalaman 4+ tahun."
   structuredData={structuredData}
   breadcrumbs={[{ name: "Tentang", url: "/about" }]}
 >
-  <section
-    class="mx-auto grid max-w-6xl gap-12 px-6 pb-24 pt-28 md:grid-cols-[1fr,0.9fr] md:items-start"
-  >
-    <div class="space-y-6">
-      <p class="text-xs uppercase tracking-[0.3em] text-accent">Tentang</p>
-      <h1 class="font-heading text-4xl text-text">Profil singkat</h1>
-      <p class="text-base text-text2">
-        Lulusan Teknik Informatika dan Full-Stack Web Developer yang membangun solusi backend dan
-        frontend. Berfokus pada efisiensi kode, arsitektur bersih, serta implementasi yang mudah
-        dipelihara.
+  <WaveDivider variant="top" color="accent" opacity={0.06} />
+
+  <!-- Hero Section -->
+  <section class="relative mx-auto max-w-6xl px-6 pb-16 pt-28">
+    <div class="mx-auto max-w-4xl text-center">
+      <p class="text-xs uppercase tracking-[0.32em] text-accent/80">About Me</p>
+      <h1
+        class="mt-3 font-heading text-[2.5rem] font-semibold leading-tight text-text md:text-[3rem]"
+      >
+        Full-Stack Developer & <span class="text-accent">Digital Craftsman</span>
+      </h1>
+      <p class="mt-6 text-lg leading-relaxed text-text2 md:text-xl">
+        Lulusan Teknik Informatika yang membangun solusi digital dengan backend yang solid dan
+        frontend yang intuitif. Berfokus pada arsitektur bersih, performa optimal, dan pengalaman
+        pengguna yang meaningful.
       </p>
-      <p class="text-base text-text2">
-        Dengan pengalaman lebih dari 3 tahun, saya telah mengerjakan admin panel, POS, LMS, dan
-        asisten digital AI untuk institusi pendidikan dan ritel.
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="mx-auto max-w-6xl px-6 pb-20">
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div
+        class="rounded-2xl border border-divider/40 bg-surface/60 p-6 text-center transition-all hover:border-accent/30 hover:shadow-lg"
+      >
+        <div class="text-4xl font-bold text-accent">4+</div>
+        <div class="mt-2 text-sm text-text2">Tahun Pengalaman</div>
+      </div>
+      <div
+        class="rounded-2xl border border-divider/40 bg-surface/60 p-6 text-center transition-all hover:border-accent/30 hover:shadow-lg"
+      >
+        <div class="text-4xl font-bold text-accent">15+</div>
+        <div class="mt-2 text-sm text-text2">Proyek Selesai</div>
+      </div>
+      <div
+        class="rounded-2xl border border-divider/40 bg-surface/60 p-6 text-center transition-all hover:border-accent/30 hover:shadow-lg"
+      >
+        <div class="text-4xl font-bold text-accent">10+</div>
+        <div class="mt-2 text-sm text-text2">Teknologi Dikuasai</div>
+      </div>
+      <div
+        class="rounded-2xl border border-divider/40 bg-surface/60 p-6 text-center transition-all hover:border-accent/30 hover:shadow-lg"
+      >
+        <div class="text-4xl font-bold text-accent">100%</div>
+        <div class="mt-2 text-sm text-text2">Client Satisfaction</div>
+      </div>
+    </div>
+  </section>
+
+  <WaveDivider variant="top" color="accent" opacity={0.05} />
+
+  <!-- Skills Section -->
+  <section class="bg-surface/30 py-20">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="mb-12 text-center">
+        <p class="text-xs uppercase tracking-[0.32em] text-accent/80">Expertise</p>
+        <h2 class="mt-3 font-heading text-3xl font-semibold text-text md:text-4xl">
+          Keahlian Teknis
+        </h2>
+      </div>
+      <div class="grid gap-6 md:grid-cols-2">
+        {
+          skills.map((skill) => (
+            <div class="group rounded-2xl border border-divider/40 bg-surface/80 p-6 transition-all hover:border-accent/30 hover:shadow-lg">
+              <div class="mb-4 flex items-center gap-3">
+                <span class="text-3xl" aria-hidden="true">
+                  {skill.icon}
+                </span>
+                <h3 class="font-heading text-xl font-medium text-text">{skill.title}</h3>
+              </div>
+              <ul class="space-y-2">
+                {skill.items.map((item) => (
+                  <li class="flex items-start gap-2 text-sm text-text2">
+                    <svg
+                      class="mt-0.5 h-5 w-5 flex-shrink-0 text-accent"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <WaveDivider variant="bottom" color="accent" opacity={0.05} />
+
+  <!-- Timeline Section -->
+  <section class="py-20">
+    <div class="mx-auto max-w-4xl px-6">
+      <div class="mb-12 text-center">
+        <p class="text-xs uppercase tracking-[0.32em] text-accent/80">Journey</p>
+        <h2 class="mt-3 font-heading text-3xl font-semibold text-text md:text-4xl">
+          Perjalanan Profesional
+        </h2>
+      </div>
+      <div class="relative space-y-8">
+        {/* Timeline line */}
+        <div class="absolute left-8 top-0 h-full w-0.5 bg-divider/40" aria-hidden="true"></div>
+
+        {
+          timeline.map((item) => (
+            <div class="relative pl-20">
+              {/* Timeline dot */}
+              <div
+                class="absolute left-6 top-2 h-5 w-5 rounded-full border-4 border-bg bg-accent"
+                aria-hidden="true"
+              />
+
+              <div class="rounded-xl border border-divider/40 bg-surface/60 p-6 transition-all hover:border-accent/30 hover:shadow-lg">
+                <div class="mb-2 flex flex-wrap items-center gap-3">
+                  <span class="rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent">
+                    {item.year}
+                  </span>
+                  <span class="text-sm text-text2">{item.company}</span>
+                </div>
+                <h3 class="mb-2 font-heading text-xl font-medium text-text">{item.role}</h3>
+                <p class="text-sm leading-relaxed text-text2">{item.description}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="bg-surface/30 py-20">
+    <div class="mx-auto max-w-4xl px-6 text-center">
+      <h2 class="font-heading text-3xl font-semibold text-text md:text-4xl">
+        Mari Wujudkan Proyek Anda
+      </h2>
+      <p class="mt-4 text-lg text-text2">
+        Punya ide atau proyek yang ingin dikembangkan? Saya siap membantu mewujudkannya dengan
+        solusi yang tepat dan berkualitas.
       </p>
-      <div class="flex flex-wrap gap-3">
-        <CTAButton client:load href="/contact">Diskusikan peluang</CTAButton>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <CTAButton client:load href="/contact"> Mulai Diskusi </CTAButton>
         <a
           href="/pdf/Mohammad_Noor_Wahid_Freelance_Portfolio_CV.pdf"
           target="_blank"
           rel="noopener noreferrer"
-          class="focus-outline inline-flex items-center gap-2 rounded-lg border border-divider/40 bg-surface/60 px-5 py-2.5 text-sm font-medium text-text transition-colors hover:border-accent/50 hover:bg-surface"
+          class="focus-outline inline-flex items-center gap-2 rounded-lg border border-divider/40 bg-surface/60 px-6 py-3 text-sm font-medium text-text transition-all hover:border-accent/50 hover:bg-surface hover:shadow-lg"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
             height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            fill="currentColor"
+            viewBox="0 0 256 256"
           >
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-            <polyline points="14 2 14 8 20 8"></polyline>
-            <line x1="16" y1="13" x2="8" y2="13"></line>
-            <line x1="16" y1="17" x2="8" y2="17"></line>
-            <polyline points="10 9 9 9 8 9"></polyline>
+            <path
+              d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,51.31,188.69,80H160ZM200,216H56V40h88V88a8,8,0,0,0,8,8h48V216Zm-42.34-61.66a8,8,0,0,1,0,11.32l-24,24a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L120,164.69V120a8,8,0,0,1,16,0v44.69l10.34-10.35A8,8,0,0,1,157.66,154.34Z"
+            ></path>
           </svg>
           Preview CV
         </a>
         <a
           href="/pdf/Mohammad_Noor_Wahid_Freelance_Portfolio_CV.pdf"
           download
-          class="focus-outline inline-flex items-center gap-2 rounded-lg border border-divider/40 bg-surface/60 px-5 py-2.5 text-sm font-medium text-text transition-colors hover:border-accent/50 hover:bg-surface"
+          class="focus-outline inline-flex items-center gap-2 rounded-lg border border-accent/40 bg-accent/10 px-6 py-3 text-sm font-medium text-accent transition-all hover:bg-accent/20 hover:shadow-lg"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
             height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            fill="currentColor"
+            viewBox="0 0 256 256"
           >
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
+            <path
+              d="M240,136v64a16,16,0,0,1-16,16H32a16,16,0,0,1-16-16V136a16,16,0,0,1,16-16H80a8,8,0,0,1,0,16H32v64H224V136H176a8,8,0,0,1,0-16h48A16,16,0,0,1,240,136Zm-117.66-2.34a8,8,0,0,0,11.32,0l48-48a8,8,0,0,0-11.32-11.32L136,108.69V24a8,8,0,0,0-16,0v84.69L85.66,74.34A8,8,0,0,0,74.34,85.66Z"
+            ></path>
           </svg>
           Download CV
         </a>
       </div>
     </div>
-    <aside class="space-y-8" aria-label="Detail profesional Noah Isme"></aside>
   </section>
 </Base>
-<aside class="space-y-8" aria-label="Detail profesional Noah Isme">
-  <div class="overflow-hidden rounded-3xl border border-divider/40">
-    <Image src={portrait} alt="Potret Noah Isme" loading="lazy" decoding="async" />
-  </div>
-  <section class="space-y-4">
-    <h2 class="font-heading text-2xl text-text">Keahlian utama</h2>
-    <ul class="grid gap-3 text-sm text-text2">
-      <li>• Backend: Node.js, FastAPI, Golang — REST API dan orchestrasi worker</li>
-      <li>• Frontend: React, Next.js, Astro — performa dan aksesibilitas</li>
-      <li>• Database & infra: PostgreSQL, Redis, Supabase, deployment Vercel/Railway</li>
-      <li>• Praktik dev: testing, observabilitas, dan CI/CD sederhana</li>
-    </ul>
-  </section>
-  <section class="space-y-4">
-    <h2 class="font-heading text-2xl text-text">Timeline singkat</h2>
-    <ol class="space-y-4 text-sm text-text2">
-      <li>
-        <strong class="text-text">2023–2024</strong> · Web Developer — PT Buroq Sakti Terbang — membangun
-        dan memelihara aplikasi full-stack serta RESTful API.
-      </li>
-      <li>
-        <strong class="text-text">2022–2023</strong> · Proyek POS & Admin Panel — implementasi modul
-        transaksi dan RBAC untuk sekolah & retail.
-      </li>
-      <li>
-        <strong class="text-text">2020–2022</strong> · Freelancer & Kontribusi Open Source — fokus pada
-        tooling dan integrasi layanan.
-      </li>
-    </ol>
-  </section>
-</aside>
