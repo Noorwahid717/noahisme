@@ -1,0 +1,80 @@
+---
+// Scroll Cue - Encourage users to explore further
+interface Props {
+  text?: string;
+  className?: string;
+}
+
+const { text = "Scroll to explore", className = "" } = Astro.props;
+---
+
+<div class={`scroll-cue ${className}`}>
+  <span class="scroll-cue-text">{text}</span>
+  <svg
+    class="scroll-cue-arrow"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+  >
+    <path
+      d="M12 5V19M12 19L5 12M12 19L19 12"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"></path>
+  </svg>
+</div>
+
+<style>
+  .scroll-cue {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 3rem;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+  }
+
+  .scroll-cue:hover {
+    opacity: 1;
+  }
+
+  .scroll-cue-text {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgb(var(--color-text2));
+  }
+
+  .scroll-cue-arrow {
+    color: rgb(var(--color-accent));
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(8px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-cue-arrow {
+      animation: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .scroll-cue {
+      margin-top: 2rem;
+    }
+  }
+</style>
