@@ -146,8 +146,12 @@ export default function HeroIntro() {
         Saya membangun aplikasi web end-to-end — dari API hingga UI — dengan perhatian pada
         performa, aksesibilitas, dan arsitektur yang dapat diskalakan.
       </motion.p>
-      <div className="text-lg text-accent/80">
-        <span ref={typedRef} aria-live="polite" />
+      <div className="min-h-[2.5rem] sm:min-h-[2rem] flex items-center text-base sm:text-lg text-accent/80">
+        <span
+          ref={typedRef}
+          aria-live="polite"
+          className="inline-block min-w-[240px] sm:min-w-[320px]"
+        />
       </div>
       <motion.div
         className="flex flex-wrap items-center gap-4"
@@ -171,10 +175,30 @@ export default function HeroIntro() {
       </motion.div>
       <div className="flex flex-wrap gap-3 text-xs uppercase tracking-[0.35em] text-text2">
         <span className="inline-flex items-center gap-2 rounded-full border border-divider/60 bg-surface/70 px-4 py-2 tracking-[0.2em] text-text2">
-          <span className="h-2 w-2 rounded-full bg-success/80"></span> 3+ tahun pengalaman
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            viewBox="0 0 256 256"
+            className="text-success/80"
+          >
+            <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm49.66,85.66-58.34,56a8,8,0,0,1-11.09-.21l-26-28a8,8,0,0,1,11.94-10.66l20.38,22.48,52.74-50.58a8,8,0,1,1,11.3,11.33Z"></path>
+          </svg>
+          3+ tahun pengalaman
         </span>
         <span className="inline-flex items-center gap-2 rounded-full border border-divider/60 bg-surface/70 px-4 py-2 tracking-[0.2em] text-text2">
-          <span className="h-2 w-2 rounded-full bg-accent/60"></span> Fokus aksesibilitas & animasi
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            viewBox="0 0 256 256"
+            className="text-accent/80"
+          >
+            <path d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.47,133.47,0,0,1,25,128,133.33,133.33,0,0,1,48.07,97.25C70.33,75.19,97.22,64,128,64s57.67,11.19,79.93,33.25A133.46,133.46,0,0,1,231.05,128C223.84,141.46,192.43,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"></path>
+          </svg>
+          Fokus aksesibilitas & animasi
         </span>
       </div>
     </div>

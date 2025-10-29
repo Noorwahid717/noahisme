@@ -1,52 +1,116 @@
 ---
 import CTAButton from "./CTAButton";
+import WaveDivider from "./WaveDivider.astro";
 ---
 
-<footer class="border-t border-divider/60 bg-bg">
+<!-- Wave transition before footer -->
+<WaveDivider variant="top" color="accent" opacity={0.06} />
+
+<footer class="relative overflow-hidden bg-gradient-to-b from-[#F8FAFC] via-[#FAFBFC] to-[#EFF6FF]">
+  <!-- Decorative gradient blobs -->
   <div
-    class="mx-auto flex max-w-6xl flex-col gap-10 px-6 py-16 text-sm text-text2 md:flex-row md:justify-between"
+    aria-hidden="true"
+    class="pointer-events-none absolute -left-20 top-0 h-40 w-40 rounded-full bg-accent/5 blur-3xl"
   >
-    <div class="max-w-lg space-y-4">
-      <p class="font-heading text-2xl font-semibold text-text">
-        Mari bangun pengalaman digital yang memikat.
-      </p>
-      <p>
-        Hubungi saya untuk kolaborasi produk, audit aksesibilitas, atau eksplorasi konsep interaktif
-        yang berfokus pada storytelling dan emosi.
-      </p>
-      <CTAButton client:load href="/contact" variant="primary" className="w-fit">
-        Diskusikan proyek
-      </CTAButton>
+  </div>
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute -right-20 bottom-0 h-40 w-40 rounded-full bg-accent/5 blur-3xl"
+  >
+  </div>
+
+  <div
+    class="relative mx-auto flex max-w-6xl flex-col gap-12 px-6 py-16 text-sm text-text2 md:flex-row md:justify-between md:py-20"
+  >
+    <!-- Left Section: CTA -->
+    <div class="max-w-lg space-y-6">
+      <div class="space-y-4">
+        {/* Emotional Hook */}
+        <p class="text-sm font-medium uppercase tracking-wider text-accent">
+          Let's Create Together
+        </p>
+        <p class="font-heading text-3xl font-semibold leading-tight text-text md:text-4xl">
+          Mari bangun sesuatu yang luar biasa.
+        </p>
+        <p class="text-base leading-relaxed text-text/80">
+          Let's craft digital experiences that matter — clean, fast, and human-centered.
+        </p>
+        <p class="text-base leading-relaxed text-text2">
+          Tertarik berkolaborasi? Saya terbuka untuk diskusi proyek, konsultasi teknis, atau sekadar
+          ngobrol tentang teknologi dan arsitektur software.
+        </p>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-wrap items-center gap-3">
+        <CTAButton client:load href="/contact" variant="primary" className="group w-fit">
+          <span class="inline-flex items-center gap-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              viewBox="0 0 256 256"
+              class="transition-all group-hover:scale-110"
+            >
+              <path
+                d="M216,48H40A16,16,0,0,0,24,64V224a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V64A16,16,0,0,0,216,48Zm0,16V152.89l-37.65-37.66a16,16,0,0,0-22.63,0L115.31,155.63l-19-19a16,16,0,0,0-22.63,0L40,170.34V64ZM40,224V190.63l52.69-52.69,20.69,20.69a16,16,0,0,0,22.63,0l40.69-40.69,22.63-22.63L216,112.46V224Z"
+              ></path>
+            </svg>
+            Hubungi
+          </span>
+        </CTAButton>
+        <CTAButton client:load href="/about" variant="ghost" className="w-fit">
+          Tentang Saya
+        </CTAButton>
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="flex flex-wrap gap-6 pt-4 text-xs">
+        <div class="flex items-center gap-2">
+          <span class="flex h-2 w-2 rounded-full bg-success/80"></span>
+          <span class="text-text2">3+ tahun pengalaman</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="flex h-2 w-2 rounded-full bg-accent/80"></span>
+          <span class="text-text2">Full-Stack Developer</span>
+        </div>
+      </div>
     </div>
-    <div class="grid gap-6 text-text2 md:text-right">
-      <div class="space-y-1">
+
+    <!-- Right Section: Contact & Links -->
+    <div class="grid gap-8 text-text2 md:text-right">
+      <!-- Contact -->
+      <div class="space-y-3">
         <span class="text-xs uppercase tracking-[0.35em] text-accent">Kontak</span>
         <a
-          class="focus-outline inline-flex items-center gap-2 text-text transition-colors hover:text-accent md:justify-end"
+          class="focus-outline group inline-flex items-center gap-2 text-base text-text transition-all duration-200 hover:text-accent md:justify-end"
           href="mailto:noorwahid717@gmail.com"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
             height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            fill="currentColor"
+            viewBox="0 0 256 256"
+            class="transition-transform group-hover:scale-110"
           >
-            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
-            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            <path
+              d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48ZM98.71,128,40,181.81V74.19Zm11.84,10.85,12,11.05a8,8,0,0,0,10.82,0l12-11.05,58,53.15H52.57ZM157.29,128,216,74.18V181.82Z"
+            ></path>
           </svg>
-          <span>noorwahid717@gmail.com</span>
+          <span class="font-medium">noorwahid717@gmail.com</span>
         </a>
       </div>
-      <div class="space-y-1">
-        <span class="text-xs uppercase tracking-[0.35em] text-accent">Jejak digital</span>
-        <div class="flex flex-col gap-2 text-text md:items-end">
+
+      <!-- Social Links -->
+      <div class="space-y-3">
+        <span class="text-xs uppercase tracking-[0.35em] text-accent">Jejak Digital</span>
+        <div class="flex flex-col gap-3 text-text md:items-end">
           <a
-            class="focus-outline inline-flex items-center gap-2 text-text2 transition-colors hover:text-text"
+            class="social-link social-link-github focus-outline group inline-flex items-center gap-2 text-text2 transition-all duration-300 hover:translate-x-[-4px] md:hover:translate-x-[4px]"
             href="https://github.com/noah-isme"
             rel="noreferrer"
             target="_blank"
@@ -55,23 +119,19 @@ import CTAButton from "./CTAButton";
               xmlns="http://www.w3.org/2000/svg"
               width="16"
               height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              fill="currentColor"
+              viewBox="0 0 256 256"
+              class="transition-all duration-300 group-hover:scale-110 group-hover:rotate-12"
             >
               <path
-                d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
+                d="M216,104v8a56.06,56.06,0,0,1-48.44,55.47A39.8,39.8,0,0,1,176,192v40a8,8,0,0,1-8,8H104a8,8,0,0,1-8-8V216H72a40,40,0,0,1-40-40A24,24,0,0,0,8,152a8,8,0,0,1,0-16,40,40,0,0,1,40,40,24,24,0,0,0,24,24H96v-8a39.8,39.8,0,0,1,8.44-24.53A56.06,56.06,0,0,1,56,112v-8a58.14,58.14,0,0,1,7.69-28.32A59.78,59.78,0,0,1,69.07,28,8,8,0,0,1,76,24a59.75,59.75,0,0,1,48,24h24a59.75,59.75,0,0,1,48-24,8,8,0,0,1,6.93,4,59.74,59.74,0,0,1,5.37,47.68A58,58,0,0,1,216,104Z"
               ></path>
-              <path d="M9 18c-4.51 2-5-2-7-2"></path>
             </svg>
-            <span>GitHub</span>
+            <span class="font-medium">GitHub</span>
           </a>
           <a
-            class="focus-outline inline-flex items-center gap-2 text-text2 transition-colors hover:text-text"
-            href="https://instagram.com/__noah_is_me"
+            class="social-link social-link-instagram focus-outline group inline-flex items-center gap-2 text-text2 transition-all duration-300 hover:translate-x-[-4px] md:hover:translate-x-[4px]"
+            href="https://www.instagram.com/__noah_is_me/"
             rel="noreferrer"
             target="_blank"
           >
@@ -79,22 +139,19 @@ import CTAButton from "./CTAButton";
               xmlns="http://www.w3.org/2000/svg"
               width="16"
               height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              fill="currentColor"
+              viewBox="0 0 256 256"
+              class="transition-all duration-300 group-hover:scale-110 group-hover:rotate-12"
             >
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              <path
+                d="M176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24ZM128,176a48,48,0,1,1,48-48A48.05,48.05,0,0,1,128,176Zm60-96a12,12,0,1,1,12-12A12,12,0,0,1,188,80Zm-28,48a32,32,0,1,1-32-32A32,32,0,0,1,160,128Z"
+              ></path>
             </svg>
-            <span>Instagram</span>
+            <span class="font-medium">Instagram</span>
           </a>
           <a
-            class="focus-outline inline-flex items-center gap-2 text-text2 transition-colors hover:text-text"
-            href="https://wa.me/6281335843507"
+            class="social-link social-link-whatsapp focus-outline group inline-flex items-center gap-2 text-text2 transition-all duration-300 hover:translate-x-[-4px] md:hover:translate-x-[4px]"
+            href="https://wa.me/+6282254547005"
             rel="noreferrer"
             target="_blank"
           >
@@ -102,22 +159,87 @@ import CTAButton from "./CTAButton";
               xmlns="http://www.w3.org/2000/svg"
               width="16"
               height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              fill="currentColor"
+              viewBox="0 0 256 256"
+              class="transition-all duration-300 group-hover:scale-110 group-hover:rotate-12"
             >
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              <path
+                d="M187.58,144.84l-32-16a8,8,0,0,0-8,.5l-14.69,9.8a40.55,40.55,0,0,1-16-16l9.8-14.69a8,8,0,0,0,.5-8l-16-32A8,8,0,0,0,104,64a40,40,0,0,0-40,40,88.1,88.1,0,0,0,88,88,40,40,0,0,0,40-40A8,8,0,0,0,187.58,144.84ZM152,176a72.08,72.08,0,0,1-72-72A24,24,0,0,1,99.29,80.46l11.48,23L101,118a8,8,0,0,0-.73,7.51,56.47,56.47,0,0,0,30.15,30.15A8,8,0,0,0,138,155l14.61-9.74,23,11.48A24,24,0,0,1,152,176ZM128,24A104,104,0,0,0,36.18,176.88L24.83,210.93a16,16,0,0,0,20.24,20.24l34.05-11.35A104,104,0,1,0,128,24Zm0,192a87.87,87.87,0,0,1-44.06-11.81,8,8,0,0,0-6.54-.67L40,216,52.47,178.6a8,8,0,0,0-.66-6.54A88,88,0,1,1,128,216Z"
+              ></path>
             </svg>
-            <span>WhatsApp</span>
+            <span class="font-medium">WhatsApp</span>
           </a>
         </div>
       </div>
-      <p class="text-xs text-text2">
-        © {new Date().getFullYear()} Mohammad Noor Wahid. Dibangun dengan Astro & cinta pada detail.
-      </p>
+
+      <!-- Copyright -->
+      <div class="pt-6 border-t border-text2/10">
+        <p class="text-xs text-text2/70 text-center md:text-right leading-relaxed">
+          © {new Date().getFullYear()} Noah Is Me.
+          <br class="md:hidden" />
+          <span class="md:ml-1"
+            >Crafted with <span class="text-accent font-medium">Astro</span> & love for clean code.</span
+          >
+        </p>
+      </div>
     </div>
   </div>
 </footer>
+
+<style>
+  /* Platform-specific hover colors */
+  .social-link-github:hover {
+    color: #333;
+  }
+
+  .social-link-instagram:hover {
+    background: linear-gradient(
+      45deg,
+      #f09433 0%,
+      #e6683c 25%,
+      #dc2743 50%,
+      #cc2366 75%,
+      #bc1888 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .social-link-whatsapp:hover {
+    color: #25d366;
+  }
+
+  /* Dark mode adjustments */
+  :global(.dark) .social-link-github:hover {
+    color: #f0f0f0;
+  }
+
+  /* Fade-in animation for social links */
+  .social-link {
+    animation: fadeInUp 0.6s ease-out backwards;
+  }
+
+  .social-link:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+
+  .social-link:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .social-link:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

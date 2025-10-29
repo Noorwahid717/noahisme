@@ -41,18 +41,18 @@ const links = [
             src="/mylogo.svg"
             alt=""
             aria-hidden="true"
-            class="h-10 w-10 rounded-full border border-divider/70 bg-bg object-cover"
+            class="h-10 w-10 rounded-full border-2 border-accent/20 bg-bg object-cover shadow-sm transition-all duration-200 hover:border-accent/40 hover:shadow-md"
             loading="eager"
             fetchpriority="high"
           />
-          <span class="text-text">NOAH IS ME</span>
+          <span class="logo-text text-text font-semibold">NOAH IS ME</span>
         </div>
       </a>
       <div class="hidden items-center gap-7 md:flex">
         {
           links.map((link) => (
             <a
-              class="focus-outline text-text2 transition-colors duration-200 hover:text-text"
+              class="nav-link focus-outline relative text-text2 transition-all duration-150 hover:text-text"
               href={link.href}
             >
               {link.label}
@@ -145,4 +145,52 @@ const links = [
 
     evaluate();
   }
+
+  // Active nav link indicator
+  const currentPath = window.location.pathname;
+  document.querySelectorAll(".nav-link").forEach((link) => {
+    const linkPath = new URL(link.href).pathname;
+    if (currentPath === linkPath || (linkPath !== "/" && currentPath.startsWith(linkPath))) {
+      link.classList.add("active");
+    }
+  });
 </script>
+
+<style>
+  /* Nav link underline indicator */
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgb(var(--color-accent));
+    transform: scaleX(0);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    transform: scaleX(1);
+  }
+
+  .nav-link.active {
+    color: rgb(var(--color-accent));
+    font-weight: 500;
+  }
+
+  /* Logo text gradient effect */
+  .logo-text {
+    background: linear-gradient(135deg, rgb(var(--color-text)) 0%, rgb(var(--color-accent)) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+    transition: background-position 0.3s ease;
+  }
+
+  .logo-text:hover {
+    background-position: right center;
+  }
+</style>

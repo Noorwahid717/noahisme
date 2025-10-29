@@ -1,7 +1,7 @@
 # Mohammad Noor Wahid
 
 💻 **Full-Stack Web Developer** | Backend & Frontend Specialist  
-📍 Kediri, Indonesia  
+📍 Kudus, Indonesia  
 📧 [noorwahid717@gmail.com](mailto:noorwahid717@gmail.com)  
 🌐 [github.com/noah-isme](https://github.com/noah-isme)
 
