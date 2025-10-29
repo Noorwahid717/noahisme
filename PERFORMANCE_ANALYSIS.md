@@ -245,10 +245,56 @@ loading="eager" <!-- ✅ No lazy loading -->
 
 ## ✅ Action Items Checklist
 
-- [ ] Add font-display: swap
-- [ ] Replace client:load with static or client:visible
-- [ ] Add resource hints (preload, preconnect)
-- [ ] Remove unused font subsets
-- [ ] Add fetchpriority to hero elements
+### Phase 1: Quick Wins ✅ COMPLETED
+
+- [x] Replace about.astro CTAButton client:load with static HTML
+- [x] Add Phosphor icon inline SVG (zero JS)
+- [x] Remove unused CTAButton import from about.astro
+- [x] Build successful, no errors
+
+### Phase 2: Hydration & Resource Optimization ✅ COMPLETED
+
+- [x] Change Footer CTAButton from client:load → client:visible (below fold)
+- [x] Change Projects page CTAButton from client:load → client:visible
+- [x] Optimize 404 page: replace CTAButton with static HTML
+- [x] Remove unused Google Fonts preconnect (using @fontsource)
+- [x] Font already optimized: latin subset only, font-display: swap via @fontsource
+- [x] Build successful
+
+### Phase 3: Testing & Validation (NEXT)
+
+- [ ] Run Lighthouse on about page
+- [ ] Run Lighthouse on 404 page
+- [ ] Measure actual LCP improvement
 - [ ] Test on mobile device (3G throttling)
-- [ ] Re-run Lighthouse after each phase
+- [ ] Verify performance score improvement
+
+## 🎯 Expected Results After Phase 1 & 2
+
+| Metric             | Before | After (Expected) | Improvement |
+| ------------------ | ------ | ---------------- | ----------- |
+| Performance        | 75     | 85-88            | +10-13      |
+| FCP                | 1.2s   | 0.9-1.0s         | -200-300ms  |
+| LCP                | 4.1s   | 2.8-3.2s         | -0.9-1.3s   |
+| TBT                | 50ms   | 20-30ms          | -20-30ms    |
+| Initial JS (about) | 334 KB | 306 KB           | -28 KB      |
+
+## 📊 Optimization Summary
+
+### Files Modified:
+
+1. ✅ `src/pages/about.astro` - Static CTA button
+2. ✅ `src/pages/404.astro` - Static CTA button
+3. ✅ `src/components/Footer.astro` - client:visible CTAs
+4. ✅ `src/pages/projects.astro` - client:visible CTAs
+5. ✅ `src/components/SEO.astro` - Removed unused preconnects
+6. ✅ `src/styles/fonts.css` - Already optimized with latin subset
+
+### Key Improvements:
+
+- **About page**: Zero React hydration for primary CTA
+- **404 page**: Zero React hydration, fully static
+- **Footer**: Lazy hydration (client:visible) for below-fold CTAs
+- **Projects page**: Lazy hydration for project links
+- **Resource hints**: Removed 4 unused DNS/preconnect entries
+- **Fonts**: Already using optimal latin subset with font-display: swap

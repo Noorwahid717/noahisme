@@ -95,7 +95,7 @@ const structuredData = {
                 <p class="text-sm text-text2">{data.problem}</p>
                 <p class="text-sm text-success">{data.result}</p>
               </div>
-              <CTAButton client:load href={`/project/${slug}`} variant="ghost">
+              <CTAButton client:visible href={`/project/${slug}`} variant="ghost">
                 Lihat studi kasus
               </CTAButton>
             </article>

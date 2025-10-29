@@ -43,7 +43,7 @@ import WaveDivider from "./WaveDivider.astro";
 
       <!-- Action Buttons -->
       <div class="flex flex-wrap items-center gap-3">
-        <CTAButton client:load href="/contact" variant="primary" className="group w-fit">
+        <CTAButton client:visible href="/contact" variant="primary" className="group w-fit">
           <span class="inline-flex items-center gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -60,7 +60,7 @@ import WaveDivider from "./WaveDivider.astro";
             Hubungi
           </span>
         </CTAButton>
-        <CTAButton client:load href="/about" variant="ghost" className="w-fit">
+        <CTAButton client:visible href="/about" variant="ghost" className="w-fit">
           Tentang Saya
         </CTAButton>
       </div>

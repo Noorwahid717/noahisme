@@ -6,7 +6,9 @@
  * - Fonts are preloaded in SEO.astro for critical rendering path
  */
 
-/* Inter Variable - Latin wght subset (400-700 range, no italic variants) */
+/* Inter Variable - Latin wght subset only (400-700 range, no italic) */
+/* Using @fontsource-variable/inter/wght.css already includes only latin subset */
+/* with font-display: swap by default for optimal FOIT prevention */
 @import "@fontsource-variable/inter/wght.css";
 
 /* Spectral - Latin subset only, specific weights for minimal bundle */
