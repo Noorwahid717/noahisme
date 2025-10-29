@@ -1,6 +1,5 @@
 ---
 import Base from "~/layouts/Base.astro";
-import CTAButton from "~/components/CTAButton";
 import WaveDivider from "~/components/WaveDivider.astro";
 import { SITE } from "~/lib/seo";
 
@@ -220,7 +219,23 @@ const timeline = [
         solusi yang tepat dan berkualitas.
       </p>
       <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
-        <CTAButton client:load href="/contact"> Mulai Diskusi </CTAButton>
+        <a
+          href="/contact"
+          class="focus-outline inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-medium text-white shadow-lg transition-all hover:bg-accent/90 hover:shadow-xl hover:shadow-accent/30"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            viewBox="0 0 256 256"
+          >
+            <path
+              d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm40-68a8,8,0,0,1,0,11.32l-32,32a8,8,0,0,1-11.32,0l-32-32a8,8,0,0,1,11.32-11.32L120,163.31V88a8,8,0,0,1,16,0v75.31l15.32-15.32A8,8,0,0,1,168,148Z"
+            ></path>
+          </svg>
+          Mulai Diskusi
+        </a>
         <a
           href="/pdf/Mohammad_Noor_Wahid_Freelance_Portfolio_CV.pdf"
           target="_blank"
