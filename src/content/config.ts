@@ -3,6 +3,7 @@ import { defineCollection, z } from "astro:content";
 const projects = defineCollection({
   schema: z.object({
     title: z.string(),
+    subtitle: z.string().optional(),
     date: z.string(),
     tags: z.array(z.string()).default([]),
     stack: z.array(z.string()).default([]),
@@ -14,6 +15,7 @@ const projects = defineCollection({
     kpi: z.array(z.string()).optional(),
     cover: z.string(),
     featured: z.boolean().default(false),
+    liveUrl: z.string().optional(),
   }),
 });
 
