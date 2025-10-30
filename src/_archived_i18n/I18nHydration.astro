@@ -1,0 +1,54 @@
+<script>
+  // Client-side i18n hydration script
+  // This runs on every page load and updates text content based on URL language parameter
+  
+  import { t, getCurrentLanguage, type TranslationKey } from '../lib/i18n';
+
+  // Map of element selectors to translation keys
+  const translations: Record<string, TranslationKey> = {
+    // IntroSection
+    '.intro-label em': 'intro.label',
+    '.intro-context-label': 'intro.context',
+    '.intro-heading': 'intro.heading',
+    '.badge-float.badge-1 .badge-text': 'badge.backend',
+    '.badge-float.badge-2 .badge-text': 'badge.api',
+    '.badge-float.badge-3 .badge-text': 'badge.uiux',
+    '.badge-float.badge-4 .badge-text': 'badge.performance',
+    '.badge-float.badge-5 .badge-text': 'badge.ai',
+    '.badge-float.badge-6 .badge-text': 'badge.strategy',
+    
+    // FounderSection
+    '.founder-subtitle': 'founder.subtitle',
+    '.founder-title': 'founder.title',
+    '.founder-tagline': 'founder.tagline',
+    
+    // FounderInfo
+    '.founder-description': 'founder.description',
+    '.founder-cta .cta-text': 'founder.cta',
+    
+    // Footer
+    '.footer footer p:first-of-type': 'footer.cta.title',
+    '.footer footer p.font-heading': 'footer.cta.heading',
+  };
+
+  function hydrateTranslations() {
+    const lang = getCurrentLanguage();
+    
+    // Update all mapped elements
+    Object.entries(translations).forEach(([selector, key]) => {
+      const elements = document.querySelectorAll(selector);
+      elements.forEach((element) => {
+        if (element.textContent) {
+          element.textContent = t(key, lang);
+        }
+      });
+    });
+  }
+
+  // Run on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hydrateTranslations);
+  } else {
+    hydrateTranslations();
+  }
+</script>

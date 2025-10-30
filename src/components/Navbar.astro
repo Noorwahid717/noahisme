@@ -3,12 +3,11 @@ import ThemeToggle from "./ThemeToggle";
 // import AudioButton from "./AudioButton";
 import CTAButton from "./CTAButton";
 import { trackEvent } from "~/lib/analytics";
-// using public logo via <img>
 
 const links = [
-  { href: "/#projects", label: "Proyek" },
-  { href: "/about", label: "Tentang" },
-  { href: "/contact", label: "Kontak" },
+  { href: "/#projects", label: 'Proyek' },
+  { href: "/about", label: 'Tentang' },
+  { href: "/contact", label: 'Kontak' },
 ];
 ---
 
@@ -78,7 +77,7 @@ const links = [
 
 <script is:inline>
   const nav = document.querySelector("[data-nav]");
-  const root = document.documentElement;
+  const navRoot = document.documentElement;
 
   if (nav) {
     let lastY = window.scrollY;
@@ -92,7 +91,7 @@ const links = [
       }
     };
 
-    const prefersReducedMotion = () => root.dataset.motion === "reduced";
+    const prefersReducedMotion = () => navRoot.dataset.motion === "reduced";
 
     const evaluate = () => {
       const currentY = window.scrollY;

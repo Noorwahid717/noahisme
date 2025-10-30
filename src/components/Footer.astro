@@ -27,17 +27,16 @@ import WaveDivider from "./WaveDivider.astro";
       <div class="space-y-4">
         {/* Emotional Hook */}
         <p class="text-sm font-medium uppercase tracking-wider text-accent">
-          Let's Create Together
+          mari bekerjasama
         </p>
         <p class="font-heading text-3xl font-semibold leading-tight text-text md:text-4xl">
-          Mari bangun sesuatu yang luar biasa.
+          Membangun sesuatu yang luar biasa.
         </p>
         <p class="text-base leading-relaxed text-text/80">
-          Let's craft digital experiences that matter — clean, fast, and human-centered.
+          Bersama, kita dapat menciptakan pengalaman digital yang bernilai — efisien, intuitif, dan berorientasi pada pengguna.
         </p>
         <p class="text-base leading-relaxed text-text2">
-          Tertarik berkolaborasi? Saya terbuka untuk diskusi proyek, konsultasi teknis, atau sekadar
-          ngobrol tentang teknologi dan arsitektur software.
+          Tertarik berkolaborasi? Saya terbuka untuk diskusi proyek, konsultasi teknis, atau sekadar ngobrol tentang teknologi dan arsitektur software.
         </p>
       </div>
 
@@ -60,8 +59,22 @@ import WaveDivider from "./WaveDivider.astro";
             Hubungi
           </span>
         </CTAButton>
-        <CTAButton client:visible href="/about" variant="ghost" className="w-fit">
-          Tentang Saya
+        <CTAButton client:visible href="/about" variant="secondary" className="group w-fit">
+          <span class="inline-flex items-center gap-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              viewBox="0 0 256 256"
+              class="transition-all group-hover:scale-110"
+            >
+              <path
+                d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216ZM112,136v64a8,8,0,0,0,16,0V136a8,8,0,0,0-16,0Zm8-24a12,12,0,1,0-12-12A12,12,0,0,0,120,112Z"
+              ></path>
+            </svg>
+            Tentang Saya
+          </span>
         </CTAButton>
       </div>
 
@@ -178,7 +191,7 @@ import WaveDivider from "./WaveDivider.astro";
           © {new Date().getFullYear()} Noah Is Me.
           <br class="md:hidden" />
           <span class="md:ml-1"
-            >Crafted with <span class="text-accent font-medium">Astro</span> & love for clean code.</span
+            >Dibuat dengan <span class="text-accent font-medium">Astro</span> & cinta untuk kode yang rapi.</span
           >
         </p>
       </div>

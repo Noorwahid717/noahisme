@@ -12,23 +12,23 @@ const stacks = Array.from(new Set(projects.flatMap((project) => project.data.sta
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  name: "Portofolio proyek Mohammad Noor Wahid",
-  description: "Daftar studi kasus lengkap yang dikurasi berdasarkan stack dan hasil bisnis.",
+  name: "Proyek",
+  description: "Koleksi proyek yang telah dikerjakan oleh Noah Alif Ramadhan",
   url: `${SITE.url}/projects`,
 };
 ---
 
 <Base
-  title="Proyek Mohammad Noor Wahid"
-  description="Rangkuman studi kasus lengkap beserta proses, dampak, dan peran saya dalam tiap proyek."
+  title="Proyek"
+  description="Koleksi proyek yang telah dikerjakan oleh Noah Alif Ramadhan"
   structuredData={structuredData}
   breadcrumbs={[{ name: "Proyek", url: "/projects" }]}
 >
   <WaveDivider variant="top" color="accent" opacity={0.06} />
   <section class="mx-auto max-w-6xl px-6 pb-24 pt-28">
     <header class="space-y-4">
-      <p class="text-xs uppercase tracking-[0.3em] text-accent">Studi kasus</p>
-      <h1 class="font-heading text-4xl text-text">Proyek terkurasi</h1>
+      <p class="text-xs uppercase tracking-[0.3em] text-accent">Portfolio</p>
+      <h1 class="font-heading text-4xl text-text">Proyek Saya</h1>
       <p class="max-w-2xl text-base text-text2">
         Filter berdasarkan stack untuk menemukan karya relevan. Navigasi kartu dapat menggunakan
         tombol panah, Enter untuk membuka, dan Escape untuk kembali ke filter.
@@ -84,7 +84,7 @@ const structuredData = {
                   src={data.cover}
                   loading="lazy"
                   decoding="async"
-                  alt={`Cuplikan proyek ${data.title}`}
+                  alt={`Gambar proyek ${data.title}`}
                   class="h-48 w-full rounded-xl object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
