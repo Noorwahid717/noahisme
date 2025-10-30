@@ -74,8 +74,9 @@
 - `react-vendor.js`: 246 KB (80 KB gzipped) - terbesar
 - `vendor.js`: 48 KB
 - `CTAButton.js`: 28 KB
-- `typed.js`: 12 KB (untuk hero typing effect)
-- **Total JS**: ~334 KB raw / ~120 KB gzipped
+- ~~`typed.js`: 12 KB~~ ✅ **REMOVED** - Replaced with vanilla JS (~200 bytes)
+- ~~`howler.js`: ~20 KB~~ ✅ **REMOVED** - Audio feature disabled
+- **Total JS**: ~302 KB raw / ~108 KB gzipped (-32 KB saved!)
 
 ## 🎯 Rekomendasi Optimasi (Priority Order)
 
@@ -209,7 +210,7 @@ loading="eager" <!-- ✅ No lazy loading -->
 ### Phase 3: Code Splitting (2 hours)
 
 1. ✅ Create static version of CTAButton for above-fold
-2. ✅ Lazy load heavy components (typed.js, framer-motion)
+2. ✅ ~~Lazy load heavy components (typed.js, framer-motion)~~ **REPLACED** - typed.js & howler removed, vanilla implementation
 3. ✅ Split react-vendor into smaller chunks
 
 **Expected gain:** +2-3 points

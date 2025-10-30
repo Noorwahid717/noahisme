@@ -2,15 +2,14 @@
 import Base from "~/layouts/Base.astro";
 import Section from "~/components/Section.astro";
 import ProjectCard from "~/components/ProjectCard.astro";
-import MotionReveal from "~/components/MotionReveal";
 import HeroStatic from "~/components/HeroStatic.astro";
 import HeroVisualStatic from "~/components/HeroVisualStatic.astro";
 import LogoMarquee from "~/components/LogoMarquee.astro";
 import TiltingCard from "~/components/TiltingCard";
-import PillImageReveal from "~/components/PillImageReveal.astro";
 import ProcessStepCard from "~/components/ProcessStepCard";
 import FounderSection from "~/components/FounderSection.astro";
 import IntroSection from "~/components/IntroSection.astro";
+import TestimonialCard from "~/components/TestimonialCard.astro";
 import WaveDivider from "~/components/WaveDivider.astro";
 import ScrollCue from "~/components/ScrollCue.astro";
 import { getCollection } from "astro:content";
@@ -166,7 +165,7 @@ const homePageSchema = {
 
     <div class="mx-auto max-w-4xl text-center">
       <p class="text-xs uppercase tracking-[0.32em] text-accent/80">Dampak produk</p>
-      
+
       <p
         class="mt-5 mx-auto max-w-[650px] text-sm leading-relaxed tracking-wide text-text2 md:text-base"
         style="letter-spacing: 0.01em;"
@@ -322,57 +321,17 @@ const homePageSchema = {
       >
         <div class="testimonials-grid grid gap-12 md:grid-cols-2 md:gap-16">
           {testimonials.map(({ data }, index) => (
-            <MotionReveal
-              client:visible
-              delay={index * 0.15}
-              className={`h-full ${
-                index % 2 === 1 ? "md:border-l md:border-[#E2E8F0] md:pl-12" : ""
-              }`}
+            <div
+              class={`h-full ${index % 2 === 1 ? "md:border-l md:border-[#E2E8F0] md:pl-12" : ""}`}
             >
-              <div class="testimonial-card group relative flex h-full flex-col justify-between gap-8 rounded-2xl border border-transparent p-8 transition-all duration-500 hover:-translate-y-1 hover:border-accent/10 hover:bg-accent/[0.02] hover:shadow-lg hover:shadow-accent/5">
-                {/* Large quote background */}
-                <div
-                  class="quote-bg pointer-events-none absolute left-4 top-4 text-[120px] leading-none text-divider/[0.08] transition-all duration-500 group-hover:scale-110 group-hover:text-accent/[0.12]"
-                  aria-hidden="true"
-                >
-                  "
-                </div>
-
-                {/* Quote text */}
-                <div class="relative z-10">
-                  <p class="text-base italic leading-[1.8] text-text/90 md:text-lg">
-                    "{data.quote}"
-                  </p>
-                </div>
-
-                {/* Author info */}
-                <div class="relative z-10 flex items-center gap-4">
-                  {/* Avatar or Initial */}
-                  {data.avatar ? (
-                    <PillImageReveal
-                      src={data.avatar}
-                      alt={data.name}
-                      width={56}
-                      height={56}
-                      class="h-14 w-14 flex-shrink-0"
-                    />
-                  ) : (
-                    <div class="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-accent/10 font-heading text-xl font-semibold text-accent">
-                      {data.name.charAt(0)}
-                    </div>
-                  )}
-
-                  <div>
-                    <span class="block font-heading text-base font-medium text-text">
-                      {data.name}
-                    </span>
-                    <span class="block text-xs uppercase tracking-[0.28em] text-text2">
-                      {data.role}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </MotionReveal>
+              <TestimonialCard
+                name={data.name}
+                role={data.role}
+                quote={data.quote}
+                avatar={data.avatar}
+                index={index}
+              />
+            </div>
           ))}
         </div>
       </Section>

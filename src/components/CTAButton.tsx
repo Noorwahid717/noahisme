@@ -3,7 +3,6 @@
 import type { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { clsx } from "clsx";
-import { play } from "~/lib/audio";
 
 interface CTAButtonProps {
   children: ReactNode;
@@ -36,7 +35,6 @@ export default function CTAButton({
   );
 
   const handleClick = () => {
-    play("click");
     onClick?.();
   };
 

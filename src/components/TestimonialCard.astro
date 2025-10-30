@@ -1,0 +1,182 @@
+---
+// Testimonial Card with Typing + Blur Animation on Scroll
+interface Props {
+  name: string;
+  role: string;
+  quote: string;
+  avatar?: string;
+  index: number;
+}
+
+const { name, role, quote, avatar, index } = Astro.props;
+const initial = name.charAt(0).toUpperCase();
+---
+
+<div
+  class="testimonial-card group relative flex h-full flex-col justify-between gap-8 rounded-2xl border border-transparent p-8 transition-all duration-500 hover:-translate-y-1 hover:border-accent/10 hover:bg-accent/[0.02] hover:shadow-lg hover:shadow-accent/5"
+  data-testimonial-card
+  data-index={index}
+>
+  {/* Large quote background */}
+  <div
+    class="quote-bg pointer-events-none absolute left-4 top-4 text-[120px] leading-none text-divider/[0.08] transition-all duration-500 group-hover:scale-110 group-hover:text-accent/[0.12]"
+    aria-hidden="true"
+  >
+    "
+  </div>
+
+  {/* Quote text with typing animation */}
+  <div class="relative z-10">
+    <p
+      class="testimonial-quote text-base italic leading-[1.8] text-text/90 md:text-lg"
+      data-quote={quote}
+      role="text"
+      aria-label={`Testimonial: ${quote}`}
+    >
+      {/* Static fallback text for SEO & initial render */}
+      <span class="static-text">"{quote}"</span>
+    </p>
+  </div>
+
+  {/* Author info */}
+  <div class="relative z-10 flex items-center gap-4">
+    {/* Avatar or Initial */}
+    <div
+      class="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-accent/20 to-accent/10 text-lg font-semibold text-accent"
+    >
+      {avatar ? <img src={avatar} alt={name} class="h-full w-full object-cover" /> : initial}
+    </div>
+
+    <div>
+      <p class="font-semibold text-text">{name}</p>
+      <p class="text-sm text-text-muted">{role}</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .testimonial-quote {
+    min-height: 4.5rem;
+  }
+
+  /* Typing cursor */
+  .testimonial-quote.typing::after {
+    content: "|";
+    animation: blink 1s infinite;
+    margin-left: 2px;
+  }
+
+  @keyframes blink {
+    0%,
+    49% {
+      opacity: 1;
+    }
+    50%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  /* Blur effect styles */
+  .testimonial-quote .typed-text {
+    filter: blur(0) !important;
+    opacity: 1 !important;
+  }
+
+  .testimonial-quote .remaining-text {
+    filter: blur(8px) !important;
+    opacity: 0.4 !important;
+    color: currentColor !important;
+  }
+
+  /* Hide static text during typing animation */
+  .testimonial-quote.typing .static-text {
+    display: none !important;
+  }
+
+  /* Also hide when animation starts */
+  .testimonial-quote .static-text {
+    display: none;
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    function initTestimonialTyping() {
+      const cards = document.querySelectorAll("[data-testimonial-card]");
+
+      cards.forEach((card) => {
+        const quoteEl = card.querySelector(".testimonial-quote");
+        if (!quoteEl) return;
+
+        const fullQuote = quoteEl.dataset.quote || "";
+        const staticText = quoteEl.querySelector(".static-text");
+        let hasTyped = false;
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting && !hasTyped) {
+                hasTyped = true;
+
+                setTimeout(() => {
+                  startTyping(quoteEl, fullQuote, staticText);
+                }, 300);
+
+                observer.unobserve(card);
+              }
+            });
+          },
+          { threshold: 0.3, rootMargin: "0px 0px -100px 0px" }
+        );
+
+        observer.observe(card);
+      });
+
+      function startTyping(element, text, staticElement) {
+        element.classList.add("typing");
+        staticElement.style.display = "none";
+
+        const escapeHtml = (str) => {
+          const div = document.createElement("div");
+          div.textContent = str;
+          return div.innerHTML;
+        };
+
+        const initialHtml = `<span class="remaining-text" style="filter: blur(8px); opacity: 0.4;">&ldquo;${escapeHtml(text)}&rdquo;</span>`;
+        element.innerHTML = initialHtml;
+
+        let charIndex = 0;
+        const typeSpeed = 15;
+
+        function type() {
+          if (charIndex < text.length) {
+            charIndex++;
+            const typedText = escapeHtml(text.substring(0, charIndex));
+            const remainingText = escapeHtml(text.substring(charIndex));
+
+            if (remainingText.length > 0) {
+              element.innerHTML = `&ldquo;<span class="typed-text" style="filter: blur(0); opacity: 1;">${typedText}</span><span class="remaining-text" style="filter: blur(8px); opacity: 0.4;">${remainingText}</span>&rdquo;`;
+            } else {
+              element.innerHTML = `&ldquo;<span class="typed-text" style="filter: blur(0); opacity: 1;">${typedText}</span>&rdquo;`;
+            }
+
+            setTimeout(type, typeSpeed);
+          } else {
+            element.classList.remove("typing");
+          }
+        }
+
+        setTimeout(type, 200);
+      }
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initTestimonialTyping);
+    } else {
+      initTestimonialTyping();
+    }
+
+    document.addEventListener("astro:page-load", initTestimonialTyping);
+  })();
+</script>

@@ -43,9 +43,6 @@ export default defineConfig({
               if (id.includes('framer-motion')) {
                 return 'framer';
               }
-              if (id.includes('typed.js')) {
-                return 'typed';
-              }
               return 'vendor';
             }
           }

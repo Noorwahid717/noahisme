@@ -142,43 +142,68 @@ import CTAButton from "~/components/CTAButton";
 
 <!-- Inline script for Typed.js - loaded after LCP -->
 <script>
-  // Only load Typed.js after the page is fully interactive
+  // Vanilla typing animation - no dependencies
   if (typeof window !== "undefined") {
-    // Use requestIdleCallback for non-critical animation
-    const initTyped = () => {
+    const initTyping = () => {
       const element = document.getElementById("hero-subtitle");
       if (!element) return;
 
-      // Delay import until idle
-      import("typed.js").then((module) => {
-        const Typed = module.default;
-        // Clear static content only when Typed.js is ready to start typing
-        // so the static text remains during page load and LCP.
-        const el = document.getElementById("hero-subtitle");
-        if (!el) return;
-        el.textContent = "";
-        new Typed(el, {
-          strings: [
-            "Saya membangun aplikasi web end-to-end — dari API hingga UI.",
-            "Building scalable, maintainable web applications.",
-            "Performance-minded, accessibility-first development.",
-            "Fokus pada performa, aksesibilitas, dan arsitektur bersih.",
-          ],
-          typeSpeed: window.innerWidth < 768 ? 40 : 50,
-          backSpeed: window.innerWidth < 768 ? 30 : 40,
-          backDelay: 1800,
-          loop: true,
-          showCursor: true,
-          cursorChar: "|",
-        });
-      });
+      const strings = [
+        "Saya membangun aplikasi web end-to-end — dari API hingga UI.",
+        "Building scalable, maintainable web applications.",
+        "Performance-minded, accessibility-first development.",
+        "Fokus pada performa, aksesibilitas, dan arsitektur bersih.",
+      ];
+
+      const typeSpeed = window.innerWidth < 768 ? 40 : 50;
+      const backSpeed = window.innerWidth < 768 ? 30 : 40;
+      const backDelay = 1800;
+
+      let stringIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+      let isPaused = false;
+
+      element.textContent = "";
+
+      function type() {
+        const currentString = strings[stringIndex];
+
+        if (isPaused) {
+          setTimeout(type, backDelay);
+          isPaused = false;
+          return;
+        }
+
+        if (isDeleting) {
+          element.textContent = currentString.substring(0, charIndex - 1);
+          charIndex--;
+        } else {
+          element.textContent = currentString.substring(0, charIndex + 1);
+          charIndex++;
+        }
+
+        let speed = isDeleting ? backSpeed : typeSpeed;
+
+        if (!isDeleting && charIndex === currentString.length) {
+          isPaused = true;
+          isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+          isDeleting = false;
+          stringIndex = (stringIndex + 1) % strings.length;
+        }
+
+        setTimeout(type, speed);
+      }
+
+      type();
     };
 
     // Use requestIdleCallback if available, otherwise setTimeout
     if ("requestIdleCallback" in window) {
-      requestIdleCallback(initTyped);
+      requestIdleCallback(initTyping);
     } else {
-      setTimeout(initTyped, 2000);
+      setTimeout(initTyping, 100);
     }
   }
 </script>

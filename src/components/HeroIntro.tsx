@@ -87,34 +87,67 @@ export default function HeroIntro() {
   useEffect(() => {
     if (!typedRef.current || !shouldAnimate) return;
 
-    let typed: { destroy?: () => void } | undefined;
-    let timer: number | undefined;
+    let timeoutId: number | undefined;
+    let animationId: number | undefined;
 
-    // Delay Typed.js initialization for better FCP/LCP
-    timer = window.setTimeout(async () => {
-      const module = await import("typed.js");
-      const Typed = module.default;
-      typed = new Typed(typedRef.current!, {
-        strings: [
-          "Full-Stack Web Developer.",
-          "Backend & Frontend Specialist.",
-          "Building scalable, maintainable apps.",
-        ],
-        typeSpeed: isMobile ? 40 : 50, // Faster typing on mobile
-        backSpeed: isMobile ? 30 : 40, // Faster backspace on mobile
-        backDelay: 1800,
-        loop: true,
-        showCursor: true,
-        cursorChar: "|",
-      });
-    }, 1000); // Delay 1 second for better initial render
+    const element = typedRef.current;
+    const strings = [
+      "Full-Stack Web Developer.",
+      "Backend & Frontend Specialist.",
+      "Building scalable, maintainable apps.",
+    ];
+
+    const typeSpeed = isMobile ? 40 : 50;
+    const backSpeed = isMobile ? 30 : 40;
+    const backDelay = 1800;
+
+    let stringIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let isPaused = false;
+
+    function type() {
+      const currentString = strings[stringIndex];
+
+      if (isPaused) {
+        animationId = window.setTimeout(type, backDelay);
+        isPaused = false;
+        return;
+      }
+
+      if (isDeleting) {
+        element.textContent = currentString.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        element.textContent = currentString.substring(0, charIndex + 1);
+        charIndex++;
+      }
+
+      const speed = isDeleting ? backSpeed : typeSpeed;
+
+      if (!isDeleting && charIndex === currentString.length) {
+        isPaused = true;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        stringIndex = (stringIndex + 1) % strings.length;
+      }
+
+      animationId = window.setTimeout(type, speed);
+    }
+
+    // Start typing after 1 second delay for better FCP/LCP
+    timeoutId = window.setTimeout(() => {
+      element.textContent = "";
+      type();
+    }, 1000);
 
     return () => {
-      if (timer !== undefined) {
-        window.clearTimeout(timer);
+      if (timeoutId !== undefined) {
+        window.clearTimeout(timeoutId);
       }
-      if (typed && typeof typed.destroy === "function") {
-        typed.destroy();
+      if (animationId !== undefined) {
+        window.clearTimeout(animationId);
       }
     };
   }, [shouldAnimate, isMobile]);
