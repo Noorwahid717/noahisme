@@ -1,0 +1,35 @@
+feat: implement Role Rotator animation and cleanup redundant Hero components
+
+## Animation Changes
+- Replace old tagline typing with Role Rotator on main heading
+- Animate role text in accent color: "Backend Engineer" → "Frontend Specialist" → "System Designer"
+- Type speed: 50ms/char, erase: 35ms/char, 1s pause between roles
+- Limited to 4 loops then stops at "Backend Engineer"
+- Smooth cursor blink (600ms) during typing
+
+## Component Cleanup
+- Archive unused React components (HeroIntro.tsx, HeroVisual.tsx)
+- Keep only active Astro components (HeroStatic, HeroVisualStatic)
+- Add documentation in _archived_components/README.md
+
+## Technical Details
+- Update HeroStatic.astro with vanilla JS typing animation
+- Add cursor-blink keyframe to tailwind.config.cjs
+- Respect prefers-reduced-motion preference
+- No layout shift, animation integrated in heading
+
+## Files Changed
+Modified:
+  - src/components/HeroStatic.astro (Role Rotator implementation)
+  - tailwind.config.cjs (cursor-blink animation)
+
+Archived:
+  - src/components/HeroIntro.tsx → src/_archived_components/
+  - src/components/HeroVisual.tsx → src/_archived_components/
+
+Added:
+  - src/_archived_components/README.md
+  - HERO_ANIMATION_CHANGES.md
+
+Build: ✅ Success (7.29s)
+Breaking Changes: None

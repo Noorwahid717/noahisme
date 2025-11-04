@@ -12,31 +12,32 @@ import CTAButton from "~/components/CTAButton";
     Mohammad Noor Wahid
   </p>
 
-  <!-- Main heading - static, no animation -->
+  <!-- Main heading with Role Rotator animation -->
   <h1
     class="font-heading text-4xl font-semibold tracking-tight text-text sm:text-5xl md:text-[3.25rem] md:leading-[1.1] opacity-0 animate-fade-in"
     style="animation-delay: 0.2s"
   >
-    Full-Stack Web Developer — <span class="font-bold text-accent"
-      >Backend & Frontend Specialist</span
+    Full-Stack Web Developer — <span
+      id="role-container"
+      class="inline-block align-baseline"
+      style="width: 11.5em; min-width: 11.5em; text-align: left;"
+      ><span
+        id="role-text"
+        class="text-accent inline-block text-left"
+        role="status"
+        aria-live="polite">Backend Engineer</span
+      ><span
+        id="role-cursor"
+        class="inline-block w-[2px] h-[0.9em] bg-accent ml-[2px] align-middle animate-cursor-blink"
+        aria-hidden="true"></span></span
     >, fokus pada efisiensi dan arsitektur bersih.
   </h1>
 
-  <!-- Typing animation target - starts with static text -->
-  <div class="min-h-[4rem] sm:min-h-[3.5rem] flex items-start">
-    <p
-      id="hero-subtitle"
-      role="status"
-      aria-live="polite"
-      class="max-w-xl text-lg text-text2 opacity-0 animate-fade-in"
-      style="animation-delay: 0.3s"
-    >
-      Saya membangun aplikasi web end-to-end — dari API hingga UI — dengan perhatian pada performa,
-      aksesibilitas, dan arsitektur yang dapat diskalakan.
-    </p>
-  </div>
-
-  <!-- tagline removed; typing animation moved to main title -->
+  <!-- Subheading - no animation here anymore -->
+  <p class="max-w-xl text-lg text-text2 opacity-0 animate-fade-in" style="animation-delay: 0.3s">
+    Saya membangun aplikasi web end-to-end — dari API hingga UI — dengan perhatian pada performa,
+    aksesibilitas, dan arsitektur yang dapat diskalakan.
+  </p>
 
   <div
     class="flex flex-wrap items-center gap-4 opacity-0 animate-fade-in"
@@ -114,8 +115,44 @@ import CTAButton from "~/components/CTAButton";
     }
   }
 
+  @keyframes cursor-blink {
+    0%,
+    49% {
+      opacity: 1;
+    }
+    50%,
+    100% {
+      opacity: 0;
+    }
+  }
+
   .animate-fade-in {
     animation: fade-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animate-cursor-blink {
+    animation: cursor-blink 600ms step-end infinite;
+  }
+
+  /* Role container with fixed width to prevent layout shift */
+  :global(.role-container) {
+    width: 11.5em; /* Enough for "Frontend Specialist" at text-4xl */
+    min-width: 11.5em;
+    text-align: left;
+  }
+
+  @media (min-width: 640px) {
+    :global(.role-container) {
+      width: 10em; /* Adjust for text-5xl */
+      min-width: 10em;
+    }
+  }
+
+  @media (min-width: 768px) {
+    :global(.role-container) {
+      width: 9.5em; /* Adjust for text-[3.25rem] */
+      min-width: 9.5em;
+    }
   }
 
   /* Enhanced CTA button styling */
@@ -137,73 +174,116 @@ import CTAButton from "~/components/CTAButton";
       opacity: 1;
       transform: none;
     }
+    .animate-cursor-blink {
+      animation: none;
+      opacity: 1;
+    }
   }
 </style>
 
-<!-- Inline script for Typed.js - loaded after LCP -->
+<!-- Role Rotator Animation Script -->
 <script>
-  // Vanilla typing animation - no dependencies
   if (typeof window !== "undefined") {
-    const initTyping = () => {
-      const element = document.getElementById("hero-subtitle");
-      if (!element) return;
+    const initRoleRotator = () => {
+      const roleElement = document.getElementById("role-text");
+      const cursorElement = document.getElementById("role-cursor");
+      const roleContainer = document.getElementById("role-container");
 
-      const strings = [
-        "Saya membangun aplikasi web end-to-end — dari API hingga UI.",
-        "Building scalable, maintainable web applications.",
-        "Performance-minded, accessibility-first development.",
-        "Fokus pada performa, aksesibilitas, dan arsitektur bersih.",
-      ];
+      if (!roleElement || !cursorElement || !roleContainer) return;
 
-      const typeSpeed = window.innerWidth < 768 ? 40 : 50;
-      const backSpeed = window.innerWidth < 768 ? 30 : 40;
-      const backDelay = 1800;
+      // Adjust container width based on screen size
+      const updateContainerWidth = () => {
+        const width = window.innerWidth;
+        if (width >= 768) {
+          roleContainer.style.width = "9.5em";
+          roleContainer.style.minWidth = "9.5em";
+        } else if (width >= 640) {
+          roleContainer.style.width = "10em";
+          roleContainer.style.minWidth = "10em";
+        } else {
+          roleContainer.style.width = "11.5em";
+          roleContainer.style.minWidth = "11.5em";
+        }
+      };
 
-      let stringIndex = 0;
+      updateContainerWidth();
+      window.addEventListener("resize", updateContainerWidth);
+
+      // Check for reduced motion preference
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (prefersReducedMotion) {
+        roleElement.textContent = "Backend Engineer";
+        cursorElement.style.display = "none";
+        return;
+      }
+
+      const roles = ["Backend Engineer", "Frontend Specialist", "System Designer"];
+
+      const typeSpeed = 50; // 50ms per character
+      const eraseSpeed = 35; // 35ms per character (faster erase)
+      const delayBetween = 1000; // 1s pause between role changes
+      const maxLoops = 4; // Loop 4 times then stop
+
+      let roleIndex = 0;
       let charIndex = 0;
       let isDeleting = false;
-      let isPaused = false;
+      let loopCount = 0;
 
-      element.textContent = "";
+      // Clear initial content
+      roleElement.textContent = "";
 
       function type() {
-        const currentString = strings[stringIndex];
-
-        if (isPaused) {
-          setTimeout(type, backDelay);
-          isPaused = false;
+        // Stop after max loops
+        if (loopCount >= maxLoops && roleIndex === 0 && charIndex === 0 && !isDeleting) {
+          roleElement.textContent = roles[0];
+          cursorElement.style.opacity = "0";
           return;
         }
 
+        const currentRole = roles[roleIndex];
+
         if (isDeleting) {
-          element.textContent = currentString.substring(0, charIndex - 1);
+          roleElement.textContent = currentRole.substring(0, charIndex - 1);
           charIndex--;
+
+          if (charIndex === 0) {
+            isDeleting = false;
+            roleIndex = (roleIndex + 1) % roles.length;
+
+            // Increment loop counter when we complete a full cycle
+            if (roleIndex === 0) {
+              loopCount++;
+            }
+
+            setTimeout(type, delayBetween);
+            return;
+          }
         } else {
-          element.textContent = currentString.substring(0, charIndex + 1);
+          roleElement.textContent = currentRole.substring(0, charIndex + 1);
           charIndex++;
+
+          if (charIndex === currentRole.length) {
+            isDeleting = true;
+            setTimeout(type, delayBetween);
+            return;
+          }
         }
 
-        let speed = isDeleting ? backSpeed : typeSpeed;
-
-        if (!isDeleting && charIndex === currentString.length) {
-          isPaused = true;
-          isDeleting = true;
-        } else if (isDeleting && charIndex === 0) {
-          isDeleting = false;
-          stringIndex = (stringIndex + 1) % strings.length;
-        }
-
+        const speed = isDeleting ? eraseSpeed : typeSpeed;
         setTimeout(type, speed);
       }
 
-      type();
+      // Start typing after a short delay (after initial fade-in)
+      setTimeout(() => {
+        type();
+      }, 800);
     };
 
     // Use requestIdleCallback if available, otherwise setTimeout
     if ("requestIdleCallback" in window) {
-      requestIdleCallback(initTyping);
+      requestIdleCallback(initRoleRotator);
     } else {
-      setTimeout(initTyping, 100);
+      setTimeout(initRoleRotator, 100);
     }
   }
 </script>

@@ -4,35 +4,14 @@ import { motion, useReducedMotion } from "framer-motion";
 import CTAButton from "~/components/CTAButton";
 // import AudioButton from "~/components/AudioButton";
 import { trackEvent } from "~/lib/analytics";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const HEADING_TEXT =
-  "Full-Stack Web Developer — Backend & Frontend Specialist, fokus pada efisiensi dan arsitektur bersih.";
+const HEADING_BEFORE = "Full-Stack Web Developer — ";
+const HEADING_AFTER = ", fokus pada efisiensi dan arsitektur bersih.";
+
+const ROLE_VARIANTS = ["Backend Engineer", "Frontend Specialist", "System Designer"];
 
 const easing: [number, number, number, number] = [0.16, 1, 0.3, 1];
-
-const headingContainer = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.15,
-    },
-  },
-};
-
-const wordVariant = {
-  hidden: {
-    y: "110%",
-  },
-  visible: {
-    y: "0%",
-    transition: {
-      duration: 0.6,
-      ease: easing,
-    },
-  },
-};
 
 const subheadingVariant = {
   hidden: { opacity: 0, y: 12 },
@@ -73,74 +52,77 @@ const ctaItem = {
   },
 };
 
-const words = HEADING_TEXT.split(" ");
-
 export default function HeroIntro() {
   const prefersReducedMotion = useReducedMotion();
   const isBrowser = typeof window !== "undefined";
   const shouldAnimate = isBrowser && !prefersReducedMotion;
   const initialState = shouldAnimate ? "hidden" : "visible";
 
-  const typedRef = useRef<HTMLSpanElement | null>(null);
-  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+  const roleRef = useRef<HTMLSpanElement | null>(null);
+  const [isTyping, setIsTyping] = useState(true);
 
   useEffect(() => {
-    if (!typedRef.current || !shouldAnimate) return;
+    if (!roleRef.current || !shouldAnimate) return;
 
+    const element = roleRef.current;
     let timeoutId: number | undefined;
     let animationId: number | undefined;
 
-    const element = typedRef.current;
-    const strings = [
-      "Full-Stack Web Developer.",
-      "Backend & Frontend Specialist.",
-      "Building scalable, maintainable apps.",
-    ];
+    const typeSpeed = 50; // 50ms per character
+    const eraseSpeed = 35; // 35ms per character (faster erase)
+    const delayBetween = 1000; // 1s pause between role changes
+    const maxLoops = 4; // Loop 4 times then stop
 
-    const typeSpeed = isMobile ? 40 : 50;
-    const backSpeed = isMobile ? 30 : 40;
-    const backDelay = 1800;
-
-    let stringIndex = 0;
+    let roleIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
-    let isPaused = false;
+    let loopCount = 0;
 
     function type() {
-      const currentString = strings[stringIndex];
-
-      if (isPaused) {
-        animationId = window.setTimeout(type, backDelay);
-        isPaused = false;
+      // Stop after max loops
+      if (loopCount >= maxLoops && roleIndex === 0 && charIndex === 0 && !isDeleting) {
+        element.textContent = ROLE_VARIANTS[0];
+        setIsTyping(false);
         return;
       }
+
+      const currentString = ROLE_VARIANTS[roleIndex];
 
       if (isDeleting) {
         element.textContent = currentString.substring(0, charIndex - 1);
         charIndex--;
+
+        if (charIndex === 0) {
+          isDeleting = false;
+          roleIndex = (roleIndex + 1) % ROLE_VARIANTS.length;
+
+          // Increment loop counter when we complete a full cycle
+          if (roleIndex === 0) {
+            loopCount++;
+          }
+
+          animationId = window.setTimeout(type, delayBetween);
+          return;
+        }
       } else {
         element.textContent = currentString.substring(0, charIndex + 1);
         charIndex++;
+
+        if (charIndex === currentString.length) {
+          isDeleting = true;
+          animationId = window.setTimeout(type, delayBetween);
+          return;
+        }
       }
 
-      const speed = isDeleting ? backSpeed : typeSpeed;
-
-      if (!isDeleting && charIndex === currentString.length) {
-        isPaused = true;
-        isDeleting = true;
-      } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        stringIndex = (stringIndex + 1) % strings.length;
-      }
-
+      const speed = isDeleting ? eraseSpeed : typeSpeed;
       animationId = window.setTimeout(type, speed);
     }
 
-    // Start typing after 1 second delay for better FCP/LCP
+    // Start typing after a short delay
     timeoutId = window.setTimeout(() => {
-      element.textContent = "";
       type();
-    }, 1000);
+    }, 800);
 
     return () => {
       if (timeoutId !== undefined) {
@@ -150,26 +132,28 @@ export default function HeroIntro() {
         window.clearTimeout(animationId);
       }
     };
-  }, [shouldAnimate, isMobile]);
+  }, [shouldAnimate]);
 
   return (
     <div className="space-y-8">
       <p className="text-xs uppercase tracking-[0.35em] text-accent">Mohammad Noor Wahid</p>
-      <motion.h1
-        className="font-heading text-4xl font-semibold tracking-tight text-text sm:text-5xl md:text-[3.25rem] md:leading-[1.1]"
-        variants={headingContainer}
-        initial={initialState}
-        animate="visible"
-      >
-        {words.map((word, index) => (
-          <span key={`${word}-${index}`} className="relative inline-block overflow-hidden">
-            <motion.span variants={wordVariant} className="inline-block">
-              {word}
-              {index < words.length - 1 ? "\u00A0" : ""}
-            </motion.span>
-          </span>
-        ))}
-      </motion.h1>
+      <h1 className="font-heading text-4xl font-semibold tracking-tight text-text sm:text-5xl md:text-[3.25rem] md:leading-[1.1]">
+        {HEADING_BEFORE}
+        <span
+          ref={roleRef}
+          className="text-accent relative inline-block min-w-[200px] sm:min-w-[240px]"
+          aria-live="polite"
+        >
+          {shouldAnimate ? "" : ROLE_VARIANTS[0]}
+          <span
+            className={`inline-block w-[2px] h-[0.9em] bg-accent ml-[2px] align-middle ${
+              isTyping ? "animate-cursor-blink" : "opacity-0"
+            }`}
+            aria-hidden="true"
+          />
+        </span>
+        {HEADING_AFTER}
+      </h1>
       <motion.p
         className="max-w-xl text-lg text-text2"
         variants={subheadingVariant}
@@ -179,13 +163,6 @@ export default function HeroIntro() {
         Saya membangun aplikasi web end-to-end — dari API hingga UI — dengan perhatian pada
         performa, aksesibilitas, dan arsitektur yang dapat diskalakan.
       </motion.p>
-      <div className="min-h-[2.5rem] sm:min-h-[2rem] flex items-center text-base sm:text-lg text-accent/80">
-        <span
-          ref={typedRef}
-          aria-live="polite"
-          className="inline-block min-w-[240px] sm:min-w-[320px]"
-        />
-      </div>
       <motion.div
         className="flex flex-wrap items-center gap-4"
         variants={ctaContainer}
