@@ -1,0 +1,243 @@
+---
+import Base from "~/layouts/Base.astro";
+import { SITE } from "~/lib/seo";
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Hourly Dev Support (min 2h)",
+  description:
+    "Support development untuk task kecil dan cepat seperti bugfix, optimization, atau integrasi API.",
+  provider: {
+    "@type": "Person",
+    name: "Noah Wahid",
+  },
+  url: `${SITE.url}/book/hourly`,
+};
+
+const whatsappHourlyMessage = encodeURIComponent(`Hi, I need Hourly Dev Support (min 2h).
+Task: 
+Repo/URL: `);
+
+const emailSubject = encodeURIComponent("Hourly Dev Support Request");
+const emailBody = encodeURIComponent(`Name: 
+Task description: 
+Repo/URL: 
+Preferred time: `);
+---
+
+<Base
+  title="Hourly Dev Support (min 2h)"
+  description="Quick fix dan development support untuk task kecil tanpa sprint."
+  structuredData={structuredData}
+  breadcrumbs={[
+    { name: "Book", url: "/book/hourly" },
+    { name: "Hourly Support", url: "/book/hourly" },
+  ]}
+>
+  <section class="mx-auto grid max-w-4xl gap-10 px-6 pb-24 pt-28">
+    <header class="space-y-4">
+      <p class="text-xs uppercase tracking-[0.3em] text-accent">Hourly Dev Support</p>
+      <h1 class="font-heading text-4xl text-text">Hourly Dev Support (min 2h)</h1>
+      <p class="max-w-2xl text-base text-text2">
+        Untuk task kecil & cepat — bugfix, performance, CI/CD, refactor ringan, atau integrasi API
+        kecil. Tanpa discovery & sprint.
+      </p>
+    </header>
+
+    <div class="grid gap-8 rounded-3xl border border-divider/40 bg-surface/80 p-8 shadow-soft">
+      <div class="space-y-4">
+        <h2 class="text-xl font-semibold text-text">Apa saja yang bisa dikerjakan?</h2>
+        <ul class="grid gap-3 text-sm text-text2">
+          <li class="flex items-start gap-3">
+            <svg
+              class="mt-0.5 h-5 w-5 flex-shrink-0 text-accent"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>Bug fixes & debugging</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg
+              class="mt-0.5 h-5 w-5 flex-shrink-0 text-accent"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>Performance optimization</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg
+              class="mt-0.5 h-5 w-5 flex-shrink-0 text-accent"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>UI component creation atau enhancement</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg
+              class="mt-0.5 h-5 w-5 flex-shrink-0 text-accent"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>API integration (small scope)</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg
+              class="mt-0.5 h-5 w-5 flex-shrink-0 text-accent"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>CI/CD setup atau improvement</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg
+              class="mt-0.5 h-5 w-5 flex-shrink-0 text-accent"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>Code refactoring</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg
+              class="mt-0.5 h-5 w-5 flex-shrink-0 text-accent"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>Testing implementation</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div class="space-y-3 rounded-xl border border-accent/20 bg-accent/5 p-4">
+          <p class="text-sm font-medium text-text">✅ Cocok untuk:</p>
+          <ul class="grid gap-2 text-sm text-text2">
+            <li>• Task yang sudah jelas scopenya</li>
+            <li>• Butuh eksekusi cepat</li>
+            <li>• Tidak perlu discovery atau planning</li>
+            <li>• Estimasi 2–8 jam kerja</li>
+          </ul>
+        </div>
+        <div class="space-y-3 rounded-xl border border-divider/40 bg-bg/40 p-4">
+          <p class="text-sm font-medium text-text">❌ Tidak cocok untuk:</p>
+          <ul class="grid gap-2 text-sm text-text2">
+            <li>• Fitur besar atau kompleks</li>
+            <li>• Proyek yang perlu planning</li>
+            <li>• Scope yang belum jelas</li>
+            <li>• Development jangka panjang</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="space-y-3 rounded-xl border border-divider/40 bg-surface p-4">
+        <p class="text-sm font-medium text-text">💰 Pricing</p>
+        <p class="text-sm text-text2">
+          Minimum 2 jam. Rate per jam disesuaikan dengan kompleksitas task dan tech stack.
+          Diskusikan terlebih dahulu sebelum mulai.
+        </p>
+      </div>
+
+      <div id="calendar" class="space-y-4">
+        <h2 class="text-xl font-semibold text-text">Pilih Jadwal</h2>
+        <div class="aspect-[16/9] w-full overflow-hidden rounded-xl border border-divider/40">
+          <iframe
+            src="https://cal.com/noahisme/hourly"
+            class="h-full w-full"
+            frameborder="0"
+            title="Book Hourly Dev Support"></iframe>
+        </div>
+      </div>
+
+      <div class="space-y-4 border-t border-divider/40 pt-8">
+        <h3 class="text-lg font-semibold text-text">Tidak menemukan jadwal yang cocok?</h3>
+        <p class="text-sm text-text2">Hubungi langsung melalui:</p>
+        <div class="flex flex-wrap gap-3">
+          <a
+            href={`https://wa.me/6281335843507?text=${whatsappHourlyMessage}`}
+            target="_blank"
+            rel="noreferrer"
+            class="focus-outline inline-flex items-center gap-2 rounded-lg border border-divider/60 bg-bg/80 px-4 py-2.5 text-sm text-text transition-colors hover:border-accent hover:text-accent"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            WhatsApp
+          </a>
+          <a
+            href={`mailto:noorwahid717@gmail.com?subject=${emailSubject}&body=${emailBody}`}
+            class="focus-outline inline-flex items-center gap-2 rounded-lg border border-divider/60 bg-bg/80 px-4 py-2.5 text-sm text-text transition-colors hover:border-accent hover:text-accent"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </svg>
+            Email
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
