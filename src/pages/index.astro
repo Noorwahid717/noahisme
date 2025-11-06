@@ -10,6 +10,7 @@ import ProcessStepCard from "~/components/ProcessStepCard";
 import FounderSection from "~/components/FounderSection.astro";
 import IntroSection from "~/components/IntroSection.astro";
 import TestimonialCard from "~/components/TestimonialCard.astro";
+import PricingSection from "~/components/PricingSection.astro";
 import WaveDivider from "~/components/WaveDivider.astro";
 import ScrollCue from "~/components/ScrollCue.astro";
 import ScrollReveal from "~/components/ScrollReveal.astro";
@@ -396,6 +397,10 @@ const homePageSchema = {
       </Section>
     )
   }
+
+  <WaveDivider variant="top" color="accent" opacity={0.06} />
+  <PricingSection />
+  <WaveDivider variant="bottom" color="accent" opacity={0.06} />
 </Base>
 
 <style>

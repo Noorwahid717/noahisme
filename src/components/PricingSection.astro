@@ -1,0 +1,1030 @@
+---
+import ScrollReveal from "~/components/ScrollReveal.astro";
+
+interface HourlyMode {
+  id: "hourly";
+  label: string;
+  tagline: string;
+  hero: {
+    title: string;
+    subtitle: string;
+    badge: string;
+  };
+  pricing: {
+    currency: string;
+    range: string;
+    unit: string;
+    minimum_booking: string;
+    billing_model: string;
+  };
+  shortDesc: string;
+  suitableFor: string[];
+  deliverables: string[];
+  constraints: string[];
+  cta: {
+    primary: { label: string; href: string };
+    secondary: { label: string; href: string };
+  };
+  notes: string[];
+}
+
+interface ProjectTier {
+  id: string;
+  name: string;
+  target: string;
+  price: string;
+  billing_model: string;
+  sprints: number;
+  timeline: string;
+  shortDesc: string;
+  included: string[];
+}
+
+interface ProjectMode {
+  id: "project";
+  label: string;
+  tagline: string;
+  hero: {
+    title: string;
+    subtitle: string;
+    badge: string;
+  };
+  tiers: ProjectTier[];
+  cta: {
+    primary: { label: string; href: string };
+    secondary: { label: string; href: string };
+  };
+  notes: string[];
+}
+
+interface Benefit {
+  icon: string;
+  title: string;
+}
+
+interface FAQ {
+  q: string;
+  a: string;
+}
+
+const hourlyMode: HourlyMode = {
+  id: "hourly",
+  label: "Per Jam",
+  tagline: "Scope kecil, tanpa sprint",
+  hero: {
+    title: "Per Jam — Cepat & Fokus",
+    subtitle: "Ideal untuk permintaan kecil, bugfix, dan iterasi ringan tanpa perlu sprint.",
+    badge: "Tanpa Sprint",
+  },
+  pricing: {
+    currency: "IDR",
+    range: "Rp\u00A0100.000\u00A0–\u00A0150.000 / jam",
+    unit: "per jam",
+    minimum_booking: "2 jam",
+    billing_model: "Time & Material",
+  },
+  shortDesc:
+    "Eksekusi cepat untuk tugas terdefinisi jelas. Cocok untuk landing tweak, komponen UI, perbaikan bug, atau setup kecil.",
+  suitableFor: [
+    "Perbaikan UI kecil / micro-copy",
+    "Optimasi Lighthouse/SEO minor",
+    "Integrasi API kecil (read-only, 1–2 endpoint)",
+    "Setup komponen desain (MUI/Tailwind)",
+    "Bugfix & refactor ringan",
+  ],
+  deliverables: [
+    "Estimasi jam sebelum mulai",
+    "Laporan waktu (worklog) transparan",
+    "PR/commit terpisah per sub-tugas",
+    "Catatan perubahan & short loom (opsional)",
+  ],
+  constraints: [
+    "Tidak ada sprint/ceremony",
+    "Scope harus jelas & kecil",
+    "Tidak termasuk arsitektur besar",
+    "Revisi mengikuti sisa jam",
+  ],
+  cta: {
+    primary: { label: "Mulai dari 2 Jam", href: "#contact" },
+    secondary: { label: "Cek Ketersediaan", href: "#contact" },
+  },
+  notes: ["Diskon volume untuk >15 jam/minggu.", "Jam dihitung per 30 menit."],
+};
+
+const projectMode: ProjectMode = {
+  id: "project",
+  label: "Per Proyek",
+  tagline: "Scope besar, dengan sprint",
+  hero: {
+    title: "Per Proyek — Terstruktur & Terukur",
+    subtitle: "Paket end-to-end dengan agenda sprint, cocok untuk sistem kustom dan rilis serius.",
+    badge: "Dengan Sprint",
+  },
+  tiers: [
+    {
+      id: "starter",
+      name: "Starter",
+      target: "Personal / UMKM Kecil",
+      price: "Rp\u00A01,5\u00A0–\u00A05\u00A0juta",
+      billing_model: "Fixed per proyek",
+      sprints: 1,
+      timeline: "1–2 minggu",
+      shortDesc:
+        "Landing page/portofolio cepat rilis. Fokus pada tampilan, copy ringkas, dan kecepatan.",
+      included: [
+        "Desain + implementasi 1 halaman inti",
+        "SEO dasar + performa ringan",
+        "Integrasi formulir kontak",
+        "1x sesi revisi terjadwal",
+        "Dokumentasi singkat deploy",
+      ],
+    },
+    {
+      id: "growth",
+      name: "Growth",
+      target: "Startup & Bisnis Berkembang",
+      price: "Rp\u00A07\u00A0–\u00A020\u00A0juta",
+      billing_model: "Fixed per proyek",
+      sprints: 2,
+      timeline: "2–4 minggu",
+      shortDesc: "Website dengan CMS, dashboard sederhana, atau integrasi API dasar.",
+      included: [
+        "UI/UX halaman inti + CMS (blog/produk)",
+        "Integrasi API read/write sederhana",
+        "Auth dasar (opsional)",
+        "Dokumentasi + handover",
+        "2x sesi revisi terjadwal",
+      ],
+    },
+    {
+      id: "pro",
+      name: "Pro",
+      target: "Perusahaan / Sekolah / Yayasan / Startup Tech",
+      price: "Rp\u00A025\u00A0–\u00A060\u00A0juta",
+      billing_model: "Fixed per milestone",
+      sprints: 3,
+      timeline: "4–8 minggu",
+      shortDesc:
+        "Full-stack custom app (FE + BE + DB + CI/CD) dengan analisis kebutuhan & code review.",
+      included: [
+        "Arsitektur & scoping detail",
+        "FE (Next.js/React) + BE (Go/Node) + DB (Postgres)",
+        "Auth, role, audit trail (sesuai scope)",
+        "CI/CD + observability dasar",
+        "Dokumentasi teknis + sesi handover",
+      ],
+    },
+  ],
+  cta: {
+    primary: { label: "Minta Estimasi Proyek", href: "#contact" },
+    secondary: { label: "Jadwalkan Discovery Call", href: "#contact" },
+  },
+  notes: [
+    "Pembayaran umumnya 30/40/30 (DP/Milestone/Final).",
+    "Perubahan scope besar → change request/milestone baru.",
+  ],
+};
+
+const benefits: Benefit[] = [
+  { icon: "⭐", title: "Senior-level quality" },
+  { icon: "🧩", title: "Systems thinking" },
+  { icon: "💻", title: "Developer-friendly" },
+  { icon: "📋", title: "Clear process" },
+  { icon: "🎨", title: "On-brand" },
+  { icon: "🤝", title: "Smooth handoff" },
+];
+
+const faqs: FAQ[] = [
+  {
+    q: 'Apa bedanya "Per Jam" dan "Per Proyek"?',
+    a: "Per Jam: tanpa sprint, untuk scope kecil/terdefinisi, eksekusi cepat. Billing berdasarkan jam yang dipakai. Per Proyek: dengan sprint & milestone, cocok untuk scope menengah–besar (CMS, dashboard, app kustom). Ada discovery, plan, eksekusi, review, handover.",
+  },
+  {
+    q: "Kapan sebaiknya pilih Per Jam?",
+    a: "Jika kebutuhanmu < 1–2 hari kerja: bugfix, tweak UI, optimasi, integrasi endpoint kecil, atau rilis minor. Kamu dapat estimasi jam di awal dan worklog transparan.",
+  },
+  {
+    q: "Bagaimana alur sprint pada Per Proyek?",
+    a: "Discovery (brief, goals, risiko) → Sprint Planning (scope & deliverables) → Build (dev + review mingguan) → Demo & QA (feedback terjadwal) → Handover (docs, akses, release checklist).",
+  },
+  {
+    q: "Berapa lama pengerjaan?",
+    a: "Per Jam: rata-rata 1–2 hari kerja untuk task umum. Starter: 1–2 minggu • Growth: 2–4 minggu • Pro: 4–8 minggu (tergantung kompleksitas & respons feedback).",
+  },
+  {
+    q: "Bagaimana skema pembayaran?",
+    a: "Per Jam: invoicing berkala (minimal 2 jam), pembayaran setelah selesai/pekanan. Per Proyek: umumnya 30/40/30 (DP/Milestone/Final). Bisa disesuaikan.",
+  },
+  {
+    q: "Apakah termasuk pengembangan (development) juga?",
+    a: "Ya. Saya mengerjakan desain dan development web end-to-end (Next.js/React, Go/Node, Postgres), termasuk CI/CD dasar. Untuk proyek besar bisa kolaborasi tim.",
+  },
+  {
+    q: "Siapa pemilik kode & aset?",
+    a: "Setelah pembayaran lunas, kode & aset proyek menjadi milik klien. Repo bisa dipindah ke organisasi Anda; saya pertahankan akses hanya jika diminta untuk maintenance.",
+  },
+  {
+    q: "Bagaimana kebijakan revisi?",
+    a: "Per Jam: revisi dihitung sebagai jam tambahan. Per Proyek: revisi dibatasi per sprint (dijelaskan di plan). Perubahan besar → change request.",
+  },
+  {
+    q: "Apakah bisa pause/resume?",
+    a: "Per Proyek: bisa hold antar sprint (jadwal ulang). Per Jam: tinggal lanjut saat slot tersedia. Sisa jam tidak hangus dalam 30 hari.",
+  },
+  {
+    q: "Keamanan & privasi data?",
+    a: "Gunakan repo private, secret via env, audit akses, dan praktik standar (HTTPS, hashed secrets). NDA bisa disiapkan bila perlu.",
+  },
+];
+
+const modes = [hourlyMode, projectMode];
+const modesJSON = JSON.stringify(modes);
+---
+
+<section id="pricing" class="pricing-section relative py-24">
+  <div class="mx-auto max-w-6xl px-6">
+    <!-- Section Header -->
+    <div class="mx-auto max-w-3xl text-center">
+      <ScrollReveal animation="fade-up" delay={100}>
+        <p class="text-xs uppercase tracking-[0.32em] text-accent/80">Pricing</p>
+      </ScrollReveal>
+      <ScrollReveal animation="fade-up" delay={200}>
+        <h2 class="mt-3 font-heading text-3xl font-semibold tracking-tight text-text md:text-4xl">
+          Paket yang Jelas, Hasil yang Nyata
+        </h2>
+      </ScrollReveal>
+      <ScrollReveal animation="fade-up" delay={300}>
+        <p class="mt-4 text-base text-text2">
+          Pilih model kerja yang sesuai. Kedua opsi fokus pada kualitas dan kecepatan eksekusi.
+        </p>
+      </ScrollReveal>
+    </div>
+
+    <!-- Level 1: Mode Switcher (Per Jam vs Per Proyek) -->
+    <ScrollReveal animation="fade-up" delay={400}>
+      <div class="pricing-container mx-auto mt-12 max-w-[920px]">
+        <!-- Mode Tabs (Level 1) -->
+        <div
+          role="tablist"
+          aria-label="Pilih model pricing"
+          class="mode-tablist mb-8 flex justify-center gap-3"
+        >
+          {
+            modes.map((mode, idx) => (
+              <button
+                role="tab"
+                type="button"
+                id={`mode-tab-${mode.id}`}
+                aria-controls={`mode-panel-${mode.id}`}
+                aria-selected={idx === 0 ? "true" : "false"}
+                data-mode={mode.id}
+                class="mode-tab group flex flex-col items-center gap-1 rounded-2xl border-2 border-divider/30 bg-surface/50 px-8 py-4 transition-all duration-300 hover:border-accent/40 hover:bg-accent/5 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 aria-selected:border-accent aria-selected:bg-accent/10 aria-selected:shadow-lg aria-selected:shadow-accent/20 sm:flex-row sm:gap-3"
+              >
+                <div class="text-left">
+                  <p class="text-base font-bold text-text group-aria-selected:text-accent">
+                    {mode.label}
+                  </p>
+                  <p class="text-xs text-text2/70">{mode.tagline}</p>
+                </div>
+              </button>
+            ))
+          }
+        </div>
+
+        <!-- Single Card Container -->
+        <div class="pricing-card-wrapper relative">
+          <div
+            class="pricing-card rounded-3xl border border-divider/20 bg-surface/50 p-8 shadow-soft backdrop-blur-sm transition-all duration-500 md:p-10"
+            data-pricing-card
+          >
+            <!-- Hourly Mode Panel -->
+            <div
+              role="tabpanel"
+              id="mode-panel-hourly"
+              aria-labelledby="mode-tab-hourly"
+              data-mode-panel="hourly"
+              class="mode-panel"
+            >
+              <!-- Hero -->
+              <div class="mb-6 text-center">
+                <span
+                  class="inline-flex items-center rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-accent"
+                >
+                  {hourlyMode.hero.badge}
+                </span>
+                <h3 class="mt-3 text-2xl font-bold text-text md:text-3xl">
+                  {hourlyMode.hero.title}
+                </h3>
+                <p class="mt-2 text-sm text-text2">{hourlyMode.hero.subtitle}</p>
+              </div>
+
+              <!-- Pricing -->
+              <div class="mb-6 text-center">
+                <p
+                  class="text-4xl font-bold tracking-tight text-text md:text-5xl"
+                  aria-label={`Harga ${hourlyMode.pricing.range.replace(/\u00A0/g, " ")}`}
+                >
+                  {hourlyMode.pricing.range}
+                </p>
+                <p class="mt-2 text-sm text-text2">
+                  {hourlyMode.pricing.billing_model} • Min. booking: {
+                    hourlyMode.pricing.minimum_booking
+                  }
+                </p>
+              </div>
+
+              <!-- Short Description -->
+              <div class="mb-8">
+                <p class="text-center text-base leading-relaxed text-text2">
+                  {hourlyMode.shortDesc}
+                </p>
+              </div>
+
+              <!-- Suitable For -->
+              <div class="mb-8">
+                <p class="mb-4 text-xs font-semibold uppercase tracking-wider text-text/60">
+                  Cocok Untuk
+                </p>
+                <ul class="space-y-2.5" role="list">
+                  {
+                    hourlyMode.suitableFor.map((item) => (
+                      <li class="included-item flex items-start gap-3 text-sm text-text2">
+                        <svg
+                          class="mt-0.5 h-5 w-5 shrink-0 text-accent"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M13 10V3L4 14h7v7l9-11h-7z"
+                          />
+                        </svg>
+                        <span>{item}</span>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+
+              <!-- Deliverables -->
+              <div class="mb-8">
+                <p class="mb-4 text-xs font-semibold uppercase tracking-wider text-text/60">
+                  Yang Kamu Dapatkan
+                </p>
+                <ul class="space-y-2.5" role="list">
+                  {
+                    hourlyMode.deliverables.map((item) => (
+                      <li class="included-item flex items-start gap-3 text-sm text-text2">
+                        <svg
+                          class="mt-0.5 h-5 w-5 shrink-0 text-success"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                        <span>{item}</span>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+
+              <!-- Constraints -->
+              <div class="mb-8">
+                <p class="mb-4 text-xs font-semibold uppercase tracking-wider text-text/60">
+                  Batasan
+                </p>
+                <ul class="space-y-2.5" role="list">
+                  {
+                    hourlyMode.constraints.map((item) => (
+                      <li class="flex items-start gap-3 text-sm text-text2/80">
+                        <svg
+                          class="mt-0.5 h-5 w-5 shrink-0 text-text2/50"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+                        <span>{item}</span>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+
+              <!-- CTA Buttons -->
+              <div class="mb-6 flex flex-col gap-3 sm:flex-row">
+                <a
+                  href={hourlyMode.cta.primary.href}
+                  class="group/cta inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:bg-accent/90 hover:shadow-lg hover:shadow-accent/25 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+                >
+                  <span>{hourlyMode.cta.primary.label}</span>
+                  <svg
+                    class="h-4 w-4 transition-transform duration-200 group-hover/cta:translate-x-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                  </svg>
+                </a>
+                <a
+                  href={hourlyMode.cta.secondary.href}
+                  class="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-divider/40 bg-transparent px-6 py-3 text-sm font-medium text-text2 transition-all duration-200 hover:border-accent/40 hover:bg-accent/5 hover:text-text focus:outline-none focus:ring-2 focus:ring-accent/50 focus:ring-offset-2"
+                >
+                  {hourlyMode.cta.secondary.label}
+                </a>
+              </div>
+
+              <!-- Notes -->
+              <div class="border-t border-divider/20 pt-6">
+                {
+                  hourlyMode.notes.map((note) => (
+                    <p class="text-xs italic leading-relaxed text-text2/60">{note}</p>
+                  ))
+                }
+              </div>
+            </div>
+
+            <!-- Project Mode Panel -->
+            <div
+              role="tabpanel"
+              id="mode-panel-project"
+              aria-labelledby="mode-tab-project"
+              hidden
+              inert
+              data-mode-panel="project"
+              class="mode-panel"
+            >
+              <!-- Hero -->
+              <div class="mb-6 text-center">
+                <span
+                  class="inline-flex items-center rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-accent"
+                >
+                  {projectMode.hero.badge}
+                </span>
+                <h3 class="mt-3 text-2xl font-bold text-text md:text-3xl">
+                  {projectMode.hero.title}
+                </h3>
+                <p class="mt-2 text-sm text-text2">{projectMode.hero.subtitle}</p>
+              </div>
+
+              <!-- Level 2: Tier Switcher (Starter/Growth/Pro) -->
+              <div
+                role="tablist"
+                aria-label="Pilih tier proyek"
+                class="tier-tablist mb-8 flex justify-center gap-2 overflow-x-auto pb-2 scrollbar-hide"
+              >
+                {
+                  projectMode.tiers.map((tier, idx) => (
+                    <button
+                      role="tab"
+                      type="button"
+                      id={`tier-tab-${tier.id}`}
+                      aria-controls={`tier-panel-${tier.id}`}
+                      aria-selected={idx === 0 ? "true" : "false"}
+                      data-tier={tier.id}
+                      class="tier-tab inline-flex items-center whitespace-nowrap rounded-full border border-divider/30 bg-surface/50 px-5 py-2 text-sm font-semibold transition-all duration-300 hover:border-accent/40 hover:bg-accent/5 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 aria-selected:border-accent aria-selected:bg-accent aria-selected:text-white aria-selected:shadow-md aria-selected:shadow-accent/25"
+                    >
+                      {tier.name}
+                    </button>
+                  ))
+                }
+              </div>
+
+              <!-- Tier Panels -->
+              <div class="tier-panels-wrapper" data-tier-panels>
+                {
+                  projectMode.tiers.map((tier, idx) => (
+                    <div
+                      role="tabpanel"
+                      id={`tier-panel-${tier.id}`}
+                      aria-labelledby={`tier-tab-${tier.id}`}
+                      hidden={idx !== 0}
+                      inert={idx !== 0 ? true : undefined}
+                      data-tier-panel={tier.id}
+                      class="tier-panel"
+                    >
+                      {/* Target */}
+                      <div class="mb-6 text-center">
+                        <p class="text-sm text-text2/70">{tier.target}</p>
+                      </div>
+
+                      {/* Pricing */}
+                      <div class="mb-6 text-center">
+                        <p
+                          class="text-4xl font-bold tracking-tight text-text md:text-5xl"
+                          aria-label={`Harga ${tier.price.replace(/\u00A0/g, " ")}`}
+                        >
+                          {tier.price}
+                        </p>
+                        <p class="mt-2 text-sm text-text2">
+                          {tier.billing_model} • {tier.sprints} sprint
+                          {tier.sprints > 1 ? "s" : ""} • {tier.timeline}
+                        </p>
+                      </div>
+
+                      {/* Description */}
+                      <div class="mb-8">
+                        <p class="text-center text-base leading-relaxed text-text2">
+                          {tier.shortDesc}
+                        </p>
+                      </div>
+
+                      {/* Included */}
+                      <div class="mb-8">
+                        <p class="mb-4 text-xs font-semibold uppercase tracking-wider text-text/60">
+                          Yang Termasuk
+                        </p>
+                        <ul class="space-y-2.5" role="list">
+                          {tier.included.map((item) => (
+                            <li class="included-item flex items-start gap-3 text-sm text-text2">
+                              <svg
+                                class="mt-0.5 h-5 w-5 shrink-0 text-success"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M5 13l4 4L19 7"
+                                />
+                              </svg>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  ))
+                }
+              </div>
+
+              <!-- CTA Buttons (Project Mode) -->
+              <div class="mb-6 flex flex-col gap-3 sm:flex-row">
+                <a
+                  href={projectMode.cta.primary.href}
+                  class="group/cta inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:bg-accent/90 hover:shadow-lg hover:shadow-accent/25 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+                >
+                  <span>{projectMode.cta.primary.label}</span>
+                  <svg
+                    class="h-4 w-4 transition-transform duration-200 group-hover/cta:translate-x-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                  </svg>
+                </a>
+                <a
+                  href={projectMode.cta.secondary.href}
+                  class="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-divider/40 bg-transparent px-6 py-3 text-sm font-medium text-text2 transition-all duration-200 hover:border-accent/40 hover:bg-accent/5 hover:text-text focus:outline-none focus:ring-2 focus:ring-accent/50 focus:ring-offset-2"
+                >
+                  {projectMode.cta.secondary.label}
+                </a>
+              </div>
+
+              <!-- Notes (Project Mode) -->
+              <div class="border-t border-divider/20 pt-6">
+                {
+                  projectMode.notes.map((note) => (
+                    <p class="text-xs italic leading-relaxed text-text2/60">{note}</p>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ScrollReveal>
+
+    <!-- Benefits Grid -->
+    <div class="mt-20">
+      <ScrollReveal animation="fade-up" delay={100}>
+        <h3 class="mb-8 text-center text-lg font-semibold text-text">Kenapa Bekerja Sama?</h3>
+      </ScrollReveal>
+
+      <div class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-6">
+        {
+          benefits.map((benefit, index) => (
+            <ScrollReveal animation="fade-up" delay={200 + index * 60}>
+              <div class="benefit-item group flex flex-col items-center gap-3 rounded-2xl border border-divider/20 bg-surface/30 p-5 text-center transition-all duration-300 hover:-translate-y-1 hover:border-accent/20 hover:bg-accent/5 hover:shadow-subtle">
+                <span
+                  class="text-3xl transition-transform duration-300 group-hover:scale-110"
+                  aria-hidden="true"
+                >
+                  {benefit.icon}
+                </span>
+                <p class="text-xs font-medium text-text2">{benefit.title}</p>
+              </div>
+            </ScrollReveal>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="mt-20">
+      <ScrollReveal animation="fade-up" delay={100}>
+        <h3 class="mb-8 text-center text-lg font-semibold text-text">Pertanyaan Umum</h3>
+      </ScrollReveal>
+
+      <div class="mx-auto max-w-3xl space-y-4">
+        {
+          faqs.map((faq, index) => (
+            <ScrollReveal animation="fade-up" delay={200 + index * 60}>
+              <details class="faq-item group rounded-2xl border border-divider/20 bg-surface/30 p-6 transition-all duration-300 hover:border-accent/20 hover:bg-accent/5">
+                <summary class="flex cursor-pointer items-start justify-between gap-4 text-sm font-semibold text-text transition-colors duration-200 group-hover:text-accent">
+                  <span>{faq.q}</span>
+                  <svg
+                    class="mt-0.5 h-5 w-5 shrink-0 transition-transform duration-200 group-open:rotate-180"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </summary>
+                <p class="mt-4 text-sm leading-relaxed text-text2">{faq.a}</p>
+              </details>
+            </ScrollReveal>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .faq-item summary {
+    list-style: none;
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item[open] {
+    border-color: rgb(var(--color-accent) / 0.3);
+    background-color: rgb(var(--color-accent) / 0.05);
+  }
+
+  .mode-panel,
+  .tier-panel {
+    transition:
+      opacity 300ms cubic-bezier(0.22, 0.61, 0.36, 1),
+      transform 300ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .mode-panel[hidden],
+  .tier-panel[hidden] {
+    display: none;
+  }
+
+  .included-item {
+    opacity: 0;
+    transform: translateY(8px);
+    animation: fadeInUp 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .mode-panel .included-item:nth-child(1),
+  .tier-panel .included-item:nth-child(1) {
+    animation-delay: 100ms;
+  }
+  .mode-panel .included-item:nth-child(2),
+  .tier-panel .included-item:nth-child(2) {
+    animation-delay: 130ms;
+  }
+  .mode-panel .included-item:nth-child(3),
+  .tier-panel .included-item:nth-child(3) {
+    animation-delay: 160ms;
+  }
+  .mode-panel .included-item:nth-child(4),
+  .tier-panel .included-item:nth-child(4) {
+    animation-delay: 190ms;
+  }
+  .mode-panel .included-item:nth-child(5),
+  .tier-panel .included-item:nth-child(5) {
+    animation-delay: 220ms;
+  }
+  .mode-panel .included-item:nth-child(6),
+  .tier-panel .included-item:nth-child(6) {
+    animation-delay: 250ms;
+  }
+  .mode-panel .included-item:nth-child(7),
+  .tier-panel .included-item:nth-child(7) {
+    animation-delay: 280ms;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mode-panel,
+    .tier-panel,
+    .included-item {
+      animation: none;
+      transition: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>
+
+<script define:vars={{ modesJSON }}>
+  (function () {
+    const modes = JSON.parse(modesJSON);
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    let activeMode = "hourly";
+    let activeTier = "starter";
+
+    function initPricingTabs() {
+      const modeTabs = document.querySelectorAll("[data-mode]");
+      const modePanels = document.querySelectorAll("[data-mode-panel]");
+      const card = document.querySelector("[data-pricing-card]");
+
+      if (!modeTabs.length || !modePanels.length || !card) return;
+
+      // Restore from URL or localStorage
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlMode = urlParams.get("mode");
+      const urlTier = urlParams.get("tier");
+      const savedMode = localStorage.getItem("pricing-mode");
+      const savedTier = localStorage.getItem("pricing-tier");
+
+      const initialMode = urlMode || savedMode || "hourly";
+      const initialTier = urlTier || savedTier || "starter";
+
+      if (initialMode !== "hourly") {
+        switchMode(initialMode, false);
+      }
+
+      if (initialMode === "project" && initialTier !== "starter") {
+        setTimeout(() => switchTier(initialTier, false), 50);
+      }
+
+      // Mode tabs click handlers
+      modeTabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const mode = tab.dataset.mode;
+          if (mode && mode !== activeMode) {
+            switchMode(mode, true);
+          }
+        });
+      });
+
+      // Tier tabs click handlers (for project mode)
+      const initTierTabs = () => {
+        const tierTabs = document.querySelectorAll("[data-tier]");
+        tierTabs.forEach((tab) => {
+          tab.addEventListener("click", () => {
+            const tier = tab.dataset.tier;
+            if (tier && tier !== activeTier) {
+              switchTier(tier, true);
+            }
+          });
+        });
+      };
+
+      initTierTabs();
+
+      // Keyboard navigation for mode tabs
+      const modeTablist = document.querySelector(".mode-tablist");
+      if (modeTablist) {
+        modeTablist.addEventListener("keydown", (e) => {
+          handleTablistKeyboard(e, modeTabs, (index) => {
+            const mode = modeTabs[index].dataset.mode;
+            if (mode) switchMode(mode, true);
+          });
+        });
+      }
+
+      // Keyboard navigation for tier tabs
+      document.addEventListener("keydown", (e) => {
+        const tierTablist = document.querySelector(".tier-tablist");
+        if (!tierTablist) return;
+
+        const tierTabs = Array.from(document.querySelectorAll("[data-tier]"));
+        handleTablistKeyboard(e, tierTabs, (index) => {
+          const tier = tierTabs[index].dataset.tier;
+          if (tier) switchTier(tier, true);
+        });
+      });
+
+      function handleTablistKeyboard(e, tabs, onSwitch) {
+        const currentTab = document.activeElement;
+        if (!currentTab.matches('[role="tab"]')) return;
+
+        const tabsArray = Array.from(tabs);
+        const currentIndex = tabsArray.indexOf(currentTab);
+
+        let nextIndex = currentIndex;
+
+        if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+          e.preventDefault();
+          nextIndex = currentIndex > 0 ? currentIndex - 1 : tabsArray.length - 1;
+        } else if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+          e.preventDefault();
+          nextIndex = currentIndex < tabsArray.length - 1 ? currentIndex + 1 : 0;
+        } else if (e.key === "Home") {
+          e.preventDefault();
+          nextIndex = 0;
+        } else if (e.key === "End") {
+          e.preventDefault();
+          nextIndex = tabsArray.length - 1;
+        }
+
+        if (nextIndex !== currentIndex) {
+          tabsArray[nextIndex].focus();
+        }
+      }
+
+      function switchMode(mode, animate = true) {
+        const oldMode = activeMode;
+        activeMode = mode;
+
+        const oldPanel = document.querySelector(`[data-mode-panel="${oldMode}"]`);
+        const newPanel = document.querySelector(`[data-mode-panel="${mode}"]`);
+
+        if (!oldPanel || !newPanel) return;
+
+        // Update mode tabs
+        modeTabs.forEach((tab) => {
+          const isActive = tab.dataset.mode === mode;
+          tab.setAttribute("aria-selected", isActive ? "true" : "false");
+        });
+
+        if (animate && !prefersReducedMotion) {
+          heightLockTransition(oldPanel, newPanel, card);
+        } else {
+          oldPanel.hidden = true;
+          oldPanel.inert = true;
+          newPanel.hidden = false;
+          newPanel.inert = false;
+        }
+
+        // Save state
+        localStorage.setItem("pricing-mode", mode);
+        const url = new URL(window.location.href);
+        url.searchParams.set("mode", mode);
+        window.history.replaceState({}, "", url);
+      }
+
+      function switchTier(tier, animate = true) {
+        const oldTier = activeTier;
+        activeTier = tier;
+
+        const oldPanel = document.querySelector(`[data-tier-panel="${oldTier}"]`);
+        const newPanel = document.querySelector(`[data-tier-panel="${tier}"]`);
+        const tierTabs = document.querySelectorAll("[data-tier]");
+        const tierPanelsWrapper = document.querySelector("[data-tier-panels]");
+
+        if (!oldPanel || !newPanel) return;
+
+        // Update tier tabs
+        tierTabs.forEach((tab) => {
+          const isActive = tab.dataset.tier === tier;
+          tab.setAttribute("aria-selected", isActive ? "true" : "false");
+        });
+
+        if (animate && !prefersReducedMotion) {
+          heightLockTransition(oldPanel, newPanel, tierPanelsWrapper);
+        } else {
+          oldPanel.hidden = true;
+          oldPanel.inert = true;
+          newPanel.hidden = false;
+          newPanel.inert = false;
+        }
+
+        // Save state
+        localStorage.setItem("pricing-tier", tier);
+        const url = new URL(window.location.href);
+        url.searchParams.set("tier", tier);
+        window.history.replaceState({}, "", url);
+      }
+
+      function heightLockTransition(oldPanel, newPanel, container) {
+        const oldHeight = container.offsetHeight;
+
+        // Measure new panel height
+        newPanel.hidden = false;
+        newPanel.inert = false;
+        newPanel.style.position = "absolute";
+        newPanel.style.opacity = "0";
+        newPanel.style.visibility = "hidden";
+
+        const newHeight = newPanel.offsetHeight;
+        const maxHeight = Math.max(oldHeight, newHeight);
+
+        // Reset new panel
+        newPanel.style.position = "";
+        newPanel.style.opacity = "";
+        newPanel.style.visibility = "";
+        newPanel.hidden = true;
+        newPanel.inert = true;
+
+        // Lock height
+        container.style.minHeight = `${maxHeight}px`;
+
+        // Animate out old panel
+        oldPanel.style.opacity = "1";
+        oldPanel.style.transform = "translateY(0)";
+
+        requestAnimationFrame(() => {
+          oldPanel.style.transition =
+            "opacity 200ms cubic-bezier(0.22, 0.61, 0.36, 1), transform 200ms cubic-bezier(0.22, 0.61, 0.36, 1)";
+          oldPanel.style.opacity = "0";
+          oldPanel.style.transform = "translateY(8px)";
+
+          setTimeout(() => {
+            oldPanel.hidden = true;
+            oldPanel.inert = true;
+            oldPanel.style.transition = "";
+            oldPanel.style.opacity = "";
+            oldPanel.style.transform = "";
+
+            // Animate in new panel
+            newPanel.hidden = false;
+            newPanel.inert = false;
+            newPanel.style.opacity = "0";
+            newPanel.style.transform = "translateY(8px)";
+
+            requestAnimationFrame(() => {
+              newPanel.style.transition =
+                "opacity 300ms cubic-bezier(0.22, 0.61, 0.36, 1), transform 300ms cubic-bezier(0.22, 0.61, 0.36, 1)";
+              newPanel.style.opacity = "1";
+              newPanel.style.transform = "translateY(0)";
+
+              setTimeout(() => {
+                newPanel.style.transition = "";
+                newPanel.style.opacity = "";
+                newPanel.style.transform = "";
+                container.style.minHeight = "";
+              }, 300);
+            });
+          }, 200);
+        });
+      }
+    }
+
+    // Initialize
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initPricingTabs);
+    } else {
+      initPricingTabs();
+    }
+
+    document.addEventListener("astro:page-load", initPricingTabs);
+  })();
+</script>

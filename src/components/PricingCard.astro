@@ -1,0 +1,243 @@
+---
+interface Props {
+  id: "starter" | "growth" | "pro";
+  name: string;
+  target: string;
+  pricePrimary: string;
+  priceSecondary?: string;
+  billingModel: "per_project" | "per_hour" | "milestone";
+  shortDesc: string;
+  ctaPrimary: {
+    label: string;
+    href: string;
+    intent: "book" | "contact" | "quote";
+  };
+  ctaSecondary?: {
+    label: string;
+    href: string;
+  };
+  included: string[];
+  notes?: string[];
+  index: number;
+}
+
+const {
+  id,
+  name,
+  target,
+  pricePrimary,
+  priceSecondary,
+  billingModel,
+  shortDesc,
+  ctaPrimary,
+  ctaSecondary,
+  included,
+  notes,
+  index,
+} = Astro.props;
+
+const billingLabels = {
+  per_project: "Per Proyek",
+  per_hour: "Per Jam",
+  milestone: "Milestone",
+};
+
+const accentColors = {
+  starter: "from-blue-500/10 to-teal-500/10 border-blue-500/20",
+  growth: "from-orange-500/10 to-amber-500/10 border-orange-500/20",
+  pro: "from-emerald-500/10 to-accent/10 border-emerald-500/20",
+};
+---
+
+<div
+  class="pricing-card group relative flex h-full flex-col overflow-hidden rounded-3xl border border-divider/20 bg-surface/50 p-6 shadow-subtle backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-soft hover:border-accent/30 md:p-7"
+  data-pricing-card
+  data-index={index}
+  data-tier={id}
+>
+  <!-- Gradient background -->
+  <div
+    class={`absolute inset-0 -z-10 bg-gradient-to-br opacity-0 transition-opacity duration-500 group-hover:opacity-100 ${accentColors[id]}`}
+    aria-hidden="true"
+  >
+  </div>
+
+  <!-- Badge & Billing Model -->
+  <div class="mb-4 flex items-center justify-between gap-3">
+    <span
+      class="inline-flex items-center rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-accent"
+    >
+      {name}
+    </span>
+    <span
+      class="inline-flex items-center rounded-full border border-divider/30 bg-bg/50 px-2.5 py-0.5 text-xs text-text2"
+    >
+      {billingLabels[billingModel]}
+    </span>
+  </div>
+
+  <!-- Target Segment -->
+  <p class="mb-3 text-sm text-text2/70">{target}</p>
+
+  <!-- Pricing -->
+  <div class="mb-4">
+    <div class="flex items-baseline gap-2">
+      <p class="text-3xl font-bold tracking-tight text-text md:text-4xl">
+        {pricePrimary}
+      </p>
+    </div>
+    {
+      priceSecondary && (
+        <p class="mt-1 text-sm text-text2/60" aria-label={`atau ${priceSecondary}`}>
+          {priceSecondary}
+        </p>
+      )
+    }
+  </div>
+
+  <!-- Description -->
+  <p class="mb-6 text-sm leading-relaxed text-text2">{shortDesc}</p>
+
+  <!-- CTA Buttons -->
+  <div class="mb-6 flex flex-col gap-3">
+    <a
+      href={ctaPrimary.href}
+      class="group/cta inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:bg-accent/90 hover:shadow-lg hover:shadow-accent/25 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+      aria-label={`${ctaPrimary.label} untuk paket ${name}`}
+    >
+      <span>{ctaPrimary.label}</span>
+      <svg
+        class="h-4 w-4 transition-transform duration-200 group-hover/cta:translate-x-1"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+      </svg>
+    </a>
+    {
+      ctaSecondary && (
+        <a
+          href={ctaSecondary.href}
+          class="inline-flex items-center justify-center gap-2 rounded-full border border-divider/40 bg-transparent px-6 py-2.5 text-sm font-medium text-text2 transition-all duration-200 hover:border-accent/40 hover:bg-accent/5 hover:text-text focus:outline-none focus:ring-2 focus:ring-accent/50 focus:ring-offset-2"
+          aria-label={`${ctaSecondary.label} untuk paket ${name}`}
+        >
+          {ctaSecondary.label}
+        </a>
+      )
+    }
+  </div>
+
+  <!-- Included Features -->
+  <div class="mb-6 flex-1">
+    <p class="mb-3 text-xs font-semibold uppercase tracking-wider text-text/60">Yang Termasuk</p>
+    <ul class="space-y-2.5" role="list">
+      {
+        included.map((item, idx) => (
+          <li
+            class="pricing-feature flex items-start gap-3 text-sm text-text2"
+            style={`--feature-index: ${idx}`}
+          >
+            <svg
+              class="mt-0.5 h-5 w-5 shrink-0 text-success"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+            <span>{item}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <!-- Notes/Footnotes -->
+  {
+    notes && notes.length > 0 && (
+      <div class="mt-auto border-t border-divider/20 pt-4">
+        {notes.map((note) => (
+          <p class="text-xs italic leading-relaxed text-text2/60">{note}</p>
+        ))}
+      </div>
+    )
+  }
+</div>
+
+<style>
+  .pricing-card {
+    will-change: transform;
+  }
+
+  .pricing-feature {
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.5s cubic-bezier(0.22, 0.61, 0.36, 1),
+      transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+    transition-delay: calc(var(--feature-index) * 40ms + 100ms);
+  }
+
+  .pricing-card.in-view .pricing-feature {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pricing-card {
+      transition: none;
+    }
+
+    .pricing-feature {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  function initPricingCards() {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
+
+    const cards = document.querySelectorAll("[data-pricing-card]");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.2,
+        rootMargin: "0px 0px -80px 0px",
+      }
+    );
+
+    cards.forEach((card) => observer.observe(card));
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initPricingCards);
+  } else {
+    initPricingCards();
+  }
+
+  document.addEventListener("astro:page-load", initPricingCards);
+</script>
