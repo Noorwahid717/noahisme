@@ -10,6 +10,8 @@ interface TiltingCardProps {
   metric: string;
   index?: number;
   category?: "education" | "retail" | "enterprise" | "tech";
+  icon?: string;
+  additionalMetrics?: Array<{ label: string; value: string }>;
 }
 
 const easing: [number, number, number, number] = [0.16, 1, 0.3, 1];
@@ -109,51 +111,81 @@ export default function TiltingCard({
   metric,
   index = 0,
   category = "tech",
+  icon,
+  additionalMetrics = [],
 }: TiltingCardProps) {
   const prefersReducedMotion = useReducedMotion();
   const delay = Math.min(index * 0.1, 0.4);
   const config = categoryConfig[category];
+  const [isHovered, setIsHovered] = React.useState(false);
 
   if (prefersReducedMotion) {
     return (
       <article className={baseClasses} style={{ borderColor: config.borderColor }}>
-        {/* Illustration thumbnail */}
-        <div
-          className="absolute right-4 top-4 flex h-16 w-16 items-center justify-center rounded-full opacity-10 blur-sm"
-          style={{ backgroundColor: config.bgColor }}
-          aria-hidden="true"
-        >
-          <div className="w-8 h-8" style={{ color: config.color }}>
-            <config.Icon />
-          </div>
-        </div>
-
-        <header className="relative flex items-start justify-between gap-3">
+        <header className="relative flex flex-col gap-3">
+          {/* Product icon - Right side */}
           <div
-            className="flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium uppercase tracking-[0.15em]"
+            className="absolute -right-2 -top-2 flex h-20 w-20 items-center justify-center rounded-full opacity-10 blur-sm"
+            style={{ backgroundColor: config.bgColor }}
+            aria-hidden="true"
+          >
+            {icon ? (
+              <span className="text-3xl">{icon}</span>
+            ) : (
+              <div className="w-10 h-10" style={{ color: config.color }}>
+                <config.Icon />
+              </div>
+            )}
+          </div>
+          {/* Category Badge - Top Left */}
+          <div
+            className="inline-flex w-fit items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium uppercase tracking-[0.15em]"
             style={{
               backgroundColor: config.bgColor,
               color: config.color,
             }}
           >
+            <span>{config.label}</span>
             <div className="w-4 h-4" aria-hidden="true">
               <config.Icon />
             </div>
-            <span className="hidden sm:inline">In Focus</span>
-            <span className="sm:hidden">Focus</span>
           </div>
+
+          {/* Impact Badge - Below Category */}
           <span
-            className="rounded-full border px-3 py-1 text-xs font-medium"
+            className="inline-flex w-fit items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold"
             style={{
               borderColor: config.borderColor,
               color: config.color,
             }}
           >
+            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                fillRule="evenodd"
+                d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
+                clipRule="evenodd"
+              />
+            </svg>
             {metric}
           </span>
         </header>
+
         <h3 className="mt-6 font-heading text-2xl leading-snug text-text">{title}</h3>
         <p className="mt-3 text-sm leading-relaxed text-text2">{description}</p>
+
+        {/* Additional Metrics */}
+        {additionalMetrics.length > 0 && (
+          <div className="mt-4 flex flex-wrap gap-3">
+            {additionalMetrics.map((m, i) => (
+              <div key={i} className="flex flex-col">
+                <span className="text-xs font-semibold" style={{ color: config.color }}>
+                  {m.value}
+                </span>
+                <span className="text-xs text-text2/70">{m.label}</span>
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* CTA */}
         <div
@@ -174,86 +206,190 @@ export default function TiltingCard({
   const whileHoverEffect = isMobile
     ? {}
     : {
-        rotateX: -4,
-        rotateY: 6,
-        y: -5,
-        boxShadow: "0 28px 60px rgba(14, 25, 50, 0.35)",
+        y: -4,
+        scale: 1.01,
       };
 
   return (
     <motion.article
       className={clsx(baseClasses, "cursor-pointer")}
       style={{ borderColor: config.borderColor }}
-      initial={{ opacity: 0, rotateX: 12, rotateY: -8, y: 40, scale: 0.96 }}
-      whileInView={{ opacity: 1, rotateX: 0, rotateY: 0, y: 0, scale: 1 }}
+      initial={{ opacity: 0, y: 30, scale: 0.98 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.7, ease: easing, delay }}
+      transition={{
+        duration: 0.7,
+        ease: easing as [number, number, number, number],
+        delay: delay + 0.12 * index,
+      }}
       whileHover={whileHoverEffect}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
     >
-      {/* Illustration thumbnail with blur */}
-      <motion.div
-        className="absolute right-4 top-4 flex h-16 w-16 items-center justify-center rounded-full opacity-10 blur-sm"
-        style={{ backgroundColor: config.bgColor }}
-        aria-hidden="true"
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ scale: 1, opacity: 0.1 }}
-        transition={{ duration: 0.5, delay: delay + 0.2 }}
-      >
-        <div className="w-8 h-8" style={{ color: config.color }}>
-          <config.Icon />
-        </div>
-      </motion.div>
-
-      <header className="relative flex items-start justify-between gap-3">
+      <header className="relative flex flex-col gap-3">
+        {/* Product icon with floating animation - Right side */}
         <motion.div
-          className="flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium uppercase tracking-[0.15em]"
+          className="absolute -right-2 -top-2 flex h-20 w-20 items-center justify-center rounded-full opacity-10 blur-sm"
+          style={{ backgroundColor: config.bgColor }}
+          aria-hidden="true"
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{
+            scale: 1,
+            opacity: 0.1,
+            y: [0, -4, 0],
+          }}
+          transition={{
+            scale: { duration: 0.5, delay: delay + 0.2 },
+            opacity: { duration: 0.5, delay: delay + 0.2 },
+            y: {
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut",
+            },
+          }}
+        >
+          {icon ? (
+            <span className="text-3xl">{icon}</span>
+          ) : (
+            <div className="w-10 h-10" style={{ color: config.color }}>
+              <config.Icon />
+            </div>
+          )}
+        </motion.div>
+        {/* Category Badge - Top Left with stagger */}
+        <motion.div
+          className="inline-flex w-fit items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium uppercase tracking-[0.15em]"
           style={{
             backgroundColor: config.bgColor,
             color: config.color,
           }}
-          initial={{ opacity: 0, x: -12 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.4, delay: delay + 0.05, ease: easing }}
+          initial={{ opacity: 0, y: -8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{
+            duration: 0.5,
+            delay: delay + 0.08,
+            ease: easing as [number, number, number, number],
+          }}
         >
+          <span>{config.label}</span>
           <div className="w-4 h-4" aria-hidden="true">
             <config.Icon />
           </div>
-          <span className="hidden sm:inline">In Focus</span>
-          <span className="sm:hidden">Focus</span>
         </motion.div>
+
+        {/* Impact Badge with expandable hover */}
         <motion.span
-          className="rounded-full border px-3 py-1 text-xs font-medium"
+          className="inline-flex w-fit items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold transition-all duration-200"
           style={{
             borderColor: config.borderColor,
             color: config.color,
           }}
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: delay + 0.1, ease: easing }}
+          initial={{ opacity: 0, y: -8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{
+            duration: 0.5,
+            delay: delay + 0.14,
+            ease: easing as [number, number, number, number],
+          }}
+          whileHover={{ scale: 1.05 }}
         >
+          <motion.svg
+            className="w-3 h-3"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            animate={isHovered ? { rotate: [0, 10, 0] } : {}}
+            transition={{ duration: 0.3 }}
+          >
+            <path
+              fillRule="evenodd"
+              d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
+              clipRule="evenodd"
+            />
+          </motion.svg>
           {metric}
         </motion.span>
       </header>
-      <h3 className="mt-6 font-heading text-2xl leading-snug text-text">{title}</h3>
-      <p className="mt-3 text-sm leading-relaxed text-text2">{description}</p>
+      <motion.h3
+        className="mt-6 font-heading text-2xl leading-snug text-text"
+        initial={{ opacity: 0, y: 8 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{
+          duration: 0.5,
+          delay: delay + 0.2,
+          ease: easing as [number, number, number, number],
+        }}
+      >
+        {title}
+      </motion.h3>
 
-      {/* CTA - View details */}
+      <motion.p
+        className="mt-3 text-sm leading-relaxed text-text2"
+        initial={{ opacity: 0, y: 8 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{
+          duration: 0.5,
+          delay: delay + 0.26,
+          ease: easing as [number, number, number, number],
+        }}
+      >
+        {description}
+      </motion.p>
+
+      {/* Additional Metrics with stagger */}
+      {additionalMetrics.length > 0 && (
+        <motion.div
+          className="mt-4 flex flex-wrap gap-4"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: delay + 0.32 }}
+        >
+          {additionalMetrics.map((m, i) => (
+            <motion.div
+              key={i}
+              className="flex flex-col"
+              initial={{ opacity: 0, x: -8 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.4,
+                delay: delay + 0.32 + i * 0.08,
+                ease: easing as [number, number, number, number],
+              }}
+            >
+              <span className="text-sm font-semibold" style={{ color: config.color }}>
+                {m.value}
+              </span>
+              <span className="text-xs text-text2/70">{m.label}</span>
+            </motion.div>
+          ))}
+        </motion.div>
+      )}
+
+      {/* CTA - View details with arrow slide animation */}
       <motion.div
-        className="mt-6 flex items-center gap-1.5 text-xs font-medium transition-all duration-200 group-hover:gap-2"
+        className="mt-6 flex items-center text-xs font-medium"
         style={{ color: config.color }}
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.4, delay: delay + 0.3 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4, delay: delay + 0.4 }}
       >
-        <span>View details</span>
-        <svg
-          className="h-3 w-3 transition-transform duration-200 group-hover:translate-x-0.5"
+        <span className={isHovered ? "underline underline-offset-2" : ""}>View details</span>
+        <motion.svg
+          className="ml-1.5 h-3 w-3"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
+          animate={isHovered ? { x: 4 } : { x: 0 }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
         >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-        </svg>
+        </motion.svg>
       </motion.div>
     </motion.article>
   );
@@ -262,5 +398,5 @@ export default function TiltingCard({
 const baseClasses = clsx(
   "group relative h-full overflow-hidden rounded-2xl border bg-surface/90 p-6 sm:p-8",
   "backdrop-blur-sm shadow-subtle transition-all duration-300",
-  "hover:shadow-[0_20px_50px_rgba(0,0,0,0.25)]"
+  "hover:shadow-[0_24px_56px_rgba(0,0,0,0.28)]"
 );

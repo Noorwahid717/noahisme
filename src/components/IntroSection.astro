@@ -274,10 +274,9 @@
     max-width: 1200px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: minmax(0, var(--intro-badge-col-left)) minmax(
-        0,
-        var(--intro-badge-col-center)
-      ) minmax(0, var(--intro-badge-col-right));
+    grid-template-columns:
+      minmax(0, var(--intro-badge-col-left)) minmax(0, var(--intro-badge-col-center))
+      minmax(0, var(--intro-badge-col-right));
     align-items: center;
     gap: var(--intro-badge-gap);
     min-height: 420px;
@@ -337,6 +336,13 @@
     pointer-events: auto;
   }
 
+  /* Limit badge width on desktop/tablet to prevent text overflow */
+  @media (min-width: 769px) {
+    .badge-float {
+      max-width: 190px;
+    }
+  }
+
   @media (prefers-reduced-motion: no-preference) {
     .badge-float {
       animation: float 5s ease-in-out infinite;
@@ -375,6 +381,7 @@
       rgba(0, 0, 0, 0.1) 12px 16px 16px 0px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     user-select: none;
+    max-width: fit-content;
   }
 
   .badge-1 .badge-inner {
@@ -478,12 +485,14 @@
 
   .badge-text {
     font-family: "Inter Display", "Inter", sans-serif;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 400;
-    line-height: 1.7em;
+    line-height: 1.5em;
     color: rgb(var(--color-text));
     white-space: nowrap;
     margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   @keyframes float {
@@ -506,6 +515,16 @@
     }
     .badges-column {
       gap: var(--intro-badge-vertical-gap);
+    }
+
+    /* Adjust badge text size for medium screens */
+    .badge-text {
+      font-size: 0.85rem;
+    }
+
+    .badge-inner {
+      padding: 0.65rem 1.25rem;
+      gap: 0.65rem;
     }
   }
 
