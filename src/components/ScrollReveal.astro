@@ -1,0 +1,171 @@
+---
+/**
+ * ScrollReveal - Native CSS & JS scroll animation component
+ * Animates elements when they come into view using Intersection Observer API
+ *
+ * Usage:
+ * <ScrollReveal animation="fade-up" delay={100}>
+ *   <YourContent />
+ * </ScrollReveal>
+ */
+
+interface Props {
+  animation?:
+    | "fade-up"
+    | "fade-down"
+    | "fade-left"
+    | "fade-right"
+    | "fade"
+    | "zoom"
+    | "slide-up"
+    | "slide-down";
+  delay?: number; // in milliseconds
+  duration?: number; // in milliseconds
+  threshold?: number; // 0-1, percentage of element visibility
+  class?: string;
+  once?: boolean; // animate only once or every time element enters viewport
+}
+
+const {
+  animation = "fade-up",
+  delay = 0,
+  duration = 600,
+  threshold = 0.15,
+  class: className = "",
+  once = true,
+} = Astro.props;
+---
+
+<div
+  class={`scroll-reveal ${className}`}
+  data-animation={animation}
+  data-delay={delay}
+  data-duration={duration}
+  data-threshold={threshold}
+  data-once={once}
+>
+  <slot />
+</div>
+
+<style>
+  .scroll-reveal {
+    opacity: 0;
+    transition-property: opacity, transform;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Animation variants */
+  .scroll-reveal[data-animation="fade-up"] {
+    transform: translateY(30px);
+  }
+
+  .scroll-reveal[data-animation="fade-down"] {
+    transform: translateY(-30px);
+  }
+
+  .scroll-reveal[data-animation="fade-left"] {
+    transform: translateX(30px);
+  }
+
+  .scroll-reveal[data-animation="fade-right"] {
+    transform: translateX(-30px);
+  }
+
+  .scroll-reveal[data-animation="fade"] {
+    transform: none;
+  }
+
+  .scroll-reveal[data-animation="zoom"] {
+    transform: scale(0.9);
+  }
+
+  .scroll-reveal[data-animation="slide-up"] {
+    transform: translateY(60px);
+  }
+
+  .scroll-reveal[data-animation="slide-down"] {
+    transform: translateY(-60px);
+  }
+
+  /* Active state */
+  .scroll-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0) translateX(0) scale(1);
+  }
+
+  /* Respect reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-reveal {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+</style>
+
+<script>
+  function initScrollReveal() {
+    // Check for reduced motion preference
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (prefersReducedMotion) {
+      // Make all elements visible immediately
+      document.querySelectorAll(".scroll-reveal").forEach((el) => {
+        el.classList.add("is-visible");
+      });
+      return;
+    }
+
+    const elements = document.querySelectorAll(".scroll-reveal");
+
+    if (!elements.length) return;
+
+    // Create intersection observer for each element (to support different thresholds)
+    elements.forEach((element) => {
+      const threshold = parseFloat(element.getAttribute("data-threshold") || "0.15");
+      const delay = parseInt(element.getAttribute("data-delay") || "0", 10);
+      const duration = parseInt(element.getAttribute("data-duration") || "600", 10);
+      const once = element.getAttribute("data-once") === "true";
+
+      // Set transition duration
+      (element as HTMLElement).style.transitionDuration = `${duration}ms`;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              // Apply delay before revealing
+              setTimeout(() => {
+                entry.target.classList.add("is-visible");
+              }, delay);
+
+              // Disconnect observer if once is true
+              if (once) {
+                observer.unobserve(entry.target);
+              }
+            } else if (!once) {
+              // Remove visible class when element leaves viewport (if once is false)
+              entry.target.classList.remove("is-visible");
+            }
+          });
+        },
+        {
+          threshold: threshold,
+          rootMargin: "0px 0px -50px 0px",
+        }
+      );
+
+      observer.observe(element);
+    });
+  }
+
+  // Initialize on page load
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initScrollReveal);
+  } else {
+    initScrollReveal();
+  }
+
+  // Re-initialize on Astro page transitions
+  document.addEventListener("astro:page-load", initScrollReveal);
+</script>
