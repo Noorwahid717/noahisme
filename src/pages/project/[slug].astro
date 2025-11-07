@@ -48,10 +48,12 @@ const schema = {
     <p class="text-xs uppercase tracking-[0.3em] text-accent">{data.role}</p>
     <h1 class="font-heading text-4xl text-text">{data.title}</h1>
     <p class="text-base text-text2">{data.problem}</p>
-    <div class="flex flex-wrap gap-3 text-xs uppercase tracking-[0.2em] text-text2">
+    <div class="flex flex-wrap gap-3 text-xs uppercase tracking-[0.25em] text-text2">
       {
         data.stack.map((item: string) => (
-          <span class="rounded-full border border-divider/50 px-3 py-1">{item}</span>
+          <span class="chip rounded-full border border-divider/50 bg-surface/80 px-3 py-1.5 transition-colors duration-200 hover:border-divider/70 hover:bg-surface/90">
+            {item}
+          </span>
         ))
       }
     </div>
