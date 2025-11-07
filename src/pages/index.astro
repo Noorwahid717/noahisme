@@ -3,7 +3,6 @@ import Base from "~/layouts/Base.astro";
 import Section from "~/components/Section.astro";
 import ProjectCard from "~/components/ProjectCard.astro";
 import HeroStatic from "~/components/HeroStatic.astro";
-import HeroVisualStatic from "~/components/HeroVisualStatic.astro";
 import LogoMarquee from "~/components/LogoMarquee.astro";
 import TiltingCard from "~/components/TiltingCard";
 import ProcessStepCard from "~/components/ProcessStepCard";
@@ -149,10 +148,7 @@ const homePageSchema = {
     </div>
 
     <div class="mx-auto max-w-6xl px-6 pb-32 pt-36">
-      <div class="grid gap-16 md:grid-cols-[minmax(0,1fr)_minmax(280px,0.9fr)] md:items-center">
-        <HeroStatic />
-        <HeroVisualStatic />
-      </div>
+      <HeroStatic />
     </div>
   </section>
 
