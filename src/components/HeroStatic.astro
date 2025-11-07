@@ -30,260 +30,270 @@ import CTAButton from "~/components/CTAButton";
         id="role-cursor"
         class="inline-block w-[2px] h-[0.9em] bg-accent ml-[2px] align-middle animate-cursor-blink"
         aria-hidden="true"></span></span
-    >, fokus pada efisiensi dan arsitektur bersih.
-  </h1>
+    >
 
-  <!-- Subheading - no animation here anymore -->
-  <p class="max-w-xl text-lg text-text2 opacity-0 animate-fade-in" style="animation-delay: 0.3s">
-    Saya membangun aplikasi web end-to-end — dari API hingga UI — dengan perhatian pada performa,
-    aksesibilitas, dan arsitektur yang dapat diskalakan.
-  </p>
+    <!-- Subheading - no animation here anymore -->
+    <p
+      class="max-w-xl text-lg text-text2 font-heading opacity-0 animate-fade-in"
+      style="animation-delay: 0.3s"
+    >
+      Saya membangun solusi digital yang scalable, bersih secara arsitektur, dan mudah dirawat dalam
+      jangka panjang.
+    </p>
+    <p
+      class="max-w-xl text-base text-text2 font-heading opacity-0 animate-fade-in"
+      style="animation-delay: 0.37s"
+    >
+      Saya membantu startup dan bisnis merancang dan mengembangkan aplikasi web end-to-end — dari
+      fondasi arsitektur, pengembangan API & backend, hingga integrasi antarmuka yang solid. Fokus
+      saya pada performa, aksesibilitas, dan kualitas engineering yang sustainable.
+    </p>
 
-  <div
-    class="flex flex-wrap items-center gap-4 opacity-0 animate-fade-in"
-    style="animation-delay: 0.4s"
-  >
-    <CTAButton client:idle href="/contact" class="hero-cta-primary">
-      <span class="inline-flex items-center gap-2">
+    <div
+      class="flex flex-wrap items-center gap-4 opacity-0 animate-fade-in"
+      style="animation-delay: 0.4s"
+    >
+      <CTAButton client:idle href="/contact" class="hero-cta-primary font-heading">
+        <span class="inline-flex items-center gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            viewBox="0 0 256 256"
+          >
+            <path
+              d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32Zm0,176H48V48H72v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V208Zm-96-88h40a8,8,0,0,1,0,16H112a8,8,0,0,1,0-16Zm0,48h40a8,8,0,0,1,0,16H112a8,8,0,0,1,0-16Z"
+            ></path>
+          </svg>
+          <span>Jadwalkan diskusi</span>
+        </span>
+      </CTAButton>
+      <CTAButton client:idle href="/projects" variant="ghost" class="font-heading">
+        Lihat studi kasus
+      </CTAButton>
+    </div>
+
+    <div class="flex flex-wrap gap-3 opacity-0 animate-fade-in" style="animation-delay: 0.5s">
+      <span
+        class="chip inline-flex items-center gap-2 rounded-full border border-divider/50 bg-surface/80 px-4 py-2 text-xs uppercase tracking-[0.25em] text-text2 transition-all duration-200 hover:-translate-y-0.5 hover:border-divider/70 hover:bg-surface/90 hover:shadow-sm"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
+          width="14"
+          height="14"
           fill="currentColor"
           viewBox="0 0 256 256"
+          class="text-success/90"
         >
           <path
-            d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32Zm0,176H48V48H72v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V208Zm-96-88h40a8,8,0,0,1,0,16H112a8,8,0,0,1,0-16Zm0,48h40a8,8,0,0,1,0,16H112a8,8,0,0,1,0-16Z"
+            d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm49.66,85.66-58.34,56a8,8,0,0,1-11.09-.21l-26-28a8,8,0,0,1,11.94-10.66l20.38,22.48,52.74-50.58a8,8,0,1,1,11.3,11.33Z"
           ></path>
         </svg>
-        <span>Jadwalkan diskusi</span>
+        3+ tahun pengalaman
       </span>
-    </CTAButton>
-    <CTAButton client:idle href="/projects" variant="ghost"> Lihat studi kasus </CTAButton>
-  </div>
-
-  <div
-    class="flex flex-wrap gap-3 text-xs uppercase tracking-[0.3em] text-text2 opacity-0 animate-fade-in"
-    style="animation-delay: 0.5s"
-  >
-    <span
-      class="inline-flex items-center gap-2 rounded-full border border-divider/60 bg-surface/70 px-4 py-2 tracking-[0.2em] text-text2 transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        fill="currentColor"
-        viewBox="0 0 256 256"
-        class="text-success/80"
+      <span
+        class="chip inline-flex items-center gap-2 rounded-full border border-divider/50 bg-surface/80 px-4 py-2 text-xs uppercase tracking-[0.25em] text-text2 transition-all duration-200 hover:-translate-y-0.5 hover:border-divider/70 hover:bg-surface/90 hover:shadow-sm"
       >
-        <path
-          d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm49.66,85.66-58.34,56a8,8,0,0,1-11.09-.21l-26-28a8,8,0,0,1,11.94-10.66l20.38,22.48,52.74-50.58a8,8,0,1,1,11.3,11.33Z"
-        ></path>
-      </svg>
-      3+ tahun pengalaman
-    </span>
-    <span
-      class="inline-flex items-center gap-2 rounded-full border border-divider/60 bg-surface/70 px-4 py-2 tracking-[0.2em] text-text2 transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        fill="currentColor"
-        viewBox="0 0 256 256"
-        class="text-accent/80"
-      >
-        <path
-          d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.47,133.47,0,0,1,25,128,133.33,133.33,0,0,1,48.07,97.25C70.33,75.19,97.22,64,128,64s57.67,11.19,79.93,33.25A133.46,133.46,0,0,1,231.05,128C223.84,141.46,192.43,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"
-        ></path>
-      </svg>
-      Fokus aksesibilitas & integritas
-    </span>
-  </div>
-</div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          fill="currentColor"
+          viewBox="0 0 256 256"
+          class="text-accent/90"
+        >
+          <path
+            d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.47,133.47,0,0,1,25,128,133.33,133.33,0,0,1,48.07,97.25C70.33,75.19,97.22,64,128,64s57.67,11.19,79.93,33.25A133.46,133.46,0,0,1,231.05,128C223.84,141.46,192.43,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"
+          ></path>
+        </svg>
+        Fokus aksesibilitas & integritas
+      </span>
+    </div>
+  </h1>
 
-<style>
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-      transform: translateY(12px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes cursor-blink {
-    0%,
-    49% {
-      opacity: 1;
-    }
-    50%,
-    100% {
-      opacity: 0;
-    }
-  }
-
-  .animate-fade-in {
-    animation: fade-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
-  .animate-cursor-blink {
-    animation: cursor-blink 600ms step-end infinite;
-  }
-
-  /* Role container with fixed width to prevent layout shift */
-  :global(.role-container) {
-    width: 11.5em; /* Enough for "Frontend Specialist" at text-4xl */
-    min-width: 11.5em;
-    text-align: left;
-  }
-
-  @media (min-width: 640px) {
-    :global(.role-container) {
-      width: 10em; /* Adjust for text-5xl */
-      min-width: 10em;
-    }
-  }
-
-  @media (min-width: 768px) {
-    :global(.role-container) {
-      width: 9.5em; /* Adjust for text-[3.25rem] */
-      min-width: 9.5em;
-    }
-  }
-
-  /* Enhanced CTA button styling */
-  :global(.hero-cta-primary) {
-    background: linear-gradient(135deg, rgb(37, 99, 235) 0%, rgb(29, 78, 216) 100%) !important;
-    color: white !important;
-    font-weight: 600 !important;
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  }
-
-  :global(.hero-cta-primary:hover) {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 12px 24px -8px rgba(37, 99, 235, 0.5) !important;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .animate-fade-in {
-      animation: none;
-      opacity: 1;
-      transform: none;
-    }
-    .animate-cursor-blink {
-      animation: none;
-      opacity: 1;
-    }
-  }
-</style>
-
-<!-- Role Rotator Animation Script -->
-<script>
-  if (typeof window !== "undefined") {
-    const initRoleRotator = () => {
-      const roleElement = document.getElementById("role-text");
-      const cursorElement = document.getElementById("role-cursor");
-      const roleContainer = document.getElementById("role-container");
-
-      if (!roleElement || !cursorElement || !roleContainer) return;
-
-      // Adjust container width based on screen size
-      const updateContainerWidth = () => {
-        const width = window.innerWidth;
-        if (width >= 768) {
-          roleContainer.style.width = "9.5em";
-          roleContainer.style.minWidth = "9.5em";
-        } else if (width >= 640) {
-          roleContainer.style.width = "10em";
-          roleContainer.style.minWidth = "10em";
-        } else {
-          roleContainer.style.width = "11.5em";
-          roleContainer.style.minWidth = "11.5em";
-        }
-      };
-
-      updateContainerWidth();
-      window.addEventListener("resize", updateContainerWidth);
-
-      // Check for reduced motion preference
-      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (prefersReducedMotion) {
-        roleElement.textContent = "Backend Engineer";
-        cursorElement.style.display = "none";
-        return;
+  <style>
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
       }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-      const roles = ["Backend Engineer", "Frontend Specialist", "System Designer"];
+    @keyframes cursor-blink {
+      0%,
+      49% {
+        opacity: 1;
+      }
+      50%,
+      100% {
+        opacity: 0;
+      }
+    }
 
-      const typeSpeed = 50; // 50ms per character
-      const eraseSpeed = 35; // 35ms per character (faster erase)
-      const delayBetween = 1000; // 1s pause between role changes
-      const maxLoops = 4; // Loop 4 times then stop
+    .animate-fade-in {
+      animation: fade-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
 
-      let roleIndex = 0;
-      let charIndex = 0;
-      let isDeleting = false;
-      let loopCount = 0;
+    .animate-cursor-blink {
+      animation: cursor-blink 600ms step-end infinite;
+    }
 
-      // Clear initial content
-      roleElement.textContent = "";
+    /* Role container with fixed width to prevent layout shift */
+    :global(.role-container) {
+      width: 11.5em; /* Enough for "Frontend Specialist" at text-4xl */
+      min-width: 11.5em;
+      text-align: left;
+    }
 
-      function type() {
-        // Stop after max loops
-        if (loopCount >= maxLoops && roleIndex === 0 && charIndex === 0 && !isDeleting) {
-          roleElement.textContent = roles[0];
-          cursorElement.style.opacity = "0";
+    @media (min-width: 640px) {
+      :global(.role-container) {
+        width: 10em; /* Adjust for text-5xl */
+        min-width: 10em;
+      }
+    }
+
+    @media (min-width: 768px) {
+      :global(.role-container) {
+        width: 9.5em; /* Adjust for text-[3.25rem] */
+        min-width: 9.5em;
+      }
+    }
+
+    /* Enhanced CTA button styling */
+    :global(.hero-cta-primary) {
+      background: linear-gradient(135deg, rgb(37, 99, 235) 0%, rgb(29, 78, 216) 100%) !important;
+      color: white !important;
+      font-weight: 600 !important;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+
+    :global(.hero-cta-primary:hover) {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 12px 24px -8px rgba(37, 99, 235, 0.5) !important;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .animate-fade-in {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
+      .animate-cursor-blink {
+        animation: none;
+        opacity: 1;
+      }
+    }
+  </style>
+
+  <!-- Role Rotator Animation Script -->
+  <script>
+    if (typeof window !== "undefined") {
+      const initRoleRotator = () => {
+        const roleElement = document.getElementById("role-text");
+        const cursorElement = document.getElementById("role-cursor");
+        const roleContainer = document.getElementById("role-container");
+
+        if (!roleElement || !cursorElement || !roleContainer) return;
+
+        // Adjust container width based on screen size
+        const updateContainerWidth = () => {
+          const width = window.innerWidth;
+          if (width >= 768) {
+            roleContainer.style.width = "9.5em";
+            roleContainer.style.minWidth = "9.5em";
+          } else if (width >= 640) {
+            roleContainer.style.width = "10em";
+            roleContainer.style.minWidth = "10em";
+          } else {
+            roleContainer.style.width = "11.5em";
+            roleContainer.style.minWidth = "11.5em";
+          }
+        };
+
+        updateContainerWidth();
+        window.addEventListener("resize", updateContainerWidth);
+
+        // Check for reduced motion preference
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (prefersReducedMotion) {
+          roleElement.textContent = "Backend Engineer";
+          cursorElement.style.display = "none";
           return;
         }
 
-        const currentRole = roles[roleIndex];
+        const roles = ["Backend Engineer", "Frontend Specialist", "System Designer"];
 
-        if (isDeleting) {
-          roleElement.textContent = currentRole.substring(0, charIndex - 1);
-          charIndex--;
+        const typeSpeed = 50; // 50ms per character
+        const eraseSpeed = 35; // 35ms per character (faster erase)
+        const delayBetween = 1000; // 1s pause between role changes
+        const maxLoops = 4; // Loop 4 times then stop
 
-          if (charIndex === 0) {
-            isDeleting = false;
-            roleIndex = (roleIndex + 1) % roles.length;
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let loopCount = 0;
 
-            // Increment loop counter when we complete a full cycle
-            if (roleIndex === 0) {
-              loopCount++;
+        // Clear initial content
+        roleElement.textContent = "";
+
+        function type() {
+          // Stop after max loops
+          if (loopCount >= maxLoops && roleIndex === 0 && charIndex === 0 && !isDeleting) {
+            roleElement.textContent = roles[0];
+            cursorElement.style.opacity = "0";
+            return;
+          }
+
+          const currentRole = roles[roleIndex];
+
+          if (isDeleting) {
+            roleElement.textContent = currentRole.substring(0, charIndex - 1);
+            charIndex--;
+
+            if (charIndex === 0) {
+              isDeleting = false;
+              roleIndex = (roleIndex + 1) % roles.length;
+
+              // Increment loop counter when we complete a full cycle
+              if (roleIndex === 0) {
+                loopCount++;
+              }
+
+              setTimeout(type, delayBetween);
+              return;
             }
+          } else {
+            roleElement.textContent = currentRole.substring(0, charIndex + 1);
+            charIndex++;
 
-            setTimeout(type, delayBetween);
-            return;
+            if (charIndex === currentRole.length) {
+              isDeleting = true;
+              setTimeout(type, delayBetween);
+              return;
+            }
           }
-        } else {
-          roleElement.textContent = currentRole.substring(0, charIndex + 1);
-          charIndex++;
 
-          if (charIndex === currentRole.length) {
-            isDeleting = true;
-            setTimeout(type, delayBetween);
-            return;
-          }
+          const speed = isDeleting ? eraseSpeed : typeSpeed;
+          setTimeout(type, speed);
         }
 
-        const speed = isDeleting ? eraseSpeed : typeSpeed;
-        setTimeout(type, speed);
+        // Start typing after a short delay (after initial fade-in)
+        setTimeout(() => {
+          type();
+        }, 800);
+      };
+
+      // Use requestIdleCallback if available, otherwise setTimeout
+      if ("requestIdleCallback" in window) {
+        requestIdleCallback(initRoleRotator);
+      } else {
+        setTimeout(initRoleRotator, 100);
       }
-
-      // Start typing after a short delay (after initial fade-in)
-      setTimeout(() => {
-        type();
-      }, 800);
-    };
-
-    // Use requestIdleCallback if available, otherwise setTimeout
-    if ("requestIdleCallback" in window) {
-      requestIdleCallback(initRoleRotator);
-    } else {
-      setTimeout(initRoleRotator, 100);
     }
-  }
-</script>
+  </script>
+</div>
