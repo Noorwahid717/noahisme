@@ -186,12 +186,12 @@ const projectMode: ProjectMode = {
 };
 
 const benefits: Benefit[] = [
-  { icon: "⭐", title: "Senior-level quality" },
-  { icon: "🧩", title: "Systems thinking" },
-  { icon: "💻", title: "Developer-friendly" },
-  { icon: "📋", title: "Clear process" },
-  { icon: "🎨", title: "On-brand" },
-  { icon: "🤝", title: "Smooth handoff" },
+  { icon: "star", title: "Senior-level quality" },
+  { icon: "puzzle", title: "Systems thinking" },
+  { icon: "code", title: "Developer-friendly" },
+  { icon: "checklist", title: "Clear process" },
+  { icon: "palette", title: "On-brand" },
+  { icon: "handshake", title: "Smooth handoff" },
 ];
 
 const faqs: FAQ[] = [
@@ -637,19 +637,90 @@ const modesJSON = JSON.stringify(modes);
 
       <div class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-6">
         {
-          benefits.map((benefit, index) => (
-            <ScrollReveal animation="fade-up" delay={200 + index * 60}>
-              <div class="benefit-item group flex flex-col items-center gap-3 rounded-2xl border border-divider/20 bg-surface/30 p-5 text-center transition-all duration-300 hover:-translate-y-1 hover:border-accent/20 hover:bg-accent/5 hover:shadow-subtle">
-                <span
-                  class="text-3xl transition-transform duration-300 group-hover:scale-110"
-                  aria-hidden="true"
+          benefits.map((benefit, index) => {
+            const iconSVGs = {
+              star: (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  fill="currentColor"
+                  viewBox="0 0 256 256"
                 >
-                  {benefit.icon}
-                </span>
-                <p class="text-xs font-medium text-text2">{benefit.title}</p>
-              </div>
-            </ScrollReveal>
-          ))
+                  <path d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z" />
+                </svg>
+              ),
+              puzzle: (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  fill="currentColor"
+                  viewBox="0 0 256 256"
+                >
+                  <path d="M220.27,158.54a8,8,0,0,0-7.7-.46,20,20,0,1,1,0-36.16,8,8,0,0,0,11.43-7.3V80a16,16,0,0,0-16-16H173.38a8,8,0,0,0-7.3,11.43,20,20,0,1,1-36.16,0A8,8,0,0,0,122.62,64H88a16,16,0,0,0-16,16V98.62a8,8,0,0,0,11.43,7.3,20,20,0,1,1,0,36.16A8,8,0,0,0,72,149.38V184a16,16,0,0,0,16,16h34.62a8,8,0,0,0,7.3-11.43,20,20,0,1,1,36.16,0,8,8,0,0,0,7.3,11.43H208a16,16,0,0,0,16-16V173.38A8,8,0,0,0,220.27,158.54Z" />
+                </svg>
+              ),
+              code: (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  fill="currentColor"
+                  viewBox="0 0 256 256"
+                >
+                  <path d="M69.12,94.15,28.5,128l40.62,33.85a8,8,0,1,1-10.24,12.29l-48-40a8,8,0,0,1,0-12.29l48-40a8,8,0,0,1,10.24,12.3Zm176,27.7-48-40a8,8,0,1,0-10.24,12.3L227.5,128l-40.62,33.85a8,8,0,1,0,10.24,12.29l48-40a8,8,0,0,0,0-12.29ZM162.73,32.48a8,8,0,0,0-10.25,4.79l-64,176a8,8,0,0,0,4.79,10.26A8.14,8.14,0,0,0,96,224a8,8,0,0,0,7.52-5.27l64-176A8,8,0,0,0,162.73,32.48Z" />
+                </svg>
+              ),
+              checklist: (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  fill="currentColor"
+                  viewBox="0 0 256 256"
+                >
+                  <path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48ZM40,112H80v32H40Zm56,0H216v32H96ZM216,64V96H40V64ZM40,160H80v32H40Zm176,32H96V160H216v32Z" />
+                </svg>
+              ),
+              palette: (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  fill="currentColor"
+                  viewBox="0 0 256 256"
+                >
+                  <path d="M200.77,53.89A103.27,103.27,0,0,0,128,24h-1.07A104,104,0,0,0,24,128c0,43,26.58,79.06,69.36,94.17A32,32,0,0,0,136,192a16,16,0,0,1,16-16h46.21a31.81,31.81,0,0,0,31.2-24.88,104.43,104.43,0,0,0,2.59-24A103.28,103.28,0,0,0,200.77,53.89Zm13,93.71A15.89,15.89,0,0,1,198.21,160H152a32,32,0,0,0-32,32,16,16,0,0,1-21.31,15.07C62.49,194.3,40,164,40,128a88,88,0,0,1,87.09-88h.9a88.35,88.35,0,0,1,88,87.25A88.86,88.86,0,0,1,213.81,147.6ZM140,76a12,12,0,1,1-12-12A12,12,0,0,1,140,76Zm-36,24a12,12,0,1,1-12-12A12,12,0,0,1,104,100Zm88,0a12,12,0,1,1-12-12A12,12,0,0,1,192,100Zm-36,40a12,12,0,1,1-12-12A12,12,0,0,1,156,140Z" />
+                </svg>
+              ),
+              handshake: (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  fill="currentColor"
+                  viewBox="0 0 256 256"
+                >
+                  <path d="M254.3,107.91,228.78,56.85a16,16,0,0,0-21.47-7.15L182.44,62.13,130.05,48.27a8.14,8.14,0,0,0-4.1,0L73.56,62.13,48.69,49.7a16,16,0,0,0-21.47,7.15L1.7,107.9a16,16,0,0,0,7.15,21.47l27,13.51,55.49,39.63a8.06,8.06,0,0,0,2.71,1.25l64,16a8,8,0,0,0,7.6-2.1l55.07-55.08,26.42-13.21a16,16,0,0,0,7.15-21.46Zm-54.89,33.37L165,113.72a8,8,0,0,0-10.68.61C136.51,132.27,116.66,130,104,122L147.24,85.2a8,8,0,0,0-9.3-13L100,109.78l-15.08-26.26a8,8,0,0,0-6.39-3.63,8.12,8.12,0,0,0-6.09,3.3L51.65,108.27c-2.84,3.31-13.15,17.18-18.37,22.19L18,119.35,43.5,68.29,81.56,87.16a8,8,0,0,0,7.92-.46L128,68.94l38.52,17.76a8,8,0,0,0,7.92.46l38.06-18.87,25.52,51.07Z" />
+                </svg>
+              ),
+            };
+
+            return (
+              <ScrollReveal animation="fade-up" delay={200 + index * 60}>
+                <div class="benefit-item group flex flex-col items-center gap-3 rounded-2xl border border-divider/20 bg-surface/30 p-5 text-center transition-all duration-300 hover:-translate-y-1 hover:border-accent/20 hover:bg-accent/5 hover:shadow-subtle">
+                  <div
+                    class="text-accent transition-all duration-300 group-hover:scale-110 group-hover:text-accent/80"
+                    aria-hidden="true"
+                  >
+                    {iconSVGs[benefit.icon as keyof typeof iconSVGs]}
+                  </div>
+                  <p class="text-xs font-medium text-text2">{benefit.title}</p>
+                </div>
+              </ScrollReveal>
+            );
+          })
         }
       </div>
     </div>

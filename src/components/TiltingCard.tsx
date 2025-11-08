@@ -64,7 +64,7 @@ const Icons = {
   ),
 };
 
-// Category-specific colors and configurations
+// Category-specific colors and configurations - using theme colors
 const categoryConfig: Record<
   string,
   {
@@ -76,30 +76,30 @@ const categoryConfig: Record<
   }
 > = {
   education: {
-    color: "rgb(59, 130, 246)", // Blue
-    bgColor: "rgba(59, 130, 246, 0.08)",
-    borderColor: "rgba(59, 130, 246, 0.2)",
+    color: "rgb(var(--color-accent))",
+    bgColor: "rgba(var(--color-accent), 0.08)",
+    borderColor: "rgba(var(--color-accent), 0.15)",
     label: "Education",
     Icon: Icons.GraduationCap,
   },
   retail: {
-    color: "rgb(16, 185, 129)", // Green
-    bgColor: "rgba(16, 185, 129, 0.08)",
-    borderColor: "rgba(16, 185, 129, 0.2)",
+    color: "rgb(var(--color-success))",
+    bgColor: "rgba(var(--color-success), 0.08)",
+    borderColor: "rgba(var(--color-success), 0.15)",
     label: "Retail",
     Icon: Icons.ShoppingCart,
   },
   enterprise: {
-    color: "rgb(139, 92, 246)", // Purple
-    bgColor: "rgba(139, 92, 246, 0.08)",
-    borderColor: "rgba(139, 92, 246, 0.2)",
+    color: "rgb(var(--color-accent))",
+    bgColor: "rgba(var(--color-accent), 0.1)",
+    borderColor: "rgba(var(--color-accent), 0.18)",
     label: "Enterprise",
     Icon: Icons.Building2,
   },
   tech: {
-    color: "rgb(236, 72, 153)", // Pink
-    bgColor: "rgba(236, 72, 153, 0.08)",
-    borderColor: "rgba(236, 72, 153, 0.2)",
+    color: "rgb(var(--color-success))",
+    bgColor: "rgba(var(--color-success), 0.1)",
+    borderColor: "rgba(var(--color-success), 0.18)",
     label: "Technology",
     Icon: Icons.Sparkles,
   },
