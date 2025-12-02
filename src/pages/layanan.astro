@@ -1,0 +1,498 @@
+---
+import Base from "~/layouts/Base.astro";
+import Section from "~/components/Section.astro";
+import WaveDivider from "~/components/WaveDivider.astro";
+import ScrollReveal from "~/components/ScrollReveal.astro";
+import ProcessStepCard from "~/components/ProcessStepCard";
+import { SITE } from "~/lib/seo";
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Layanan Pengembangan Web",
+  provider: {
+    "@type": "Person",
+    name: "Mohammad Noor Wahid",
+  },
+  url: `${SITE.url}/layanan`,
+  description:
+    "Layanan pengembangan web full-stack profesional dengan pricing transparan dan proses terstruktur.",
+};
+
+const processSteps = [
+  {
+    step: "01",
+    title: "Analisis & Perencanaan",
+    description:
+      "Mengidentifikasi kebutuhan bisnis, merancang arsitektur sistem, dan menentukan tech stack optimal (React/Next.js, Node.js/Golang, PostgreSQL) sebelum eksekusi.",
+  },
+  {
+    step: "02",
+    title: "Desain API & Database",
+    description:
+      "Merancang RESTful API, skema database relasional, dan struktur data yang scalable dengan fokus pada efisiensi query dan integritas data.",
+  },
+  {
+    step: "03",
+    title: "Development Full-Stack",
+    description:
+      "Implementasi backend (Node.js/Golang) dan frontend (React/Next.js) dengan TypeScript, state management modern, dan integrasi real-time menggunakan WebSocket/Redis.",
+  },
+  {
+    step: "04",
+    title: "Deployment & Maintenance",
+    description:
+      "Deploy ke production (Vercel, Railway, Supabase), setup monitoring, optimisasi performa, dan dokumentasi teknis untuk kemudahan maintenance jangka panjang.",
+  },
+];
+
+interface PricingTier {
+  id: string;
+  name: string;
+  target: string;
+  price: string;
+  sprints: number;
+  timeline: string;
+  description: string;
+  features: string[];
+  cta: string;
+  ctaHref: string;
+}
+
+const pricingTiers: PricingTier[] = [
+  {
+    id: "starter",
+    name: "Starter",
+    target: "Personal / UMKM Kecil",
+    price: "Rp 1,5 – 5 juta",
+    sprints: 1,
+    timeline: "1–2 bulan",
+    description:
+      "Landing page/portofolio cepat rilis. Fokus pada tampilan, copy ringkas, dan kecepatan.",
+    features: [
+      "Desain + implementasi 1 halaman inti",
+      "SEO dasar + performa ringan",
+      "Integrasi formulir kontak",
+      "1x sesi revisi terjadwal",
+      "Dokumentasi singkat deploy",
+    ],
+    cta: "Mulai Proyek Starter",
+    ctaHref: "/brief",
+  },
+  {
+    id: "growth",
+    name: "Growth",
+    target: "Startup & Bisnis Berkembang",
+    price: "Rp 7 – 20 juta",
+    sprints: 2,
+    timeline: "2–4 bulan",
+    description: "Website dengan CMS, dashboard sederhana, atau integrasi API dasar.",
+    features: [
+      "UI/UX halaman inti + CMS (blog/produk)",
+      "Integrasi API read/write sederhana",
+      "Auth dasar (opsional)",
+      "Dokumentasi + handover",
+      "2x sesi revisi terjadwal",
+    ],
+    cta: "Mulai Proyek Growth",
+    ctaHref: "/brief",
+  },
+  {
+    id: "pro",
+    name: "Pro",
+    target: "Perusahaan / Sekolah / Yayasan / Startup Tech",
+    price: "Rp 25 – 60 juta",
+    sprints: 3,
+    timeline: "4–8 bulan",
+    description:
+      "Full-stack custom app (FE + BE + DB + CI/CD) dengan analisis kebutuhan & code review.",
+    features: [
+      "Arsitektur & scoping detail",
+      "FE (Next.js/React) + BE (Go/Node) + DB (Postgres)",
+      "Auth, role, audit trail (sesuai scope)",
+      "CI/CD + observability dasar",
+      "Dokumentasi teknis + sesi handover",
+    ],
+    cta: "Mulai Proyek Pro",
+    ctaHref: "/brief",
+  },
+];
+
+const hourlyService = {
+  title: "Per Jam — Cepat & Fokus",
+  tagline: "Tanpa Sprint",
+  price: "Rp 100.000 – 150.000 / jam",
+  minimum: "Minimum 2 jam",
+  description:
+    "Eksekusi cepat untuk tugas terdefinisi jelas. Cocok untuk landing tweak, komponen UI, perbaikan bug, atau setup kecil.",
+  suitableFor: [
+    "Perbaikan UI kecil / micro-copy",
+    "Optimasi Lighthouse/SEO minor",
+    "Integrasi API kecil (read-only, 1–2 endpoint)",
+    "Setup komponen desain (MUI/Tailwind)",
+    "Bugfix & refactor ringan",
+  ],
+  notes: [
+    "Diskon volume untuk >15 jam/bulan",
+    "Jam dihitung per 30 menit",
+    "Tidak ada sprint/ceremony",
+  ],
+};
+
+const faqs = [
+  {
+    q: "Bagaimana cara memulai proyek?",
+    a: "Mulai dengan mengisi brief di halaman /brief atau jadwalkan discovery call untuk diskusi kebutuhan proyek Anda. Saya akan memberikan estimasi timeline dan biaya berdasarkan scope.",
+  },
+  {
+    q: "Bagaimana sistem pembayaran?",
+    a: "Untuk proyek fixed-price, umumnya 30% DP, 40% di milestone tengah, dan 30% setelah selesai. Untuk per jam, bisa mingguan atau setelah proyek selesai (tergantung kesepakatan).",
+  },
+  {
+    q: "Berapa lama pengerjaan?",
+    a: "Starter: 1–2 bulan • Growth: 2–4 bulan • Pro: 4–8 bulan. Per Jam: rata-rata 1–2 hari kerja untuk task umum. Timeline tergantung kompleksitas & respons feedback.",
+  },
+  {
+    q: "Apakah bisa revisi setelah selesai?",
+    a: "Ya. Setiap tier sudah termasuk sesi revisi terjadwal. Revisi tambahan di luar scope bisa diatur sebagai sprint baru atau per jam.",
+  },
+  {
+    q: "Tech stack apa yang digunakan?",
+    a: "Frontend: React, Next.js, Astro, Tailwind CSS. Backend: Node.js, Golang, FastAPI. Database: PostgreSQL, Supabase, Redis. Deployment: Vercel, Railway, Docker.",
+  },
+  {
+    q: "Apakah termasuk maintenance?",
+    a: "Proyek Pro termasuk 1 bulan maintenance gratis setelah launch. Untuk paket lain, maintenance bisa diatur terpisah dengan skema per jam atau retainer bulanan.",
+  },
+];
+---
+
+<Base
+  structuredData={structuredData}
+  title="Layanan | Mohammad Noor Wahid"
+  description="Layanan pengembangan web full-stack dengan pricing transparan dan proses terstruktur. Dari landing page hingga aplikasi enterprise."
+>
+  {/* Hero Section */}
+  <section
+    class="relative overflow-hidden bg-gradient-to-b from-accent/5 via-transparent to-transparent pt-32 pb-20"
+  >
+    <div class="mx-auto max-w-6xl px-6">
+      <ScrollReveal animation="fade-up" delay={100}>
+        <p class="text-xs uppercase tracking-[0.32em] text-accent/80">Layanan</p>
+      </ScrollReveal>
+
+      <ScrollReveal animation="fade-up" delay={200}>
+        <h1
+          class="mt-4 font-heading text-[2.5rem] font-bold leading-tight text-text md:text-[3.5rem]"
+        >
+          Pengembangan Web<br />
+          <span class="bg-gradient-to-r from-accent to-accent/60 bg-clip-text text-transparent">
+            Profesional & Terukur
+          </span>
+        </h1>
+      </ScrollReveal>
+
+      <ScrollReveal animation="fade-up" delay={300}>
+        <p class="mt-6 max-w-2xl text-lg leading-relaxed text-text2 md:text-xl">
+          Dari landing page hingga aplikasi enterprise, saya membantu mewujudkan produk digital
+          dengan standar kualitas tinggi, arsitektur bersih, dan performa optimal.
+        </p>
+      </ScrollReveal>
+
+      <ScrollReveal animation="fade-up" delay={400}>
+        <div class="mt-8 flex flex-wrap items-center gap-4">
+          <a
+            href="/brief"
+            class="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-accent/90 hover:shadow-lg"
+          >
+            Minta Estimasi Proyek
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              viewBox="0 0 256 256"
+            >
+              <path
+                d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"
+              ></path>
+            </svg>
+          </a>
+          <a
+            href="/contact"
+            class="inline-flex items-center gap-2 rounded-full border border-divider px-6 py-3 text-sm font-semibold text-text transition-all hover:border-accent hover:text-accent"
+          >
+            Hubungi Saya
+          </a>
+        </div>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <WaveDivider variant="top" color="accent" opacity={0.06} />
+
+  {/* Process Steps Section */}
+  <Section eyebrow="Proses Kerja" title="Cara Saya Bekerja">
+    <p class="mx-auto mt-5 max-w-2xl text-center text-sm leading-relaxed text-text2 md:text-base">
+      Metode terstruktur yang menggabungkan riset, prototyping, dan implementasi hingga siap
+      production. Setiap tahap dirancang untuk transparansi dan hasil maksimal.
+    </p>
+
+    <div class="mt-16 grid gap-8 md:grid-cols-2 xl:grid-cols-4">
+      {
+        processSteps.map((step, index) => (
+          <ScrollReveal animation="fade-up" delay={100 + index * 100}>
+            <ProcessStepCard client:visible {...step} index={index} />
+          </ScrollReveal>
+        ))
+      }
+    </div>
+  </Section>
+
+  <WaveDivider variant="bottom" color="accent" opacity={0.06} />
+  <WaveDivider variant="top" color="accent" opacity={0.08} />
+
+  {/* Pricing Section */}
+  <section
+    class="relative bg-gradient-to-b from-accent/[0.02] via-transparent to-transparent py-24"
+  >
+    <div class="mx-auto max-w-6xl px-6">
+      <ScrollReveal animation="fade-up" delay={100}>
+        <p class="text-center text-xs uppercase tracking-[0.32em] text-accent/80">Pricing</p>
+      </ScrollReveal>
+
+      <ScrollReveal animation="fade-up" delay={200}>
+        <h2
+          class="mt-3 text-center font-heading text-[1.9rem] font-semibold leading-tight text-text md:text-[2.35rem]"
+        >
+          <span class="bg-gradient-to-r from-text to-accent bg-clip-text text-transparent">
+            Paket Layanan Per Proyek
+          </span>
+        </h2>
+      </ScrollReveal>
+
+      <ScrollReveal animation="fade-up" delay={300}>
+        <p
+          class="mt-5 mx-auto max-w-2xl text-center text-sm leading-relaxed text-text2 md:text-base"
+        >
+          Pilih paket yang sesuai dengan kebutuhan dan budget Anda. Semua paket termasuk konsultasi,
+          implementasi, dan handover.
+        </p>
+      </ScrollReveal>
+
+      {/* Pricing Cards */}
+      <div class="mt-16 grid gap-8 md:grid-cols-3">
+        {
+          pricingTiers.map((tier, index) => (
+            <ScrollReveal animation="fade-up" delay={100 + index * 100}>
+              <div class="group relative rounded-2xl border border-divider bg-surface p-8 shadow-subtle transition-all duration-300 hover:border-accent/40 hover:shadow-lg">
+                <div class="mb-6">
+                  <h3 class="text-2xl font-bold text-text">{tier.name}</h3>
+                  <p class="mt-1 text-sm text-text2/80">{tier.target}</p>
+                </div>
+
+                <div class="mb-6">
+                  <p class="text-3xl font-bold text-accent">{tier.price}</p>
+                  <p class="mt-2 text-sm text-text2">
+                    {tier.sprints} sprint • {tier.timeline}
+                  </p>
+                </div>
+
+                <p class="mb-6 text-sm leading-relaxed text-text2">{tier.description}</p>
+
+                <ul class="mb-8 space-y-3">
+                  {tier.features.map((feature) => (
+                    <li class="flex items-start gap-3 text-sm text-text2">
+                      <svg
+                        class="mt-0.5 h-5 w-5 flex-shrink-0 text-accent"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        fill="currentColor"
+                        viewBox="0 0 256 256"
+                      >
+                        <path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z" />
+                      </svg>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <a
+                  href={tier.ctaHref}
+                  class="block w-full rounded-full bg-accent px-6 py-3 text-center text-sm font-semibold text-white transition-all hover:bg-accent/90 hover:shadow-md"
+                >
+                  {tier.cta}
+                </a>
+              </div>
+            </ScrollReveal>
+          ))
+        }
+      </div>
+
+      {/* Hourly Service */}
+      <ScrollReveal animation="fade-up" delay={400}>
+        <div class="mt-12 rounded-2xl border border-divider bg-surface/50 p-8 md:p-10">
+          <div class="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+            <div class="flex-1">
+              <div class="flex items-center gap-3">
+                <h3 class="text-2xl font-bold text-text">{hourlyService.title}</h3>
+                <span class="rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold text-accent">
+                  {hourlyService.tagline}
+                </span>
+              </div>
+              <p class="mt-4 text-lg font-semibold text-accent">{hourlyService.price}</p>
+              <p class="mt-1 text-sm text-text2">{hourlyService.minimum}</p>
+              <p class="mt-4 text-sm leading-relaxed text-text2">
+                {hourlyService.description}
+              </p>
+
+              <div class="mt-6">
+                <p class="text-sm font-semibold text-text">Cocok untuk:</p>
+                <ul class="mt-3 space-y-2">
+                  {
+                    hourlyService.suitableFor.map((item) => (
+                      <li class="flex items-start gap-2 text-sm text-text2">
+                        <span class="mt-1 text-accent">•</span>
+                        <span>{item}</span>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+
+              <div class="mt-6 space-y-1">
+                {
+                  hourlyService.notes.map((note) => (
+                    <p class="text-xs italic text-text2/70">{note}</p>
+                  ))
+                }
+              </div>
+            </div>
+
+            <div class="flex-shrink-0">
+              <a
+                href="/book/hourly"
+                class="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-accent/90 hover:shadow-md"
+              >
+                Mulai dari 2 Jam
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  viewBox="0 0 256 256"
+                >
+                  <path
+                    d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"
+                  ></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <WaveDivider variant="bottom" color="accent" opacity={0.08} />
+
+  {/* FAQ Section */}
+  <section class="py-24">
+    <div class="mx-auto max-w-4xl px-6">
+      <ScrollReveal animation="fade-up" delay={100}>
+        <p class="text-center text-xs uppercase tracking-[0.32em] text-accent/80">FAQ</p>
+      </ScrollReveal>
+
+      <ScrollReveal animation="fade-up" delay={200}>
+        <h2
+          class="mt-3 text-center font-heading text-[1.9rem] font-semibold leading-tight text-text md:text-[2.35rem]"
+        >
+          Pertanyaan Umum
+        </h2>
+      </ScrollReveal>
+
+      <div class="mt-12 space-y-4">
+        {
+          faqs.map((faq, index) => (
+            <ScrollReveal animation="fade-up" delay={100 + index * 50}>
+              <details class="group rounded-xl border border-divider bg-surface p-6 transition-all hover:border-accent/40">
+                <summary class="flex cursor-pointer items-center justify-between font-semibold text-text">
+                  <span>{faq.q}</span>
+                  <svg
+                    class="h-5 w-5 flex-shrink-0 text-accent transition-transform group-open:rotate-180"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    fill="currentColor"
+                    viewBox="0 0 256 256"
+                  >
+                    <path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z" />
+                  </svg>
+                </summary>
+                <p class="mt-4 text-sm leading-relaxed text-text2">{faq.a}</p>
+              </details>
+            </ScrollReveal>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* CTA Section */}
+  <section
+    class="relative overflow-hidden bg-gradient-to-b from-accent/5 via-transparent to-transparent py-20"
+  >
+    <div class="mx-auto max-w-4xl px-6 text-center">
+      <ScrollReveal animation="fade-up" delay={100}>
+        <h2 class="font-heading text-[2rem] font-bold leading-tight text-text md:text-[2.5rem]">
+          Siap Memulai Proyek Anda?
+        </h2>
+      </ScrollReveal>
+
+      <ScrollReveal animation="fade-up" delay={200}>
+        <p class="mt-4 text-lg text-text2">
+          Isi brief singkat atau jadwalkan call untuk diskusi kebutuhan proyek Anda.
+        </p>
+      </ScrollReveal>
+
+      <ScrollReveal animation="fade-up" delay={300}>
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <a
+            href="/brief"
+            class="inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 text-base font-semibold text-white transition-all hover:bg-accent/90 hover:shadow-lg"
+          >
+            Isi Brief Proyek
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              fill="currentColor"
+              viewBox="0 0 256 256"
+            >
+              <path
+                d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"
+              ></path>
+            </svg>
+          </a>
+          <a
+            href="/contact"
+            class="inline-flex items-center gap-2 rounded-full border-2 border-accent px-8 py-4 text-base font-semibold text-accent transition-all hover:bg-accent hover:text-white"
+          >
+            Hubungi Saya
+          </a>
+        </div>
+      </ScrollReveal>
+    </div>
+  </section>
+</Base>
+
+<style>
+  details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  details[open] {
+    border-color: rgb(var(--color-accent) / 0.4);
+  }
+</style>
