@@ -1,9 +1,7 @@
 ---
 import Base from "~/layouts/Base.astro";
-import Section from "~/components/Section.astro";
 import WaveDivider from "~/components/WaveDivider.astro";
 import ScrollReveal from "~/components/ScrollReveal.astro";
-import ProcessStepCard from "~/components/ProcessStepCard";
 import { SITE } from "~/lib/seo";
 
 const structuredData = {
@@ -19,30 +17,248 @@ const structuredData = {
     "Layanan pengembangan web full-stack profesional dengan pricing transparan dan proses terstruktur.",
 };
 
-const processSteps = [
+const workflowPhases = [
   {
-    step: "01",
-    title: "Analisis & Perencanaan",
+    phase: "01",
+    name: "Discovery & Requirements",
+    duration: "1-2 minggu",
     description:
-      "Mengidentifikasi kebutuhan bisnis, merancang arsitektur sistem, dan menentukan tech stack optimal (React/Next.js, Node.js/Golang, PostgreSQL) sebelum eksekusi.",
+      "Fase awal untuk memahami visi produk, validasi kebutuhan bisnis, dan technical feasibility. Output fase ini adalah project brief yang komprehensif dan sprint plan yang actionable.",
+    activities: [
+      "Discovery workshop dengan stakeholders (60-90 menit)",
+      "Requirements gathering dan prioritization (MoSCoW method)",
+      "Competitive analysis dan market research (jika diperlukan)",
+      "User persona definition dan user journey mapping",
+      "Technical architecture planning dan tech stack selection",
+      "Risk assessment dan mitigation strategy",
+      "Timeline dan budget finalization",
+    ],
+    deliverables: [
+      "Project Brief Document (scope, features, constraints)",
+      "Sprint Backlog dengan user stories",
+      "Technical Architecture Diagram",
+      "Database Schema (ERD) preliminary design",
+      "API Specification outline (endpoints, resources)",
+      "UI/UX Wireframes atau sitemap",
+      "Project Kickoff Presentation",
+    ],
+    tools: [
+      "Notion/Linear untuk project management",
+      "Figma untuk wireframes",
+      "Miro untuk brainstorming",
+      "Google Docs untuk documentation",
+    ],
+    keyQuestions: [
+      "Siapa target user dan apa pain points mereka?",
+      "Apa success metrics yang akan kita ukur?",
+      "Apa saja constraint (budget, timeline, technical)?",
+      "Apakah ada existing system yang perlu diintegrasikan?",
+    ],
   },
   {
-    step: "02",
-    title: "Desain API & Database",
+    phase: "02",
+    name: "Design & Architecture",
+    duration: "1-2 minggu",
     description:
-      "Merancang RESTful API, skema database relasional, dan struktur data yang scalable dengan fokus pada efisiensi query dan integritas data.",
+      "Merancang foundation teknis yang solid: database schema, API design, system architecture, dan UI/UX mockups. Fase ini memastikan semua komponen terintegrasi dengan baik sebelum coding dimulai.",
+    activities: [
+      "Database schema design dengan normalization dan indexing",
+      "RESTful API design atau GraphQL schema definition",
+      "Authentication & authorization flow design",
+      "UI/UX design dengan component library selection",
+      "State management strategy (React Query, Zustand, dll)",
+      "Error handling dan validation strategy",
+      "Caching strategy (Redis, CDN, browser cache)",
+      "Security audit untuk architecture (OWASP checklist)",
+    ],
+    deliverables: [
+      "Final Database Schema dengan relationships dan constraints",
+      "Complete API Documentation (OpenAPI/Swagger spec)",
+      "Authentication Flow Diagram (login, register, reset password)",
+      "High-Fidelity UI Mockups atau Design System",
+      "Component Architecture Diagram (React tree)",
+      "Data Flow Diagram (client ↔ API ↔ database)",
+      "Security Checklist dan compliance requirements",
+      "Development Environment Setup Guide",
+    ],
+    tools: [
+      "PostgreSQL/Supabase Studio untuk DB design",
+      "Swagger/Postman untuk API spec",
+      "Figma/Penpot untuk UI design",
+      "DrawSQL/dbdiagram.io untuk ERD",
+    ],
+    keyQuestions: [
+      "Bagaimana struktur data optimal untuk scale?",
+      "Apa API design pattern terbaik untuk use case ini?",
+      "Bagaimana menangani concurrent users dan data consistency?",
+      "Apa security measures yang harus diimplementasikan?",
+    ],
   },
   {
-    step: "03",
-    title: "Development Full-Stack",
+    phase: "03",
+    name: "Development & Integration",
+    duration: "4-10 minggu (tergantung tier)",
     description:
-      "Implementasi backend (Node.js/Golang) dan frontend (React/Next.js) dengan TypeScript, state management modern, dan integrasi real-time menggunakan WebSocket/Redis.",
+      "Fase development dengan iterasi sprint mingguan. Setiap sprint menghasilkan working increment yang bisa di-demo dan di-test. Code review, testing, dan feedback loop berjalan kontinyu.",
+    activities: [
+      "Sprint planning setiap awal minggu (prioritas & estimation)",
+      "Backend API development dengan testing (unit + integration)",
+      "Frontend component development dengan Storybook",
+      "Database migration dan seeding untuk development",
+      "Third-party integration (payment, email, storage, dll)",
+      "Real-time features (WebSocket, SSE) jika diperlukan",
+      "Authentication implementation (JWT, OAuth, SSO)",
+      "Daily progress updates via chat/project management tool",
+      "Weekly sprint review dan demo (live/recorded)",
+      "Code review dan refactoring session",
+      "Bug fixing dan technical debt management",
+    ],
+    deliverables: [
+      "Working backend API dengan full CRUD operations",
+      "Responsive frontend application (mobile-first)",
+      "Database dengan production-ready schema dan indexes",
+      "Automated test suite (unit, integration, E2E)",
+      "CI/CD pipeline untuk automated testing dan preview",
+      "API documentation dengan examples (Swagger UI)",
+      "Admin dashboard untuk data management (jika included)",
+      "Email templates dan notification system",
+      "File upload/download functionality dengan CDN",
+      "Search dan filtering features",
+    ],
+    tools: [
+      "GitHub/GitLab untuk version control",
+      "Vercel/Railway untuk preview deployments",
+      "Vitest/Jest untuk testing",
+      "GitHub Actions untuk CI/CD",
+    ],
+    keyQuestions: [
+      "Apakah setiap feature working as expected?",
+      "Bagaimana performance di production-like environment?",
+      "Apakah ada technical blocker yang perlu di-address?",
+      "Apa feedback dari weekly demo?",
+    ],
   },
   {
-    step: "04",
-    title: "Deployment & Maintenance",
+    phase: "04",
+    name: "Testing & Quality Assurance",
+    duration: "1-2 minggu",
     description:
-      "Deploy ke production (Vercel, Railway, Supabase), setup monitoring, optimisasi performa, dan dokumentasi teknis untuk kemudahan maintenance jangka panjang.",
+      "QA menyeluruh untuk memastikan aplikasi stable, performant, dan secure sebelum launch. Termasuk user acceptance testing, performance testing, dan security audit.",
+    activities: [
+      "Comprehensive manual testing (all features, all flows)",
+      "Cross-browser testing (Chrome, Firefox, Safari, Edge)",
+      "Mobile responsive testing (iOS, Android, tablets)",
+      "Performance testing dengan Lighthouse dan WebPageTest",
+      "Load testing untuk menguji scalability (optional untuk Pro)",
+      "Security penetration testing (OWASP Top 10)",
+      "Accessibility audit (WCAG 2.1 compliance check)",
+      "User Acceptance Testing (UAT) dengan client/stakeholders",
+      "Bug tracking dan prioritization (critical → minor)",
+      "Regression testing setelah bug fixes",
+    ],
+    deliverables: [
+      "QA Test Report dengan bug list dan status",
+      "Performance Report (Lighthouse scores, Core Web Vitals)",
+      "Security Audit Report dengan recommendations",
+      "Accessibility Report (WCAG compliance level)",
+      "UAT Sign-off Document dari client",
+      "Bug-free application ready for production",
+      "Performance optimization recommendations",
+    ],
+    tools: [
+      "Playwright/Cypress untuk E2E testing",
+      "Lighthouse untuk performance",
+      "BrowserStack untuk cross-browser",
+      "OWASP ZAP untuk security scan",
+    ],
+    keyQuestions: [
+      "Apakah semua critical bugs sudah fixed?",
+      "Apakah performance memenuhi target metrics?",
+      "Apakah ada security vulnerability yang perlu di-patch?",
+      "Apakah client approve untuk production deployment?",
+    ],
+  },
+  {
+    phase: "05",
+    name: "Deployment & Launch",
+    duration: "3-5 hari",
+    description:
+      "Production deployment dengan zero-downtime strategy, monitoring setup, dan post-launch support. Memastikan aplikasi running smoothly di production environment.",
+    activities: [
+      "Production environment setup (domain, SSL, CDN)",
+      "Database migration ke production dengan backup strategy",
+      "Environment variables dan secrets configuration",
+      "Production deployment dengan smoke testing",
+      "DNS configuration dan domain pointing",
+      "Monitoring dan alerting setup (Sentry, LogRocket)",
+      "Analytics integration (Google Analytics, Plausible)",
+      "Performance monitoring (Web Vitals, uptime)",
+      "Backup dan disaster recovery setup",
+      "Post-launch smoke testing dan validation",
+    ],
+    deliverables: [
+      "Live production application dengan custom domain",
+      "SSL certificate dan HTTPS enforcement",
+      "Monitoring dashboard dengan alerting rules",
+      "Analytics setup untuk tracking user behavior",
+      "Backup strategy dan recovery procedures",
+      "Production deployment checklist (completed)",
+      "Launch announcement (jika diperlukan)",
+    ],
+    tools: [
+      "Vercel/Railway/AWS untuk hosting",
+      "Cloudflare untuk DNS + CDN",
+      "Sentry untuk error tracking",
+      "Uptime Robot untuk monitoring",
+    ],
+    keyQuestions: [
+      "Apakah deployment berhasil tanpa downtime?",
+      "Apakah monitoring dan alerting sudah active?",
+      "Apakah ada issue critical di production?",
+      "Apakah backup strategy sudah tested?",
+    ],
+  },
+  {
+    phase: "06",
+    name: "Handover & Documentation",
+    duration: "1 minggu",
+    description:
+      "Knowledge transfer ke tim client, dokumentasi lengkap untuk future development, dan training untuk admin/content team. Memastikan client bisa maintain dan develop aplikasi secara mandiri.",
+    activities: [
+      "Complete technical documentation writing",
+      "API documentation dengan code examples",
+      "Admin/user manual untuk non-technical users",
+      "Video tutorial recording untuk common tasks",
+      "Knowledge transfer session dengan development team",
+      "Training session untuk admin/content team",
+      "Repository access dan permission setup",
+      "Handover meeting dengan stakeholders",
+      "Post-launch support period (2 minggu - 2 bulan)",
+    ],
+    deliverables: [
+      "Complete Technical Documentation (architecture, setup, deployment)",
+      "API Documentation dengan Postman collection atau Swagger",
+      "Admin User Guide dengan screenshots dan tutorials",
+      "Video Tutorials untuk common operations (10-30 menit)",
+      "Source Code Repository dengan full access",
+      "Environment Setup Guide untuk local development",
+      "Troubleshooting Guide untuk common issues",
+      "Future Development Roadmap (recommendations)",
+      "Maintenance dan Update Guidelines",
+      "Post-Launch Support (bug fixes, questions, adjustments)",
+    ],
+    tools: [
+      "Notion/GitBook untuk documentation",
+      "Loom untuk video tutorials",
+      "GitHub untuk repository access",
+      "Slack/Discord untuk post-launch support",
+    ],
+    keyQuestions: [
+      "Apakah tim client understand architecture dan codebase?",
+      "Apakah admin team bisa manage content dan users?",
+      "Apakah ada questions atau concerns yang belum addressed?",
+      "Apa rencana maintenance dan future development?",
+    ],
   },
 ];
 
@@ -382,23 +598,256 @@ const faqs = [
 
   <WaveDivider variant="top" color="accent" opacity={0.06} />
 
-  {/* Process Steps Section */}
-  <Section eyebrow="Proses Kerja" title="Cara Saya Bekerja">
-    <p class="mx-auto mt-5 max-w-2xl text-center text-sm leading-relaxed text-text2 md:text-base">
-      Metode terstruktur yang menggabungkan riset, prototyping, dan implementasi hingga siap
-      production. Setiap tahap dirancang untuk transparansi dan hasil maksimal.
-    </p>
+  {/* Workflow Process Section */}
+  <section class="relative py-24">
+    <div class="mx-auto max-w-6xl px-6">
+      <ScrollReveal animation="fade-up" delay={100}>
+        <p class="text-center text-xs uppercase tracking-[0.32em] text-accent/80">Workflow</p>
+      </ScrollReveal>
 
-    <div class="mt-16 grid gap-8 md:grid-cols-2 xl:grid-cols-4">
-      {
-        processSteps.map((step, index) => (
-          <ScrollReveal animation="fade-up" delay={100 + index * 100}>
-            <ProcessStepCard client:visible {...step} index={index} />
-          </ScrollReveal>
-        ))
-      }
+      <ScrollReveal animation="fade-up" delay={200}>
+        <h2
+          class="mt-3 text-center font-heading text-[1.9rem] font-semibold leading-tight text-text md:text-[2.35rem]"
+        >
+          <span class="bg-gradient-to-r from-text to-accent bg-clip-text text-transparent">
+            End-to-End Development Process
+          </span>
+        </h2>
+      </ScrollReveal>
+
+      <ScrollReveal animation="fade-up" delay={300}>
+        <p
+          class="mt-5 mx-auto max-w-3xl text-center text-sm leading-relaxed text-text2 md:text-base"
+        >
+          Proses development yang terstruktur dan transparan dari discovery hingga handover. Setiap
+          fase memiliki deliverables yang jelas, timeline yang realistis, dan checkpoint untuk
+          feedback. Anda selalu tahu apa yang sedang dikerjakan dan apa yang akan didapatkan.
+        </p>
+      </ScrollReveal>
+
+      {/* Timeline Visualization */}
+      <div class="relative mt-16">
+        {/* Timeline Line */}
+        <div
+          class="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-accent via-accent/50 to-accent/20 hidden md:block"
+          aria-hidden="true"
+        >
+        </div>
+
+        {/* Workflow Phases */}
+        <div class="space-y-12">
+          {
+            workflowPhases.map((phase, index) => (
+              <ScrollReveal animation="fade-up" delay={100 + index * 50}>
+                <div class="relative">
+                  {/* Phase Number Badge */}
+                  <div class="absolute left-0 top-0 hidden md:flex h-16 w-16 items-center justify-center rounded-full border-4 border-bg bg-accent text-white shadow-lg">
+                    <span class="font-heading text-xl font-bold">{phase.phase}</span>
+                  </div>
+
+                  {/* Phase Container */}
+                  <div class="md:ml-24 overflow-hidden rounded-2xl border border-divider bg-surface shadow-subtle">
+                    {/* Phase Header */}
+                    <div class="border-b border-divider bg-gradient-to-r from-accent/5 to-transparent p-6">
+                      <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                        <div class="flex-1">
+                          <div class="flex items-center gap-3">
+                            <span class="md:hidden rounded-full bg-accent px-3 py-1 text-sm font-bold text-white">
+                              {phase.phase}
+                            </span>
+                            <h3 class="font-heading text-2xl font-bold text-text">{phase.name}</h3>
+                          </div>
+                          <p class="mt-2 text-sm leading-relaxed text-text2">{phase.description}</p>
+                        </div>
+                        <div class="flex-shrink-0">
+                          <div class="rounded-lg bg-accent/10 px-4 py-2 text-center">
+                            <p class="text-xs font-medium text-text2">Duration</p>
+                            <p class="text-sm font-semibold text-accent">{phase.duration}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Phase Content */}
+                    <div class="p-6">
+                      <div class="grid gap-6 lg:grid-cols-2">
+                        {/* Left Column */}
+                        <div class="space-y-6">
+                          {/* Activities */}
+                          <div>
+                            <h4 class="mb-3 flex items-center gap-2 text-base font-semibold text-text">
+                              <svg
+                                class="h-5 w-5 text-accent"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="20"
+                                height="20"
+                                fill="currentColor"
+                                viewBox="0 0 256 256"
+                              >
+                                <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm40-68a28,28,0,0,1-28,28h-4v8a8,8,0,0,1-16,0v-8H104a8,8,0,0,1,0-16h36a12,12,0,0,0,0-24H116a28,28,0,0,1,0-56h4V72a8,8,0,0,1,16,0v8h16a8,8,0,0,1,0,16H116a12,12,0,0,0,0,24h24A28,28,0,0,1,168,148Z" />
+                              </svg>
+                              Activities
+                            </h4>
+                            <ul class="space-y-2">
+                              {phase.activities.map((activity) => (
+                                <li class="flex items-start gap-2 text-sm leading-relaxed text-text2">
+                                  <span class="mt-1 text-accent">•</span>
+                                  <span>{activity}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+
+                          {/* Key Questions */}
+                          {phase.keyQuestions && (
+                            <div>
+                              <h4 class="mb-3 flex items-center gap-2 text-base font-semibold text-text">
+                                <svg
+                                  class="h-5 w-5 text-accent"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="20"
+                                  height="20"
+                                  fill="currentColor"
+                                  viewBox="0 0 256 256"
+                                >
+                                  <path d="M140,180a12,12,0,1,1-12-12A12,12,0,0,1,140,180ZM128,72c-22.06,0-40,16.15-40,36v4a8,8,0,0,0,16,0v-4c0-11,10.77-20,24-20s24,9,24,20-10.77,20-24,20a8,8,0,0,0-8,8v8a8,8,0,0,0,16,0v-.72c18.24-3.35,32-17.9,32-35.28C168,88.15,150.06,72,128,72Zm104,56A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z" />
+                                </svg>
+                                Key Questions
+                              </h4>
+                              <ul class="space-y-2">
+                                {phase.keyQuestions.map((question) => (
+                                  <li class="flex items-start gap-2 text-sm leading-relaxed text-text2">
+                                    <span class="mt-1 text-accent">?</span>
+                                    <span>{question}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Right Column */}
+                        <div class="space-y-6">
+                          {/* Deliverables */}
+                          <div>
+                            <h4 class="mb-3 flex items-center gap-2 text-base font-semibold text-text">
+                              <svg
+                                class="h-5 w-5 text-accent"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="20"
+                                height="20"
+                                fill="currentColor"
+                                viewBox="0 0 256 256"
+                              >
+                                <path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z" />
+                              </svg>
+                              Deliverables
+                            </h4>
+                            <ul class="space-y-2">
+                              {phase.deliverables.map((deliverable) => (
+                                <li class="flex items-start gap-2 text-sm leading-relaxed text-text2">
+                                  <svg
+                                    class="mt-0.5 h-4 w-4 flex-shrink-0 text-accent"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    fill="currentColor"
+                                    viewBox="0 0 256 256"
+                                  >
+                                    <path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z" />
+                                  </svg>
+                                  <span>{deliverable}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+
+                          {/* Tools */}
+                          <div>
+                            <h4 class="mb-3 flex items-center gap-2 text-base font-semibold text-text">
+                              <svg
+                                class="h-5 w-5 text-accent"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="20"
+                                height="20"
+                                fill="currentColor"
+                                viewBox="0 0 256 256"
+                              >
+                                <path d="M232,120h-8.34l-32-64A16,16,0,0,0,177.33,48H78.67a16,16,0,0,0-14.3,8.84l-32,64H24a8,8,0,0,0,0,16h8v48a16,16,0,0,0,16,16H80a16,16,0,0,0,16-16V136h64v48a16,16,0,0,0,16,16h32a16,16,0,0,0,16-16V136h8a8,8,0,0,0,0-16ZM78.67,64h98.66l24,48H54.67ZM80,184H48V136H80Zm128,0H176V136h32Z" />
+                              </svg>
+                              Tools & Platforms
+                            </h4>
+                            <div class="flex flex-wrap gap-2">
+                              {phase.tools.map((tool) => (
+                                <span class="rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-text2">
+                                  {tool}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))
+          }
+        </div>
+      </div>
+
+      {/* Communication & Collaboration Note */}
+      <ScrollReveal animation="fade-up" delay={500}>
+        <div class="mt-16 rounded-2xl border border-accent/20 bg-accent/5 p-8">
+          <div class="flex items-start gap-4">
+            <svg
+              class="mt-1 h-6 w-6 flex-shrink-0 text-accent"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="currentColor"
+              viewBox="0 0 256 256"
+            >
+              <path
+                d="M232,128A104,104,0,0,1,79.12,219.82L45.07,231.17a16,16,0,0,1-20.24-20.24l11.35-34.05A104,104,0,1,1,232,128Zm-40,24a8,8,0,0,0-8-8H72a8,8,0,0,0,0,16H184A8,8,0,0,0,192,152Zm0-32a8,8,0,0,0-8-8H72a8,8,0,0,0,0,16H184A8,8,0,0,0,192,120Zm0-32a8,8,0,0,0-8-8H72a8,8,0,0,0,0,16H184A8,8,0,0,0,192,88Z"
+              ></path>
+            </svg>
+            <div class="flex-1">
+              <h3 class="mb-2 text-lg font-semibold text-text">
+                Komunikasi & Kolaborasi Sepanjang Proses
+              </h3>
+              <div class="space-y-3 text-sm leading-relaxed text-text2">
+                <p>
+                  <strong class="font-semibold text-text">Daily Updates:</strong> Progress report singkat
+                  via project management tool (Linear, Notion) atau Slack/Discord. Anda always tahu what's
+                  being worked on.
+                </p>
+                <p>
+                  <strong class="font-semibold text-text">Weekly Sprint Review:</strong> Demo live atau
+                  recorded video (10-20 menit) menunjukkan progress dan working features. Feedback session
+                  untuk adjustment di sprint berikutnya.
+                </p>
+                <p>
+                  <strong class="font-semibold text-text">Bi-weekly Sync Call:</strong> Video call untuk
+                  diskusi strategy, blocker, atau perubahan scope (30-45 menit). Opsional tapi highly
+                  recommended.
+                </p>
+                <p>
+                  <strong class="font-semibold text-text">Ad-hoc Communication:</strong> Quick questions
+                  via chat dengan response time &lt;24 jam. Untuk urgent issues, bisa phone call atau
+                  emergency meeting.
+                </p>
+                <p class="italic text-text2/80">
+                  → Semua komunikasi terdokumentasi di project management tool untuk referensi
+                  future dan audit trail.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ScrollReveal>
     </div>
-  </Section>
+  </section>
 
   <WaveDivider variant="bottom" color="accent" opacity={0.06} />
   <WaveDivider variant="top" color="accent" opacity={0.08} />
