@@ -46,131 +46,282 @@ const processSteps = [
   },
 ];
 
-interface PricingTier {
-  id: string;
-  name: string;
-  target: string;
-  price: string;
-  sprints: number;
-  timeline: string;
-  description: string;
-  features: string[];
-  cta: string;
-  ctaHref: string;
-}
-
-const pricingTiers: PricingTier[] = [
+const services = [
   {
     id: "starter",
-    name: "Starter",
-    target: "Personal / UMKM Kecil",
+    name: "Starter Package",
+    subtitle: "Perfect untuk memulai presence digital",
+    target: "Personal, UMKM, Freelancer",
     price: "Rp 1,5 – 5 juta",
     sprints: 4,
     timeline: "1–2 bulan",
     description:
-      "Landing page/portofolio cepat rilis. Fokus pada tampilan, copy ringkas, dan kecepatan.",
-    features: [
-      "Desain + implementasi 1 halaman inti",
-      "SEO dasar + performa ringan",
-      "Integrasi formulir kontak",
-      "1x sesi revisi terjadwal",
-      "Dokumentasi singkat deploy",
+      "Paket ini dirancang untuk individu atau bisnis kecil yang membutuhkan website profesional dengan cepat. Fokus pada kecepatan development, performa optimal, dan kemudahan maintenance. Cocok untuk portfolio, company profile, atau landing page produk dengan konversi tinggi.",
+    idealFor: [
+      "Portfolio profesional dengan case studies dan contact form",
+      "Company profile untuk UMKM dengan informasi produk/layanan",
+      "Landing page produk dengan fokus konversi dan lead generation",
+      "Website event atau promosi dengan timeline terbatas",
+      "Halaman biolink premium dengan analytics dan tracking",
     ],
-    cta: "Mulai Proyek Starter",
-    ctaHref: "/book/project",
+    deliverables: [
+      "Website responsif 1-3 halaman dengan design modern",
+      "SEO on-page optimization (meta tags, structured data, sitemap)",
+      "Contact form dengan email notification atau WhatsApp integration",
+      "Performance optimization (Lighthouse score 90+)",
+      "Mobile-first responsive design untuk semua device",
+      "Google Analytics setup dan basic tracking",
+      "Domain setup dan SSL certificate configuration",
+      "1x revisi content dan design setelah preview",
+      "Deployment ke platform modern (Vercel/Netlify)",
+      "Dokumentasi maintenance dan content update guide",
+    ],
+    techStack: [
+      "Frontend: Astro, React, atau Next.js (static)",
+      "Styling: Tailwind CSS untuk design consistency",
+      "Forms: FormSubmit, Formspree, atau EmailJS",
+      "Analytics: Google Analytics 4",
+      "Hosting: Vercel atau Netlify (auto-deploy)",
+      "CMS (optional): TinaCMS atau Sanity untuk content editing",
+    ],
+    limitations: [
+      "Tidak termasuk backend custom atau database",
+      "Maksimal 3 halaman utama (bisa ditambah dengan additional cost)",
+      "Tidak termasuk e-commerce atau payment gateway",
+      "Content copywriting ditangani oleh client",
+    ],
+    addOns: [
+      "Tambahan halaman: Rp 500k per halaman",
+      "Blog dengan CMS: +Rp 1,5 juta",
+      "Multilingual support: +Rp 1 juta",
+      "Advanced animations: +Rp 800k",
+    ],
   },
   {
     id: "growth",
-    name: "Growth",
-    target: "Startup & Bisnis Berkembang",
+    name: "Growth Package",
+    subtitle: "Scale bisnis dengan sistem yang powerful",
+    target: "Startup, SME, Bisnis Berkembang",
     price: "Rp 7 – 20 juta",
     sprints: 8,
     timeline: "2–4 bulan",
-    description: "Website dengan CMS, dashboard sederhana, atau integrasi API dasar.",
-    features: [
-      "UI/UX halaman inti + CMS (blog/produk)",
-      "Integrasi API read/write sederhana",
-      "Auth dasar (opsional)",
-      "Dokumentasi + handover",
-      "2x sesi revisi terjadwal",
+    description:
+      "Paket comprehensive untuk bisnis yang membutuhkan sistem lebih kompleks dengan CMS, dashboard, atau integrasi API. Termasuk backend development, database design, dan user management. Cocok untuk product platform, content website, atau internal tools dengan multiple user roles.",
+    idealFor: [
+      "Content platform dengan CMS (blog, news, documentation)",
+      "Dashboard admin untuk manage data atau user",
+      "Website dengan membership atau user authentication",
+      "Platform booking atau reservation system",
+      "Integration dengan third-party services (payment, shipping, email)",
+      "Multi-vendor marketplace (basic)",
+      "Learning Management System (LMS) sederhana",
     ],
-    cta: "Mulai Proyek Growth",
-    ctaHref: "/book/project",
+    deliverables: [
+      "Full-stack web application dengan frontend dan backend",
+      "Database schema design dan implementation (PostgreSQL/Supabase)",
+      "CMS integration untuk content management (Sanity, Strapi, atau Payload)",
+      "User authentication dan authorization (email/social login)",
+      "Admin dashboard untuk content dan user management",
+      "RESTful API atau GraphQL untuk data operations",
+      "File upload dan media management system",
+      "Email notification system (transactional emails)",
+      "Search dan filtering functionality",
+      "2x revisi setelah milestone review",
+      "Comprehensive API documentation",
+      "Deployment dengan CI/CD pipeline",
+      "1 bulan bug fixes setelah launch",
+      "Training session untuk client team",
+    ],
+    techStack: [
+      "Frontend: Next.js 14+, React 18, TypeScript",
+      "Backend: Next.js API Routes, tRPC, atau Express.js",
+      "Database: PostgreSQL (Supabase atau Railway)",
+      "ORM: Prisma atau Drizzle",
+      "Auth: NextAuth.js, Clerk, atau Supabase Auth",
+      "CMS: Sanity, Payload CMS, atau Strapi",
+      "Styling: Tailwind CSS + shadcn/ui components",
+      "State Management: Zustand atau React Query",
+      "Deployment: Vercel dengan environment variables",
+      "Monitoring: Sentry untuk error tracking",
+    ],
+    limitations: [
+      "Tidak termasuk machine learning atau AI features",
+      "Real-time features terbatas (polling, bukan WebSocket)",
+      "Maksimal 3 user roles (admin, user, moderator)",
+      "Payment gateway integration memerlukan additional fee",
+    ],
+    addOns: [
+      "Real-time features (WebSocket): +Rp 3 juta",
+      "Payment gateway integration: +Rp 2,5 juta",
+      "Advanced user roles & permissions: +Rp 2 juta",
+      "Mobile app (React Native): +Rp 8-15 juta",
+    ],
   },
   {
     id: "pro",
-    name: "Pro",
-    target: "Perusahaan / Sekolah / Yayasan / Startup Tech",
+    name: "Pro Package",
+    subtitle: "Enterprise-grade solution untuk scale besar",
+    target: "Perusahaan, Sekolah, Yayasan, Tech Startup",
     price: "Rp 25 – 60 juta",
     sprints: 12,
     timeline: "4–8 bulan",
     description:
-      "Full-stack custom app (FE + BE + DB + CI/CD) dengan analisis kebutuhan & code review.",
-    features: [
-      "Arsitektur & scoping detail",
-      "FE (Next.js/React) + BE (Go/Node) + DB (Postgres)",
-      "Auth, role, audit trail (sesuai scope)",
-      "CI/CD + observability dasar",
-      "Dokumentasi teknis + sesi handover",
+      "Solusi enterprise dengan full-stack custom development, microservices architecture, dan advanced features. Termasuk system design, code review, testing, CI/CD setup, dan monitoring. Cocok untuk aplikasi mission-critical dengan high traffic, complex business logic, dan requirement khusus.",
+    idealFor: [
+      "SaaS platform dengan subscription billing",
+      "ERP atau internal management system",
+      "E-learning platform dengan video streaming",
+      "Healthcare atau fintech application dengan compliance",
+      "Social platform dengan real-time messaging",
+      "Marketplace dengan complex vendor management",
+      "IoT dashboard dengan real-time data visualization",
+      "Legacy system modernization dan migration",
     ],
-    cta: "Mulai Proyek Pro",
-    ctaHref: "/book/project",
+    deliverables: [
+      "Complete system architecture design dan technical documentation",
+      "Frontend application dengan advanced UI/UX patterns",
+      "Backend API dengan microservices architecture (optional)",
+      "Database design dengan optimization dan indexing strategy",
+      "Multi-tenant architecture (jika diperlukan)",
+      "Real-time features dengan WebSocket atau Server-Sent Events",
+      "Advanced authentication dengan SSO, 2FA, atau biometric",
+      "Role-based access control (RBAC) dengan granular permissions",
+      "Payment gateway integration (Midtrans, Xendit, Stripe)",
+      "Email system dengan templating dan queue",
+      "File storage dengan CDN (Cloudinary, Supabase Storage, S3)",
+      "Search dengan Elasticsearch atau Algolia",
+      "Background job processing dengan queues (BullMQ, Inngest)",
+      "Comprehensive unit dan integration testing",
+      "CI/CD pipeline dengan automated testing dan deployment",
+      "Monitoring dan observability (logging, metrics, alerting)",
+      "Security audit dan penetration testing checklist",
+      "Performance optimization dan load testing",
+      "Disaster recovery dan backup strategy",
+      "Complete API documentation dengan Swagger/OpenAPI",
+      "Admin dashboard dengan analytics dan reporting",
+      "3x sprint review dan demo dengan stakeholders",
+      "Code review dan refactoring sessions",
+      "2 bulan maintenance dan bug fixes setelah launch",
+      "Knowledge transfer dan training untuk tim internal",
+      "Handover documentation untuk future development",
+    ],
+    techStack: [
+      "Frontend: Next.js 14+, React 18, TypeScript",
+      "Backend: Node.js/Express, Golang (Gin/Fiber), atau NestJS",
+      "Database: PostgreSQL dengan connection pooling (PgBouncer)",
+      "Cache: Redis atau Upstash untuk session dan caching",
+      "Queue: BullMQ, Inngest, atau Trigger.dev",
+      "ORM: Prisma, Drizzle, atau TypeORM",
+      "API: RESTful + GraphQL (optional) dengan tRPC type-safety",
+      "Auth: Custom JWT + OAuth2 providers, atau Auth0",
+      "Real-time: WebSocket (Socket.io) atau Pusher",
+      "Search: Algolia atau Elasticsearch",
+      "Storage: S3-compatible (Supabase, R2, MinIO)",
+      "Email: Resend, SendGrid, atau AWS SES",
+      "Payment: Midtrans, Xendit, Stripe",
+      "Monitoring: Sentry, LogRocket, atau Datadog",
+      "Testing: Vitest, Playwright, Jest",
+      "CI/CD: GitHub Actions atau GitLab CI",
+      "Deployment: Docker containers pada Railway, Render, atau AWS",
+      "CDN: Cloudflare atau Vercel Edge Network",
+    ],
+    limitations: [
+      "Custom AI/ML model development memerlukan partner specialist",
+      "Mobile native app development terpisah (bisa React Native)",
+      "Blockchain integration memerlukan additional consultation",
+      "Video encoding dan streaming menggunakan third-party (Mux, Cloudflare Stream)",
+    ],
+    addOns: [
+      "Mobile app (React Native): +Rp 15-25 juta",
+      "AI/ML integration consultation: +Rp 5-10 juta",
+      "Dedicated DevOps setup: +Rp 8 juta",
+      "Ongoing retainer support: Rp 5-10 juta/bulan",
+    ],
   },
 ];
 
 const hourlyService = {
-  title: "Per Jam — Cepat & Fokus",
-  tagline: "Tanpa Sprint",
+  title: "Hourly Development Support",
+  subtitle: "Flexible support untuk task spesifik",
   price: "Rp 100.000 – 150.000 / jam",
-  minimum: "Minimum 2 jam",
+  minimum: "Minimum booking 2 jam",
   description:
-    "Eksekusi cepat untuk tugas terdefinisi jelas. Cocok untuk landing tweak, komponen UI, perbaikan bug, atau setup kecil.",
+    "Layanan per jam cocok untuk task kecil yang terdefinisi dengan jelas, tidak memerlukan discovery workshop atau sprint planning. Billing berdasarkan waktu aktual dengan tracking transparan. Ideal untuk bugfix, optimization, atau feature tambahan kecil pada existing codebase.",
   suitableFor: [
-    "Perbaikan UI kecil / micro-copy",
-    "Optimasi Lighthouse/SEO minor",
-    "Integrasi API kecil (read-only, 1–2 endpoint)",
-    "Setup komponen desain (MUI/Tailwind)",
-    "Bugfix & refactor ringan",
+    "Bugfix pada existing codebase (UI glitches, API errors)",
+    "Performance optimization (Lighthouse audit, bundle size)",
+    "UI/UX tweaks dan styling adjustments",
+    "Component development (React/Vue components)",
+    "API integration untuk third-party services (1-2 endpoints)",
+    "SEO optimization dan metadata improvements",
+    "Deployment troubleshooting dan DevOps support",
+    "Code review dan refactoring recommendations",
+    "Database query optimization",
+    "Security patch dan dependency updates",
+  ],
+  process: [
+    "Diskusi scope via chat (15-30 menit gratis)",
+    "Estimasi jam yang dibutuhkan",
+    "DP 50% sebelum mulai (untuk booking ≥4 jam)",
+    "Work log transparan dengan progress updates",
+    "Testing dan review sebelum delivery",
+    "Sisa pembayaran setelah task selesai",
+  ],
+  limitations: [
+    "Tidak cocok untuk scope yang belum jelas atau memerlukan research",
+    "Tidak termasuk sprint planning atau discovery workshop",
+    "Hanya untuk task yang bisa selesai dalam 1-8 jam",
+    "Revisi follow jam yang tersisa (jika ada)",
+    "Tidak termasuk deployment jika infrastruktur complex",
   ],
   notes: [
-    "Diskon volume untuk >15 jam/bulan",
-    "Jam dihitung per 30 menit",
-    "Tidak ada sprint/ceremony",
+    "Diskon 10% untuk booking >15 jam/bulan",
+    "Rate bisa disesuaikan berdasarkan complexity",
+    "Jam dihitung per 30 menit (0.5 jam increment)",
+    "Maximum 8 jam per hari untuk menjaga kualitas",
   ],
 };
 
 const faqs = [
   {
     q: "Bagaimana cara memulai proyek?",
-    a: "Jadwalkan Discovery Workshop (60-90 menit) untuk diskusi mendalam tentang scope, fitur, dan timeline proyek Anda. Setelah sesi ini, Anda akan mendapat project brief lengkap dengan estimasi budget dan sprint plan.",
+    a: "Jadwalkan Discovery Workshop (60-90 menit) untuk diskusi mendalam tentang scope, fitur, dan timeline proyek Anda. Setelah sesi ini, Anda akan mendapat project brief lengkap dengan estimasi budget dan sprint plan yang detail.",
+  },
+  {
+    q: "Apa yang dimaksud dengan 'sprint' dalam timeline?",
+    a: "Sprint adalah siklus development 1 minggu dengan deliverables yang jelas. Setiap sprint memiliki planning, development, review, dan feedback session. Dengan sistem sprint, progress bisa dimonitor secara konsisten dan ada ruang untuk adjustment berdasarkan feedback.",
   },
   {
     q: "Bagaimana sistem pembayaran?",
-    a: "Untuk proyek fixed-price, umumnya 30% DP, 40% di milestone tengah, dan 30% setelah selesai. Untuk per jam, bisa mingguan atau setelah proyek selesai (tergantung kesepakatan).",
-  },
-  {
-    q: "Berapa lama pengerjaan?",
-    a: "Starter: 1–2 bulan • Growth: 2–4 bulan • Pro: 4–8 bulan. Per Jam: rata-rata 1–2 hari kerja untuk task umum. Timeline tergantung kompleksitas & respons feedback.",
+    a: "Untuk proyek fixed-price: umumnya 30% DP, 40% di milestone tengah, 30% setelah selesai. Untuk per jam: bisa mingguan atau setelah task selesai (tergantung kesepakatan). Semua payment terms akan didiskusikan di awal dan tertulis di kontrak.",
   },
   {
     q: "Apakah bisa revisi setelah selesai?",
-    a: "Ya. Setiap tier sudah termasuk sesi revisi terjadwal. Revisi tambahan di luar scope bisa diatur sebagai sprint baru atau per jam.",
+    a: "Ya. Setiap paket sudah include sesi revisi terjadwal: Starter (1x), Growth (2x), Pro (3x). Revisi di luar scope atau setelah handover bisa diatur sebagai change request atau hourly support.",
   },
   {
     q: "Tech stack apa yang digunakan?",
-    a: "Frontend: React, Next.js, Astro, Tailwind CSS. Backend: Node.js, Golang, FastAPI. Database: PostgreSQL, Supabase, Redis. Deployment: Vercel, Railway, Docker.",
+    a: "Tech stack disesuaikan dengan kebutuhan project. Default: Frontend (React/Next.js), Backend (Node.js/Golang), Database (PostgreSQL), Hosting (Vercel/Railway). Untuk requirement spesifik, akan didiskusikan saat discovery workshop.",
   },
   {
-    q: "Apakah termasuk maintenance?",
-    a: "Proyek Pro termasuk 1 bulan maintenance gratis setelah launch. Untuk paket lain, maintenance bisa diatur terpisah dengan skema per jam atau retainer bulanan.",
+    q: "Apakah termasuk maintenance setelah launch?",
+    a: "Starter: 2 minggu bug fixes gratis. Growth: 1 bulan bug fixes + support. Pro: 2 bulan full maintenance. Setelah periode tersebut, bisa continue dengan retainer bulanan atau hourly support untuk updates dan maintenance.",
+  },
+  {
+    q: "Bagaimana jika ada perubahan scope di tengah jalan?",
+    a: "Perubahan kecil masih bisa diakomodasi dalam sprint yang sama. Perubahan besar (new features, change in architecture) akan di-assess sebagai change request dengan additional timeline dan budget. Semua perubahan akan didokumentasikan dan di-approve sebelum eksekusi.",
+  },
+  {
+    q: "Apakah source code menjadi milik saya?",
+    a: "Ya, 100%. Setelah pembayaran final, seluruh source code, assets, dan documentation menjadi milik Anda. Anda akan mendapat akses penuh ke repository dan bisa melanjutkan development dengan tim internal atau developer lain.",
   },
 ];
 ---
 
 <Base
   structuredData={structuredData}
-  title="Layanan | Mohammad Noor Wahid"
-  description="Layanan pengembangan web full-stack dengan pricing transparan dan proses terstruktur. Dari landing page hingga aplikasi enterprise."
+  title="Layanan Pengembangan Web | Mohammad Noor Wahid"
+  description="Layanan pengembangan web full-stack profesional dari portfolio hingga enterprise application. Transparent pricing, structured process, modern tech stack."
 >
   {/* Hero Section */}
   <section
@@ -252,13 +403,13 @@ const faqs = [
   <WaveDivider variant="bottom" color="accent" opacity={0.06} />
   <WaveDivider variant="top" color="accent" opacity={0.08} />
 
-  {/* Pricing Section */}
+  {/* Services Detail Section */}
   <section
     class="relative bg-gradient-to-b from-accent/[0.02] via-transparent to-transparent py-24"
   >
     <div class="mx-auto max-w-6xl px-6">
       <ScrollReveal animation="fade-up" delay={100}>
-        <p class="text-center text-xs uppercase tracking-[0.32em] text-accent/80">Pricing</p>
+        <p class="text-center text-xs uppercase tracking-[0.32em] text-accent/80">Paket Layanan</p>
       </ScrollReveal>
 
       <ScrollReveal animation="fade-up" delay={200}>
@@ -266,7 +417,7 @@ const faqs = [
           class="mt-3 text-center font-heading text-[1.9rem] font-semibold leading-tight text-text md:text-[2.35rem]"
         >
           <span class="bg-gradient-to-r from-text to-accent bg-clip-text text-transparent">
-            Paket Layanan Per Proyek
+            Pilih Paket Yang Sesuai Kebutuhan
           </span>
         </h2>
       </ScrollReveal>
@@ -275,111 +426,347 @@ const faqs = [
         <p
           class="mt-5 mx-auto max-w-2xl text-center text-sm leading-relaxed text-text2 md:text-base"
         >
-          Pilih paket yang sesuai dengan kebutuhan dan budget Anda. Semua paket termasuk konsultasi,
-          implementasi, dan handover.
+          Setiap paket dirancang dengan deliverables yang jelas, tech stack modern, dan support yang
+          komprehensif. Tidak ada hidden cost, semua transparent sejak awal.
         </p>
       </ScrollReveal>
 
-      {/* Pricing Cards */}
-      <div class="mt-16 grid gap-8 md:grid-cols-3">
+      {/* Services Detail Containers */}
+      <div class="mt-16 space-y-12">
         {
-          pricingTiers.map((tier, index) => (
-            <ScrollReveal animation="fade-up" delay={100 + index * 100}>
-              <div class="group relative rounded-2xl border border-divider bg-surface p-8 shadow-subtle transition-all duration-300 hover:border-accent/40 hover:shadow-lg">
-                <div class="mb-6">
-                  <h3 class="text-2xl font-bold text-text">{tier.name}</h3>
-                  <p class="mt-1 text-sm text-text2/80">{tier.target}</p>
+          services.map((service, index) => (
+            <ScrollReveal animation="fade-up" delay={100 + index * 50}>
+              <div class="overflow-hidden rounded-3xl border border-divider bg-surface shadow-soft">
+                {/* Header */}
+                <div class="border-b border-divider bg-gradient-to-r from-accent/5 to-transparent p-8">
+                  <div class="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
+                    <div class="flex-1">
+                      <div class="flex items-center gap-3">
+                        <h3 class="font-heading text-3xl font-bold text-text">{service.name}</h3>
+                        <span class="rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold text-accent">
+                          {service.sprints} Sprints
+                        </span>
+                      </div>
+                      <p class="mt-2 text-base text-text2">{service.subtitle}</p>
+                      <p class="mt-3 text-sm text-text2/70">Target: {service.target}</p>
+                    </div>
+                    <div class="flex-shrink-0 text-right">
+                      <p class="text-3xl font-bold text-accent">{service.price}</p>
+                      <p class="mt-1 text-sm text-text2">Timeline: {service.timeline}</p>
+                    </div>
+                  </div>
+                  <p class="mt-6 leading-relaxed text-text2">{service.description}</p>
                 </div>
 
-                <div class="mb-6">
-                  <p class="text-3xl font-bold text-accent">{tier.price}</p>
-                  <p class="mt-2 text-sm text-text2">
-                    {tier.sprints} sprint • {tier.timeline}
-                  </p>
-                </div>
+                {/* Content */}
+                <div class="p-8">
+                  <div class="grid gap-8 lg:grid-cols-2">
+                    {/* Left Column */}
+                    <div class="space-y-8">
+                      {/* Ideal For */}
+                      <div>
+                        <h4 class="mb-4 flex items-center gap-2 text-lg font-semibold text-text">
+                          <svg
+                            class="h-5 w-5 text-accent"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            fill="currentColor"
+                            viewBox="0 0 256 256"
+                          >
+                            <path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z" />
+                          </svg>
+                          Ideal Untuk
+                        </h4>
+                        <ul class="space-y-2">
+                          {service.idealFor.map((item) => (
+                            <li class="flex items-start gap-3 text-sm leading-relaxed text-text2">
+                              <span class="mt-1 text-accent">•</span>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
 
-                <p class="mb-6 text-sm leading-relaxed text-text2">{tier.description}</p>
+                      {/* Tech Stack */}
+                      <div>
+                        <h4 class="mb-4 flex items-center gap-2 text-lg font-semibold text-text">
+                          <svg
+                            class="h-5 w-5 text-accent"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            fill="currentColor"
+                            viewBox="0 0 256 256"
+                          >
+                            <path d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,51.31,188.69,80H160ZM200,216H56V40h88V88a8,8,0,0,0,8,8h48V216Z" />
+                          </svg>
+                          Tech Stack
+                        </h4>
+                        <ul class="space-y-2">
+                          {service.techStack.map((tech) => (
+                            <li class="flex items-start gap-3 text-sm leading-relaxed text-text2">
+                              <span class="mt-1 text-accent">→</span>
+                              <span>{tech}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
 
-                <ul class="mb-8 space-y-3">
-                  {tier.features.map((feature) => (
-                    <li class="flex items-start gap-3 text-sm text-text2">
+                    {/* Right Column */}
+                    <div class="space-y-8">
+                      {/* Deliverables */}
+                      <div>
+                        <h4 class="mb-4 flex items-center gap-2 text-lg font-semibold text-text">
+                          <svg
+                            class="h-5 w-5 text-accent"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            fill="currentColor"
+                            viewBox="0 0 256 256"
+                          >
+                            <path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z" />
+                          </svg>
+                          Yang Anda Dapatkan
+                        </h4>
+                        <ul class="space-y-2">
+                          {service.deliverables.map((item) => (
+                            <li class="flex items-start gap-3 text-sm leading-relaxed text-text2">
+                              <svg
+                                class="mt-0.5 h-4 w-4 flex-shrink-0 text-accent"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                fill="currentColor"
+                                viewBox="0 0 256 256"
+                              >
+                                <path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z" />
+                              </svg>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Limitations */}
+                      <div>
+                        <h4 class="mb-4 flex items-center gap-2 text-lg font-semibold text-text">
+                          <svg
+                            class="h-5 w-5 text-text2"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            fill="currentColor"
+                            viewBox="0 0 256 256"
+                          >
+                            <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm-8-80V80a8,8,0,0,1,16,0v56a8,8,0,0,1-16,0Zm20,36a12,12,0,1,1-12-12A12,12,0,0,1,140,172Z" />
+                          </svg>
+                          Limitations
+                        </h4>
+                        <ul class="space-y-2">
+                          {service.limitations.map((item) => (
+                            <li class="flex items-start gap-3 text-sm leading-relaxed text-text2/80">
+                              <span class="mt-1 text-text2">×</span>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Add-ons */}
+                      {service.addOns && service.addOns.length > 0 && (
+                        <div>
+                          <h4 class="mb-4 flex items-center gap-2 text-lg font-semibold text-text">
+                            <svg
+                              class="h-5 w-5 text-accent"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="20"
+                              height="20"
+                              fill="currentColor"
+                              viewBox="0 0 256 256"
+                            >
+                              <path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z" />
+                            </svg>
+                            Optional Add-ons
+                          </h4>
+                          <ul class="space-y-2">
+                            {service.addOns.map((addon) => (
+                              <li class="flex items-start gap-3 text-sm leading-relaxed text-text2">
+                                <span class="mt-1 text-accent">+</span>
+                                <span>{addon}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* CTA */}
+                  <div class="mt-8 flex items-center justify-center border-t border-divider pt-8">
+                    <a
+                      href="/book/project"
+                      class="inline-flex items-center gap-2 rounded-full bg-accent px-8 py-3 text-base font-semibold text-white transition-all hover:bg-accent/90 hover:shadow-lg"
+                    >
+                      Jadwalkan Discovery Workshop
                       <svg
-                        class="mt-0.5 h-5 w-5 flex-shrink-0 text-accent"
                         xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
+                        width="18"
+                        height="18"
                         fill="currentColor"
                         viewBox="0 0 256 256"
                       >
-                        <path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z" />
+                        <path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z" />
                       </svg>
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <a
-                  href={tier.ctaHref}
-                  class="block w-full rounded-full bg-accent px-6 py-3 text-center text-sm font-semibold text-white transition-all hover:bg-accent/90 hover:shadow-md"
-                >
-                  {tier.cta}
-                </a>
+                    </a>
+                  </div>
+                </div>
               </div>
             </ScrollReveal>
           ))
         }
       </div>
 
-      {/* Hourly Service */}
+      {/* Hourly Service Container */}
       <ScrollReveal animation="fade-up" delay={400}>
-        <div class="mt-12 rounded-2xl border border-divider bg-surface/50 p-8 md:p-10">
-          <div class="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
-            <div class="flex-1">
-              <div class="flex items-center gap-3">
-                <h3 class="text-2xl font-bold text-text">{hourlyService.title}</h3>
-                <span class="rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold text-accent">
-                  {hourlyService.tagline}
-                </span>
+        <div
+          class="mt-12 overflow-hidden rounded-3xl border border-divider bg-gradient-to-br from-surface to-accent/5 shadow-soft"
+        >
+          <div class="border-b border-divider p-8">
+            <div class="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
+              <div class="flex-1">
+                <div class="flex items-center gap-3">
+                  <h3 class="font-heading text-3xl font-bold text-text">{hourlyService.title}</h3>
+                  <span
+                    class="rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold text-accent"
+                  >
+                    Flexible
+                  </span>
+                </div>
+                <p class="mt-2 text-base text-text2">{hourlyService.subtitle}</p>
+                <p class="mt-1 text-sm text-text2/70">{hourlyService.minimum}</p>
               </div>
-              <p class="mt-4 text-lg font-semibold text-accent">{hourlyService.price}</p>
-              <p class="mt-1 text-sm text-text2">{hourlyService.minimum}</p>
-              <p class="mt-4 text-sm leading-relaxed text-text2">
-                {hourlyService.description}
-              </p>
+              <div class="flex-shrink-0 text-right">
+                <p class="text-3xl font-bold text-accent">{hourlyService.price}</p>
+              </div>
+            </div>
+            <p class="mt-6 leading-relaxed text-text2">{hourlyService.description}</p>
+          </div>
 
-              <div class="mt-6">
-                <p class="text-sm font-semibold text-text">Cocok untuk:</p>
-                <ul class="mt-3 space-y-2">
-                  {
-                    hourlyService.suitableFor.map((item) => (
-                      <li class="flex items-start gap-2 text-sm text-text2">
-                        <span class="mt-1 text-accent">•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))
-                  }
-                </ul>
+          <div class="p-8">
+            <div class="grid gap-8 lg:grid-cols-2">
+              <div class="space-y-8">
+                <div>
+                  <h4 class="mb-4 flex items-center gap-2 text-lg font-semibold text-text">
+                    <svg
+                      class="h-5 w-5 text-accent"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      fill="currentColor"
+                      viewBox="0 0 256 256"
+                    >
+                      <path
+                        d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"
+                      ></path>
+                    </svg>
+                    Cocok Untuk
+                  </h4>
+                  <ul class="space-y-2">
+                    {
+                      hourlyService.suitableFor.map((item) => (
+                        <li class="flex items-start gap-3 text-sm leading-relaxed text-text2">
+                          <span class="mt-1 text-accent">•</span>
+                          <span>{item}</span>
+                        </li>
+                      ))
+                    }
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 class="mb-4 flex items-center gap-2 text-lg font-semibold text-text">
+                    <svg
+                      class="h-5 w-5 text-text2"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      fill="currentColor"
+                      viewBox="0 0 256 256"
+                    >
+                      <path
+                        d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm-8-80V80a8,8,0,0,1,16,0v56a8,8,0,0,1-16,0Zm20,36a12,12,0,1,1-12-12A12,12,0,0,1,140,172Z"
+                      ></path>
+                    </svg>
+                    Tidak Cocok Untuk
+                  </h4>
+                  <ul class="space-y-2">
+                    {
+                      hourlyService.limitations.map((item) => (
+                        <li class="flex items-start gap-3 text-sm leading-relaxed text-text2/80">
+                          <span class="mt-1 text-text2">×</span>
+                          <span>{item}</span>
+                        </li>
+                      ))
+                    }
+                  </ul>
+                </div>
               </div>
 
-              <div class="mt-6 space-y-1">
-                {
-                  hourlyService.notes.map((note) => (
-                    <p class="text-xs italic text-text2/70">{note}</p>
-                  ))
-                }
+              <div class="space-y-8">
+                <div>
+                  <h4 class="mb-4 flex items-center gap-2 text-lg font-semibold text-text">
+                    <svg
+                      class="h-5 w-5 text-accent"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      fill="currentColor"
+                      viewBox="0 0 256 256"
+                    >
+                      <path
+                        d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm40-68a28,28,0,0,1-28,28h-4v8a8,8,0,0,1-16,0v-8H104a8,8,0,0,1,0-16h36a12,12,0,0,0,0-24H116a28,28,0,0,1,0-56h4V72a8,8,0,0,1,16,0v8h16a8,8,0,0,1,0,16H116a12,12,0,0,0,0,24h24A28,28,0,0,1,168,148Z"
+                      ></path>
+                    </svg>
+                    Proses Kerja
+                  </h4>
+                  <ul class="space-y-2">
+                    {
+                      hourlyService.process.map((item) => (
+                        <li class="flex items-start gap-3 text-sm leading-relaxed text-text2">
+                          <span class="mt-1 text-accent">→</span>
+                          <span>{item}</span>
+                        </li>
+                      ))
+                    }
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 class="mb-4 text-lg font-semibold text-text">Catatan Penting</h4>
+                  <ul class="space-y-2">
+                    {
+                      hourlyService.notes.map((note) => (
+                        <li class="text-sm italic leading-relaxed text-text2/70">• {note}</li>
+                      ))
+                    }
+                  </ul>
+                </div>
               </div>
             </div>
 
-            <div class="flex-shrink-0">
+            <div class="mt-8 flex items-center justify-center border-t border-divider pt-8">
               <a
                 href="/book/hourly"
-                class="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-accent/90 hover:shadow-md"
+                class="inline-flex items-center gap-2 rounded-full bg-accent px-8 py-3 text-base font-semibold text-white transition-all hover:bg-accent/90 hover:shadow-lg"
               >
-                Mulai dari 2 Jam
+                Book Hourly Support
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
+                  width="18"
+                  height="18"
                   fill="currentColor"
                   viewBox="0 0 256 256"
                 >
@@ -408,7 +795,7 @@ const faqs = [
         <h2
           class="mt-3 text-center font-heading text-[1.9rem] font-semibold leading-tight text-text md:text-[2.35rem]"
         >
-          Pertanyaan Umum
+          Pertanyaan Yang Sering Ditanyakan
         </h2>
       </ScrollReveal>
 
@@ -452,7 +839,8 @@ const faqs = [
 
       <ScrollReveal animation="fade-up" delay={200}>
         <p class="mt-4 text-lg text-text2">
-          Isi brief singkat atau jadwalkan call untuk diskusi kebutuhan proyek Anda.
+          Jadwalkan discovery workshop untuk diskusi mendalam tentang kebutuhan dan solusi terbaik
+          untuk project Anda.
         </p>
       </ScrollReveal>
 
