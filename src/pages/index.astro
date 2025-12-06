@@ -23,8 +23,8 @@ const testimonials = await getCollection("testimonials");
 const marqueeLogos = [
   { prefix: "EdTech", label: "Admin Panel SMA" },
   { prefix: "LMS", label: "Classroom Informatika" },
-  { prefix: "Live Learning", label: "GEMA SMAWA" },
-  { prefix: "Retail", label: "Kios POS" },
+  { prefix: "LMS Platform", label: "GEMA - Generasi Muda Informatika" },
+  { prefix: "Retail", label: "Toko POS" },
   { prefix: "Enterprise", label: "Buroq Admin Panel" },
   { prefix: "Fintech", label: "Elysian Bank" },
   { prefix: "Streaming", label: "Nebula TV" },
@@ -45,27 +45,27 @@ const impactHighlights = [
     ],
   },
   {
-    title: "Platform pembelajaran digital komprehensif",
+    title: "Platform LMS Informatika dengan Coding Lab Interaktif",
     description:
-      "GEMA SMAWA mengintegrasikan manajemen siswa, konten tutorial, dan interaksi real-time dengan Next.js 15 dan LiveKit untuk meningkatkan engagement siswa dalam satu ekosistem terpadu.",
-    metric: "Engagement lebih tinggi",
-    icon: "📡",
+      "GEMA (Generasi Muda Informatika) menyediakan Learning Management System lengkap dengan coding lab browser-based, multi-bahasa pemrograman, auto-grading system, dan dashboard analytics untuk pembelajaran informatika modern di tingkat SMA.",
+    metric: "Auto-grading hemat 70% waktu",
+    icon: "💻",
     category: "education" as const,
     additionalMetrics: [
-      { label: "Active sessions", value: "+42%" },
-      { label: "Avg. watch time", value: "18.5 min" },
+      { label: "Student engagement", value: "+85%" },
+      { label: "Coding lab uptime", value: "99.9%" },
     ],
   },
   {
-    title: "Sistem kasir digital untuk retail modern",
+    title: "Sistem kasir modern berbasis cloud untuk retail Indonesia",
     description:
-      "Kios POS menyediakan platform Point of Sale berbasis web dengan TypeScript, memproses transaksi kurang dari 3 detik per item dengan cloud-ready deployment di Vercel.",
-    metric: "<3s per transaksi",
+      "Toko POS adalah solusi kasir modern yang mudah digunakan dengan interface Bahasa Indonesia. Digitalisasi toko dengan transaksi 3x lebih cepat, alert stok otomatis, dashboard real-time, multi-outlet support, tanpa investasi hardware mahal.",
+    metric: "<30s per transaksi",
     icon: "🛒",
     category: "retail" as const,
     additionalMetrics: [
-      { label: "Avg. checkout", value: "2.4s" },
-      { label: "Cache warm", value: "1.3s" },
+      { label: "Kasir siap pakai", value: "5 menit" },
+      { label: "Load time", value: "<1.5s" },
     ],
   },
   {
