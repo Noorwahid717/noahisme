@@ -1,0 +1,242 @@
+---
+// Testimonial Card with Word Stagger Animation
+interface Props {
+  name: string;
+  role: string;
+  quote: string;
+  avatar?: string;
+  index: number;
+}
+
+const { name, role, quote, avatar, index } = Astro.props;
+const initial = name.charAt(0).toUpperCase();
+---
+
+<div
+  class="testimonial-card group relative flex h-full flex-col justify-between gap-8 rounded-2xl border border-transparent p-8 transition-all duration-500 hover:-translate-y-1 hover:border-accent/10 hover:bg-accent/[0.02] hover:shadow-lg hover:shadow-accent/5"
+  data-testimonial-card
+  data-index={index}
+>
+  {/* Large quote background */}
+  <div
+    class="quote-bg pointer-events-none absolute left-4 top-4 text-[120px] leading-none text-divider/[0.08] transition-all duration-500 group-hover:scale-110 group-hover:text-accent/[0.12]"
+    aria-hidden="true"
+  >
+    "
+  </div>
+
+  {/* Quote text with stagger animation */}
+  <div class="relative z-10">
+    <p
+      class="testimonial-quote text-base italic leading-[1.8] text-text/90 md:text-lg"
+      data-stagger="word"
+      role="text"
+      aria-label={`Testimonial: ${quote}`}
+    >
+      "{quote}"
+    </p>
+  </div>
+
+  {/* Author info with fade animation */}
+  <div class="testimonial-author relative z-10 flex items-center gap-4" data-fade-up>
+    {/* Avatar or Initial */}
+    <div
+      class="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-accent/20 to-accent/10 text-lg font-semibold text-accent"
+    >
+      {avatar ? <img src={avatar} alt={name} class="h-full w-full object-cover" /> : initial}
+    </div>
+
+    <div>
+      <p class="font-semibold text-text">{name}</p>
+      <p class="text-sm text-text-muted">{role}</p>
+    </div>
+  </div>
+</div>
+
+<style is:global>
+  /* Word stagger animation - MUST be global to work with dynamic spans */
+  .testimonial-quote .word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+
+  .testimonial-quote .word.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Author fade up animation */
+  .testimonial-author {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s,
+      transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
+  }
+
+  .testimonial-author.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .testimonial-quote .word,
+    .testimonial-author {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>
+
+<style>
+  .testimonial-quote {
+    min-height: 4.5rem;
+  }
+</style>
+
+<script type="module" is:inline>
+  (function () {
+    const MAX_DELAY = 1500; // Maximum total delay in ms
+    const DELAY_PER_WORD = 50; // Delay increment per word in ms
+
+    /**
+     * Initialize word stagger animation for elements with data-stagger="word"
+     * @param {Element} container - Container element to search within (defaults to document)
+     */
+    function initStagger(container = document) {
+      // Check for reduced motion preference
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (prefersReducedMotion) return;
+
+      const elements = container.querySelectorAll('[data-stagger="word"]');
+
+      elements.forEach((element) => {
+        // Skip if already processed
+        if (element.dataset.staggerProcessed === "true") return;
+        element.dataset.staggerProcessed = "true";
+
+        const text = element.textContent.trim();
+        if (!text) return;
+
+        // Split text into words while preserving spaces
+        const words = text.split(/(\s+)/);
+
+        // Build new HTML with word spans
+        const html = words
+          .map((word, index) => {
+            // Skip empty strings
+            if (!word) return "";
+
+            // Preserve whitespace as-is
+            if (/^\s+$/.test(word)) return word;
+
+            // Calculate delay with clamping
+            const wordIndex = Math.floor(index / 2); // Account for spaces
+            const delay = Math.min(wordIndex * DELAY_PER_WORD, MAX_DELAY);
+
+            return `<span class="word" style="transition-delay: ${delay}ms;">${word}</span>`;
+          })
+          .join("");
+
+        element.innerHTML = html;
+      });
+
+      // Setup IntersectionObserver for fade-in
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const target = entry.target;
+
+              // Animate words
+              if (target.hasAttribute("data-stagger")) {
+                const words = target.querySelectorAll(".word");
+
+                // Force browser to recognize the initial state before adding class
+                void target.offsetHeight;
+
+                requestAnimationFrame(() => {
+                  words.forEach((word) => {
+                    word.classList.add("in");
+                  });
+                });
+              }
+
+              // Animate fade-up elements
+              if (target.hasAttribute("data-fade-up")) {
+                requestAnimationFrame(() => {
+                  target.classList.add("in");
+                });
+              }
+
+              // Unobserve after animation triggers
+              observer.unobserve(target);
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+          rootMargin: "0px 0px -100px 0px",
+        }
+      );
+
+      // Observe all stagger and fade-up elements
+      const staggerElements = container.querySelectorAll("[data-stagger]");
+      const fadeElements = container.querySelectorAll("[data-fade-up]");
+
+      staggerElements.forEach((el) => observer.observe(el));
+      fadeElements.forEach((el) => observer.observe(el));
+
+      // Immediately trigger for elements already in viewport
+      setTimeout(() => {
+        const checkVisible = (element) => {
+          const rect = element.getBoundingClientRect();
+          const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+          return rect.top < windowHeight && rect.bottom > 0;
+        };
+
+        staggerElements.forEach((el) => {
+          if (checkVisible(el)) {
+            const words = el.querySelectorAll(".word");
+            if (words.length > 0) {
+              void el.offsetHeight;
+              requestAnimationFrame(() => {
+                words.forEach((word) => word.classList.add("in"));
+              });
+              observer.unobserve(el);
+            }
+          }
+        });
+
+        fadeElements.forEach((el) => {
+          if (checkVisible(el)) {
+            requestAnimationFrame(() => {
+              el.classList.add("in");
+            });
+            observer.unobserve(el);
+          }
+        });
+      }, 100);
+    }
+
+    // Initialize on page load
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", () => initStagger());
+    } else {
+      initStagger();
+    }
+
+    // Re-initialize on Astro page transitions
+    document.addEventListener("astro:page-load", () => initStagger());
+
+    // Expose function globally for dynamic content
+    window.initTestimonialStagger = initStagger;
+  })();
+</script>

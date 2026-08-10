@@ -1,0 +1,268 @@
+---
+import Base from "~/layouts/Base.astro";
+import { SITE } from "~/lib/seo";
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: "Project Estimation Form",
+  description: "Dapatkan estimasi proyek dengan mengisi form brief singkat.",
+  url: `${SITE.url}/brief`,
+};
+---
+
+<Base
+  title="Project Estimation Form"
+  description="Dapatkan estimasi proyek dengan mengisi form brief singkat."
+  structuredData={structuredData}
+  breadcrumbs={[{ name: "Project Brief", url: "/brief" }]}
+>
+  <section class="mx-auto grid max-w-4xl gap-10 px-6 pb-24 pt-28">
+    <header class="space-y-4">
+      <p class="text-xs uppercase tracking-[0.3em] text-accent">Project Brief</p>
+      <h1 class="font-heading text-4xl text-text">Request Project Estimation</h1>
+      <p class="max-w-2xl text-base text-text2">
+        Isi form singkat di bawah untuk mendapatkan estimasi proyek. Saya akan merespons dalam 1–2
+        hari kerja dengan estimasi timeline, budget range, dan rekomendasi pendekatan terbaik.
+      </p>
+    </header>
+
+    <div class="grid gap-8 rounded-3xl border border-divider/40 bg-surface/80 p-8 shadow-soft">
+      <div class="space-y-3 rounded-xl border border-accent/20 bg-accent/5 p-4">
+        <p class="text-sm font-medium text-text">💡 Tips untuk mendapat estimasi akurat:</p>
+        <ul class="grid gap-2 text-sm text-text2">
+          <li>• Jelaskan tujuan utama produk/project</li>
+          <li>• List fitur-fitur yang dibutuhkan</li>
+          <li>• Sebutkan referensi produk serupa (jika ada)</li>
+          <li>• Budget range dan timeline ideal kamu</li>
+          <li>• Tech stack preferensi (opsional)</li>
+        </ul>
+      </div>
+
+      <form class="grid gap-6" method="post" action="https://formsubmit.co/noorwahid717@gmail.com">
+        <input type="hidden" name="_subject" value="Project Estimation Request" />
+        <input type="hidden" name="_next" value="https://noahisme.vercel.app/brief?success=true" />
+        <input type="text" name="_honey" class="hidden" aria-hidden="true" tabindex="-1" />
+
+        <div class="grid gap-2">
+          <label class="text-sm font-medium text-text" for="name">Nama / Perusahaan*</label>
+          <input
+            class="focus-outline rounded-md border border-divider/60 bg-bg/80 px-4 py-3 text-sm text-text"
+            type="text"
+            id="name"
+            name="name"
+            required
+            autocomplete="name"
+          />
+        </div>
+
+        <div class="grid gap-2">
+          <label class="text-sm font-medium text-text" for="email">Email*</label>
+          <input
+            class="focus-outline rounded-md border border-divider/60 bg-bg/80 px-4 py-3 text-sm text-text"
+            type="email"
+            id="email"
+            name="email"
+            required
+            autocomplete="email"
+          />
+        </div>
+
+        <div class="grid gap-2">
+          <label class="text-sm font-medium text-text" for="phone">Nomor WhatsApp (opsional)</label>
+          <input
+            class="focus-outline rounded-md border border-divider/60 bg-bg/80 px-4 py-3 text-sm text-text"
+            type="tel"
+            id="phone"
+            name="phone"
+            autocomplete="tel"
+            placeholder="+62..."
+          />
+        </div>
+
+        <div class="grid gap-2">
+          <label class="text-sm font-medium text-text" for="project_type">Tipe Project*</label>
+          <select
+            class="focus-outline rounded-md border border-divider/60 bg-bg/80 px-4 py-3 text-sm text-text"
+            id="project_type"
+            name="project_type"
+            required
+          >
+            <option value="">Pilih tipe project</option>
+            <option value="web_app">Web Application</option>
+            <option value="mobile_app">Mobile App</option>
+            <option value="landing_page">Landing Page / Marketing Site</option>
+            <option value="ecommerce">E-commerce</option>
+            <option value="saas">SaaS Product</option>
+            <option value="dashboard">Dashboard / Admin Panel</option>
+            <option value="api">API / Backend</option>
+            <option value="other">Lainnya</option>
+          </select>
+        </div>
+
+        <div class="grid gap-2">
+          <label class="text-sm font-medium text-text" for="description">Deskripsi Project*</label>
+          <textarea
+            class="focus-outline min-h-[160px] rounded-md border border-divider/60 bg-bg/80 px-4 py-3 text-sm text-text"
+            id="description"
+            name="description"
+            required
+            placeholder="Jelaskan tujuan utama, target user, dan apa yang ingin dicapai..."
+          ></textarea>
+        </div>
+
+        <div class="grid gap-2">
+          <label class="text-sm font-medium text-text" for="features">Fitur Utama*</label>
+          <textarea
+            class="focus-outline min-h-[120px] rounded-md border border-divider/60 bg-bg/80 px-4 py-3 text-sm text-text"
+            id="features"
+            name="features"
+            required
+            placeholder="Contoh:
+- User authentication (email & social login)
+- Dashboard analytics
+- Payment integration
+- Admin panel"
+          ></textarea>
+        </div>
+
+        <div class="grid gap-2">
+          <label class="text-sm font-medium text-text" for="reference"
+            >Referensi Produk (opsional)</label
+          >
+          <input
+            class="focus-outline rounded-md border border-divider/60 bg-bg/80 px-4 py-3 text-sm text-text"
+            type="text"
+            id="reference"
+            name="reference"
+            placeholder="URL atau nama produk serupa"
+          />
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div class="grid gap-2">
+            <label class="text-sm font-medium text-text" for="budget">Budget Range*</label>
+            <select
+              class="focus-outline rounded-md border border-divider/60 bg-bg/80 px-4 py-3 text-sm text-text"
+              id="budget"
+              name="budget"
+              required
+            >
+              <option value="">Pilih range</option>
+              <option value="< 10jt">&lt; Rp 10 juta</option>
+              <option value="10-25jt">Rp 10–25 juta</option>
+              <option value="25-50jt">Rp 25–50 juta</option>
+              <option value="50-100jt">Rp 50–100 juta</option>
+              <option value="> 100jt">&gt; Rp 100 juta</option>
+              <option value="flexible">Fleksibel</option>
+            </select>
+          </div>
+
+          <div class="grid gap-2">
+            <label class="text-sm font-medium text-text" for="timeline">Timeline Target*</label>
+            <select
+              class="focus-outline rounded-md border border-divider/60 bg-bg/80 px-4 py-3 text-sm text-text"
+              id="timeline"
+              name="timeline"
+              required
+            >
+              <option value="">Pilih timeline</option>
+              <option value="urgent">Urgent (&lt; 2 minggu)</option>
+              <option value="1-month">1 bulan</option>
+              <option value="2-3-months">2–3 bulan</option>
+              <option value="3-6-months">3–6 bulan</option>
+              <option value="> 6-months">&gt; 6 bulan</option>
+              <option value="flexible">Fleksibel</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid gap-2">
+          <label class="text-sm font-medium text-text" for="tech_stack"
+            >Tech Stack Preferensi (opsional)</label
+          >
+          <input
+            class="focus-outline rounded-md border border-divider/60 bg-bg/80 px-4 py-3 text-sm text-text"
+            type="text"
+            id="tech_stack"
+            name="tech_stack"
+            placeholder="Contoh: Next.js, Node.js, PostgreSQL, AWS"
+          />
+        </div>
+
+        <div class="grid gap-2">
+          <label class="text-sm font-medium text-text" for="additional"
+            >Info Tambahan (opsional)</label
+          >
+          <textarea
+            class="focus-outline min-h-[100px] rounded-md border border-divider/60 bg-bg/80 px-4 py-3 text-sm text-text"
+            id="additional"
+            name="additional"
+            placeholder="Design sudah ada? Ada tim internal? Target market? dll."></textarea>
+        </div>
+
+        <button
+          type="submit"
+          class="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:bg-accent/90 hover:shadow-lg hover:shadow-accent/25 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+        >
+          <span>Kirim Brief & Dapatkan Estimasi</span>
+          <svg
+            class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+          </svg>
+        </button>
+
+        <p class="text-center text-sm text-text2">
+          Atau jadwalkan <a href="/book/intro" class="text-accent hover:underline"
+            >Intro Call (20m)</a
+          > untuk diskusi langsung
+        </p>
+      </form>
+    </div>
+
+    <div class="rounded-xl border border-divider/40 bg-bg/40 p-6">
+      <h3 class="mb-3 text-lg font-semibold text-text">Apa yang terjadi selanjutnya?</h3>
+      <ol class="grid gap-3 text-sm text-text2">
+        <li class="flex items-start gap-3">
+          <span
+            class="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-accent/20 text-xs font-medium text-accent"
+            >1</span
+          >
+          <span>Saya review brief kamu dan estimasi scope pekerjaan</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span
+            class="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-accent/20 text-xs font-medium text-accent"
+            >2</span
+          >
+          <span
+            >Kirim estimasi timeline, budget, dan pendekatan yang direkomendasikan (1–2 hari kerja)</span
+          >
+        </li>
+        <li class="flex items-start gap-3">
+          <span
+            class="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-accent/20 text-xs font-medium text-accent"
+            >3</span
+          >
+          <span>Jika cocok, kita jadwalkan Discovery Workshop untuk detail scope</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span
+            class="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-accent/20 text-xs font-medium text-accent"
+            >4</span
+          >
+          <span>Mulai development! 🚀</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+</Base>

@@ -2,15 +2,17 @@
 import Base from "~/layouts/Base.astro";
 import Section from "~/components/Section.astro";
 import ProjectCard from "~/components/ProjectCard.astro";
-import MotionReveal from "~/components/MotionReveal";
-import HeroVisual from "~/components/HeroVisual";
-import HeroIntro from "~/components/HeroIntro";
+import HeroWithMockup from "~/components/HeroWithMockup.astro";
 import LogoMarquee from "~/components/LogoMarquee.astro";
-import StaggeredText from "~/components/StaggeredText";
 import TiltingCard from "~/components/TiltingCard";
-import BlurStaggerText from "~/components/BlurStaggerText";
-import PillImageReveal from "~/components/PillImageReveal.astro";
 import ProcessStepCard from "~/components/ProcessStepCard";
+import FounderSection from "~/components/FounderSection.astro";
+import IntroSection from "~/components/IntroSection.astro";
+import TestimonialCard from "~/components/TestimonialCard.astro";
+import PricingSection from "~/components/PricingSection.astro";
+import WaveDivider from "~/components/WaveDivider.astro";
+import ScrollCue from "~/components/ScrollCue.astro";
+import ScrollReveal from "~/components/ScrollReveal.astro";
 import { getCollection } from "astro:content";
 import { SITE } from "~/lib/seo";
 
@@ -21,8 +23,8 @@ const testimonials = await getCollection("testimonials");
 const marqueeLogos = [
   { prefix: "EdTech", label: "Admin Panel SMA" },
   { prefix: "LMS", label: "Classroom Informatika" },
-  { prefix: "Live Learning", label: "GEMA SMAWA" },
-  { prefix: "Retail", label: "Kios POS" },
+  { prefix: "LMS Platform", label: "GEMA - Generasi Muda Informatika" },
+  { prefix: "Retail", label: "Toko POS" },
   { prefix: "Enterprise", label: "Buroq Admin Panel" },
   { prefix: "Fintech", label: "Elysian Bank" },
   { prefix: "Streaming", label: "Nebula TV" },
@@ -31,58 +33,78 @@ const marqueeLogos = [
 ];
 const impactHighlights = [
   {
-    title: "Absensi real-time untuk 1.200+ siswa",
+    title: "Sistem manajemen sekolah terpusat untuk SMA",
     description:
-      "Monorepo admin-panel-sma menghubungkan NestJS, BullMQ, dan React Admin sehingga data kehadiran terkirim otomatis ke worker dan rapor siap unduh tanpa duplikasi.",
-    metric: "95% kehadiran <10.00",
+      "Admin Panel SMA menggabungkan TypeScript dan React untuk mencatat kehadiran dan nilai akademik secara real-time, mengurangi pekerjaan manual administrasi dengan interface responsif.",
+    metric: "Data aman & terpusat",
     icon: "🎓",
+    category: "education" as const,
+    additionalMetrics: [
+      { label: "Proses absensi", value: "~85% lebih cepat" },
+      { label: "Akurasi data", value: "99.7%" },
+    ],
   },
   {
-    title: "Live kelas tetap stabil di jaringan sekolah",
+    title: "Platform LMS Informatika dengan Coding Lab Interaktif",
     description:
-      "GEMA SMAWA menghadirkan LiveKit dan fallback SSE sehingga streaming materi Informatika tetap mulus dengan animasi joyful yang menjaga fokus siswa.",
-    metric: "37% boost retensi",
-    icon: "📡",
+      "GEMA (Generasi Muda Informatika) menyediakan Learning Management System lengkap dengan coding lab browser-based, multi-bahasa pemrograman, auto-grading system, dan dashboard analytics untuk pembelajaran informatika modern di tingkat SMA.",
+    metric: "Auto-grading hemat 70% waktu",
+    icon: "💻",
+    category: "education" as const,
+    additionalMetrics: [
+      { label: "Student engagement", value: "+85%" },
+      { label: "Coding lab uptime", value: "99.9%" },
+    ],
   },
   {
-    title: "POS web yang siap barcode & mock offline",
+    title: "Sistem kasir modern berbasis cloud untuk retail Indonesia",
     description:
-      "Kios POS menggabungkan Next.js + tRPC + Supabase dengan mode mock MSW, memastikan kasir dapat memproses transaksi dan struk PDF walau koneksi tersendat.",
-    metric: "3s per transaksi",
+      "Toko POS adalah solusi kasir modern yang mudah digunakan dengan interface Bahasa Indonesia. Digitalisasi toko dengan transaksi 3x lebih cepat, alert stok otomatis, dashboard real-time, multi-outlet support, tanpa investasi hardware mahal.",
+    metric: "<30s per transaksi",
     icon: "🛒",
+    category: "retail" as const,
+    additionalMetrics: [
+      { label: "Kasir siap pakai", value: "5 menit" },
+      { label: "Load time", value: "<1.5s" },
+    ],
   },
   {
-    title: "Admin panel enterprise dengan monitoring real-time",
+    title: "Dashboard enterprise dengan integrasi lengkap",
     description:
-      "Buroq Admin Panel menyatukan React + TypeScript + Vite untuk dashboard komprehensif dengan Google Maps integration, WhatsApp Bot, dan analytics real-time.",
-    metric: "Type-safe & scalable",
+      "Buroq Admin Panel menggabungkan React 18+, TypeScript, dan Vite untuk centralized management system dengan Google Maps integration dan WhatsApp Business automation.",
+    metric: "Type-safe & modular",
     icon: "⚙️",
+    category: "enterprise" as const,
+    additionalMetrics: [
+      { label: "API integrations", value: "6 services" },
+      { label: "Load time", value: "<1.8s" },
+    ],
   },
 ];
 const processSteps = [
   {
     step: "01",
-    title: "Discover",
+    title: "Analisis & Perencanaan",
     description:
-      "Audit kebutuhan bisnis, riset pengguna, dan mapping modul teknis agar prioritas jelas sebelum menulis satu baris kode.",
+      "Mengidentifikasi kebutuhan bisnis, merancang arsitektur sistem, dan menentukan tech stack optimal (React/Next.js, Node.js/Golang, PostgreSQL) sebelum eksekusi.",
   },
   {
     step: "02",
-    title: "Frame & Prototype",
+    title: "Desain API & Database",
     description:
-      "Menyusun alur layanan, interaksi, dan animasi utama dalam prototipe high fidelity sehingga stakeholder bisa menguji dalam 1–2 minggu.",
+      "Merancang RESTful API, skema database relasional, dan struktur data yang scalable dengan fokus pada efisiensi query dan integritas data.",
   },
   {
     step: "03",
-    title: "Build & Orchestrate",
+    title: "Development Full-Stack",
     description:
-      "Implementasi front-end performa tinggi—lengkap dengan aksesibilitas, state management, dan integrasi audio/animasi yang terukur.",
+      "Implementasi backend (Node.js/Golang) dan frontend (React/Next.js) dengan TypeScript, state management modern, dan integrasi real-time menggunakan WebSocket/Redis.",
   },
   {
     step: "04",
-    title: "Launch & Scale",
+    title: "Deployment & Maintenance",
     description:
-      "Menjaga rilis stabil lewat observabilitas, dokumentasi deployment, serta handover playbook supaya tim internal bisa melanjutkan dengan percaya diri.",
+      "Deploy ke production (Vercel, Railway, Supabase), setup monitoring, optimisasi performa, dan dokumentasi teknis untuk kemudahan maintenance jangka panjang.",
   },
 ];
 const primaryService = servicesCollection[0]?.data;
@@ -97,94 +119,220 @@ const homePageSchema = {
 ---
 
 <Base structuredData={homePageSchema}>
-  <section class="relative overflow-hidden">
-    <div
-      aria-hidden="true"
-      class="absolute inset-0 -z-10 bg-gradient-to-br from-accent/10 via-transparent to-transparent"
-    >
-    </div>
-    <div
-      aria-hidden="true"
-      class="absolute left-1/2 top-12 -z-10 h-72 w-72 -translate-x-1/2 rounded-full bg-accent/15 blur-[120px]"
-    >
-    </div>
-    <div class="mx-auto max-w-6xl px-6 pb-32 pt-36">
-      <div class="grid gap-16 md:grid-cols-[minmax(0,1fr)_minmax(280px,0.9fr)] md:items-center">
-        <HeroIntro client:load />
-        <HeroVisual client:visible />
-      </div>
-    </div>
+  <section class="hero-section relative">
+    <HeroWithMockup />
   </section>
 
   <section class="mx-auto max-w-6xl px-6 pb-16">
-    <p class="text-xs uppercase tracking-[0.32em] text-accent/80">Kolaborasi & karya</p>
-    <h2 class="mt-2 text-sm text-text2">
-      Produk yang saya bangun membantu pendidikan, ritel, dan ekosistem digital lainnya melaju lebih
-      cepat.
-    </h2>
-    <div class="mt-6">
-      <LogoMarquee items={marqueeLogos} duration={26} />
-    </div>
+    <ScrollReveal animation="fade-up" delay={100}>
+      <p class="text-xs uppercase tracking-[0.32em] text-accent/80">Kolaborasi & karya</p>
+    </ScrollReveal>
+    <ScrollReveal animation="fade-up" delay={200}>
+      <h2 class="mt-2 text-sm text-text2">
+        Produk yang saya bangun membantu pendidikan, ritel, dan ekosistem digital lainnya melaju
+        lebih cepat.
+      </h2>
+    </ScrollReveal>
+    <ScrollReveal animation="fade-up" delay={300}>
+      <div class="mt-6">
+        <LogoMarquee items={marqueeLogos} duration={26} />
+      </div>
+    </ScrollReveal>
+    <ScrollReveal animation="fade" delay={400}>
+      <ScrollCue text="Scroll untuk mengetahui lebih lanjut" />
+    </ScrollReveal>
   </section>
 
-  <section class="mx-auto max-w-6xl px-6 pb-24">
-    <p class="text-xs uppercase tracking-[0.32em] text-accent/80">Dampak produk</p>
-    <StaggeredText
-      client:visible
-      text="Saya merangkai arsitektur, animasi, dan alur operasional yang menggerakkan sekolah, ritel, dan komunitas teknologi."
-      as="h2"
-      className="mt-3 max-w-3xl font-heading text-[1.9rem] font-semibold text-text md:text-[2.35rem]"
-      delay={0.1}
-    />
-    <p class="mt-4 max-w-2xl text-sm text-text2 md:text-base">
-      Setiap kartu merangkum bagaimana pendekatan detail—dari kontrak data bersama hingga fallback
-      koneksi—mendorong tim shipping fitur lebih percaya diri.
-    </p>
-    <div class="mt-10 grid gap-6 md:grid-cols-2">
+  <WaveDivider variant="top" color="accent" opacity={0.08} />
+  <IntroSection />
+  <WaveDivider variant="bottom" color="accent" opacity={0.08} />
+
+  <WaveDivider variant="top" color="accent" opacity={0.06} />
+  <section class="impact-section relative mx-auto max-w-6xl px-6 pb-24 pt-16">
+    <!-- Subtle background pattern -->
+    <div
+      class="absolute inset-0 -z-10 bg-gradient-to-br from-accent/[0.02] via-transparent to-success/[0.02]"
+      aria-hidden="true"
+    >
+    </div>
+
+    <div class="mx-auto max-w-4xl text-center">
+      <ScrollReveal animation="fade-up" delay={100}>
+        <p class="text-xs uppercase tracking-[0.32em] text-accent/80">Dampak produk</p>
+      </ScrollReveal>
+
+      <ScrollReveal animation="fade-up" delay={200}>
+        <p
+          class="mt-5 mx-auto max-w-[650px] text-sm leading-relaxed tracking-wide text-text2 md:text-base"
+          style="letter-spacing: 0.01em;"
+        >
+          Setiap kartu merangkum bagaimana pendekatan detail—dari kontrak data bersama hingga
+          fallback koneksi—mendorong tim shipping fitur lebih percaya diri.
+        </p>
+      </ScrollReveal>
+    </div>
+
+    <!-- Grid 2 kolom di desktop untuk spesialisasi box -->
+    <div class="impact-grid mt-12 grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
       {
         impactHighlights.map((card, index) => (
-          <TiltingCard client:visible {...card} index={index} />
+          <ScrollReveal animation="fade-up" delay={300 + index * 100}>
+            <TiltingCard client:idle {...card} index={index} />
+          </ScrollReveal>
         ))
       }
     </div>
+
+    <!-- CTA to view all projects -->
+    <ScrollReveal animation="fade-up" delay={700}>
+      <div class="mt-12 text-center">
+        <a
+          href="/projects"
+          class="group inline-flex items-center gap-2 text-sm font-medium text-accent transition-all duration-200 hover:gap-3 hover:text-accent/80"
+        >
+          <span>Lihat Semua Proyek</span>
+          <svg
+            class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+          </svg>
+        </a>
+      </div>
+    </ScrollReveal>
   </section>
 
+  <WaveDivider variant="top" color="accent" opacity={0.05} />
   <Section
     id="projects"
-    eyebrow="Featured"
-    title="Studi kasus terpilih"
-    description="3 proyek yang menonjolkan strategi pengalaman end-to-end: dari riset, desain, hingga implementasi front-end performa tinggi."
+    eyebrow="Portfolio"
+    title="Proyek Unggulan"
+    description="Berikut adalah beberapa proyek yang telah saya kerjakan — dari sistem backend yang kokoh hingga antarmuka yang intuitif."
   >
-    <div class="grid gap-8 md:grid-cols-2">
+    <!-- Enhanced title with gradient -->
+    <style>
+      #projects h2 {
+        background: linear-gradient(
+          135deg,
+          rgb(var(--color-text)) 0%,
+          rgb(var(--color-accent)) 100%
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    </style>
+
+    <div class="grid gap-10 md:grid-cols-2">
       {
         featured.map(({ data, slug }, index) => (
-          <ProjectCard project={data} slug={slug} revealDelay={index * 0.12} />
+          <ScrollReveal
+            animation={index % 2 === 0 ? "fade-right" : "fade-left"}
+            delay={100 + index * 150}
+          >
+            <ProjectCard
+              project={data}
+              slug={slug}
+              revealDelay={index * 0.15}
+              projectNumber={index + 1}
+            />
+          </ScrollReveal>
         ))
       }
     </div>
   </Section>
+  <WaveDivider variant="bottom" color="accent" opacity={0.05} />
 
   {
     processSteps.length > 0 && (
-      <Section
-        eyebrow="Layanan"
-        title="Cara saya membantu tim Anda"
-        description={
-          primaryService?.description ??
-          "Kerangka empat langkah yang menyatukan riset, prototyping, dan implementasi hingga siap diluncurkan."
-        }
-      >
-        {primaryService && (
-          <p class="text-xs uppercase tracking-[0.32em] text-accent/70">{primaryService.title}</p>
-        )}
-        <div class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-          {processSteps.map((step, index) => (
-            <ProcessStepCard client:visible {...step} index={index} />
-          ))}
-        </div>
-      </Section>
+      <>
+        <WaveDivider variant="top" color="accent" opacity={0.06} />
+        <section class="process-section relative mx-auto max-w-6xl px-6 py-28">
+          {/* Subtle background gradient */}
+          <div
+            class="absolute inset-0 -z-10 bg-gradient-to-b from-accent/[0.02] via-transparent to-transparent"
+            aria-hidden="true"
+          />
+
+          {/* Section Header */}
+          <div class="mx-auto max-w-4xl text-center">
+            <ScrollReveal animation="fade-up" delay={100}>
+              <p class="text-xs uppercase tracking-[0.32em] text-accent/80">Layanan</p>
+            </ScrollReveal>
+            <ScrollReveal animation="fade-up" delay={200}>
+              <h2 class="mt-3 mx-auto max-w-3xl font-heading text-[1.9rem] font-semibold leading-tight text-text md:text-[2.35rem]">
+                <span class="bg-gradient-to-r from-text to-accent bg-clip-text text-transparent">
+                  Cara saya membantu tim Anda
+                </span>
+              </h2>
+            </ScrollReveal>
+            <ScrollReveal animation="fade-up" delay={300}>
+              <p class="mt-5 mx-auto max-w-[700px] text-sm leading-relaxed text-text2 md:text-base">
+                {primaryService?.description ??
+                  "Kerangka empat langkah yang menyatukan riset, prototyping, dan implementasi hingga siap diluncurkan."}
+              </p>
+            </ScrollReveal>
+            <ScrollReveal animation="fade-up" delay={400}>
+              <p class="mt-4 text-sm italic text-text2/80">
+                Metode kolaborasi ini dirancang agar tim Anda mendapatkan hasil maksimal tanpa
+                kehilangan fleksibilitas.
+              </p>
+            </ScrollReveal>
+          </div>
+
+          {/* Progress Indicator */}
+          <div class="progress-dots mt-12 flex justify-center gap-3">
+            {[0, 1, 2, 3].map((i) => (
+              <div
+                class="progress-dot h-2 w-2 rounded-full bg-accent/20 transition-all duration-500"
+                data-step={i}
+              />
+            ))}
+          </div>
+
+          {/* Process Cards Grid */}
+          <div class="process-grid relative mt-12">
+            {/* Desktop Grid */}
+            <div class="hidden gap-8 md:grid md:grid-cols-2 xl:grid-cols-4">
+              {processSteps.map((step, index) => (
+                <ScrollReveal animation="fade-up" delay={100 + index * 100}>
+                  <ProcessStepCard client:visible {...step} index={index} />
+                </ScrollReveal>
+              ))}
+            </div>
+
+            {/* Mobile Carousel */}
+            <div class="mobile-carousel md:hidden">
+              <div class="carousel-container flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide">
+                {processSteps.map((step, index) => (
+                  <div class="carousel-item min-w-[85vw] snap-center">
+                    <ScrollReveal animation="fade-up" delay={100 + index * 100}>
+                      <ProcessStepCard client:visible {...step} index={index} />
+                    </ScrollReveal>
+                  </div>
+                ))}
+              </div>
+
+              {/* Scroll hint */}
+              <p class="mt-4 text-center text-xs text-text2/60">
+                ← Geser untuk melihat langkah berikutnya →
+              </p>
+            </div>
+          </div>
+        </section>
+        <WaveDivider variant="bottom" color="accent" opacity={0.06} />
+      </>
     )
   }
+
+  <FounderSection />
 
   {
     testimonials.length > 0 && (
@@ -193,53 +341,199 @@ const homePageSchema = {
         title="Suara kolaborator"
         description="Rekan kerja dan klien tentang dampak kolaborasi kami."
       >
-        <div class="grid gap-12 md:grid-cols-2 md:gap-16">
+        <div class="testimonials-grid grid gap-12 md:grid-cols-2 md:gap-16">
           {testimonials.map(({ data }, index) => (
-            <MotionReveal
-              client:visible
-              delay={index * 0.1}
-              className={`h-full ${
-                index % 2 === 1 ? "md:border-l md:border-divider/30 md:pl-12" : ""
-              }`}
+            <ScrollReveal
+              animation={index % 2 === 0 ? "fade-right" : "fade-left"}
+              delay={100 + index * 150}
             >
-              <div class="flex h-full flex-col justify-between gap-8">
-                <div class="flex items-start gap-4">
-                  <span aria-hidden="true" class="text-6xl leading-none text-divider/40">
-                    "
-                  </span>
-                  <BlurStaggerText
-                    client:visible
-                    text={data.quote}
-                    as="span"
-                    className="block text-base leading-relaxed text-text md:text-lg"
-                    delay={0.08}
-                  />
-                  <span aria-hidden="true" class="self-end text-5xl leading-none text-divider/40">
-                    ”
-                  </span>
-                </div>
-                <div class="flex items-center gap-3">
-                  {data.avatar && (
-                    <PillImageReveal
-                      src={data.avatar}
-                      alt={data.name}
-                      width={56}
-                      height={56}
-                      class="h-14 w-14"
-                    />
-                  )}
-                  <div>
-                    <span class="block font-heading text-sm text-text">{data.name}</span>
-                    <span class="block text-xs uppercase tracking-[0.28em] text-text2">
-                      {data.role}
-                    </span>
-                  </div>
-                </div>
+              <div
+                class={`h-full ${index % 2 === 1 ? "md:border-l md:border-[#E2E8F0] md:pl-12" : ""}`}
+              >
+                <TestimonialCard
+                  name={data.name}
+                  role={data.role}
+                  quote={data.quote}
+                  avatar={data.avatar}
+                  index={index}
+                />
               </div>
-            </MotionReveal>
+            </ScrollReveal>
           ))}
         </div>
       </Section>
     )
   }
+
+  <WaveDivider variant="top" color="accent" opacity={0.06} />
+  <PricingSection />
+  <WaveDivider variant="bottom" color="accent" opacity={0.06} />
 </Base>
+
+<style>
+  .parallax-layer {
+    position: absolute;
+    inset: 0;
+    will-change: transform;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .parallax-layer {
+      transform: none !important;
+    }
+  }
+
+  /* Mobile Carousel Styles */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .carousel-container {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Progress Dots Animation */
+  .progress-dot {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .progress-dot.active {
+    background: rgb(var(--color-accent));
+    transform: scale(1.5);
+  }
+
+  /* Connector Lines Enhancement */
+  @media (min-width: 1280px) {
+    .process-grid::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(
+        to right,
+        transparent,
+        rgba(var(--color-accent), 0.1) 10%,
+        rgba(var(--color-accent), 0.1) 90%,
+        transparent
+      );
+      z-index: -1;
+    }
+  }
+</style>
+
+<script>
+  function initParallax() {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (prefersReducedMotion) return;
+
+    const parallaxLayers = document.querySelectorAll(".parallax-layer");
+
+    if (!parallaxLayers.length) return;
+
+    let ticking = false;
+
+    function updateParallax() {
+      const scrollY = window.scrollY;
+
+      parallaxLayers.forEach((layer) => {
+        const speed = parseFloat(layer.getAttribute("data-speed") || "0");
+        const yPos = -(scrollY * speed);
+        layer.style.transform = `translateY(${yPos}px)`;
+      });
+
+      ticking = false;
+    }
+
+    function requestTick() {
+      if (!ticking) {
+        requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    }
+
+    window.addEventListener("scroll", requestTick, { passive: true });
+
+    // Initial update
+    updateParallax();
+  }
+
+  // Initialize on page load
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initParallax);
+  } else {
+    initParallax();
+  }
+
+  // Process Section Progress Indicator
+  function initProcessProgress() {
+    const progressDots = document.querySelectorAll(".progress-dot");
+    const processCards = document.querySelectorAll('.process-grid [class*="ProcessStepCard"]');
+    const carousel = document.querySelector(".carousel-container");
+
+    if (!progressDots.length) return;
+
+    // Desktop: Activate dots based on scroll position
+    if (!carousel) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+              const index = Array.from(processCards).indexOf(entry.target);
+              if (index >= 0) {
+                progressDots.forEach((dot, i) => {
+                  if (i <= index) {
+                    dot.classList.add("active");
+                  } else {
+                    dot.classList.remove("active");
+                  }
+                });
+              }
+            }
+          });
+        },
+        {
+          threshold: [0.5],
+          rootMargin: "-100px 0px",
+        }
+      );
+
+      processCards.forEach((card) => observer.observe(card));
+    }
+
+    // Mobile: Track carousel scroll
+    if (carousel) {
+      const updateCarouselProgress = () => {
+        const scrollLeft = carousel.scrollLeft;
+        const itemWidth = carousel.scrollWidth / 4;
+        const activeIndex = Math.round(scrollLeft / itemWidth);
+
+        progressDots.forEach((dot, i) => {
+          if (i === activeIndex) {
+            dot.classList.add("active");
+          } else {
+            dot.classList.remove("active");
+          }
+        });
+      };
+
+      carousel.addEventListener("scroll", updateCarouselProgress, { passive: true });
+      updateCarouselProgress(); // Initial state
+    }
+  }
+
+  // Initialize process progress
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initProcessProgress);
+  } else {
+    initProcessProgress();
+  }
+</script>

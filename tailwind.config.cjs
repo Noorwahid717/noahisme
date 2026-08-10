@@ -29,7 +29,16 @@ module.exports = {
         heading: ["Inter", "system-ui", "sans-serif"],
         body: ["Inter", "system-ui", "sans-serif"]
       },
-      screens: { xs: "360px" }
+      screens: { xs: "360px" },
+      keyframes: {
+        "cursor-blink": {
+          "0%, 49%": { opacity: "1" },
+          "50%, 100%": { opacity: "0" }
+        }
+      },
+      animation: {
+        "cursor-blink": "cursor-blink 600ms step-end infinite"
+      }
     }
   },
   plugins: []

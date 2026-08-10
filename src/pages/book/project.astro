@@ -1,0 +1,219 @@
+---
+import Base from "~/layouts/Base.astro";
+import { SITE } from "~/lib/seo";
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Discovery Workshop (60–90m)",
+  description:
+    "Sesi scoping proyek untuk menyusun scope, user flow, modul, dan sprint plan yang siap eksekusi.",
+  provider: {
+    "@type": "Person",
+    name: "Noah Wahid",
+  },
+  url: `${SITE.url}/book/project`,
+};
+
+const whatsappProjectMessage = encodeURIComponent(`Hi, I'm interested in the Discovery Workshop.
+Product/Project: 
+Team size: 
+Timeline target: `);
+
+const emailSubject = encodeURIComponent("Discovery Workshop Request");
+const emailBody = encodeURIComponent(`Name: 
+Product/Project: 
+Team size: 
+Timeline target: `);
+---
+
+<Base
+  title="Discovery Workshop (60–90m)"
+  description="Sesi scoping proyek untuk menyusun scope, user flow, dan sprint plan."
+  structuredData={structuredData}
+  breadcrumbs={[
+    { name: "Book", url: "/book/project" },
+    { name: "Discovery Workshop", url: "/book/project" },
+  ]}
+>
+  <section class="mx-auto grid max-w-4xl gap-10 px-6 pb-24 pt-28">
+    <header class="space-y-4">
+      <p class="text-xs uppercase tracking-[0.3em] text-accent">Discovery Workshop</p>
+      <h1 class="font-heading text-4xl text-text">Discovery Workshop (60–90m)</h1>
+      <p class="max-w-2xl text-base text-text2">
+        Sesi mendalam untuk menyusun scope, user flow, modul, dan sprint plan. Hasil akhir berupa
+        dokumen project brief siap eksekusi.
+      </p>
+    </header>
+
+    <div class="grid gap-8 rounded-3xl border border-divider/40 bg-surface/80 p-8 shadow-soft">
+      <div class="space-y-4">
+        <h2 class="text-xl font-semibold text-text">Apa yang akan kita lakukan?</h2>
+        <ul class="grid gap-3 text-sm text-text2">
+          <li class="flex items-start gap-3">
+            <svg
+              class="mt-0.5 h-5 w-5 flex-shrink-0 text-accent"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>Define core features dan prioritas (MVP vs Nice-to-have)</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg
+              class="mt-0.5 h-5 w-5 flex-shrink-0 text-accent"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>User flow mapping dan use cases</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg
+              class="mt-0.5 h-5 w-5 flex-shrink-0 text-accent"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>Technical requirements & integrations</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg
+              class="mt-0.5 h-5 w-5 flex-shrink-0 text-accent"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>Sprint breakdown dan milestone planning</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg
+              class="mt-0.5 h-5 w-5 flex-shrink-0 text-accent"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>Timeline & budget estimation</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg
+              class="mt-0.5 h-5 w-5 flex-shrink-0 text-accent"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>Success metrics & deliverables definition</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="space-y-3 rounded-xl border border-accent/20 bg-accent/5 p-4">
+        <p class="text-sm font-medium text-text">📋 Output yang kamu dapatkan:</p>
+        <ul class="grid gap-2 text-sm text-text2">
+          <li>• Project Brief Document (scope, features, user flow)</li>
+          <li>• Sprint Plan dengan timeline jelas</li>
+          <li>• Technical Architecture Overview</li>
+          <li>• Estimasi budget & resources yang dibutuhkan</li>
+        </ul>
+      </div>
+
+      <div class="space-y-3 rounded-xl border border-divider/40 bg-bg/40 p-4">
+        <p class="text-sm font-medium text-text">✅ Ideal untuk:</p>
+        <ul class="grid gap-2 text-sm text-text2">
+          <li>• Fixed Project (Starter / Growth / Pro)</li>
+          <li>• Sprint-based Development</li>
+          <li>• Kamu sudah punya vision tapi perlu struktur eksekusi</li>
+        </ul>
+      </div>
+
+      <div id="calendar" class="space-y-4">
+        <h2 class="text-xl font-semibold text-text">Pilih Jadwal</h2>
+        <div class="aspect-[16/9] w-full overflow-hidden rounded-xl border border-divider/40">
+          <iframe
+            src="https://cal.com/noahisme/discovery"
+            class="h-full w-full"
+            frameborder="0"
+            title="Book Discovery Workshop"></iframe>
+        </div>
+      </div>
+
+      <div class="space-y-4 border-t border-divider/40 pt-8">
+        <h3 class="text-lg font-semibold text-text">Tidak menemukan jadwal yang cocok?</h3>
+        <p class="text-sm text-text2">Hubungi langsung melalui:</p>
+        <div class="flex flex-wrap gap-3">
+          <a
+            href={`https://wa.me/6281335843507?text=${whatsappProjectMessage}`}
+            target="_blank"
+            rel="noreferrer"
+            class="focus-outline inline-flex items-center gap-2 rounded-lg border border-divider/60 bg-bg/80 px-4 py-2.5 text-sm text-text transition-colors hover:border-accent hover:text-accent"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            WhatsApp
+          </a>
+          <a
+            href={`mailto:noorwahid717@gmail.com?subject=${emailSubject}&body=${emailBody}`}
+            class="focus-outline inline-flex items-center gap-2 rounded-lg border border-divider/60 bg-bg/80 px-4 py-2.5 text-sm text-text transition-colors hover:border-accent hover:text-accent"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </svg>
+            Email
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

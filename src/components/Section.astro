@@ -1,4 +1,6 @@
 ---
+import ScrollReveal from "~/components/ScrollReveal.astro";
+
 interface Props {
   id?: string;
   title: string;
@@ -12,11 +14,25 @@ const { id, title, eyebrow, description } = Astro.props;
   <div class="mx-auto max-w-6xl px-6">
     <div class="flex flex-col gap-12 md:flex-row md:items-end md:justify-between">
       <div class="max-w-2xl space-y-4">
-        {eyebrow && <p class="text-xs uppercase tracking-[0.35em] text-accent">{eyebrow}</p>}
-        <h2 class="font-heading text-3xl font-semibold tracking-tight text-text md:text-4xl">
-          {title}
-        </h2>
-        {description && <p class="text-base text-text2">{description}</p>}
+        {
+          eyebrow && (
+            <ScrollReveal animation="fade-up" delay={100}>
+              <p class="text-xs uppercase tracking-[0.35em] text-accent">{eyebrow}</p>
+            </ScrollReveal>
+          )
+        }
+        <ScrollReveal animation="fade-up" delay={200}>
+          <h2 class="font-heading text-3xl font-semibold tracking-tight text-text md:text-4xl">
+            {title}
+          </h2>
+        </ScrollReveal>
+        {
+          description && (
+            <ScrollReveal animation="fade-up" delay={300}>
+              <p class="text-base text-text2">{description}</p>
+            </ScrollReveal>
+          )
+        }
       </div>
       <div class="hidden h-12 w-36 -translate-y-4 rounded-full bg-accent/10 blur-2xl md:block">
       </div>

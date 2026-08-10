@@ -16,10 +16,10 @@ export default function ThemeToggle() {
   });
 
   useEffect(() => {
-    const root = document.documentElement;
-    root.dataset.theme = theme;
-    root.classList.toggle("theme-light", theme === "light");
-    root.classList.toggle("theme-dark", theme === "dark");
+    const themeRoot = document.documentElement;
+    themeRoot.dataset.theme = theme;
+    themeRoot.classList.toggle("theme-light", theme === "light");
+    themeRoot.classList.toggle("theme-dark", theme === "dark");
     localStorage.setItem(THEME_KEY, theme);
   }, [theme]);
 

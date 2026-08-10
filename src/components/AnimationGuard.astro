@@ -3,13 +3,13 @@
 ---
 
 <script is:inline>
-  const root = document.documentElement;
+  const animRoot = document.documentElement;
   const query = window.matchMedia("(prefers-reduced-motion: reduce)");
 
   const applyPreference = () => {
     const value = query.matches ? "reduced" : "full";
-    if (root.dataset.motion !== value) {
-      root.dataset.motion = value;
+    if (animRoot.dataset.motion !== value) {
+      animRoot.dataset.motion = value;
     }
   };
 

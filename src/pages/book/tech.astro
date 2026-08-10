@@ -1,0 +1,210 @@
+---
+import Base from "~/layouts/Base.astro";
+import { SITE } from "~/lib/seo";
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Technical Consultation (60m)",
+  description:
+    "Diskusi teknis mendalam tentang arsitektur, fitur, integrasi API, database, dan deployment.",
+  provider: {
+    "@type": "Person",
+    name: "Noah Wahid",
+  },
+  url: `${SITE.url}/book/tech`,
+};
+
+const whatsappTechMessage = encodeURIComponent(`Hi, I want to request a Tech Consultation (60m).
+Topic: 
+Tech stack (if any): 
+Preferred time: `);
+
+const emailSubject = encodeURIComponent("Tech Consultation Request");
+const emailBody = encodeURIComponent(`Name: 
+Topic: 
+Tech stack (if any): 
+Preferred time: `);
+---
+
+<Base
+  title="Technical Consultation (60m)"
+  description="Diskusi teknis mendalam sebelum estimasi proyek."
+  structuredData={structuredData}
+  breadcrumbs={[
+    { name: "Book", url: "/book/tech" },
+    { name: "Tech Consultation", url: "/book/tech" },
+  ]}
+>
+  <section class="mx-auto grid max-w-4xl gap-10 px-6 pb-24 pt-28">
+    <header class="space-y-4">
+      <p class="text-xs uppercase tracking-[0.3em] text-accent">Technical Consultation</p>
+      <h1 class="font-heading text-4xl text-text">Technical Consultation (60m)</h1>
+      <p class="max-w-2xl text-base text-text2">
+        Bahas arsitektur, fitur, integrasi API, database, deployment, dan roadmap development. Cocok
+        sebelum memutuskan Fixed Project atau Sprint.
+      </p>
+    </header>
+
+    <div class="grid gap-8 rounded-3xl border border-divider/40 bg-surface/80 p-8 shadow-soft">
+      <div class="space-y-4">
+        <h2 class="text-xl font-semibold text-text">Yang akan kita diskusikan</h2>
+        <ul class="grid gap-3 text-sm text-text2">
+          <li class="flex items-start gap-3">
+            <svg
+              class="mt-0.5 h-5 w-5 flex-shrink-0 text-accent"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>Arsitektur sistem dan tech stack yang tepat</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg
+              class="mt-0.5 h-5 w-5 flex-shrink-0 text-accent"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>Database design dan data modeling</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg
+              class="mt-0.5 h-5 w-5 flex-shrink-0 text-accent"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>API design & third-party integrations</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg
+              class="mt-0.5 h-5 w-5 flex-shrink-0 text-accent"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>Deployment strategy dan infrastructure</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg
+              class="mt-0.5 h-5 w-5 flex-shrink-0 text-accent"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>Performance, scalability, dan security considerations</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg
+              class="mt-0.5 h-5 w-5 flex-shrink-0 text-accent"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>Development roadmap dan prioritization</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="space-y-3 rounded-xl border border-accent/20 bg-accent/5 p-4">
+        <p class="text-sm font-medium text-text">💡 Cocok untuk:</p>
+        <ul class="grid gap-2 text-sm text-text2">
+          <li>• Kamu sudah tahu ingin membangun apa</li>
+          <li>• Perlu validasi tech stack atau arsitektur</li>
+          <li>• Sebelum mulai Fixed Project atau Sprint</li>
+          <li>• Ingin second opinion dari developer berpengalaman</li>
+        </ul>
+      </div>
+
+      <div id="calendar" class="space-y-4">
+        <h2 class="text-xl font-semibold text-text">Pilih Jadwal</h2>
+        <div class="aspect-[16/9] w-full overflow-hidden rounded-xl border border-divider/40">
+          <iframe
+            src="https://cal.com/noahisme/tech"
+            class="h-full w-full"
+            frameborder="0"
+            title="Book Tech Consultation"></iframe>
+        </div>
+      </div>
+
+      <div class="space-y-4 border-t border-divider/40 pt-8">
+        <h3 class="text-lg font-semibold text-text">Tidak menemukan jadwal yang cocok?</h3>
+        <p class="text-sm text-text2">Hubungi langsung melalui:</p>
+        <div class="flex flex-wrap gap-3">
+          <a
+            href={`https://wa.me/6281335843507?text=${whatsappTechMessage}`}
+            target="_blank"
+            rel="noreferrer"
+            class="focus-outline inline-flex items-center gap-2 rounded-lg border border-divider/60 bg-bg/80 px-4 py-2.5 text-sm text-text transition-colors hover:border-accent hover:text-accent"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            WhatsApp
+          </a>
+          <a
+            href={`mailto:noorwahid717@gmail.com?subject=${emailSubject}&body=${emailBody}`}
+            class="focus-outline inline-flex items-center gap-2 rounded-lg border border-divider/60 bg-bg/80 px-4 py-2.5 text-sm text-text transition-colors hover:border-accent hover:text-accent"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </svg>
+            Email
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

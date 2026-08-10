@@ -1,0 +1,1003 @@
+---
+// Hero component with animated dashboard mockup
+// Based on example/hero design with particle background, text morphing, and magnetic CTA
+---
+
+<canvas id="particle-canvas"></canvas>
+
+<section class="hero-wrapper">
+  <div class="container">
+    <section class="hero fade-in">
+      <!-- LEFT -->
+      <div class="hero-left">
+        <div class="hero-label">
+          <span class="hero-label-dot"></span>
+          <span>MOHAMMAD NOOR WAHID · FULL-STACK</span>
+        </div>
+
+        <h1 class="hero-title">
+          <span class="hero-title-fill">
+            Membangun Aplikasi Web <span class="accent">Cepat</span> & Presisi
+          </span>
+          <span class="hero-title-stroke"> Membangun Aplikasi Web Cepat & Presisi </span>
+        </h1>
+
+        <p class="hero-subline">
+          Saya membantu founder dan tim menghadirkan produk digital dengan performa tinggi,
+          arsitektur bersih, dan pengalaman pengguna
+          <span class="morph-wrapper">
+            <span class="morph-word active">premium</span>
+            <span class="morph-word">responsif</span>
+            <span class="morph-word">siap scale</span>
+          </span>.
+        </p>
+
+        <div class="hero-cta-row">
+          <a href="/projects" class="cta-magnetic" id="ctaButton">
+            <span class="cta-letters" id="ctaLetters">Lihat Proyek</span>
+            <span class="cta-icon">↗</span>
+          </a>
+
+          <div class="cta-secondary-text">
+            <span>Studi kasus terbaru</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="hero-right">
+        <div class="hero-right-card">
+          <div class="hero-right-header">
+            <div class="hero-right-dots">
+              <span class="dot-win"></span>
+              <span class="dot-win"></span>
+              <span class="dot-win"></span>
+            </div>
+            <div class="hero-right-title">noah.app · analytics dashboard</div>
+            <div class="hero-right-pill">Preview Proyek</div>
+          </div>
+
+          <div class="hero-right-mock">
+            <div class="mock-topbar">
+              <span>https://client-project.com</span>
+              <span class="mock-url">/dashboard</span>
+            </div>
+            <div class="mock-layout">
+              <!-- LEFT PANEL: activity feed -->
+              <div class="mock-panel">
+                <div class="activity-header">
+                  <span class="activity-dot"></span>
+                  <span>Aktivitas sistem</span>
+                </div>
+                <div class="activity-viewport">
+                  <div class="activity-track">
+                    <!-- set 1 -->
+                    <div class="activity-item">
+                      <div class="activity-label">
+                        <span class="activity-pill">API</span>
+                        <span>Request sukses</span>
+                      </div>
+                      <span class="activity-time">+324</span>
+                    </div>
+                    <div class="activity-item">
+                      <div class="activity-label">
+                        <span class="activity-pill">Job</span>
+                        <span>Background queue</span>
+                      </div>
+                      <span class="activity-time">90%</span>
+                    </div>
+                    <div class="activity-item">
+                      <div class="activity-label">
+                        <span class="activity-pill">Auth</span>
+                        <span>Login harian</span>
+                      </div>
+                      <span class="activity-time">1.2k</span>
+                    </div>
+                    <div class="activity-item">
+                      <div class="activity-label">
+                        <span class="activity-pill">DB</span>
+                        <span>Query cepat</span>
+                      </div>
+                      <span class="activity-time">&lt; 12ms</span>
+                    </div>
+                    <!-- duplicate for seamless loop -->
+                    <div class="activity-item">
+                      <div class="activity-label">
+                        <span class="activity-pill">API</span>
+                        <span>Request sukses</span>
+                      </div>
+                      <span class="activity-time">+324</span>
+                    </div>
+                    <div class="activity-item">
+                      <div class="activity-label">
+                        <span class="activity-pill">Job</span>
+                        <span>Background queue</span>
+                      </div>
+                      <span class="activity-time">90%</span>
+                    </div>
+                    <div class="activity-item">
+                      <div class="activity-label">
+                        <span class="activity-pill">Auth</span>
+                        <span>Login harian</span>
+                      </div>
+                      <span class="activity-time">1.2k</span>
+                    </div>
+                    <div class="activity-item">
+                      <div class="activity-label">
+                        <span class="activity-pill">DB</span>
+                        <span>Query cepat</span>
+                      </div>
+                      <span class="activity-time">&lt; 12ms</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="activity-metric"></div>
+              </div>
+
+              <!-- RIGHT PANEL: PROJECT STRIP -->
+              <div class="project-panel">
+                <div class="project-panel-label">
+                  <span class="project-dot-live"></span>
+                  <span>Proyek aktif</span>
+                </div>
+                <div class="project-strip-viewport">
+                  <div class="project-strip">
+                    <!-- set 1 -->
+                    <div class="project-card">
+                      <div class="project-name">Billing Dashboard</div>
+                      <div class="project-meta">SaaS · React · Go</div>
+                      <span class="project-tag">TTFB &lt; 200 ms</span>
+                    </div>
+                    <div class="project-card">
+                      <div class="project-name">Marketing Analytics</div>
+                      <div class="project-meta">Next.js · Node</div>
+                      <span class="project-tag">Realtime update</span>
+                    </div>
+                    <div class="project-card">
+                      <div class="project-name">Internal Tools</div>
+                      <div class="project-meta">Monorepo · CI/CD</div>
+                      <span class="project-tag">100% coverage</span>
+                    </div>
+                    <div class="project-card">
+                      <div class="project-name">Client Portal</div>
+                      <div class="project-meta">React · Go · PG</div>
+                      <span class="project-tag">A11y first</span>
+                    </div>
+                    <!-- duplicate -->
+                    <div class="project-card">
+                      <div class="project-name">Billing Dashboard</div>
+                      <div class="project-meta">SaaS · React · Go</div>
+                      <span class="project-tag">TTFB &lt; 200 ms</span>
+                    </div>
+                    <div class="project-card">
+                      <div class="project-name">Marketing Analytics</div>
+                      <div class="project-meta">Next.js · Node</div>
+                      <span class="project-tag">Realtime update</span>
+                    </div>
+                    <div class="project-card">
+                      <div class="project-name">Internal Tools</div>
+                      <div class="project-meta">Monorepo · CI/CD</div>
+                      <span class="project-tag">100% coverage</span>
+                    </div>
+                    <div class="project-card">
+                      <div class="project-name">Client Portal</div>
+                      <div class="project-meta">React · Go · PG</div>
+                      <span class="project-tag">A11y first</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-right-footer">
+            <span>Dioptimalkan untuk load cepat dan stabilitas jangka panjang.</span>
+            <span class="highlight">Live produk - bukan sekadar konsep.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
+
+<style>
+  :root {
+    --radius-lg: 18px;
+    --radius-pill: 999px;
+  }
+
+  /* Particle Canvas */
+  #particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* Hero Wrapper */
+  .hero-wrapper {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 3rem 0;
+  }
+
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    width: 100%;
+  }
+
+  /* Hero Grid */
+  .hero {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    padding: 3rem 0;
+  }
+
+  /* LEFT SIDE */
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .hero-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #6b7280;
+    text-transform: uppercase;
+  }
+
+  .hero-label-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: radial-gradient(circle at center, #22c55e, #16a34a);
+    box-shadow: 0 0 8px rgba(52, 211, 153, 0.8);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.7;
+      transform: scale(1.1);
+    }
+  }
+
+  .hero-title {
+    position: relative;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+  }
+
+  .hero-title-fill {
+    display: block;
+    position: relative;
+    /* radial gradient = pusat terang, pinggir memudar */
+    background: radial-gradient(
+      circle at 0% 50%,
+      #285fb2 0%,
+      rgba(40, 95, 178, 0.95) 18%,
+      rgba(40, 95, 178, 0.9) 40%,
+      rgba(16, 24, 40, 0.75) 70%
+    );
+    background-size: 220% 220%;
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: heroBlobFlow 7s ease-in-out infinite alternate;
+  }
+
+  /* animasi blob bergerak keliling teks */
+  @keyframes heroBlobFlow {
+    0% {
+      background-position: 0% 50%;
+    }
+    40% {
+      background-position: 50% 0%;
+    }
+    70% {
+      background-position: 100% 60%;
+    }
+    100% {
+      background-position: 50% 100%;
+    }
+  }
+
+  .hero-title-stroke {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    -webkit-text-stroke: 1px rgba(16, 24, 40, 0.15);
+    color: transparent;
+    opacity: 0.45;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .accent {
+    /* Keep accent word solid color instead of gradient */
+    background: none;
+    -webkit-text-fill-color: #285fb2;
+    color: #285fb2;
+  }
+
+  .hero-subline {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: #475569;
+    max-width: 36rem;
+  }
+
+  .morph-wrapper {
+    display: inline-block;
+    position: relative;
+    font-weight: 600;
+    color: rgb(var(--color-accent));
+    min-width: 6rem;
+    text-align: left;
+  }
+
+  .morph-word {
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    transition: opacity 600ms ease-in-out;
+  }
+
+  .morph-word.active {
+    position: relative;
+    opacity: 1;
+  }
+
+  .hero-cta-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .cta-magnetic {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    border-radius: var(--radius-pill);
+    background: rgb(var(--color-accent));
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(var(--color-accent), 0.4);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+    text-decoration: none;
+  }
+
+  .cta-magnetic:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(var(--color-accent), 0.5);
+  }
+
+  .cta-letters {
+    display: inline-flex;
+  }
+
+  .cta-letter {
+    display: inline-block;
+    transition: transform 0.15s ease-out;
+  }
+
+  .cta-icon {
+    font-size: 1.25rem;
+    transition: transform 0.3s ease;
+  }
+
+  .cta-magnetic:hover .cta-icon {
+    transform: translate(2px, -2px);
+  }
+
+  .cta-secondary-text {
+    font-size: 0.875rem;
+    color: #64748b;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+  }
+
+  .cta-secondary-text span {
+    position: relative;
+    transition: color 0.3s ease;
+  }
+
+  .cta-secondary-text span::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: rgb(var(--color-accent));
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .cta-secondary-text:hover span {
+    color: rgb(var(--color-accent));
+  }
+
+  .cta-secondary-text:hover span::after {
+    width: 100%;
+  }
+
+  /* RIGHT SIDE - MOCKUP CARD */
+  .hero-right {
+    position: relative;
+  }
+
+  .hero-right-card {
+    border-radius: var(--radius-lg);
+    background: radial-gradient(circle at top left, #e5edff 0, #ffffff 55%, #e2e8f0 100%);
+    border: 1px solid rgba(148, 163, 184, 0.45);
+    padding: 1.2rem 1.2rem 1.1rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(15, 23, 42, 0.12);
+  }
+
+  .hero-right-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
+  }
+
+  .hero-right-dots {
+    display: flex;
+    gap: 0.35rem;
+  }
+
+  .dot-win {
+    width: 9px;
+    height: 9px;
+    border-radius: 999px;
+    background: #f97373;
+  }
+
+  .dot-win:nth-child(2) {
+    background: #facc15;
+  }
+
+  .dot-win:nth-child(3) {
+    background: #4ade80;
+  }
+
+  .hero-right-title {
+    font-size: 0.8rem;
+    color: #6b7280;
+  }
+
+  .hero-right-pill {
+    font-size: 0.74rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: var(--radius-pill);
+    background: rgba(var(--color-accent), 0.1);
+    border: 1px solid rgba(var(--color-accent), 0.3);
+    color: rgb(var(--color-accent));
+  }
+
+  .hero-right-mock {
+    border-radius: 18px;
+    overflow: hidden;
+    background: radial-gradient(circle at top, #eff6ff 0, #ffffff 50%, #e0f2fe 100%);
+    border: 1px solid rgba(191, 219, 254, 0.9);
+    position: relative;
+    min-height: 210px;
+  }
+
+  .mock-topbar {
+    height: 32px;
+    background: rgba(15, 23, 42, 0.9);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.95);
+    display: flex;
+    align-items: center;
+    padding: 0 0.9rem;
+    font-size: 0.74rem;
+    color: #e5e7eb;
+  }
+
+  .mock-url {
+    margin-left: 0.4rem;
+    padding: 0.16rem 0.5rem;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.85);
+    font-size: 0.72rem;
+    color: #cbd5f5;
+  }
+
+  .mock-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 0.7rem;
+    padding: 0.9rem 0.9rem 1.1rem;
+  }
+
+  /* LEFT PANEL: ACTIVITY FEED */
+  .mock-panel {
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 10px 30px rgba(148, 163, 184, 0.3);
+    padding: 0.7rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .activity-header {
+    font-size: 0.74rem;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .activity-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: radial-gradient(circle at center, #22c55e, #16a34a);
+  }
+
+  .activity-viewport {
+    margin-top: 0.2rem;
+    overflow: hidden;
+    position: relative;
+    height: 80px;
+  }
+
+  .activity-track {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    animation: scrollActivity 14s linear infinite;
+  }
+
+  .activity-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.72rem;
+    color: #4b5563;
+    padding: 0.16rem 0.2rem;
+  }
+
+  .activity-label {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .activity-pill {
+    font-size: 0.65rem;
+    padding: 0.08rem 0.35rem;
+    border-radius: 999px;
+    background: rgba(var(--color-accent), 0.08);
+    color: rgb(var(--color-accent));
+  }
+
+  .activity-time {
+    font-size: 0.68rem;
+    color: #9ca3af;
+  }
+
+  .activity-metric {
+    margin-top: 0.15rem;
+    height: 6px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #22c55e, #a7f3d0);
+    opacity: 0.85;
+  }
+
+  @keyframes scrollActivity {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-50%);
+    }
+  }
+
+  /* RIGHT PANEL: PROJECT STRIP */
+  .project-panel {
+    border-radius: 12px;
+    background: rgba(248, 250, 252, 0.96);
+    box-shadow: 0 10px 30px rgba(148, 163, 184, 0.22);
+    padding: 0.7rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .project-panel-label {
+    font-size: 0.74rem;
+    color: #6b7280;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .project-dot-live {
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: radial-gradient(circle at center, #22c55e, #16a34a);
+    box-shadow: 0 0 6px rgba(52, 211, 153, 0.85);
+  }
+
+  .project-strip-viewport {
+    position: relative;
+    overflow: hidden;
+    margin-top: 0.15rem;
+  }
+
+  .project-strip {
+    display: inline-flex;
+    gap: 0.6rem;
+    animation: scrollProjects 18s linear infinite;
+    will-change: transform;
+  }
+
+  .project-card {
+    flex: 0 0 130px;
+    border-radius: 12px;
+    padding: 0.55rem 0.6rem;
+    background: linear-gradient(135deg, #eff6ff, #e0f2fe);
+    border: 1px solid rgba(191, 219, 254, 0.9);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.72rem;
+    color: #1f2937;
+  }
+
+  .project-name {
+    font-weight: 600;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .project-meta {
+    font-size: 0.7rem;
+    color: #6b7280;
+  }
+
+  .project-tag {
+    margin-top: 0.15rem;
+    font-size: 0.66rem;
+    padding: 0.14rem 0.45rem;
+    border-radius: 999px;
+    background: rgba(var(--color-accent), 0.08);
+    color: rgb(var(--color-accent));
+    display: inline-block;
+    width: fit-content;
+  }
+
+  @keyframes scrollProjects {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .hero-right-footer {
+    margin-top: 0.85rem;
+    font-size: 0.76rem;
+    color: #6b7280;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .hero-right-footer span.highlight {
+    color: rgb(var(--color-accent));
+    font-weight: 500;
+  }
+
+  /* Fade-in */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 520ms ease-out,
+      transform 520ms ease-out;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 880px) {
+    .hero {
+      grid-template-columns: minmax(0, 1fr);
+      padding: 2rem 0;
+    }
+
+    .hero-right {
+      order: -1;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      padding: 1.7rem 0;
+    }
+
+    .container {
+      padding: 0 1.4rem;
+    }
+
+    .hero-cta-row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .mock-layout {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .hero-right-footer {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.25rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fade-in {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+
+    .activity-track,
+    .project-strip {
+      animation: none;
+    }
+
+    .hero-label-dot {
+      animation: none;
+    }
+  }
+</style>
+
+<script is:inline>
+  console.log("🚀 Hero animations script loaded");
+
+  // Fade in - trigger immediately when DOM is ready
+  (function initAnimations() {
+    function activateFadeIn() {
+      const fadeElements = document.querySelectorAll(".fade-in");
+      console.log("✨ Fade-in animation: Found", fadeElements.length, "elements");
+
+      fadeElements.forEach((el, index) => {
+        requestAnimationFrame(() => {
+          el.classList.add("visible");
+          console.log(`  ✅ Added 'visible' class to element ${index + 1}`);
+        });
+      });
+
+      if (fadeElements.length > 0) {
+        console.log("🎬 Fade-in animation activated successfully!");
+      } else {
+        console.warn("⚠️ No .fade-in elements found!");
+      }
+    }
+
+    // Try multiple triggers to ensure it runs
+    if (document.readyState === "loading") {
+      console.log("⏳ Waiting for DOMContentLoaded...");
+      document.addEventListener("DOMContentLoaded", activateFadeIn);
+    } else {
+      console.log("✅ DOM already loaded, activating immediately");
+      activateFadeIn();
+    }
+  })();
+
+  // Animated blob gradient text
+  (function blobGradientText() {
+    const titleFill = document.querySelector(".hero-title-fill");
+    if (!titleFill) {
+      console.warn("⚠️ Hero title not found!");
+      return;
+    }
+
+    console.log("✨ Blob gradient text initialized");
+    console.log("🎬 Animation: heroBlobFlow 7s infinite alternate");
+  })();
+
+  // Text morphing (fade only)
+  (function textMorph() {
+    const words = Array.from(document.querySelectorAll(".morph-word"));
+    console.log("🔄 Text morphing: Found", words.length, "words");
+
+    if (!words.length) {
+      console.warn("⚠️ No .morph-word elements found!");
+      return;
+    }
+
+    let index = 0;
+    console.log(
+      "🎬 Text morphing started! Words:",
+      words.map((w) => w.textContent)
+    );
+
+    setInterval(() => {
+      const prev = words[index];
+      index = (index + 1) % words.length;
+      const next = words[index];
+      prev.classList.remove("active");
+      next.classList.add("active");
+      console.log(`  🔄 Morphed to: "${next.textContent}"`);
+    }, 2200);
+  })();
+
+  // Particle background
+  (function particles() {
+    const canvas = document.getElementById("particle-canvas");
+    if (!canvas) {
+      console.warn("⚠️ Particle canvas not found!");
+      return;
+    }
+    console.log("✨ Particle canvas found");
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) {
+      console.warn("⚠️ Could not get canvas context!");
+      return;
+    }
+    console.log("🎨 Canvas context ready");
+
+    let particles = [];
+    let width, height;
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      particles = [];
+      const count = Math.min(80, Math.floor((width * height) / 26000));
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: (Math.random() - 0.5) * 0.3,
+          r: Math.random() * 1.6 + 0.6,
+          alpha: Math.random() * 0.6 + 0.2,
+        });
+      }
+      console.log("🌟 Particles initialized:", count, "particles");
+    }
+
+    window.addEventListener("resize", resize);
+    resize();
+    console.log("🎬 Particle animation started!");
+
+    function tick() {
+      if (!ctx) return;
+      ctx.clearRect(0, 0, width, height);
+      ctx.globalCompositeOperation = "lighter";
+
+      particles.forEach((p) => {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+
+        ctx.beginPath();
+        const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 4);
+        g.addColorStop(0, `rgba(37,99,235,${p.alpha})`);
+        g.addColorStop(1, "rgba(249,250,251,0)");
+        ctx.fillStyle = g;
+        ctx.arc(p.x, p.y, p.r * 3.5, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      requestAnimationFrame(tick);
+    }
+
+    tick();
+  })();
+
+  // Magnetic letters CTA
+  (function magneticCTA() {
+    const button = document.getElementById("ctaButton");
+    const lettersContainer = document.getElementById("ctaLetters");
+
+    if (!button || !lettersContainer) {
+      console.warn("⚠️ CTA button or letters container not found!");
+      return;
+    }
+    console.log("🧲 Magnetic CTA found");
+
+    const text = lettersContainer.textContent || "";
+    lettersContainer.textContent = "";
+    const spans = [];
+
+    for (let char of text) {
+      const span = document.createElement("span");
+      span.textContent = char;
+      span.classList.add("cta-letter");
+      lettersContainer.appendChild(span);
+      spans.push(span);
+    }
+
+    console.log("🔤 Magnetic letters created:", spans.length, "letters");
+
+    let rect = null;
+    function updateRect() {
+      rect = button.getBoundingClientRect();
+    }
+    updateRect();
+    window.addEventListener("resize", updateRect);
+
+    const strength = 18;
+    console.log("🎬 Magnetic CTA animation ready!");
+
+    button.addEventListener("mousemove", (e) => {
+      if (!rect) return;
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      spans.forEach((span) => {
+        const r = span.getBoundingClientRect();
+        const sx = r.left - rect.left + r.width / 2;
+        const sy = r.top - rect.top + r.height / 2;
+
+        const dx = x - sx;
+        const dy = y - sy;
+        const dist = Math.max(Math.sqrt(dx * dx + dy * dy), 1);
+        const force = Math.max((strength * 1.3 - dist) / strength, 0);
+
+        const offsetX = (dx / dist) * force * 6;
+        const offsetY = (dy / dist) * force * 6;
+        span.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+      });
+    });
+
+    button.addEventListener("mouseleave", () => {
+      spans.forEach((span) => {
+        span.style.transform = "translate(0,0)";
+      });
+    });
+  })();
+</script>

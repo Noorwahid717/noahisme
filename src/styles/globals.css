@@ -20,6 +20,13 @@
   --color-accent: 40 95 178;
   --color-success: 24 128 86;
   --color-divider: 221 226 236;
+  /* IntroSection badge layout variables (moved from component) */
+  /* Side columns fixed to avoid overlap with center content; center is flexible */
+  --intro-badge-col-left: 190px;
+  --intro-badge-col-center: 1fr;
+  --intro-badge-col-right: 190px;
+  --intro-badge-gap: 3rem;
+  --intro-badge-vertical-gap: 1.75rem;
 }
 
 [data-theme="dark"] {
@@ -42,6 +49,9 @@
 html {
   height: 100%;
   scroll-behavior: smooth;
+  /* Hint browser to use GPU acceleration */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -52,6 +62,10 @@ body {
   font-family: inherit;
   line-height: 1.6;
   text-rendering: optimizeLegibility;
+  /* Force hardware acceleration */
+  /* use will-change instead of transform to hint for GPU without creating a stacking context */
+  will-change: transform;
+  -webkit-will-change: transform;
 }
 
 main {
@@ -94,6 +108,27 @@ picture {
   img {
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
+  }
+}
+
+/* Responsive overrides for IntroSection badge variables */
+@media (max-width: 968px) {
+  :root {
+    --intro-badge-col-left: 150px;
+    --intro-badge-col-center: 1fr;
+    --intro-badge-col-right: 150px;
+    --intro-badge-gap: 2rem;
+    --intro-badge-vertical-gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --intro-badge-col-left: 1fr;
+    --intro-badge-col-center: 1fr;
+    --intro-badge-col-right: 1fr;
+    --intro-badge-gap: 0.75rem;
+    --intro-badge-vertical-gap: 0.75rem;
   }
 }
 
@@ -152,15 +187,152 @@ button {
     backdrop-filter: blur(4px) !important;
   }
 
-  /* Optimize transform performance */
-  * {
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
-  }
-
   /* Reduce animation complexity on mobile */
   [data-motion="reduced"] {
     animation: none !important;
     transition: none !important;
   }
+}
+
+/* Astro View Transitions - Custom animations for SPA-like navigation */
+@view-transition {
+  navigation: auto;
+}
+
+/* Fade transition for main content */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.3s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::view-transition-old(root) {
+  animation-name: fade-out;
+}
+
+::view-transition-new(root) {
+  animation-name: fade-in;
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.1s !important;
+  }
+}
+
+/* Content visibility optimization for below-the-fold content */
+section:not(:first-of-type) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
+}
+
+/* Language Switcher Styles */
+.language-switcher {
+  position: relative;
+}
+
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  color: rgb(var(--color-text));
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.lang-toggle:hover {
+  background-color: rgb(var(--color-surface));
+}
+
+.lang-toggle:focus {
+  outline: 2px solid rgb(var(--color-accent));
+  outline-offset: 2px;
+}
+
+.lang-code {
+  font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.lang-dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  background-color: rgb(var(--color-surface));
+  border: 1px solid rgb(var(--color-divider));
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+  padding: 0.5rem;
+  min-width: 160px;
+  z-index: 100;
+  animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lang-option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  border: none;
+  background: transparent;
+  color: rgb(var(--color-text));
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 0.875rem;
+  text-align: left;
+}
+
+.lang-option:hover {
+  background-color: rgb(var(--color-bg));
+}
+
+.lang-option.active {
+  background-color: rgb(var(--color-accent) / 0.1);
+  color: rgb(var(--color-accent));
+  font-weight: 600;
+}
+
+.lang-flag {
+  font-size: 1.25rem;
+  line-height: 1;
 }
